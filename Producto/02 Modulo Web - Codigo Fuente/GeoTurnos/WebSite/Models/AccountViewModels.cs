@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace WebSite.Models
@@ -97,17 +98,63 @@ namespace WebSite.Models
         [Display(Name = "Confirmar password")]
         [Compare("contraseña", ErrorMessage = "El password y la confirmación no coinciden.")]
         public string confirmarcontraseña { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Pregunta Seguridad")]
         public string preguntaSeguridad1 { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Respuesta Seguridad")]
         public string respuestaSeguridad1 { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Pregunta Seguridad Alt")]
         public string preguntaSeguridad2 { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Respuesta Seguridad Alt")]
         public string respuestaSeguridad2 { get; set; }
-        public Nullable<int> cuit { get; set; }
+
+        [RegularExpression(@"^\d+$")]
+        [MaxLength(11,ErrorMessage = "El {0} debe tener por lo menos caracteres")]
+        [Display(Name = "Cuit")]
+        public int cuit { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Razon Social")]
         public string razonSocial { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Nombre de Fantasia")]
         public string nombreFantasia { get; set; }
-        public Nullable<System.DateTime> inicioActividades { get; set; }
+
+        [DataType(DataType.DateTime)]
+        [Display(Name = "Inicio Actividades")]
+        public DateTime inicioActividades { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Telefono")]
         public string telefono { get; set; }
+
         public byte[] logoEmpresa { get; set; }
+
+        [Required]
+        [DataType(DataType.ImageUrl)]
+        public string logoEmpresaurl { get; set; }
+
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email")]
         public string email { get; set; }
+
+
         public string calle { get; set; }
         public int altura { get; set; }
         public Nullable<int> piso { get; set; }
