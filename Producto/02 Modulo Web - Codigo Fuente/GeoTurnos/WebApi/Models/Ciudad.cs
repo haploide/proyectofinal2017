@@ -14,18 +14,10 @@ namespace WebApi.Models
     
     public partial class Ciudad
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Ciudad()
-        {
-            this.Barrio = new HashSet<Barrio>();
-        }
-    
         public int idCiudad { get; set; }
         public string nombre { get; set; }
         public Nullable<int> idProvincia { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Barrio> Barrio { get; set; }
         public virtual Provincia Provincia { get; set; }
     }
 }

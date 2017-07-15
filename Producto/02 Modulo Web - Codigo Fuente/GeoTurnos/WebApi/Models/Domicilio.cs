@@ -14,13 +14,6 @@ namespace WebApi.Models
     
     public partial class Domicilio
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Domicilio()
-        {
-            this.Cliente = new HashSet<Cliente>();
-            this.Empresa = new HashSet<Empresa>();
-        }
-    
         public int idDomicilio { get; set; }
         public string calle { get; set; }
         public int altura { get; set; }
@@ -32,9 +25,5 @@ namespace WebApi.Models
         public Nullable<int> idBarrio { get; set; }
     
         public virtual Barrio Barrio { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cliente> Cliente { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Empresa> Empresa { get; set; }
     }
 }

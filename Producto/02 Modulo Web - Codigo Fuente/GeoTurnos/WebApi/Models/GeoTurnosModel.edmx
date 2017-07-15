@@ -298,7 +298,6 @@
           <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="idCiudad" Type="Int32" />
           <NavigationProperty Name="Ciudad" Relationship="Self.FK_Barrio_Ciudad" FromRole="Barrio" ToRole="Ciudad" />
-          <NavigationProperty Name="Domicilio" Relationship="Self.FK_Domicilio_Barrio" FromRole="Barrio" ToRole="Domicilio" />
         </EntityType>
         <EntityType Name="Ciudad">
           <Key>
@@ -307,7 +306,6 @@
           <Property Name="idCiudad" Type="Int32" Nullable="false" />
           <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="idProvincia" Type="Int32" />
-          <NavigationProperty Name="Barrio" Relationship="Self.FK_Barrio_Ciudad" FromRole="Ciudad" ToRole="Barrio" />
           <NavigationProperty Name="Provincia" Relationship="Self.FK_Ciudad_Provincia" FromRole="Ciudad" ToRole="Provincia" />
         </EntityType>
         <EntityType Name="Cliente">
@@ -344,8 +342,6 @@
           <Property Name="longitud" Type="Int32" />
           <Property Name="idBarrio" Type="Int32" />
           <NavigationProperty Name="Barrio" Relationship="Self.FK_Domicilio_Barrio" FromRole="Domicilio" ToRole="Barrio" />
-          <NavigationProperty Name="Cliente" Relationship="Self.FK_Cliente_Domicilio" FromRole="Domicilio" ToRole="Cliente" />
-          <NavigationProperty Name="Empresa" Relationship="Self.FK_Empresa_Domicilio" FromRole="Domicilio" ToRole="Empresa" />
         </EntityType>
         <EntityType Name="Empresa">
           <Key>
@@ -373,8 +369,6 @@
           </Key>
           <Property Name="idEstado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Cliente" Relationship="Self.FK_Cliente_Estado" FromRole="Estado" ToRole="Cliente" />
-          <NavigationProperty Name="Empresa" Relationship="Self.FK_Empresa_Estado" FromRole="Estado" ToRole="Empresa" />
         </EntityType>
         <EntityType Name="Provincia">
           <Key>
@@ -382,7 +376,6 @@
           </Key>
           <Property Name="idProvincia" Type="Int32" Nullable="false" />
           <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Ciudad" Relationship="Self.FK_Ciudad_Provincia" FromRole="Provincia" ToRole="Ciudad" />
         </EntityType>
         <EntityType Name="Rol">
           <Key>
@@ -390,7 +383,6 @@
           </Key>
           <Property Name="idRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="RolPorUsuario" Relationship="Self.FK_RolPorUsuario_Rol" FromRole="Rol" ToRole="RolPorUsuario" />
         </EntityType>
         <EntityType Name="RolPorUsuario">
           <Key>
@@ -407,7 +399,6 @@
           </Key>
           <Property Name="idRubro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Empresa" Relationship="Self.FK_Empresa_Rubro" FromRole="Rubro" ToRole="Empresa" />
         </EntityType>
         <EntityType Name="TipoDocumento">
           <Key>
@@ -415,7 +406,6 @@
           </Key>
           <Property Name="idTipoDocumento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Cliente" Relationship="Self.FK_Cliente_TipoDocumento" FromRole="TipoDocumento" ToRole="Cliente" />
         </EntityType>
         <Association Name="FK_Barrio_Ciudad">
           <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="0..1" />

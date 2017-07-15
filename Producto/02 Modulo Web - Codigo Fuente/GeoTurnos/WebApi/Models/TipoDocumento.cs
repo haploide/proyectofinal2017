@@ -14,16 +14,7 @@ namespace WebApi.Models
     
     public partial class TipoDocumento
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TipoDocumento()
-        {
-            this.Cliente = new HashSet<Cliente>();
-        }
-    
         public int idTipoDocumento { get; set; }
         public string nombre { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cliente> Cliente { get; set; }
     }
 }
