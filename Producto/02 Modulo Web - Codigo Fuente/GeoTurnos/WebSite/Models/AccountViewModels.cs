@@ -85,6 +85,7 @@ namespace WebSite.Models
     {
         [Required]
         [DataType(DataType.Text)]
+        [StringLength(50, ErrorMessage = "El {0} debe tener por lo menos {2} caracteres", MinimumLength = 6)]
         [Display(Name = "Usuario")]
         public string usuario1 { get; set; }
 
@@ -98,21 +99,85 @@ namespace WebSite.Models
         [Display(Name = "Confirmar password")]
         [Compare("contraseña", ErrorMessage = "El password y la confirmación no coinciden.")]
         public string confirmarcontraseña { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Pregunta Seguridad")]
         public string preguntaSeguridad1 { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Respuesta Seguridad")]
         public string respuestaSeguridad1 { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Pregunta Seguridad Alt")]
         public string preguntaSeguridad2 { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Respuesta Seguridad Alt")]
         public string respuestaSeguridad2 { get; set; }
-        public Nullable<int> cuit { get; set; }
+
+        [RegularExpression(@"^\d+$")]
+        [MaxLength(11,ErrorMessage = "El Cuit debe tener por lo menos 11 caracteres")]
+        [Display(Name = "Cuit")]
+        public int cuit { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Razon Social")]
         public string razonSocial { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Nombre de Fantasia")]
         public string nombreFantasia { get; set; }
-        public Nullable<System.DateTime> inicioActividades { get; set; }
+
+        [DataType(DataType.DateTime)]
+        [Display(Name = "Inicio Actividades")]
+        public DateTime inicioActividades { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Telefono")]
         public string telefono { get; set; }
+
         public byte[] logoEmpresa { get; set; }
+
+        [Required]
+        [DataType(DataType.ImageUrl)]
+        public string logoEmpresaurl { get; set; }
+
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email")]
         public string email { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Calle")]
         public string calle { get; set; }
+
+        [Required]
+        [RegularExpression(@"^\d+$")]
+        [Display(Name = "Altura")]
         public int altura { get; set; }
-        public Nullable<int> piso { get; set; }
+
+
+        [RegularExpression(@"^\d+$")]
+        [Display(Name = "Piso")]
+        public int piso { get; set; }
+
+        
+        [DataType(DataType.Text)]
+        [Display(Name = "Departamento")]
         public string departamento { get; set; }
+
+        
+        [DataType(DataType.Text)]
+        [Display(Name = "Torre")]
         public string torre { get; set; }
     }
 
