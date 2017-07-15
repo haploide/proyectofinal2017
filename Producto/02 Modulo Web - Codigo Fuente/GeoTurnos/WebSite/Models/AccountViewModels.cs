@@ -85,6 +85,7 @@ namespace WebSite.Models
     {
         [Required]
         [DataType(DataType.Text)]
+        [StringLength(50, ErrorMessage = "El {0} debe tener por lo menos {2} caracteres", MinimumLength = 6)]
         [Display(Name = "Usuario")]
         public string usuario1 { get; set; }
 
@@ -120,7 +121,7 @@ namespace WebSite.Models
         public string respuestaSeguridad2 { get; set; }
 
         [RegularExpression(@"^\d+$")]
-        [MaxLength(11,ErrorMessage = "El {0} debe tener por lo menos caracteres")]
+        [MaxLength(11,ErrorMessage = "El Cuit debe tener por lo menos 11 caracteres")]
         [Display(Name = "Cuit")]
         public int cuit { get; set; }
 
@@ -154,11 +155,29 @@ namespace WebSite.Models
         [Display(Name = "Email")]
         public string email { get; set; }
 
-
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Calle")]
         public string calle { get; set; }
+
+        [Required]
+        [RegularExpression(@"^\d+$")]
+        [Display(Name = "Altura")]
         public int altura { get; set; }
-        public Nullable<int> piso { get; set; }
+
+
+        [RegularExpression(@"^\d+$")]
+        [Display(Name = "Piso")]
+        public int piso { get; set; }
+
+        
+        [DataType(DataType.Text)]
+        [Display(Name = "Departamento")]
         public string departamento { get; set; }
+
+        
+        [DataType(DataType.Text)]
+        [Display(Name = "Torre")]
         public string torre { get; set; }
     }
 
