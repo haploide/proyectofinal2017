@@ -80,6 +80,40 @@ namespace WebSite.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
+    public class RegistarEmpresaViewModel
+    {
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Usuario")]
+        public string usuario1 { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "El {0} debe tener por lo menos {2} caracteres", MinimumLength = 8)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string contraseña { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirmar password")]
+        [Compare("contraseña", ErrorMessage = "El password y la confirmación no coinciden.")]
+        public string confirmarcontraseña { get; set; }
+        public string preguntaSeguridad1 { get; set; }
+        public string respuestaSeguridad1 { get; set; }
+        public string preguntaSeguridad2 { get; set; }
+        public string respuestaSeguridad2 { get; set; }
+        public Nullable<int> cuit { get; set; }
+        public string razonSocial { get; set; }
+        public string nombreFantasia { get; set; }
+        public Nullable<System.DateTime> inicioActividades { get; set; }
+        public string telefono { get; set; }
+        public byte[] logoEmpresa { get; set; }
+        public string email { get; set; }
+        public string calle { get; set; }
+        public int altura { get; set; }
+        public Nullable<int> piso { get; set; }
+        public string departamento { get; set; }
+        public string torre { get; set; }
+    }
 
     public class ResetPasswordViewModel
     {
