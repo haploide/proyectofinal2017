@@ -1,17 +1,10 @@
-﻿@model WebSite.Models.RegistarClienteViewModel
+﻿@model WebSite.Models.RegistrarClienteViewModel
 
 
-@{
-    ViewBag.Title = "RegistrarCliente";
-}
-
-<h2>@ViewBag.Title.</h2>
-
-@using (Html.BeginForm("RegistrarCliente", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-
-
+    
     <div class="form-horizontal">
         <h4>RegistarClienteViewModel</h4>
         <hr />

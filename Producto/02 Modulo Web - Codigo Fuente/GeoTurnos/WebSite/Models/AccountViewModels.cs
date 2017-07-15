@@ -162,7 +162,7 @@ namespace WebSite.Models
         public string torre { get; set; }
     }
 
-    public class RegistarClienteViewModel
+    public class RegistrarClienteViewModel
     {
         [Required]
         [DataType(DataType.Text)]
