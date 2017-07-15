@@ -30,5 +30,30 @@ namespace WebApi.Controllers
                 return InternalServerError(ex);
             }
         }
+
+        public IHttpActionResult Get(int id)
+        {
+            try
+            {
+                if (_db.Ciudad == null || !_db.Ciudad.Any())
+                {
+                    return NotFound();
+                }
+               var ciu = _db.Ciudad.Where(p => p.idProvincia  == id);
+
+              
+                if (ciu == null)
+                {
+                    return NotFound();
+                }
+                return Ok(ciu);
+
+            }
+            catch (Exception ex)
+            {
+
+                return InternalServerError(ex);
+            }
+        }
     }
 }
