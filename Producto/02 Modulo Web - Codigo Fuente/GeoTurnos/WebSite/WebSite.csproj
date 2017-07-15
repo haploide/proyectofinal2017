@@ -72,6 +72,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -179,8 +181,59 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Barrio.cs">
+      <DependentUpon>GeoturnosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Ciudad.cs">
+      <DependentUpon>GeoturnosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Cliente.cs">
+      <DependentUpon>GeoturnosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Domicilio.cs">
+      <DependentUpon>GeoturnosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Empresa.cs">
+      <DependentUpon>GeoturnosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Estado.cs">
+      <DependentUpon>GeoturnosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GeoturnosModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GeoturnosModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GeoturnosModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GeoturnosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GeoturnosModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GeoturnosModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Provincia.cs">
+      <DependentUpon>GeoturnosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Rol.cs">
+      <DependentUpon>GeoturnosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RolPorUsuario.cs">
+      <DependentUpon>GeoturnosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Rubro.cs">
+      <DependentUpon>GeoturnosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoDocumento.cs">
+      <DependentUpon>GeoturnosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usuario.cs">
+      <DependentUpon>GeoturnosModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -203,6 +256,16 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="js\angulargeoturnos.js" />
     <Content Include="js\jquerygeoturnos.js" />
+    <Content Include="Models\GeoturnosModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GeoturnosModel.edmx</DependentUpon>
+      <LastGenOutput>GeoturnosModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\GeoturnosModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GeoturnosModel.edmx</DependentUpon>
+      <LastGenOutput>GeoturnosModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular-route.js" />
     <Content Include="Scripts\angular-route.min.js" />
@@ -212,6 +275,13 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="Scripts\angular-route.min.js.map" />
+    <EntityDeploy Include="Models\GeoturnosModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>GeoturnosModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\GeoturnosModel.edmx.diagram">
+      <DependentUpon>GeoturnosModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
@@ -273,6 +343,9 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

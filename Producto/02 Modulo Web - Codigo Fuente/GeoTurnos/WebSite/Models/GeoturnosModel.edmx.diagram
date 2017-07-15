@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e36d798a85a149118c7ea38d6d1adb8d" Name="Diagram1">
+        <EntityTypeShape EntityType="GeoTurnosModel.Barrio" Width="1.5" PointX="0.75" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeoTurnosModel.Ciudad" Width="1.5" PointX="1.5" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeoTurnosModel.Cliente" Width="1.5" PointX="5.25" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeoTurnosModel.Domicilio" Width="1.5" PointX="3" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeoTurnosModel.Empresa" Width="1.5" PointX="8.25" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeoTurnosModel.Estado" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeoTurnosModel.Provincia" Width="1.5" PointX="1.5" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeoTurnosModel.Rol" Width="1.5" PointX="3" PointY="22.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeoTurnosModel.RolPorUsuario" Width="1.5" PointX="5.25" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeoTurnosModel.Rubro" Width="1.5" PointX="6" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeoTurnosModel.TipoDocumento" Width="1.5" PointX="3" PointY="20.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeoTurnosModel.Usuario" Width="1.5" PointX="3" PointY="16" IsExpanded="true" />
+        <AssociationConnector Association="GeoTurnosModel.FK_Barrio_Ciudad" ManuallyRouted="false" />
+        <AssociationConnector Association="GeoTurnosModel.FK_Domicilio_Barrio" ManuallyRouted="false" />
+        <AssociationConnector Association="GeoTurnosModel.FK_Ciudad_Provincia" ManuallyRouted="false" />
+        <AssociationConnector Association="GeoTurnosModel.FK_Cliente_Domicilio" ManuallyRouted="false" />
+        <AssociationConnector Association="GeoTurnosModel.FK_Cliente_Estado" ManuallyRouted="false" />
+        <AssociationConnector Association="GeoTurnosModel.FK_Cliente_TipoDocumento" ManuallyRouted="false" />
+        <AssociationConnector Association="GeoTurnosModel.FK_Cliente_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="GeoTurnosModel.FK_Empresa_Domicilio" ManuallyRouted="false" />
+        <AssociationConnector Association="GeoTurnosModel.FK_Empresa_Estado" ManuallyRouted="false" />
+        <AssociationConnector Association="GeoTurnosModel.FK_Empresa_Rubro" ManuallyRouted="false" />
+        <AssociationConnector Association="GeoTurnosModel.FK_Empresa_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="GeoTurnosModel.FK_Usuario_Estado" ManuallyRouted="false" />
+        <AssociationConnector Association="GeoTurnosModel.FK_RolPorUsuario_Rol" ManuallyRouted="false" />
+        <AssociationConnector Association="GeoTurnosModel.FK_RolPorUsuario_Usuario" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
