@@ -14,16 +14,7 @@ namespace WebApi.Models
     
     public partial class Provincia
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Provincia()
-        {
-            this.Ciudad = new HashSet<Ciudad>();
-        }
-    
         public int idProvincia { get; set; }
         public string nombre { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ciudad> Ciudad { get; set; }
     }
 }
