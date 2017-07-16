@@ -10,7 +10,10 @@ using WebApi.Models;
 namespace WebApi.Controllers
 {
     [EnableCors(origins: "http://localhost:6907", headers: "*", methods: "*")]
-    public class DomicilioController : ApiController
+   
+        
+
+    public class ClienteController : ApiController
     {
         private GeoTurnosEntities _db = new GeoTurnosEntities();
 
@@ -18,11 +21,11 @@ namespace WebApi.Controllers
         {
             try
             {
-                if (_db.Domicilio == null || !_db.Domicilio.Any())
+                if (_db.Cliente == null || !_db.Cliente.Any())
                 {
                     return NotFound();
                 }
-                return Ok(_db.Domicilio);
+                return Ok(_db.Cliente);
             }
             catch (Exception ex)
             {
@@ -31,24 +34,47 @@ namespace WebApi.Controllers
             }
         }
 
-        public IHttpActionResult Post([FromBody]Domicilio  dom)
+        public IHttpActionResult Get(int id)
         {
             try
             {
-                if (_db.Domicilio == null || !_db.Domicilio.Any())
+                if (_db.Cliente == null || !_db.Cliente.Any())
                 {
                     return NotFound();
                 }
-                if (dom == null)
+                Cliente cli = _db.Cliente.FirstOrDefault(p => p.idCliente  == id);
+                if (cli == null)
+                {
+                    return NotFound();
+                }
+                return Ok(cli);
+
+            }
+            catch (Exception ex)
+            {
+
+                return InternalServerError(ex);
+            }
+        }
+
+        public IHttpActionResult Post([FromBody]Cliente cliente)
+        {
+            try
+            {
+                if (_db.Cliente == null || !_db.Cliente.Any())
+                {
+                    return NotFound();
+                }
+                if (cliente == null)
                 {
                     return BadRequest();
                 }
 
-                _db.Domicilio.Add(dom);
+                _db.Cliente.Add(cliente);
 
                 _db.SaveChanges();
 
-                return Created("api/Domicilio/" + dom.idDomicilio , dom);
+                return Created("api/Cliente/" + cliente.idCliente , cliente);
 
             }
             catch (Exception ex)
@@ -57,6 +83,7 @@ namespace WebApi.Controllers
                 return InternalServerError(ex);
             }
         }
+
 
         protected override void Dispose(bool disposing)
         {
