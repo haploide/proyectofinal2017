@@ -61,5 +61,40 @@ namespace WebApi.Controllers
             }
         }
 
+
+        public IHttpActionResult Delete(int id)
+        {
+            try
+            {
+                var empr = _db.Empresa.Find(id);
+
+                if (empr == null)
+                {
+                    return NotFound();
+                }
+                _db.Empresa.Remove(empr);
+
+                _db.SaveChanges();
+
+                return Ok(empr);
+
+            }
+            catch (Exception ex)
+            {
+
+                return InternalServerError(ex);
+            }
+        }
+
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
     }
 }
