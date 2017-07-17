@@ -7,10 +7,11 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using WebSite.Models;
+using WebSite.App_Start;
 
 namespace WebSite.Controllers
 {
-    [Authorize]
+    [Autorizar]
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;

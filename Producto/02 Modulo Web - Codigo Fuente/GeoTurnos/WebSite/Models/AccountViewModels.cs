@@ -50,16 +50,17 @@ namespace WebSite.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "Usuario")]
+        [DataType(DataType.Text)]
+        public string usuario1 { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
+        [StringLength(100, ErrorMessage = "El {0} debe tener por lo menos {2} caracteres", MinimumLength = 8)]
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Recordarme?")]
         public bool RememberMe { get; set; }
     }
 
@@ -181,7 +182,7 @@ namespace WebSite.Models
         public string torre { get; set; }
     }
 
-    public class RegistarClienteViewModel
+    public class RegistrarClienteViewModel
     {
         [Required]
         [DataType(DataType.Text)]

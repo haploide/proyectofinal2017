@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebSite.App_Start;
 
 namespace WebSite.Controllers
 {
     public class HomeController : Controller
     {
+        [Autorizar]
         public ActionResult Index()
         {
             return View();
@@ -22,6 +24,7 @@ namespace WebSite.Controllers
 
         public ActionResult Contact()
         {
+
             ViewBag.Message = "Your contact page.";
 
             return View();
