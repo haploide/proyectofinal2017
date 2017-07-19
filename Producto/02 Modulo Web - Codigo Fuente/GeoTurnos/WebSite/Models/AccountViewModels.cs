@@ -141,6 +141,16 @@ namespace WebSite.Models
         public DateTime inicioActividades { get; set; }
 
         [Required]
+        [RegularExpression(@"^\d+$")]
+        [Display(Name = "Rubro")]
+        public int idRubro { get; set; }
+
+        [Required]
+        [RegularExpression(@"^\d+$")]
+        [Display(Name = "Barrio")]
+        public int idBarrio { get; set; }
+        
+        [Required]
         [DataType(DataType.Text)]
         [Display(Name = "Telefono")]
         public string telefono { get; set; }
@@ -149,6 +159,7 @@ namespace WebSite.Models
 
         [Required]
         [DataType(DataType.ImageUrl)]
+        [Display(Name = "Logo Entidad")]
         public string logoEmpresaurl { get; set; }
 
         [Required]

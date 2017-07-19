@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -10,6 +8,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using WebSite.Models;
 using WebSite.App_Start;
+using Newtonsoft.Json;
 
 namespace WebSite.Controllers
 {
@@ -74,8 +73,22 @@ namespace WebSite.Controllers
                 return View(model);
             }
 
-            HttpContext.Session["usuarioLogin"] = new UsuarioLogueado() {Usuario=model.usuario1, TipoUsuario = TipoUsuario.Administrador };
+            UsuarioLogueado usuarioLogin = new UsuarioLogueado() { Usuario = model.usuario1, TipoUsuario = TipoUsuario.Administrador };
+            HttpContext.Session["usuarioLogin"] = usuarioLogin;
 
+            if (model.RememberMe)
+            {
+                var json = JsonConvert.SerializeObject(usuarioLogin);
+
+                
+
+
+                var userCookie = new HttpCookie("usuariogeoturnos", Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(json)));
+
+                userCookie.Expires.AddDays(365);
+
+                HttpContext.Response.Cookies.Add(userCookie); 
+            }
 
             return RedirectToLocal(returnUrl);
             // This doesn't count login failures towards account lockout
@@ -466,9 +479,18 @@ namespace WebSite.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            HttpContext.Session["usuarioLogin"] = null;
-            //Faltaria expirar cookies
-            return RedirectToAction("Index", "Home");
+            HttpContext.Session["usuarioLogin"] = null;  //Se borran los datos de la session
+
+            if (Request.Cookies["usuariogeoturnos"] != null) //se expira la cookie
+            {
+                var user = new HttpCookie("usuariogeoturnos")
+                {
+                    Expires = DateTime.Now.AddDays(-1),
+                    Value = null
+                };
+                Response.Cookies.Add(user);
+            }
+            return RedirectToAction("Index", "Home");//se redirecciona
         }
 
         //

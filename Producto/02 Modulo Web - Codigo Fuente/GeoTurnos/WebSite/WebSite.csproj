@@ -267,6 +267,7 @@
       <DependentUpon>GeoturnosModel.edmx</DependentUpon>
       <LastGenOutput>GeoturnosModel.cs</LastGenOutput>
     </Content>
+    <Content Include="resources\avatar-male-empty.png" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular-route.js" />
     <Content Include="Scripts\angular-route.min.js" />
