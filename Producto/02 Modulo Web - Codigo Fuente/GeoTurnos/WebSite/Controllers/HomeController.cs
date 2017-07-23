@@ -9,7 +9,7 @@ namespace WebSite.Controllers
 {
     public class HomeController : Controller
     {
-        [Autorizar]
+   
         public ActionResult Index()
         {
             return View();
