@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/jqwidgescss")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/angular")
     <script src="~/js/angulargeoturnos.js"></script>
+    
 
 </head>
 <body>
@@ -44,7 +46,10 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/moment")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqwidgest")
     <script src="~/js/jquerygeoturnos.js"></script>
+    <script src="~/Scripts/jqxdatetimeinput.js"></script>
+    <script src="~/Scripts/jqxcalendar.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

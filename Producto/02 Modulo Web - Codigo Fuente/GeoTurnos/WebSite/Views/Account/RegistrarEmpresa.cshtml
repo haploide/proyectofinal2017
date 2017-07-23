@@ -7,6 +7,7 @@
 <h2>Registrar nueva Entidad</h2>
 
 
+
 @using (Html.BeginForm("RegistrarEmpresa", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
@@ -45,7 +46,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.inicioActividades, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.inicioActividades, new { htmlAttributes = new { @class = "form-control" } })
+                <div id="inicioActividades" name="inicioActividades"></div>
                 @Html.ValidationMessageFor(model => model.inicioActividades, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -83,6 +84,7 @@
             <div class="col-md-10">
                 <select class="form-control" id="paices">
                     <option disabled selected>Seleccione...</option>
+                    <option value="{{provincia.idProvincia}}" ng-repeat="provincia in provincias" ng-click="clickProvincias(provincia.idProvincia)">{{provincia.nombre}}</option>
                 </select>
             </div>
         </div>
@@ -92,6 +94,7 @@
             <div class="col-md-10">
                 <select class="form-control" id="ciudades" disabled>
                     <option disabled selected>Seleccione...</option>
+                    <option value="{{ciudad.idCiudad}}" ng-repeat="ciudad in ciudades" ng-click="clickCiudades(ciudad.idCiudad)">{{ciudad.nombre}}</option>
                 </select>
             </div>
         </div>
@@ -101,6 +104,7 @@
             <div class="col-md-10">
                 <select class="form-control" name="idBarrio" id="barrios" disabled>
                     <option disabled selected>Seleccione...</option>
+                    <option value="{{barrio.idBarrio}}" ng-repeat="barrio in barrios" >{{barrio.nombre}}</option>
                 </select>
             </div>
         </div>
@@ -220,6 +224,8 @@
             </div>
         </div>
     </div>
+
+    
 }
 
 

@@ -244,6 +244,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\jqx.base.css" />
+    <Content Include="Content\jqx.bootstrap.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -293,6 +295,20 @@
       <DependentUpon>GeoturnosModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Scripts\globalization\globalize.culture.cs-CZ.js" />
+    <Content Include="Scripts\globalization\globalize.culture.de-DE.js" />
+    <Content Include="Scripts\globalization\globalize.culture.en-CA.js" />
+    <Content Include="Scripts\globalization\globalize.culture.en-US.js" />
+    <Content Include="Scripts\globalization\globalize.culture.fr-FR.js" />
+    <Content Include="Scripts\globalization\globalize.culture.he-IL.js" />
+    <Content Include="Scripts\globalization\globalize.culture.hr-HR.js" />
+    <Content Include="Scripts\globalization\globalize.culture.hu-HU.js" />
+    <Content Include="Scripts\globalization\globalize.culture.it-IT.js" />
+    <Content Include="Scripts\globalization\globalize.culture.ja-JP.js" />
+    <Content Include="Scripts\globalization\globalize.culture.lt.js" />
+    <Content Include="Scripts\globalization\globalize.culture.ru-RU.js" />
+    <Content Include="Scripts\globalization\globalize.culture.sa-IN.js" />
+    <Content Include="Scripts\globalization\globalize.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
@@ -304,6 +320,9 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jqxcalendar.js" />
+    <Content Include="Scripts\jqxcore.js" />
+    <Content Include="Scripts\jqxdatetimeinput.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\moment-with-locales.js" />
     <Content Include="Scripts\moment-with-locales.min.js" />

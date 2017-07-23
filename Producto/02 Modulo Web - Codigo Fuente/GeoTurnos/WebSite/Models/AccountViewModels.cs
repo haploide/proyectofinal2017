@@ -153,7 +153,7 @@ namespace WebSite.Models
         [Display(Name = "Telefono")]
         public string telefono { get; set; }
 
-        //public byte[] logoEmpresa { get; set; }
+        public byte[] logoEmpresa { get; set; }
 
         [Required]
         [DataType(DataType.ImageUrl)]
