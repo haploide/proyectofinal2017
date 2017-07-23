@@ -139,12 +139,11 @@ namespace WebSite.Models
         [Display(Name = "Inicio Actividades")]
         public DateTime inicioActividades { get; set; }
 
-        //[Required]
-        [RegularExpression(@"^\d+$")]
+        [Required(ErrorMessage ="Seleccione un Rubro")]
         [Display(Name = "Rubro")]
         public int idRubro { get; set; }
 
-        //[Required]
+        [Required]
         [RegularExpression(@"^\d+$")]
         [Display(Name = "Barrio")]
         public int idBarrio { get; set; }

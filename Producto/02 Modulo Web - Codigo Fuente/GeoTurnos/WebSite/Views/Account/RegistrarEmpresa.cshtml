@@ -11,8 +11,8 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-
+    <div class="form-horizontal" ng-controller="registrarEmpresa">
+        
         <br />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -55,9 +55,10 @@
             <div class="col-md-10">
                 <select class="form-control" name="idRubro" id="rubros">
                     <option disabled selected>Seleccione...</option>
-                    
+                    <option value="{{rubro.idRubro}}" ng-repeat="rubro in rubros">{{rubro.nombre}}</option>
                     
                 </select>
+                @Html.ValidationMessageFor(model => model.idRubro, "", new { @class = "text-danger" })
             </div>
         </div>
 
