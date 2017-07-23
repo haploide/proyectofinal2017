@@ -176,6 +176,7 @@
     <Compile Include="App_Start\Soporte.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseDatosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -268,6 +269,8 @@
       <LastGenOutput>GeoturnosModel.cs</LastGenOutput>
     </Content>
     <Content Include="resources\avatar-male-empty.png" />
+    <Content Include="resources\O9IY170.png" />
+    <Content Include="resources\O9IY3N0.png" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular-route.js" />
     <Content Include="Scripts\angular-route.min.js" />
@@ -343,6 +346,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\BaseDatos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

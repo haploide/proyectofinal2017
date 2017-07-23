@@ -122,7 +122,6 @@ namespace WebSite.Models
         public string respuestaSeguridad2 { get; set; }
 
         [RegularExpression(@"^\d+$")]
-        [MaxLength(11,ErrorMessage = "El Cuit debe tener por lo menos 11 caracteres")]
         [Display(Name = "Cuit")]
         public int cuit { get; set; }
 
@@ -140,12 +139,12 @@ namespace WebSite.Models
         [Display(Name = "Inicio Actividades")]
         public DateTime inicioActividades { get; set; }
 
-        [Required]
+        //[Required]
         [RegularExpression(@"^\d+$")]
         [Display(Name = "Rubro")]
         public int idRubro { get; set; }
 
-        [Required]
+        //[Required]
         [RegularExpression(@"^\d+$")]
         [Display(Name = "Barrio")]
         public int idBarrio { get; set; }
@@ -155,7 +154,7 @@ namespace WebSite.Models
         [Display(Name = "Telefono")]
         public string telefono { get; set; }
 
-        public byte[] logoEmpresa { get; set; }
+        //public byte[] logoEmpresa { get; set; }
 
         [Required]
         [DataType(DataType.ImageUrl)]

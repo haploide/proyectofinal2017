@@ -163,37 +163,6 @@ namespace WebSite.Controllers
         }
 
         //
-        // POST: /Account/Register
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-                    return RedirectToAction("Index", "Home");
-                }
-                AddErrors(result);
-            }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
-        }
-
-
-        //
         // GET: /Account/RegistrarCliente
         [AllowAnonymous]
         public ActionResult RegistrarCliente()
@@ -242,17 +211,26 @@ namespace WebSite.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (true)
+                
+                    Domicilio domicilio = new Domicilio() { altura = model.altura, calle=model.calle, piso=model.piso, departamento=model.departamento, torre=model.torre };
+                    Usuario usuario = new Usuario() { usuario1=model.usuario1, contraseña=System.Web.Helpers.Crypto.SHA256(model.contraseña), preguntaSeguridad1=model.preguntaSeguridad1, respuestaSeguridad1=model.respuestaSeguridad1, preguntaSeguridad2=model.preguntaSeguridad2, respuestaSeguridad2=model.respuestaSeguridad2, idEstado=(int)EstadoUsuario.Activo};
+                    Empresa empresa = new Empresa() { cuit=model.cuit, razonSocial=model.razonSocial, nombreFantasia=model.nombreFantasia, inicioActividades=model.inicioActividades, telefono=model.telefono,  email=model.email, idEstado=(int)EstadoEmpresa.PendienteDeActivacion };
+
+                    empresa.Domicilio = domicilio;
+                    empresa.Usuario = usuario;
+
+                    var resultado = BaseDatosController.GuardarEmpresa(empresa);
+                
+                if (resultado)
                 {
+                    UsuarioLogueado usuarioLogin = new UsuarioLogueado() { Usuario = model.usuario1, TipoUsuario = TipoUsuario.Entidad , Empresa=empresa};
+                    HttpContext.Session["usuarioLogin"] = usuarioLogin;
+                    
+                    //ToDO: Mandar Email a la cuenta del administrador advirtiendo que se registro una nueva empresa y debe autorizarla
 
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home"); 
                 }
+                
             }
 
             // If we got this far, something failed, redisplay form

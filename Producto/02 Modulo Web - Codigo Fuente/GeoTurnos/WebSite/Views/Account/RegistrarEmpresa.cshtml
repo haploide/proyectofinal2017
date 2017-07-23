@@ -7,7 +7,7 @@
 <h2>Registrar nueva Entidad</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("RegistrarEmpresa", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
 
@@ -53,8 +53,10 @@
         <div class="form-group">
             @Html.LabelFor(model => model.idRubro, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <select class="form-control" id="rubros" required>
+                <select class="form-control" name="idRubro" id="rubros">
                     <option disabled selected>Seleccione...</option>
+                    
+                    
                 </select>
             </div>
         </div>
@@ -96,7 +98,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.idBarrio, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <select class="form-control" id="barrios" disabled>
+                <select class="form-control" name="idBarrio" id="barrios" disabled>
                     <option disabled selected>Seleccione...</option>
                 </select>
             </div>
@@ -149,7 +151,7 @@
             @Html.LabelFor(model => model.logoEmpresaurl, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <img src="~/resources/avatar-male-empty.png" class="img-responsive img-thumbnail" style="height:140px;width:140px" />
-                <input type="file" />
+                <input type="file" name="logoEmpresaurl"/>
                 @Html.ValidationMessageFor(model => model.logoEmpresaurl, "", new { @class = "text-danger" })
             </div>
 

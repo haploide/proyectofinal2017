@@ -16,6 +16,21 @@ namespace WebSite.App_Start
     }
     public enum EstadoUsuario
     {
+        Activo=4,
+        DeBaja=5
+
+    }
+    public enum EstadoEmpresa
+    {
+        Activa=1,
+        PendienteDeActivacion=2,
+        Suspendida=3
+
+    }
+    public enum EstadoClientePrestatario
+    {
+        Activo=6,
+        Suspendido=7
 
     }
     public class UsuarioLogueado
