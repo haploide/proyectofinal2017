@@ -156,10 +156,10 @@
             @Html.LabelFor(model => model.logoEmpresaurl, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <img id="logo" src="~/resources/avatar-male-empty.png" class="img-responsive img-thumbnail" style="height:140px;width:140px" />
-                <input type="file" accept=".png,.jpg" name="logoEmpresaurl" ng-model="urlImagen" id="archivoImagen" ng-change="onFileSelected(event)" />
+                <input type="file" accept=".png,.jpg" name="logoEmpresaurl" onchange="onFileSelected(event)" id="archivoImagen" />
                 @Html.ValidationMessageFor(model => model.logoEmpresaurl, "", new { @class = "text-danger" })
             </div>
-
+            <input type="hidden" name="logoEmpresa" id="logoEmpresa"/>
         </div>
 
         <div class="form-group">
@@ -227,7 +227,29 @@
 
     
 }
+<script>
+    function onFileSelected(event) {
 
+        var selectedFile = event.target.files[0];
+        var reader = new FileReader();
+
+        var imgtag = document.getElementById("logo");
+        var imgbyte = document.getElementById("logoEmpresa");
+        
+        imgtag.title = selectedFile.name;
+
+        reader.onload = function (event) {
+            imgtag.src = event.target.result;
+            imgbyte.value = event.target.result.replace(/^data:image\/(png|jpg);base64,/, "");
+            
+        };
+
+        reader.readAsDataURL(selectedFile);
+
+    };
+
+   
+</script>
 
 
 @section Scripts {
