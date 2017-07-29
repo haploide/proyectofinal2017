@@ -22,3 +22,27 @@ select,
 textarea {
     max-width: 280px;
 }
+
+#titulosRegistrar
+{
+    text-align: center;
+    background: lightblue;
+    padding: 15px;
+    box-shadow: 2px 2px 20px black;
+}
+
+.lineaSeparadoraTitulo
+{
+    color:black;
+    border-color:black !important;
+}
+
+.container
+{
+    width:95% !important;
+}
+
+.jumbotron
+{
+    box-shadow: 1px 10px 50px;
+}
