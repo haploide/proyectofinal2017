@@ -6750,5 +6750,7 @@ button.close {
     background-color:#1d2980;
     padding-top: 30px;
     padding-bottom: 30px;
+    margin: 0px;
+    margin-top: 25px !important;
 }
 /*# sourceMappingURL=bootstrap.css.map */

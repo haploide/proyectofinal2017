@@ -1,6 +1,6 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    padding-top: 100px;
+    
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -21,4 +21,88 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+#titulosRegistrar
+{
+    text-align: center;
+    background: lightblue;
+    padding: 15px;
+    box-shadow: 2px 2px 20px black;
+}
+
+.lineaSeparadoraTitulo
+{
+    color:black;
+    border-color:black !important;
+}
+
+.container
+{
+    width:100% !important;
+}
+
+.jumbotron
+{
+    box-shadow: 1px 10px 50px;
+}
+
+.menu
+{
+        min-height: 100px;
+        background-color: white;
+            border-color: lightgrey;
+}
+
+.menu .container
+{
+        width:90% !important;
+}
+
+.logoMenu
+{
+    max-height:90px;
+}
+
+@media only screen and (max-width:600px)
+{
+    .logoMenu
+{
+    max-width:75%;
+}
+}
+
+.barraMenu
+{
+    padding-top:25px;
+}
+.navbar-inverse .navbar-nav > li > a 
+{
+    color:black;
+}
+.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
+    color:lightslategrey;
+    background-color: transparent;
+}
+
+.navbar-toggle 
+{
+    margin-top: 25px;
+    background-color: lightgray;
+}
+
+.filaRegistrarCliente
+{
+    background-color: aliceblue;
+}
+
+.footer
+{
+    background-color:#808080;
+    color:white;
+    padding: 20px;
+}
+.footer p
+{
+    margin:0px;
 }
