@@ -9,11 +9,12 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/angular")
     <script src="~/js/angulargeoturnos.js"></script>
+    <link rel="stylesheet" href="~/Content/Site.css" type="text/css" />
     
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top menu">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -21,9 +22,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Poner Logo", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <img src="~/resources/LOGO-FINAL.png" class="logoMenu"/>
             </div>
-            <div class="navbar-collapse collapse">
+            <div class="navbar-collapse collapse barraMenu">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
@@ -35,10 +36,13 @@
     </div>
     <div class="container body-content" ng-app="geoturnos">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - GeoTurnos</p>
-        </footer>
+        <div class="row footer">
+            
+            <footer>
+                <p>&copy; @DateTime.Now.Year - GeoTurnos</p>
+            </footer>
+        </div>
+        
     </div>
 
 
