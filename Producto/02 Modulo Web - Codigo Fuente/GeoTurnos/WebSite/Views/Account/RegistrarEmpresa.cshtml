@@ -155,8 +155,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.logoEmpresaurl, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <img src="~/resources/avatar-male-empty.png" class="img-responsive img-thumbnail" style="height:140px;width:140px" />
-                <input type="file" name="logoEmpresaurl"/>
+                <img id="logo" src="~/resources/avatar-male-empty.png" class="img-responsive img-thumbnail" style="height:140px;width:140px" />
+                <input type="file" accept=".png,.jpg" name="logoEmpresaurl" ng-model="urlImagen" id="archivoImagen" ng-change="onFileSelected(event)" />
                 @Html.ValidationMessageFor(model => model.logoEmpresaurl, "", new { @class = "text-danger" })
             </div>
 
