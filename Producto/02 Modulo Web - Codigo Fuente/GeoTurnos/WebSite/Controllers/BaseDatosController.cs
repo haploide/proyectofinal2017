@@ -47,6 +47,45 @@ namespace WebSite.Controllers
             }
             return resutl;
         }
+
+        public static bool GuardarCliente(Cliente  cliente)
+        {
+            bool resutl = true;
+            using (GeoTurnosEntities db = new GeoTurnosEntities())
+            {
+
+                try
+                {
+                    db.Database.Connection.Open();
+                    if (cliente != null && db.Cliente   != null)
+                    {
+                        if (cliente.idUsuario != 0)
+                        {
+                            db.Entry(cliente).State = System.Data.Entity.EntityState.Modified;
+                        }
+                        else
+                        {
+                            db.Cliente.Add(cliente);
+                        }
+                        db.SaveChanges();
+
+                    }
+                    else
+                    {
+                        resutl = false;
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+
+                    throw;
+
+                }
+            }
+            return resutl;
+        }
         public static UsuarioLogueado Login(string usuario, string password)
         {
             UsuarioLogueado usuariologuado = null;
