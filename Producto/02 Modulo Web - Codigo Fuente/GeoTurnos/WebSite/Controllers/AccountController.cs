@@ -171,17 +171,26 @@ namespace WebSite.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (true)
-                {
 
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                Domicilio domicilio = new Domicilio() { altura = model.altura, calle = model.calle, piso = model.piso, departamento = model.departamento, torre = model.torre, idBarrio = model.idBarrio };
+                Usuario usuario = new Usuario() { usuario1 = model.usuario1, contraseña = System.Web.Helpers.Crypto.SHA256(model.contraseña), preguntaSeguridad1 = model.preguntaSeguridad1, respuestaSeguridad1 = model.respuestaSeguridad1, preguntaSeguridad2 = model.preguntaSeguridad2, respuestaSeguridad2 = model.respuestaSeguridad2, idEstado = (int)EstadoUsuario.Activo };
+                Cliente  cliente = new Cliente() {apellido = model.apellido, fechaNacimiento = model.fechaNacimiento,foto=model.foto,nombre=model.nombre,nroDocumento=model.nroDocumento, telefono = model.telefono, email = model.email, idEstado = (int)EstadoEmpresa.PendienteDeActivacion };
+
+                cliente.Domicilio = domicilio;
+                cliente.Usuario = usuario;
+
+                var resultado = BaseDatosController.GuardarCliente (cliente);
+
+                if (resultado)
+                {
+                    UsuarioLogueado usuarioLogin = new UsuarioLogueado() { Usuario = model.usuario1, TipoUsuario = TipoUsuario.Entidad, Prestatario  = cliente  };
+                    HttpContext.Session["usuarioLogin"] = usuarioLogin;
+
+                    //ToDO: Mandar Email a la cuenta del administrador advirtiendo que se registro una nueva empresa y debe autorizarla
 
                     return RedirectToAction("Index", "Home");
                 }
+
             }
 
             // If we got this far, something failed, redisplay form
