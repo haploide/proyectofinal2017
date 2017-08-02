@@ -14,14 +14,14 @@ namespace WebSite.Controllers
         {
             return View();
         }
-
+        [Autorizado]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
 
             return View();
         }
-
+        [Autorizado(Roles =TipoUsuario.Administrador)]
         public ActionResult Contact()
         {
 

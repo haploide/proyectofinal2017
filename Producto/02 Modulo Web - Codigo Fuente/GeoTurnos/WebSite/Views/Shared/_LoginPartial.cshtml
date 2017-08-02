@@ -9,7 +9,7 @@
         @Html.AntiForgeryToken()
 
         <ul class="nav navbar-nav navbar-right">
-            <li><img  src="" id="miniavatar" class="img-responsive img-thumbnail" style="height:40px;width:40px;visibility:hidden" /></li>
+            <li><img src="" id="miniavatar" class="img-responsive img-thumbnail" style="height:40px;width:40px;visibility:hidden" /></li>
             <li>
                 @Html.ActionLink("Bienvenido " + usuarioLogin.Usuario + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
             </li>
@@ -18,7 +18,7 @@
     }
 
 
-    <script>
+    @*<script>
         $(document).ready(function () {
 
             var base64 = '@Convert.ToBase64String(@usuarioLogin.Empresa.logoEmpresa)';
@@ -27,8 +27,9 @@
                 imgtag.src = 'data:image/png;base64,' + base64;
                 imgtag.style = 'height:40px;width:40px;visibility:visible';
             }
+
         });
-    </script>
+    </script>*@
 }
 else
 {

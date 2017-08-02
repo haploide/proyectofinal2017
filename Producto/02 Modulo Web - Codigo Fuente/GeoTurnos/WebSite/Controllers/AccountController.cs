@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 
 namespace WebSite.Controllers
 {
-    [Autorizar]
+    [Autorizado]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -73,40 +73,32 @@ namespace WebSite.Controllers
                 return View(model);
             }
 
-            UsuarioLogueado usuarioLogin = new UsuarioLogueado() { Usuario = model.usuario1, TipoUsuario = TipoUsuario.Administrador };
-            HttpContext.Session["usuarioLogin"] = usuarioLogin;
-
-            if (model.RememberMe)
+            UsuarioLogueado usuarioLogin = BaseDatosController.Login(model.usuario1, System.Web.Helpers.Crypto.SHA256(model.Password));
+            if (usuarioLogin!=null)
             {
-                var json = JsonConvert.SerializeObject(usuarioLogin);
+                HttpContext.Session["usuarioLogin"] = usuarioLogin;
 
-                
+                //if (model.RememberMe)
+                //{
+                //    var json = JsonConvert.SerializeObject(usuarioLogin);
 
 
-                var userCookie = new HttpCookie("usuariogeoturnos", Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(json)));
 
-                userCookie.Expires.AddDays(365);
 
-                HttpContext.Response.Cookies.Add(userCookie); 
+                //    var userCookie = new HttpCookie("usuariogeoturnos", Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(json)));
+
+                //    userCookie.Expires.AddDays(365);
+
+                //    HttpContext.Response.Cookies.Add(userCookie);
+                //}
+
+                return RedirectToLocal(returnUrl);
+            }else
+            {
+                ModelState.AddModelError("", "Usuario o Password Incorrecto");
+                return View(model);
             }
-
-            return RedirectToLocal(returnUrl);
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            //var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            //switch (result)
-            //{
-            //    case SignInStatus.Success:
-            //        return RedirectToLocal(returnUrl);
-            //    case SignInStatus.LockedOut:
-            //        return View("Lockout");
-            //    case SignInStatus.RequiresVerification:
-            //        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-            //    case SignInStatus.Failure:
-            //    default:
-            //        ModelState.AddModelError("", "Invalid login attempt.");
-            //        return View(model);
-            //}
+            
 
 
         }

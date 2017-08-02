@@ -11,7 +11,7 @@ using WebSite.App_Start;
 
 namespace WebSite.Controllers
 {
-    [Autorizar]
+    [Autorizado]
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;

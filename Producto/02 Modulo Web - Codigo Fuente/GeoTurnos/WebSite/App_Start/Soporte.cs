@@ -10,9 +10,9 @@ namespace WebSite.App_Start
     public enum TipoUsuario
     {
         _Todos,
-        Administrador,
-        Entidad,
-        Prestatario
+        Administrador=1,
+        Entidad=2,
+        Prestatario=3
     }
     public enum EstadoUsuario
     {
@@ -38,7 +38,7 @@ namespace WebSite.App_Start
         private string usuario;
         private TipoUsuario tipoUsuario;
         private Empresa empresa;
-        private Usuario prestatario;
+        private Cliente prestatario;
 
         public string Usuario{ get; set; }
 
@@ -46,13 +46,13 @@ namespace WebSite.App_Start
 
         public Empresa Empresa { get; set; }
 
-        public Usuario Prestatario { get; set; }
+        public Cliente Prestatario { get; set; }
 
         public UsuarioLogueado()
         {
 
         }
-        public UsuarioLogueado(string usuario, TipoUsuario tipoUsuario, Empresa empresa, Usuario prestatario)
+        public UsuarioLogueado(string usuario, TipoUsuario tipoUsuario, Empresa empresa, Cliente prestatario)
         {
             this.usuario = usuario;
             this.tipoUsuario = tipoUsuario;
@@ -61,7 +61,7 @@ namespace WebSite.App_Start
         }
     }
 
-    public class AutorizarAttribute : AuthorizeAttribute
+    public class AutorizadoAttribute : AuthorizeAttribute
     {
         public new TipoUsuario Roles { get; set; }
         protected override bool AuthorizeCore(HttpContextBase httpContext)

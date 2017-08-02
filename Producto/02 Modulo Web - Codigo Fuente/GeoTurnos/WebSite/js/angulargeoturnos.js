@@ -274,6 +274,6 @@ app.controller("registrarUsuario", function ($scope, $http) {
         $("#barrios").removeAttr('disabled');
     }
 
-    $("#inicioActividades").jqxDateTimeInput({theme: 'bootstrap', template: "primary", width: '275px', height: '25px' });
+    $("#fechaNacimiento").jqxDateTimeInput({ theme: 'bootstrap', template: "primary", width: '275px', height: '25px' });
 
 })

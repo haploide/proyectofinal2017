@@ -5,7 +5,7 @@
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal" ng-controller="registrarCliente">
+    <div class="form-horizontal" ng-controller="registrarUsuario">
         
         <div class="row filaRegistrarCliente">
 
@@ -67,7 +67,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.fechaNacimiento, htmlAttributes: new { @class = "control-label col-md-4" })
                     <div class="col-md-8">
-                        @Html.EditorFor(model => model.fechaNacimiento, new { htmlAttributes = new { @class = "form-control" } })
+                        <div id="fechaNacimiento" name="fechaNacimiento"></div>
                         @Html.ValidationMessageFor(model => model.fechaNacimiento, "", new { @class = "text-danger" })
                     </div>
                 </div>
