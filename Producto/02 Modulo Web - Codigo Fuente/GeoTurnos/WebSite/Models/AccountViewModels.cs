@@ -233,10 +233,12 @@ namespace WebSite.Models
         [Display(Name = "Número de Teléfono")]
         public string telefono { get; set; }
 
-        [Required]
-        [DataType(DataType.Url)]
-        [Display(Name = "Foto")]
         public byte[] foto { get; set; }
+
+        [Required]
+        [DataType(DataType.ImageUrl)]
+        [Display(Name = "Avatar")]
+        public string fotourl { get; set; }
 
         [Required]
         [DataType(DataType.EmailAddress)]
@@ -247,6 +249,10 @@ namespace WebSite.Models
         [DataType(DataType.DateTime)]
         [Display(Name = "Fecha de Nacimiento")]
         public System.DateTime fechaNacimiento { get; set; }
+
+        [Required]
+        [Display(Name = "Barrio")]
+        public int idBarrio { get; set; }
 
         [Required]
         [DataType(DataType.Text)]

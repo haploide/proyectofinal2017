@@ -4,9 +4,9 @@
 @using (Html.BeginForm("RegistrarCliente", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal" ng-controller="registrarUsuario">
-        
+
         <div class="row filaRegistrarCliente">
 
             <div id="titulosRegistrar">
@@ -72,6 +72,35 @@
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <label class="control-label col-md-4" for="provincias">Provincia</label>
+                    <div class="col-md-8">
+                        <select class="form-control" id="paices">
+                            <option disabled selected>Seleccione...</option>
+                            <option value="{{provincia.idProvincia}}" ng-repeat="provincia in provincias" ng-click="clickProvincias(provincia.idProvincia)">{{provincia.nombre}}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-4" for="ciudades">Ciudad</label>
+                    <div class="col-md-8">
+                        <select class="form-control" id="ciudades" disabled>
+                            <option disabled selected>Seleccione...</option>
+                            <option value="{{ciudad.idCiudad}}" ng-repeat="ciudad in ciudades" ng-click="clickCiudades(ciudad.idCiudad)">{{ciudad.nombre}}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.idBarrio, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        <select class="form-control" name="idBarrio" id="barrios" disabled>
+                            <option disabled selected>Seleccione...</option>
+                            <option value="{{barrio.idBarrio}}" ng-repeat="barrio in barrios">{{barrio.nombre}}</option>
+                        </select>
+                    </div>
+                </div>
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.calle, htmlAttributes: new { @class = "control-label col-md-4" })
@@ -122,6 +151,17 @@
                 <hr class="lineaSeparadoraTitulo" />
 
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.fotourl, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        <img id="fotoAvatar" src="~/resources/avatar-male-empty.png" class="img-responsive img-thumbnail" style="height:140px;width:140px" />
+                        <input type="file" accept=".png,.jpg" name="fotourl" onchange="onFileSelected(event)" id="archivoImagen" />
+                        @Html.ValidationMessageFor(model => model.fotourl, "", new { @class = "text-danger" })
+                    </div>
+                    <input type="hidden" name="foto" id="foto" />
+                </div>
+
                 <div class="form-group">
                     @Html.LabelFor(model => model.usuario1, htmlAttributes: new { @class = "control-label col-md-4" })
                     <div class="col-md-8">
@@ -182,20 +222,43 @@
 
             </div>
         </div>
-            <div class="row filaRegistrarCliente">
-                <hr />
+        <div class="row filaRegistrarCliente">
+            <hr />
 
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Registrar" class="btn btn-primary" />
-                    </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Registrar" class="btn btn-primary" />
                 </div>
             </div>
-
-
         </div>
-}
 
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
-        }
+
+    </div>
+}
+<script>
+    function onFileSelected(event) {
+
+        var selectedFile = event.target.files[0];
+        var reader = new FileReader();
+
+        var imgtag = document.getElementById("fotoAvatar");
+        var imgbyte = document.getElementById("foto");
+
+        imgtag.title = selectedFile.name;
+
+        reader.onload = function (event) {
+            imgtag.src = event.target.result;
+            imgbyte.value = event.target.result.replace(/^data:image\/(png|jpg);base64,/, "");
+
+        };
+
+        reader.readAsDataURL(selectedFile);
+
+    };
+
+
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
