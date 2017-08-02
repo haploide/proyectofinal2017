@@ -183,10 +183,8 @@ namespace WebSite.Controllers
 
                 if (resultado)
                 {
-                    UsuarioLogueado usuarioLogin = new UsuarioLogueado() { Usuario = model.usuario1, TipoUsuario = TipoUsuario.Entidad, Prestatario  = cliente  };
+                    UsuarioLogueado usuarioLogin = new UsuarioLogueado() { Usuario = model.usuario1, TipoUsuario = TipoUsuario.Prestatario, Prestatario  = cliente  };
                     HttpContext.Session["usuarioLogin"] = usuarioLogin;
-
-                    //ToDO: Mandar Email a la cuenta del administrador advirtiendo que se registro una nueva empresa y debe autorizarla
 
                     return RedirectToAction("Index", "Home");
                 }
