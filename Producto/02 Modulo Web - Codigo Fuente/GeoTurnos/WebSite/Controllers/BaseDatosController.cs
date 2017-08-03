@@ -13,13 +13,13 @@ namespace WebSite.Controllers
         public static bool GuardarEmpresa(Empresa empresa)
         {
             bool resutl = true;
-            using(GeoTurnosEntities db= new GeoTurnosEntities())
+            using (GeoTurnosEntities db = new GeoTurnosEntities())
             {
-               
+
                 try
                 {
                     db.Database.Connection.Open();
-                    if (empresa != null&&db.Empresa!=null)
+                    if (empresa != null && db.Empresa != null)
                     {
                         if (empresa.idEmpresa != 0)
                         {
@@ -32,23 +32,23 @@ namespace WebSite.Controllers
                         db.SaveChanges();
 
                     }
-                    else{
+                    else
+                    {
                         resutl = false;
                     }
 
 
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
 
-                    throw;
+                    throw new NotImplementedException();
 
                 }
             }
             return resutl;
         }
-
-        public static bool GuardarCliente(Cliente  cliente)
+        public static bool GuardarCliente(Cliente cliente)
         {
             bool resutl = true;
             using (GeoTurnosEntities db = new GeoTurnosEntities())
@@ -57,7 +57,7 @@ namespace WebSite.Controllers
                 try
                 {
                     db.Database.Connection.Open();
-                    if (cliente != null && db.Cliente   != null)
+                    if (cliente != null && db.Cliente != null)
                     {
                         if (cliente.idUsuario != 0)
                         {
@@ -77,10 +77,10 @@ namespace WebSite.Controllers
 
 
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
 
-                    throw;
+                    throw new NotImplementedException();
 
                 }
             }
@@ -90,20 +90,20 @@ namespace WebSite.Controllers
         {
             UsuarioLogueado usuariologuado = null;
 
-            using(GeoTurnosEntities db= new GeoTurnosEntities())
+            using (GeoTurnosEntities db = new GeoTurnosEntities())
             {
                 try
                 {
                     db.Database.Connection.Open();
-                    if (!string.IsNullOrEmpty(usuario) && !string.IsNullOrEmpty(password) && db.Usuario != null)
+                    if (!string.IsNullOrEmpty(usuario) && !string.IsNullOrEmpty(password) && db.Usuario != null && db.Usuario.Any())
                     {
-                        Usuario user=db.Usuario.Where(u => u.usuario1 == usuario).First();
+                        Usuario user = db.Usuario.Where(u => u.usuario1 == usuario).First();
 
                         if (user.contraseña == password)
                         {
                             if (user.Empresa.Count == 1)
                             {
-                                usuariologuado = new UsuarioLogueado() { Empresa=user.Empresa.First(), TipoUsuario= TipoUsuario.Entidad, Usuario=user.usuario1};
+                                usuariologuado = new UsuarioLogueado() { Empresa = user.Empresa.First(), TipoUsuario = TipoUsuario.Entidad, Usuario = user.usuario1 };
                             }
                             else if (user.Cliente.Count == 1)
                             {
@@ -113,7 +113,7 @@ namespace WebSite.Controllers
                             {
                                 usuariologuado = new UsuarioLogueado() { TipoUsuario = TipoUsuario.Administrador, Usuario = user.usuario1 };
                             }
-                            
+
                         }
 
                     }
@@ -125,19 +125,86 @@ namespace WebSite.Controllers
 
                     return null;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
 
-                    throw;
+                    throw new NotImplementedException();
                 }
 
 
 
             }
-            
+
             return usuariologuado;
 
         }
-        
+        public static bool esUsuarioByEmail(string email)
+        {
+            bool result = false;
+
+            using (GeoTurnosEntities db = new GeoTurnosEntities())
+            {
+                try
+                {
+                    if (!string.IsNullOrEmpty(email) && db.Empresa != null && db.Empresa.Any())
+                    {
+                        var user = db.Empresa.Where(u => u.email == email);
+
+                        if (user.Count() != 0)
+                        {
+                            result = true;
+                        }
+                    }
+                    if (!string.IsNullOrEmpty(email) && db.Cliente != null && db.Cliente.Any())
+                    {
+                        var user = db.Cliente.Where(u => u.email == email);
+
+                        if (user.Count() != 0)
+                        {
+                            result = true;
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new NotImplementedException();
+                }
+
+            }
+
+            return result;
+
+        }
+        public static bool esUsuarioByUsuario(string usuario)
+        {
+            bool result = false;
+
+            using (GeoTurnosEntities db = new GeoTurnosEntities())
+            {
+                try
+                {
+                    if (!string.IsNullOrEmpty(usuario) && db.Usuario != null && db.Usuario.Any())
+                    {
+                        var user = db.Usuario.Where(u => u.usuario1 == usuario);
+
+                        if (user.Count() != 0)
+                        {
+                            result = true;
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new NotImplementedException();
+                }
+
+            }
+
+
+            return result;
+
+        }
+
+
     }
 }
