@@ -171,14 +171,14 @@ namespace WebSite.Controllers
         {
             if (ModelState.IsValid)
             {
-
+                TipoDocumento tipoDoc = new Models.TipoDocumento() { idTipoDocumento = model.idTipoDocumento };
                 Domicilio domicilio = new Domicilio() { altura = model.altura, calle = model.calle, piso = model.piso, departamento = model.departamento, torre = model.torre, idBarrio = model.idBarrio };
                 Usuario usuario = new Usuario() { usuario1 = model.usuario1, contraseña = System.Web.Helpers.Crypto.SHA256(model.contraseña), preguntaSeguridad1 = model.preguntaSeguridad1, respuestaSeguridad1 = model.respuestaSeguridad1, preguntaSeguridad2 = model.preguntaSeguridad2, respuestaSeguridad2 = model.respuestaSeguridad2, idEstado = (int)EstadoUsuario.Activo };
                 Cliente  cliente = new Cliente() {apellido = model.apellido, fechaNacimiento = model.fechaNacimiento,foto=model.foto,nombre=model.nombre,nroDocumento=model.nroDocumento, telefono = model.telefono, email = model.email, idEstado = (int)EstadoEmpresa.PendienteDeActivacion };
 
                 cliente.Domicilio = domicilio;
                 cliente.Usuario = usuario;
-
+                cliente.TipoDocumento = tipoDoc;
                 var resultado = BaseDatosController.GuardarCliente (cliente);
 
                 if (resultado)
