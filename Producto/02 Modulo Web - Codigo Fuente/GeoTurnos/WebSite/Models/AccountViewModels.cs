@@ -91,7 +91,7 @@ namespace WebSite.Models
         public int idRubro { get; set; }
 
         [Required]
-        [RegularExpression(@"^\d+$")]
+       
         [Display(Name = "Barrio")]
         public int idBarrio { get; set; }
         
@@ -140,6 +140,10 @@ namespace WebSite.Models
 
     public class RegistrarClienteViewModel
     {
+        [Required(ErrorMessage = "Seleccione un Tipo de Documento")]
+        [Display(Name = "Tipo de Documento")]
+        public int idTipoDocumento { get; set; }
+
         [Required]
         [DataType(DataType.Text)]
         [Display(Name = "Usuario")]

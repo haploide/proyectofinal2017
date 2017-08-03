@@ -156,11 +156,44 @@ app.controller("registrarEmpresa", function ($scope, $http) {
 
 })
 app.controller("registrarUsuario", function ($scope, $http) {
+    $scope.tipoDoc = [];
     $scope.provincias = [];
     $scope.ciudades = [];
     $scope.barrios = [];
 
     this.isBusy = true;
+     $http({
+        method: 'GET',
+        url: 'http://localhost:6901/api/tipoDocumento',
+        headers: {
+            'Accept': "application/json"
+        }
+
+    }).then(function (response) {
+        if (response.status === 200) {
+            angular.copy(response.data, $scope.tipoDoc);
+        }
+
+    }, function (response) {
+        switch (response.statusText) {
+            case 400:
+                alert("Bad Request");
+                break;
+            case 401:
+                alert("Unauthorized");
+                break;
+            case 404:
+                alert("Not Found");
+                break;
+            case 500:
+                alert("Internal Server Error");
+                break;
+            default:
+                alert("Error no identificado");
+        }
+    }).then(function () {
+
+    });
     $http({
         method: 'GET',
         url: 'http://localhost:6901/api/provincia',
