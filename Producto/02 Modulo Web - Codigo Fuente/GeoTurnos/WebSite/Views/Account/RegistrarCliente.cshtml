@@ -39,7 +39,17 @@
                         @Html.ValidationMessageFor(model => model.apellido, "", new { @class = "text-danger" })
                     </div>
                 </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.idTipoDocumento , htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        <select class="form-control" name="idTipoDocumento" id="tipoDoc">
+                            <option disabled selected>Seleccione...</option>
+                            <option value="{{tipo.idTipoDocumento}}" ng-repeat="tipo in tipoDoc">{{tipo.nombre}}</option>
 
+                        </select>
+                        @Html.ValidationMessageFor(model => model.idTipoDocumento, "", new { @class = "text-danger" })
+                    </div>
+                </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.nroDocumento, htmlAttributes: new { @class = "control-label col-md-4" })
                     <div class="col-md-8">

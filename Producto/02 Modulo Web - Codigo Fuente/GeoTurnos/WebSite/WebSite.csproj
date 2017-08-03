@@ -297,7 +297,6 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="js\angulargeoturnos.js" />
-    <Content Include="js\jquerygeoturnos.js" />
     <Content Include="Models\GeoturnosModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>GeoturnosModel.edmx</DependentUpon>
