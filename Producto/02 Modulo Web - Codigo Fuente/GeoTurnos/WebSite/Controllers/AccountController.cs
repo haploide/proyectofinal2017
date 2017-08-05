@@ -55,29 +55,39 @@ namespace WebSite.Controllers
                 return View(model);
             }
 
-            UsuarioLogueado usuarioLogin = BaseDatosController.Login(model.usuario1, System.Web.Helpers.Crypto.SHA256(model.Password));
-            if (usuarioLogin!=null)
+            try
             {
-                HttpContext.Session["usuarioLogin"] = usuarioLogin;
+                UsuarioLogueado usuarioLogin = BaseDatosController.Login(model.usuario1, System.Web.Helpers.Crypto.SHA256(model.Password));
+                if (usuarioLogin != null)
+                {
+                    HttpContext.Session["usuarioLogin"] = usuarioLogin;
 
-                //if (model.RememberMe)
-                //{
-                //    var json = JsonConvert.SerializeObject(usuarioLogin);
+                    //if (model.RememberMe)
+                    //{
+                    //    var json = JsonConvert.SerializeObject(usuarioLogin);
 
 
 
 
-                //    var userCookie = new HttpCookie("usuariogeoturnos", Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(json)));
+                    //    var userCookie = new HttpCookie("usuariogeoturnos", Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(json)));
 
-                //    userCookie.Expires.AddDays(365);
+                    //    userCookie.Expires.AddDays(365);
 
-                //    HttpContext.Response.Cookies.Add(userCookie);
-                //}
+                    //    HttpContext.Response.Cookies.Add(userCookie);
+                    //}
 
-                return RedirectToLocal(returnUrl);
-            }else
+                    return RedirectToLocal(returnUrl);
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Usuario o Password Incorrecto");
+                    return View(model);
+                }
+            }
+            catch (Exception)
             {
-                ModelState.AddModelError("", "Usuario o Password Incorrecto");
+
+                ModelState.AddModelError("", "Error al procesar la solicitud");
                 return View(model);
             }
             

@@ -1,13 +1,25 @@
-﻿@using WebSite.App_Start
+﻿
 @{
     ViewBag.Title = "Administración";
-
-    var usuarioLogin = Session["usuarioLogin"] as UsuarioLogueado;
 }
 
-<div class="container" role="main">
+<div class="container" role="main" ng-controller="AdministacionController">
     @Html.Partial("_PartialCabeceraCuenta")
 
+    <ul class="container nav nav-pills" id="menu">
+        <li id="principal" ng-click="clickMenu('principal')" role="presentation" class="active"><a href="#">Principal</a></li>
+        <li id="activacionEmpresa" ng-click="clickMenu('activacionEmpresa')" role="presentation"><a href="#">Autorizar Empresa Prestadora</a></li>
+    </ul>
 </div>
 
 
+<script>
+    $(document).ready(function () {
+
+        var imgtag = document.getElementById("avatar");
+        imgtag.src = '/resources/OAI50J0.jpg';
+        var divBienvenida = document.getElementById("bienvenida");
+        divBienvenida.innerHTML = "<h1>Administración</h1>";
+
+    });
+</script>

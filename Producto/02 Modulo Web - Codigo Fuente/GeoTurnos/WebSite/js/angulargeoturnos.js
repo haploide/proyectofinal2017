@@ -1,13 +1,12 @@
 ﻿var app = angular.module('geoturnos', []);
 
-app.controller("usuarioController", function ($scope, $http , emp) {
-    var usuarioController =this;  
-    usuarioController.empresa = emp;
-    usuarioController.upDateEstadoEmpresa = function (emp){
+app.controller("AdministacionController", function ($scope, $http) {
+
+    $scope.upDateEstadoEmpresa = function (emp) {
         $http({
             method: 'PUT',
-            url: 'http://localhost:6901/api/Empresa/',
-            data: usuarioController.empresa,
+            url: 'http://localhost:6901/api/Empresa/' + emp.idEmpresa,
+            data: $scope.empresa,
             headers: {
                 'Accept': "application/json"
             }
@@ -15,7 +14,7 @@ app.controller("usuarioController", function ($scope, $http , emp) {
         }).then(function (response) {
             if (response.status === 201) {
                 alert('Estado cambiado');
-               
+
             }
 
         }, function (response) {
@@ -38,8 +37,20 @@ app.controller("usuarioController", function ($scope, $http , emp) {
         }).then(function () {
 
         });
-    } 
-    
+    }
+    $scope.clickMenu = function (idLista) {
+        $('#menu').addClass('administracionMenu');
+
+        $('#' + idLista).attr("class", "active");
+        
+    }
+
+})
+app.controller("MiCuentaEmpresaPrestadoraController", function () {
+
+})
+app.controller("MiCuentaClientePrestatarioController", function () {
+
 })
 app.controller("registrarEmpresa", function ($scope, $http) {
     $scope.rubros = [];
@@ -118,7 +129,7 @@ app.controller("registrarEmpresa", function ($scope, $http) {
         this.isBusy = true;
         $http({
             method: 'GET',
-            url: 'http://localhost:6901/api/ciudad?id='+idProvincia,
+            url: 'http://localhost:6901/api/ciudad?id=' + idProvincia,
             headers: {
                 'Accept': "application/json"
             }
@@ -158,7 +169,7 @@ app.controller("registrarEmpresa", function ($scope, $http) {
         this.isBusy = true;
         $http({
             method: 'GET',
-            url: 'http://localhost:6901/api/barrio?id='+idCiudad,
+            url: 'http://localhost:6901/api/barrio?id=' + idCiudad,
             headers: {
                 'Accept': "application/json"
             }
@@ -189,11 +200,11 @@ app.controller("registrarEmpresa", function ($scope, $http) {
         }).then(function () {
 
         });
-        
+
         $("#barrios").removeAttr('disabled');
     }
 
-    $("#inicioActividades").jqxDateTimeInput({theme: 'bootstrap', template: "primary", width: '275px', height: '25px' });
+    $("#inicioActividades").jqxDateTimeInput({ theme: 'bootstrap', template: "primary", width: '275px', height: '25px' });
 
 })
 app.controller("registrarUsuario", function ($scope, $http) {
@@ -203,7 +214,7 @@ app.controller("registrarUsuario", function ($scope, $http) {
     $scope.barrios = [];
 
     this.isBusy = true;
-     $http({
+    $http({
         method: 'GET',
         url: 'http://localhost:6901/api/tipoDocumento',
         headers: {
@@ -273,7 +284,7 @@ app.controller("registrarUsuario", function ($scope, $http) {
         this.isBusy = true;
         $http({
             method: 'GET',
-            url: 'http://localhost:6901/api/ciudad?id='+idProvincia,
+            url: 'http://localhost:6901/api/ciudad?id=' + idProvincia,
             headers: {
                 'Accept': "application/json"
             }
@@ -313,7 +324,7 @@ app.controller("registrarUsuario", function ($scope, $http) {
         this.isBusy = true;
         $http({
             method: 'GET',
-            url: 'http://localhost:6901/api/barrio?id='+idCiudad,
+            url: 'http://localhost:6901/api/barrio?id=' + idCiudad,
             headers: {
                 'Accept': "application/json"
             }
@@ -344,7 +355,7 @@ app.controller("registrarUsuario", function ($scope, $http) {
         }).then(function () {
 
         });
-        
+
         $("#barrios").removeAttr('disabled');
     }
 
