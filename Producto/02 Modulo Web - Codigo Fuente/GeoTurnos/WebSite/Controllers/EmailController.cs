@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Web.Mvc;
 
-using Google.Apis.Auth.OAuth2;
-using Google.Apis.Auth.OAuth2.Flows;
-using Google.Apis.Auth.OAuth2.Mvc;
 using Google.Apis.Gmail.v1;
-using Google.Apis.Util.Store;
+using Google.Apis.Gmail.v1.Data;
+
 
 
 namespace WebSite.Controllers
@@ -15,6 +13,21 @@ namespace WebSite.Controllers
         public ActionResult Oauth2CallBack()
         {
             throw new NotImplementedException();
+        }
+
+        public static Message SendMessager(GmailService service, string userId, Message email)
+        {
+            try
+            {
+                return service.Users.Messages.Send(email, userId).Execute();
+
+            }
+            catch (Exception)
+            {
+                throw new NotImplementedException();
+
+            }
+            return null;
         }
 
     }

@@ -22,13 +22,6 @@ namespace WebSite.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
-        {
-            UserManager = userManager;
-           
-        }
-
-
         public ApplicationUserManager UserManager
         {
             get
