@@ -11,9 +11,9 @@
         <ul class="nav navbar-nav navbar-right">
             <li><img src="" id="miniavatar" class="img-responsive img-thumbnail" style="height:40px;width:40px;visibility:hidden" /></li>
             <li>
-                @Html.ActionLink("Bienvenido " + usuarioLogin.Usuario + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                @Html.ActionLink("Bienvenido " + usuarioLogin.Usuario + "!", "RedirectorDeCuenta", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
             </li>
-            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Cerrar sesión</a></li>
         </ul>
     }
 

@@ -1,0 +1,13 @@
+﻿@using WebSite.App_Start
+@{
+    ViewBag.Title = "Administración";
+
+    var usuarioLogin = Session["usuarioLogin"] as UsuarioLogueado;
+}
+
+<div class="container" role="main">
+    @Html.Partial("_PartialCabeceraCuenta")
+
+</div>
+
+
