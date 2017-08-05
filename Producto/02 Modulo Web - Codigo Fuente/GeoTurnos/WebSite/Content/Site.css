@@ -95,6 +95,21 @@ textarea {
 {
     background-color: aliceblue;
 }
+.filaLogin
+{
+    background-color: aliceblue;
+    text-align:center;
+    padding-top:40px;
+}
+@media only screen and (max-width: 767px)
+{
+    .loginInput
+{
+    
+    display:inline !important;
+}
+}
+
 
 .footer
 {
