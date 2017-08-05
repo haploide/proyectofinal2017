@@ -39,7 +39,7 @@ app.controller("AdministacionController", function ($scope, $http) {
         });
     }
     $scope.clickMenu = function (idLista) {
-        $('#menu').addClass('administracionMenu');
+        $('li').removeClass('active');
 
         $('#' + idLista).attr("class", "active");
         
