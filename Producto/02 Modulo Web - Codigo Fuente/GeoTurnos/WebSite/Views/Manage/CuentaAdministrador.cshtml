@@ -1,15 +1,22 @@
-﻿
+﻿<link href="~/Content/Site.css" rel="stylesheet" />
 @{
     ViewBag.Title = "Administración";
 }
 
 <div class="container" role="main" ng-controller="AdministacionController">
-    @Html.Partial("_PartialCabeceraCuenta")
+    <div id="head" class="row">
+        @Html.Partial("_PartialCabeceraCuenta")
+    </div>
 
     <ul class="container nav nav-pills" id="menu">
         <li id="principal" ng-click="clickMenu('principal')" role="presentation" class="active"><a href="#">Principal</a></li>
         <li id="activacionEmpresa" ng-click="clickMenu('activacionEmpresa')" role="presentation"><a href="#">Autorizar Empresa Prestadora</a></li>
     </ul>
+
+    <div id="body" class="row">
+
+
+    </div>
 </div>
 
 

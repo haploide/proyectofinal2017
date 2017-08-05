@@ -5,16 +5,25 @@
     var usuarioLogin = Session["usuarioLogin"] as UsuarioLogueado;
 }
 
-<div class="container row" role="main" ng-controller="MiCuentaEmpresaPrestadoraController">
-    @Html.Partial("_PartialCabeceraCuenta")
+<div class="container" ng-controller="MiCuentaEmpresaPrestadoraController">
+    <div id="head" class="row" >
+        @Html.Partial("_PartialCabeceraCuenta")
+    </div>
 
-    <ul class="container nav nav-pills">
-        <li role="presentation" class="active"><a href="#">Opcion 1</a></li>
-        <li role="presentation"><a href="#">Opcion 2</a></li>
-        <li role="presentation"><a href="#">Opcion 3</a></li>
-    </ul>
+    <div id="menu" class="row">
+        <ul class="container nav nav-pills">
+            <li role="presentation" class="active"><a href="#">Opcion 1</a></li>
+            <li role="presentation"><a href="#">Opcion 2</a></li>
+            <li role="presentation"><a href="#">Opcion 3</a></li>
+        </ul>
+    </div>
+
+    <div id="body" class="row">
+
+
+    </div>
+
 </div>
-
 
 <script>
     $(document).ready(function () {
