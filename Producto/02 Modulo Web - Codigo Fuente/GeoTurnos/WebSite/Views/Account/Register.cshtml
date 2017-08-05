@@ -1,20 +1,33 @@
-﻿@{
+﻿<link rel="stylesheet" href="~/Content/Site.css" type="text/css" />
+@{
     ViewBag.Title = "Registro";
 }
+<div class="row filaRegistrarCliente">
 
-<h2>Elije un tipo de registro</h2><hr />
+    <div id="titulosRegistrar">
+        <h2>Elije un tipo de registro</h2>
+    </div>
 
-<div class="row">
+    <div style="padding-top:20px;">
+
+    </div>
+</div>
+
+
+<div class="row filaRegistrarse">
     <div class="col-md-6">
         <h3>Entidad Prestadora</h3>
         <a href="/Account/registrarempresa">
-            <img class="img-responsive img-thumbnail" src="~/resources/O9IY3N0.png" alt="Entidad Prestadora" style="width:50%;height:50%"/>
+            <div class="">
+                <img class="img-responsive img-thumbnail grow" src="~/resources/O9IY3N0.png" alt="Entidad Prestadora" style="width:50%;height:50%" />
+            </div>
         </a>
+
     </div>
     <div class="col-md-6">
         <h3>Cliente Prestatario</h3>
         <a href="/Account/registrarcliente">
-            <img class="img-responsive img-thumbnail" src="~/resources/O9IY170.png" alt="Cliente Prestatario" style="width:50%;height:50%" />
+            <img class="img-responsive img-thumbnail grow" src="~/resources/O9IY170.png" alt="Cliente Prestatario" style="width:50%;height:50%" />
         </a>
     </div>
 </div>
