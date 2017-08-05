@@ -394,11 +394,14 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\RegistrarCliente.cshtml" />
     <Content Include="Views\Account\RegistrarEmpresa.cshtml" />
+    <Content Include="Views\Manage\_PartialCabeceraCuenta.cshtml" />
+    <Content Include="Views\Manage\CuentaEmpresaPrestadora.cshtml" />
+    <Content Include="Views\Manage\CuentaClientePrestatario.cshtml" />
+    <Content Include="Views\Manage\CuentaAdministrador.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Email\" />
-    <Folder Include="Views\Manage\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -1,0 +1,31 @@
+﻿@using WebSite.App_Start
+@{
+    ViewBag.Title = "Mi Cuenta";
+
+    var usuarioLogin = Session["usuarioLogin"] as UsuarioLogueado;
+}
+
+<div class="container row" role="main">
+    @Html.Partial("_PartialCabeceraCuenta")
+
+    <ul class="container nav nav-pills">
+        <li role="presentation" class="active"><a href="#">Opcion 1</a></li>
+        <li role="presentation"><a href="#">Opcion 2</a></li>
+        <li role="presentation"><a href="#">Opcion 3</a></li>
+    </ul>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+
+        var base64 = '@Convert.ToBase64String(@usuarioLogin.Empresa.logoEmpresa)';
+        if (base64 != '') {
+            var imgtag = document.getElementById("avatar");
+            imgtag.src = 'data:image/png;base64,' + base64;
+            var divBienvenida = document.getElementById("bienvenida");
+            divBienvenida.innerHTML = "<h1>Bienvenido @usuarioLogin.Usuario</h1>";
+        }
+
+    });
+</script>
