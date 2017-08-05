@@ -1,10 +1,10 @@
 ﻿@model WebSite.Models.RegistarEmpresaViewModel
-
+<link rel="stylesheet" href="~/Content/Site.css" type="text/css" />
 @{
     ViewBag.Title = "Registrar Entidad";
 }
 
-<h2>Registrar nueva Entidad</h2>
+
 
 
 
@@ -13,245 +13,244 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal" ng-controller="registrarEmpresa">
-        
+
+        <div class="row filaRegistrarCliente">
+
+            <div id="titulosRegistrar">
+                <h2>Registrar Nueva Entidad</h2>
+            </div>
+
+            <div style="padding-top:20px;">
+
+            </div>
+        </div>
         <br />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row filaRegistrarCliente">
+            <div class="col-lg-12">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            </div>
+        </div>
+            <div class="row filaRegistrarCliente">
+                <div class="col-md-6">
+                    <h3>Datos de la Entidad</h3>
+                    <hr />
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.cuit, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.cuit, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.cuit, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.razonSocial, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.razonSocial, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.razonSocial, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.nombreFantasia, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.nombreFantasia, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.nombreFantasia, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.inicioActividades, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <div id="inicioActividades" name="inicioActividades"></div>
+                            @Html.ValidationMessageFor(model => model.inicioActividades, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.idRubro, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <select class="form-control" name="idRubro" id="rubros">
+                                <option disabled selected>Seleccione...</option>
+                                <option value="{{rubro.idRubro}}" ng-repeat="rubro in rubros">{{rubro.nombre}}</option>
 
-        <h3>Datos de la Entidad</h3>
-        <hr />
-        <div class="form-group">
-            @Html.LabelFor(model => model.cuit, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.cuit, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.cuit, "", new { @class = "text-danger" })
+                            </select>
+                            @Html.ValidationMessageFor(model => model.idRubro, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.telefono, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.telefono, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.telefono, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="provincias">Provincia</label>
+                        <div class="col-md-10">
+                            <select class="form-control" id="paices">
+                                <option disabled selected>Seleccione...</option>
+                                <option value="{{provincia.idProvincia}}" ng-repeat="provincia in provincias" ng-click="clickProvincias(provincia.idProvincia)">{{provincia.nombre}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="ciudades">Ciudad</label>
+                        <div class="col-md-10">
+                            <select class="form-control" id="ciudades" disabled>
+                                <option disabled selected>Seleccione...</option>
+                                <option value="{{ciudad.idCiudad}}" ng-repeat="ciudad in ciudades" ng-click="clickCiudades(ciudad.idCiudad)">{{ciudad.nombre}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.idBarrio, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <select class="form-control" name="idBarrio" id="barrios" disabled>
+                                <option disabled selected>Seleccione...</option>
+                                <option value="{{barrio.idBarrio}}" ng-repeat="barrio in barrios">{{barrio.nombre}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.calle, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.calle, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.calle, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.altura, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.altura, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.altura, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.piso, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.piso, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.piso, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.departamento, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.departamento, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.departamento, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.torre, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.torre, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.torre, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <h3>Datos de Usaurio</h3>
+                    <hr />
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.logoEmpresaurl, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <img id="logo" src="~/resources/avatar-male-empty.png" class="img-responsive img-thumbnail" style="height:140px;width:140px" />
+                            <input type="file" accept=".png,.jpg" name="logoEmpresaurl" onchange="onFileSelected(event)" id="archivoImagen" />
+                            @Html.ValidationMessageFor(model => model.logoEmpresaurl, "", new { @class = "text-danger" })
+                        </div>
+                        <input type="hidden" name="logoEmpresa" id="logoEmpresa" />
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.usuario1, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.usuario1, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.usuario1, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.contraseña, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.contraseña, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.contraseña, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.confirmarcontraseña, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.confirmarcontraseña, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.confirmarcontraseña, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.preguntaSeguridad1, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.preguntaSeguridad1, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.preguntaSeguridad1, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.respuestaSeguridad1, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.respuestaSeguridad1, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.respuestaSeguridad1, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.preguntaSeguridad2, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.preguntaSeguridad2, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.preguntaSeguridad2, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.respuestaSeguridad2, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.respuestaSeguridad2, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.respuestaSeguridad2, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Registrar" class="btn btn-primary" />
+                </div>
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.razonSocial, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.razonSocial, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.razonSocial, "", new { @class = "text-danger" })
-            </div>
-        </div>
+            }
+            <script>
+                function onFileSelected(event) {
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.nombreFantasia, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.nombreFantasia, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.nombreFantasia, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    var selectedFile = event.target.files[0];
+                    var reader = new FileReader();
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.inicioActividades, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div id="inicioActividades" name="inicioActividades"></div>
-                @Html.ValidationMessageFor(model => model.inicioActividades, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    var imgtag = document.getElementById("logo");
+                    var imgbyte = document.getElementById("logoEmpresa");
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.idRubro, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <select class="form-control" name="idRubro" id="rubros">
-                    <option disabled selected>Seleccione...</option>
-                    <option value="{{rubro.idRubro}}" ng-repeat="rubro in rubros">{{rubro.nombre}}</option>
-                    
-                </select>
-                @Html.ValidationMessageFor(model => model.idRubro, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    imgtag.title = selectedFile.name;
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.telefono, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.telefono, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.telefono, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    reader.onload = function (event) {
+                        imgtag.src = event.target.result;
+                        imgbyte.value = event.target.result.replace(/^data:image\/(png|jpg);base64,/, "");
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    };
 
-        <div class="form-group">
-            <label class="control-label col-md-2" for="provincias">Provincia</label>
-            <div class="col-md-10">
-                <select class="form-control" id="paices">
-                    <option disabled selected>Seleccione...</option>
-                    <option value="{{provincia.idProvincia}}" ng-repeat="provincia in provincias" ng-click="clickProvincias(provincia.idProvincia)">{{provincia.nombre}}</option>
-                </select>
-            </div>
-        </div>
+                    reader.readAsDataURL(selectedFile);
 
-        <div class="form-group">
-            <label class="control-label col-md-2" for="ciudades">Ciudad</label>
-            <div class="col-md-10">
-                <select class="form-control" id="ciudades" disabled>
-                    <option disabled selected>Seleccione...</option>
-                    <option value="{{ciudad.idCiudad}}" ng-repeat="ciudad in ciudades" ng-click="clickCiudades(ciudad.idCiudad)">{{ciudad.nombre}}</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.idBarrio, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <select class="form-control" name="idBarrio" id="barrios" disabled>
-                    <option disabled selected>Seleccione...</option>
-                    <option value="{{barrio.idBarrio}}" ng-repeat="barrio in barrios" >{{barrio.nombre}}</option>
-                </select>
-            </div>
-        </div>
-        
-        <div class="form-group">
-            @Html.LabelFor(model => model.calle, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.calle, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.calle, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.altura, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.altura, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.altura, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.piso, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.piso, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.piso, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.departamento, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.departamento, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.departamento, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.torre, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.torre, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.torre, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <h3>Datos de Usaurio</h3>
-        <hr />
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.logoEmpresaurl, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <img id="logo" src="~/resources/avatar-male-empty.png" class="img-responsive img-thumbnail" style="height:140px;width:140px" />
-                <input type="file" accept=".png,.jpg" name="logoEmpresaurl" onchange="onFileSelected(event)" id="archivoImagen" />
-                @Html.ValidationMessageFor(model => model.logoEmpresaurl, "", new { @class = "text-danger" })
-            </div>
-            <input type="hidden" name="logoEmpresa" id="logoEmpresa"/>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.usuario1, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.usuario1, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.usuario1, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.contraseña, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.contraseña, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.contraseña, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.confirmarcontraseña, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.confirmarcontraseña, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.confirmarcontraseña, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.preguntaSeguridad1, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.preguntaSeguridad1, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.preguntaSeguridad1, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.respuestaSeguridad1, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.respuestaSeguridad1, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.respuestaSeguridad1, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.preguntaSeguridad2, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.preguntaSeguridad2, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.preguntaSeguridad2, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.respuestaSeguridad2, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.respuestaSeguridad2, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.respuestaSeguridad2, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Registrar" class="btn btn-primary" />
-            </div>
-        </div>
-    </div>
-
-    
-}
-<script>
-    function onFileSelected(event) {
-
-        var selectedFile = event.target.files[0];
-        var reader = new FileReader();
-
-        var imgtag = document.getElementById("logo");
-        var imgbyte = document.getElementById("logoEmpresa");
-        
-        imgtag.title = selectedFile.name;
-
-        reader.onload = function (event) {
-            imgtag.src = event.target.result;
-            imgbyte.value = event.target.result.replace(/^data:image\/(png|jpg);base64,/, "");
-            
-        };
-
-        reader.readAsDataURL(selectedFile);
-
-    };
-
-   
-</script>
+                };
 
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+            </script>
+
+            @section Scripts {
+                @Scripts.Render("~/bundles/jqueryval")
+            }
