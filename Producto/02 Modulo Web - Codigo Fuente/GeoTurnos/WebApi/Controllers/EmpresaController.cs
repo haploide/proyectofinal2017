@@ -86,6 +86,40 @@ namespace WebApi.Controllers
             }
         }
 
+        public IHttpActionResult Put(int id, [FromBody]Empresa  emrpesa)
+        {
+            try
+            {
+                if (emrpesa == null)
+                {
+                    return BadRequest();
+                }
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+                if (id != emrpesa.idEmpresa )
+                {
+                    return BadRequest();
+                }
+                if (_db.Empresa.Count(e => e.idEmpresa == id) == 0)
+                {
+                    return NotFound();
+                }
+                _db.Entry(emrpesa).State = System.Data.Entity.EntityState.Modified;
+
+                _db.SaveChanges();
+
+                return Ok(emrpesa);
+
+
+            }
+            catch (Exception ex)
+            {
+
+                return InternalServerError(ex);
+            }
+        }
 
         protected override void Dispose(bool disposing)
         {

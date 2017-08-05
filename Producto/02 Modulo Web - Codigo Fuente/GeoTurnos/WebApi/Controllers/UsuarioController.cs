@@ -10,10 +10,8 @@ using WebApi.Models;
 namespace WebApi.Controllers
 {
     [EnableCors(origins: "http://localhost:6907", headers: "*", methods: "*")]
-   
-        
 
-    public class ClienteController : ApiController
+    public class UsuarioController : ApiController
     {
         private GeoTurnosEntities _db = new GeoTurnosEntities();
 
@@ -21,11 +19,11 @@ namespace WebApi.Controllers
         {
             try
             {
-                if (_db.Cliente == null || !_db.Cliente.Any())
+                if (_db.Usuario  == null || !_db.Usuario.Any())
                 {
                     return NotFound();
                 }
-                return Ok(_db.Cliente);
+                return Ok(_db.Usuario);
             }
             catch (Exception ex)
             {
@@ -38,16 +36,16 @@ namespace WebApi.Controllers
         {
             try
             {
-                if (_db.Cliente == null || !_db.Cliente.Any())
+                if (_db.Usuario == null || !_db.Usuario.Any())
                 {
                     return NotFound();
                 }
-                Cliente cli = _db.Cliente.FirstOrDefault(p => p.idCliente  == id);
-                if (cli == null)
+                Usuario user = _db.Usuario.FirstOrDefault(p => p.idUsuario  == id);
+                if (user == null)
                 {
                     return NotFound();
                 }
-                return Ok(cli);
+                return Ok(user);
 
             }
             catch (Exception ex)
@@ -57,24 +55,24 @@ namespace WebApi.Controllers
             }
         }
 
-        public IHttpActionResult Post([FromBody]Cliente cliente)
+        public IHttpActionResult Post([FromBody]Usuario usuario)
         {
             try
             {
-                if (_db.Cliente == null || !_db.Cliente.Any())
+                if (_db.Usuario == null || !_db.Usuario.Any())
                 {
                     return NotFound();
                 }
-                if (cliente == null)
+                if (usuario == null)
                 {
                     return BadRequest();
                 }
 
-                _db.Cliente.Add(cliente);
+                _db.Usuario.Add(usuario);
 
                 _db.SaveChanges();
 
-                return Created("api/Cliente/" + cliente.idCliente , cliente);
+                return Created("api/Usuario/" + usuario.idUsuario , usuario);
 
             }
             catch (Exception ex)
@@ -84,11 +82,11 @@ namespace WebApi.Controllers
             }
         }
 
-        public IHttpActionResult Put(int id, [FromBody]Cliente cliente)
+        public IHttpActionResult Put(int id, [FromBody]Usuario usuario)
         {
             try
             {
-                if (cliente == null)
+                if (usuario == null)
                 {
                     return BadRequest();
                 }
@@ -96,19 +94,19 @@ namespace WebApi.Controllers
                 {
                     return BadRequest(ModelState);
                 }
-                if (id != cliente.idCliente )
+                if (id != usuario.idUsuario )
                 {
                     return BadRequest();
                 }
-                if (_db.Cliente.Count(e => e.idCliente  == id) == 0)
+                if (_db.Usuario.Count(e => e.idUsuario  == id) == 0)
                 {
                     return NotFound();
                 }
-                _db.Entry(cliente).State = System.Data.Entity.EntityState.Modified;
+                _db.Entry(usuario).State = System.Data.Entity.EntityState.Modified;
 
                 _db.SaveChanges();
 
-                return Ok(cliente);
+                return Ok(usuario);
 
 
             }

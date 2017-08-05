@@ -36,5 +36,6 @@ namespace WebApi.Models
         public virtual DbSet<RolPorUsuario> RolPorUsuario { get; set; }
         public virtual DbSet<Rubro> Rubro { get; set; }
         public virtual DbSet<TipoDocumento> TipoDocumento { get; set; }
+        public virtual DbSet<Usuario> Usuario { get; set; }
     }
 }

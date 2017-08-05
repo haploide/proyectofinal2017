@@ -134,6 +134,7 @@
     <Compile Include="Controllers\RolPorUsuarioController.cs" />
     <Compile Include="Controllers\RubroController.cs" />
     <Compile Include="Controllers\TipoDocumentoController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -183,6 +184,9 @@
       <DependentUpon>GeoTurnosModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TipoDocumento.cs">
+      <DependentUpon>GeoTurnosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usuario.cs">
       <DependentUpon>GeoTurnosModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

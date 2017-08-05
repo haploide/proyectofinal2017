@@ -30,5 +30,6 @@ namespace WebApi.Models
         public virtual Domicilio Domicilio { get; set; }
         public virtual Estado Estado { get; set; }
         public virtual TipoDocumento TipoDocumento { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }
