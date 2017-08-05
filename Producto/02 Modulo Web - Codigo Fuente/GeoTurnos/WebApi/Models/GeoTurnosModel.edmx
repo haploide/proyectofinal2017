@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="GeoTurnosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="GeoTurnosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Barrio">
           <Key>
             <PropertyRef Name="idBarrio" />
@@ -57,7 +57,7 @@
             <PropertyRef Name="idEmpresa" />
           </Key>
           <Property Name="idEmpresa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="cuit" Type="int" />
+          <Property Name="cuit" Type="decimal" Precision="18" Scale="0" />
           <Property Name="razonSocial" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="nombreFantasia" Type="nvarchar" MaxLength="50" />
           <Property Name="inicioActividades" Type="date" />
@@ -111,6 +111,19 @@
           </Key>
           <Property Name="idTipoDocumento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="usuario" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="contraseña" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="preguntaSeguridad1" Type="nvarchar" MaxLength="50" />
+          <Property Name="respuestaSeguridad1" Type="nvarchar" MaxLength="50" />
+          <Property Name="preguntaSeguridad2" Type="nvarchar" MaxLength="50" />
+          <Property Name="respuestaSeguridad2" Type="nvarchar" MaxLength="50" />
+          <Property Name="idEstado" Type="int" />
         </EntityType>
         <Association Name="FK_Barrio_Ciudad">
           <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="0..1" />
@@ -172,6 +185,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Cliente_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Domicilio_Barrio">
           <End Role="Barrio" Type="Self.Barrio" Multiplicity="0..1" />
           <End Role="Domicilio" Type="Self.Domicilio" Multiplicity="*" />
@@ -220,6 +245,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Empresa_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Empresa" Type="Self.Empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Empresa">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_RolPorUsuario_Rol">
           <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
           <End Role="RolPorUsuario" Type="Self.RolPorUsuario" Multiplicity="*" />
@@ -229,6 +266,30 @@
             </Principal>
             <Dependent Role="RolPorUsuario">
               <PropertyRef Name="idRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RolPorUsuario_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="RolPorUsuario" Type="Self.RolPorUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="RolPorUsuario">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Estado">
+          <End Role="Estado" Type="Self.Estado" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="idEstado" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="idEstado" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -244,6 +305,7 @@
           <EntitySet Name="RolPorUsuario" EntityType="Self.RolPorUsuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rubro" EntityType="Self.Rubro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoDocumento" EntityType="Self.TipoDocumento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Barrio_Ciudad" Association="Self.FK_Barrio_Ciudad">
             <End Role="Ciudad" EntitySet="Ciudad" />
             <End Role="Barrio" EntitySet="Barrio" />
@@ -264,6 +326,10 @@
             <End Role="TipoDocumento" EntitySet="TipoDocumento" />
             <End Role="Cliente" EntitySet="Cliente" />
           </AssociationSet>
+          <AssociationSet Name="FK_Cliente_Usuario" Association="Self.FK_Cliente_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
           <AssociationSet Name="FK_Domicilio_Barrio" Association="Self.FK_Domicilio_Barrio">
             <End Role="Barrio" EntitySet="Barrio" />
             <End Role="Domicilio" EntitySet="Domicilio" />
@@ -280,13 +346,24 @@
             <End Role="Rubro" EntitySet="Rubro" />
             <End Role="Empresa" EntitySet="Empresa" />
           </AssociationSet>
+          <AssociationSet Name="FK_Empresa_Usuario" Association="Self.FK_Empresa_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Empresa" EntitySet="Empresa" />
+          </AssociationSet>
           <AssociationSet Name="FK_RolPorUsuario_Rol" Association="Self.FK_RolPorUsuario_Rol">
             <End Role="Rol" EntitySet="Rol" />
             <End Role="RolPorUsuario" EntitySet="RolPorUsuario" />
           </AssociationSet>
+          <AssociationSet Name="FK_RolPorUsuario_Usuario" Association="Self.FK_RolPorUsuario_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="RolPorUsuario" EntitySet="RolPorUsuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Estado" Association="Self.FK_Usuario_Estado">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="GeoTurnosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -327,6 +404,7 @@
           <NavigationProperty Name="Domicilio" Relationship="Self.FK_Cliente_Domicilio" FromRole="Cliente" ToRole="Domicilio" />
           <NavigationProperty Name="Estado" Relationship="Self.FK_Cliente_Estado" FromRole="Cliente" ToRole="Estado" />
           <NavigationProperty Name="TipoDocumento" Relationship="Self.FK_Cliente_TipoDocumento" FromRole="Cliente" ToRole="TipoDocumento" />
+          <NavigationProperty Name="Usuario" Relationship="GeoTurnosModel.FK_Cliente_Usuario" FromRole="Cliente" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Domicilio">
           <Key>
@@ -362,6 +440,7 @@
           <NavigationProperty Name="Domicilio" Relationship="Self.FK_Empresa_Domicilio" FromRole="Empresa" ToRole="Domicilio" />
           <NavigationProperty Name="Estado" Relationship="Self.FK_Empresa_Estado" FromRole="Empresa" ToRole="Estado" />
           <NavigationProperty Name="Rubro" Relationship="Self.FK_Empresa_Rubro" FromRole="Empresa" ToRole="Rubro" />
+          <NavigationProperty Name="Usuario" Relationship="GeoTurnosModel.FK_Empresa_Usuario" FromRole="Empresa" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Estado">
           <Key>
@@ -369,6 +448,7 @@
           </Key>
           <Property Name="idEstado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="GeoTurnosModel.FK_Usuario_Estado" FromRole="Estado" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Provincia">
           <Key>
@@ -392,6 +472,7 @@
           <Property Name="idUsuario" Type="Int32" Nullable="false" />
           <Property Name="idRol" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Rol" Relationship="Self.FK_RolPorUsuario_Rol" FromRole="RolPorUsuario" ToRole="Rol" />
+          <NavigationProperty Name="Usuario" Relationship="GeoTurnosModel.FK_RolPorUsuario_Usuario" FromRole="RolPorUsuario" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Rubro">
           <Key>
@@ -579,7 +660,89 @@
             <End Role="Rol" EntitySet="Rol" />
             <End Role="RolPorUsuario" EntitySet="RolPorUsuario" />
           </AssociationSet>
+          <EntitySet Name="Usuario" EntityType="GeoTurnosModel.Usuario" />
+          <AssociationSet Name="FK_Cliente_Usuario" Association="GeoTurnosModel.FK_Cliente_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empresa_Usuario" Association="GeoTurnosModel.FK_Empresa_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Empresa" EntitySet="Empresa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Estado" Association="GeoTurnosModel.FK_Usuario_Estado">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RolPorUsuario_Usuario" Association="GeoTurnosModel.FK_RolPorUsuario_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="RolPorUsuario" EntitySet="RolPorUsuario" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="usuario1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="contraseña" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="preguntaSeguridad1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="respuestaSeguridad1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="preguntaSeguridad2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="respuestaSeguridad2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idEstado" Type="Int32" />
+          <NavigationProperty Name="Cliente" Relationship="GeoTurnosModel.FK_Cliente_Usuario" FromRole="Usuario" ToRole="Cliente" />
+          <NavigationProperty Name="Empresa" Relationship="GeoTurnosModel.FK_Empresa_Usuario" FromRole="Usuario" ToRole="Empresa" />
+          <NavigationProperty Name="Estado" Relationship="GeoTurnosModel.FK_Usuario_Estado" FromRole="Usuario" ToRole="Estado" />
+          <NavigationProperty Name="RolPorUsuario" Relationship="GeoTurnosModel.FK_RolPorUsuario_Usuario" FromRole="Usuario" ToRole="RolPorUsuario" />
+        </EntityType>
+        <Association Name="FK_Cliente_Usuario">
+          <End Type="GeoTurnosModel.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="GeoTurnosModel.Cliente" Role="Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empresa_Usuario">
+          <End Type="GeoTurnosModel.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="GeoTurnosModel.Empresa" Role="Empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Empresa">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Estado">
+          <End Type="GeoTurnosModel.Estado" Role="Estado" Multiplicity="0..1" />
+          <End Type="GeoTurnosModel.Usuario" Role="Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="idEstado" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="idEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RolPorUsuario_Usuario">
+          <End Type="GeoTurnosModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="GeoTurnosModel.RolPorUsuario" Role="RolPorUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="RolPorUsuario">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -701,6 +864,20 @@
               <MappingFragment StoreEntitySet="TipoDocumento">
                 <ScalarProperty Name="idTipoDocumento" ColumnName="idTipoDocumento" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="GeoTurnosModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+                <ScalarProperty Name="respuestaSeguridad2" ColumnName="respuestaSeguridad2" />
+                <ScalarProperty Name="preguntaSeguridad2" ColumnName="preguntaSeguridad2" />
+                <ScalarProperty Name="respuestaSeguridad1" ColumnName="respuestaSeguridad1" />
+                <ScalarProperty Name="preguntaSeguridad1" ColumnName="preguntaSeguridad1" />
+                <ScalarProperty Name="contraseña" ColumnName="contraseña" />
+                <ScalarProperty Name="usuario1" ColumnName="usuario" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

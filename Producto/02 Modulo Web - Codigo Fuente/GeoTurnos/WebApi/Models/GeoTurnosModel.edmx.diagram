@@ -26,6 +26,11 @@
         <AssociationConnector Association="GeoTurnosModel.FK_Empresa_Estado" ManuallyRouted="false" />
         <AssociationConnector Association="GeoTurnosModel.FK_Empresa_Rubro" ManuallyRouted="false" />
         <AssociationConnector Association="GeoTurnosModel.FK_RolPorUsuario_Rol" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="GeoTurnosModel.Usuario" Width="1.5" PointX="3" PointY="18.875" />
+        <AssociationConnector Association="GeoTurnosModel.FK_Cliente_Usuario" />
+        <AssociationConnector Association="GeoTurnosModel.FK_Empresa_Usuario" />
+        <AssociationConnector Association="GeoTurnosModel.FK_Usuario_Estado" />
+        <AssociationConnector Association="GeoTurnosModel.FK_RolPorUsuario_Usuario" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
