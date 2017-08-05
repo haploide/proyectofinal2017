@@ -26,14 +26,14 @@
                 
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 
-                <div class="form-group" style="padding-bottom:20px; text-align:left;">
+                <div class="form-group grupoLogin">
                     @Html.LabelFor(m => m.usuario1, new { @class = "col-md-5 col-sm-5 control-label" })
                     <div class="col-md-7 col-sm-7">
                         @Html.TextBoxFor(m => m.usuario1, new { @class = "form-control loginInput" })
                         @Html.ValidationMessageFor(m => m.usuario1, "", new { @class = "text-danger" })
                     </div>
                 </div>
-                <div class="form-group" style="padding-bottom:20px; text-align:left;">
+                <div class="form-group grupoLogin" >
                     @Html.LabelFor(m => m.Password, new { @class = "col-md-5 col-sm-5 control-label" })
                     <div class="col-md-7 col-sm-7">
                         @Html.PasswordFor(m => m.Password, new { @class = "form-control loginInput" })
