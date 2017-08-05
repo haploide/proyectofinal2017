@@ -1,5 +1,46 @@
 ﻿var app = angular.module('geoturnos', []);
 
+app.controller("usuarioController", function ($scope, $http , emp) {
+    var usuarioController =this;  
+    usuarioController.empresa = emp;
+    usuarioController.upDateEstadoEmpresa = function (emp){
+        $http({
+            method: 'PUT',
+            url: 'http://localhost:6901/api/Empresa/',
+            data: usuarioController.empresa,
+            headers: {
+                'Accept': "application/json"
+            }
+
+        }).then(function (response) {
+            if (response.status === 201) {
+                alert('Estado cambiado');
+               
+            }
+
+        }, function (response) {
+            switch (response.statusText) {
+                case 400:
+                    alert("Bad Request");
+                    break;
+                case 401:
+                    alert("Unauthorized");
+                    break;
+                case 404:
+                    alert("Not Found");
+                    break;
+                case 500:
+                    alert("Internal Server Error");
+                    break;
+                default:
+                    alert("Error no identificado");
+            }
+        }).then(function () {
+
+        });
+    } 
+    
+})
 app.controller("registrarEmpresa", function ($scope, $http) {
     $scope.rubros = [];
     $scope.provincias = [];
