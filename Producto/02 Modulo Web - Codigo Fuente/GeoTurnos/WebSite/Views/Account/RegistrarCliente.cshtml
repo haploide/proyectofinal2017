@@ -18,6 +18,8 @@
             </div>
         </div>
         <div class="row filaRegistrarCliente">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <br />
             <div class="col-md-6 col-sm-6">
 
                 <h3>Datos del Cliente</h3>
@@ -234,14 +236,14 @@
         </div>
         <div class="row filaRegistrarCliente">
             <hr />
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Registrar" class="btn btn-primary" />
+            <div class="col-md-6  col-sm-6">
+                <div class="form-group">
+                    <div class="col-md-offset-4 col-md-8">
+                        <input type="submit" value="Registrar" class="btn btn-primary" />
+                    </div>
                 </div>
             </div>
         </div>
-
 
     </div>
 }

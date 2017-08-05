@@ -106,3 +106,17 @@ textarea {
 {
     margin:0px;
 }
+
+.filaRegistrarse
+{
+    text-align: center;
+    background-color: aliceblue;
+    padding-bottom:20px;
+}
+
+.grow:hover
+{
+-webkit-transform: scale(1.05);
+-ms-transform: scale(1.05);
+transform: scale(1.05);
+}
