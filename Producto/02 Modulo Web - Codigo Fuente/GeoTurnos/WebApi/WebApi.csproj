@@ -129,6 +129,7 @@
     <Compile Include="Controllers\DomicilioController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\EstadoController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProvinciaController.cs" />
     <Compile Include="Controllers\RolController.cs" />
     <Compile Include="Controllers\RolPorUsuarioController.cs" />

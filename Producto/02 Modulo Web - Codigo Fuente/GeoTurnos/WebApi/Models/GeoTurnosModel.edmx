@@ -448,7 +448,6 @@
           </Key>
           <Property Name="idEstado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Usuario" Relationship="GeoTurnosModel.FK_Usuario_Estado" FromRole="Estado" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Provincia">
           <Key>
@@ -690,8 +689,6 @@
           <Property Name="preguntaSeguridad2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="respuestaSeguridad2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="idEstado" Type="Int32" />
-          <NavigationProperty Name="Cliente" Relationship="GeoTurnosModel.FK_Cliente_Usuario" FromRole="Usuario" ToRole="Cliente" />
-          <NavigationProperty Name="Empresa" Relationship="GeoTurnosModel.FK_Empresa_Usuario" FromRole="Usuario" ToRole="Empresa" />
           <NavigationProperty Name="Estado" Relationship="GeoTurnosModel.FK_Usuario_Estado" FromRole="Usuario" ToRole="Estado" />
           <NavigationProperty Name="RolPorUsuario" Relationship="GeoTurnosModel.FK_RolPorUsuario_Usuario" FromRole="Usuario" ToRole="RolPorUsuario" />
         </EntityType>

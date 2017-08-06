@@ -17,8 +17,6 @@ namespace WebApi.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Usuario()
         {
-            this.Cliente = new HashSet<Cliente>();
-            this.Empresa = new HashSet<Empresa>();
             this.RolPorUsuario = new HashSet<RolPorUsuario>();
         }
     
@@ -31,10 +29,6 @@ namespace WebApi.Models
         public string respuestaSeguridad2 { get; set; }
         public Nullable<int> idEstado { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cliente> Cliente { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Empresa> Empresa { get; set; }
         public virtual Estado Estado { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RolPorUsuario> RolPorUsuario { get; set; }

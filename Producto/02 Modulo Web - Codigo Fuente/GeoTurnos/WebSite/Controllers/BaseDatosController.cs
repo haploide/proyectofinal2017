@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -39,6 +40,11 @@ namespace WebSite.Controllers
 
 
                 }
+                catch (EntityException)
+                {
+
+                    throw new EntityException();
+                }
                 catch (Exception)
                 {
 
@@ -76,6 +82,11 @@ namespace WebSite.Controllers
                     }
 
 
+                }
+                catch (EntityException)
+                {
+
+                    throw new EntityException();
                 }
                 catch (Exception)
                 {
@@ -125,6 +136,11 @@ namespace WebSite.Controllers
 
                     return null;
                 }
+                catch (EntityException)
+                {
+
+                    throw new EntityException();
+                }
                 catch (Exception)
                 {
 
@@ -165,6 +181,11 @@ namespace WebSite.Controllers
                         }
                     }
                 }
+                catch (EntityException)
+                {
+
+                    throw new EntityException();
+                }
                 catch (Exception)
                 {
                     throw new NotImplementedException();
@@ -192,6 +213,11 @@ namespace WebSite.Controllers
                             result = true;
                         }
                     }
+                }
+                catch (EntityException)
+                {
+
+                    throw new EntityException();
                 }
                 catch (Exception)
                 {
