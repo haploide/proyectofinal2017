@@ -87,7 +87,7 @@ namespace WebSite.Controllers
             catch (Exception)
             {
 
-                ModelState.AddModelError("", "Error al procesar la solicitud");
+                ModelState.AddModelError("", "Error al procesar la solicitud. Por favor inténtalo nuevamente");
                 return View(model);
             }
             

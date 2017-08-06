@@ -67,6 +67,18 @@ namespace WebSite.Controllers
             return RedirectToAction("Index", "Home");
 
         }
+        //
+        //GET: PrincipalAdministracion
+        public PartialViewResult PrincipalAdministracion()
+        {
+            return PartialView("_PartialPrincipalAdministracion");
+        }
+        //
+        //GET: ActivacionEmpresa
+        public PartialViewResult ActivacionEmpresa()
+        {
+            return PartialView("_PartialActivacionEmpresa");
+        }
 
 
     }
