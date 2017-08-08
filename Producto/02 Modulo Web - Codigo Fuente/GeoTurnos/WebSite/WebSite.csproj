@@ -316,6 +316,7 @@
     <Content Include="resources\OAI50J0.jpg" />
     <Content Include="resources\O9IY170.png" />
     <Content Include="resources\O9IY3N0.png" />
+    <Content Include="resources\personas.png" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular-route.js" />
     <Content Include="Scripts\angular-route.min.js" />

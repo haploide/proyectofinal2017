@@ -4,23 +4,25 @@
 }
 
 <div class="container" role="main" ng-controller="AdministacionController">
-    <div id="head" class="row">
+    <div id="head" class="row fondoEncabezadoUsuario">
         @Html.Partial("_PartialCabeceraCuenta")
     </div>
-    
-    <ul class="nav nav-pills" id="menu">
-        <li id="principal" ng-click="clickMenu('principal')" role="presentation" class="active">
-            
-                @Ajax.ActionLink("Principal", "PrincipalAdministracion", new AjaxOptions() { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "body" });
-           
-        </li>
-        <li id="activacionEmpresa" ng-click="clickMenu('activacionEmpresa')" role="presentation">
-           
-                @Ajax.ActionLink("Autorizar Empresa Prestadora", "ActivacionEmpresa", new AjaxOptions() { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "body" });
-            
-        </li>
-    </ul>
-    
+    <div class="row">
+
+        <ul class="nav nav-pills" id="menuUsuarios">
+            <li id="principal" ng-click="clickMenu('principal')" role="presentation" class="active">
+
+                @Ajax.ActionLink("Principal", "PrincipalAdministracion", new AjaxOptions() { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "body" })
+
+            </li>
+            <li id="activacionEmpresa" ng-click="clickMenu('activacionEmpresa')" role="presentation">
+
+                @Ajax.ActionLink("Autorizar Empresa Prestadora", "ActivacionEmpresa", new AjaxOptions() { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "body" })
+
+            </li>
+        </ul>
+    </div>
+
     <div id="body" class="row">
         @Html.Partial("_PartialPrincipalAdministracion");
 
