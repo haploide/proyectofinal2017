@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net.Http;
 using Xamarin.Forms;
 
 namespace GeoTurnosMobile
@@ -14,26 +11,63 @@ namespace GeoTurnosMobile
             InitializeComponent();
         }
 
-        public void btnLoginClicked(Object sender, EventArgs e)
+        public async void btnLoginClicked(Object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(usuarioEntry.Text))
             {
-                usuarioEntry.Placeholder = "Debe ingresar su usuario";
+                await DisplayAlert("Error", "Debe ingresar su usuario", "Aceptar");
                 usuarioEntry.Focus();
                 return;
             }
             if (string.IsNullOrEmpty(passEntry.Text))
             {
-                passEntry.Placeholder = "Debe ingresar su Password";
+                await DisplayAlert("Error", "Debe ingresar su Password", "Aceptar");
                 passEntry.Focus();
                 return;
             }
 
+            awaitActivityIndicator.IsRunning = true;
+            btnLogin.IsEnabled = false;
+            try
+            {
+                HttpClient cliente = new HttpClient();
+                cliente.BaseAddress = new Uri("http://localhost:6901/");
+                string url = string.Format("/api/login?usuario={0}&password={1}", usuarioEntry.Text, passEntry.Text);
+                var response = await cliente.GetAsync(url);
 
-            ///////////////////////////////////////////
-            //Si se loguea se redirecciona a 
-            this.Navigation.PushModalAsync(new MenuPrincipal());
-            //////////////////////////////////////////
+                btnLogin.IsEnabled = true;
+                awaitActivityIndicator.IsRunning = false;
+
+                if (response.StatusCode == System.Net.HttpStatusCode.InternalServerError)
+                {
+                    await DisplayAlert("Error", "Error al procesar la solicitud. Por favor inténtalo nuevamente", "Aceptar");
+                    passEntry.Focus();
+                    return;
+                }
+
+                if (response.StatusCode != System.Net.HttpStatusCode.OK)
+                {
+                    await DisplayAlert("Error", "Usuario o Password Incorrecto", "Aceptar");
+                    passEntry.Focus();
+                    return;
+                }
+
+
+
+
+                ///////////////////////////////////////////
+                //Si se loguea se redirecciona a 
+                await this.Navigation.PushModalAsync(new MenuPrincipal());
+                //////////////////////////////////////////
+            }
+            catch (Exception ex)
+            {
+                btnLogin.IsEnabled = true;
+                awaitActivityIndicator.IsRunning = false;
+
+                await DisplayAlert("Error", ex.Message, "Aceptar");
+                
+            }
         }
 
         public void btnOlvidoPassClicked(Object sender, EventArgs e)

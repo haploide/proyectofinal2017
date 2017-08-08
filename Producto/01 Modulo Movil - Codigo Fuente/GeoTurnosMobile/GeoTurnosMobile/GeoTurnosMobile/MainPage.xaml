@@ -7,10 +7,11 @@
     <ContentPage.Content>
         <StackLayout BackgroundColor="White">
             <Image Source="Logo.png"></Image>
+
+            <ActivityIndicator x:Name="awaitActivityIndicator"/>
             <Entry x:Name="usuarioEntry"
                    Placeholder="Ingrese Usuario"
                    HorizontalTextAlignment="Center"/>
-
 
             <Entry x:Name="passEntry"
                    IsPassword="True"
