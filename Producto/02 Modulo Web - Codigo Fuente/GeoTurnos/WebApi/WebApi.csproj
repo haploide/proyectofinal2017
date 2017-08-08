@@ -190,6 +190,7 @@
     <Compile Include="Models\Usuario.cs">
       <DependentUpon>GeoTurnosModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UsuarioMobile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
