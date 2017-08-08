@@ -166,3 +166,63 @@ textarea {
 -ms-transform: scale(1.05);
 transform: scale(1.05);
 }
+.fotoUsuario
+{
+    max-width:200px; 
+    max-height:200px; 
+    width:100%; 
+    height:100%;
+    border-radius:100px;
+}
+
+.fotoUsuarioPadre
+{
+        display: table;
+    table-layout: fixed;
+    width: 100%;
+}
+
+@media only screen and (max-width:500px) and (min-width:400px)
+{
+    #bienvenida h1
+{
+   font-size:30px;
+}
+}
+@media only screen and (max-width:400px)
+{
+    #bienvenida h1
+{
+   font-size:20px;
+}
+}
+#bienvenida h1
+{
+        padding-top: 15%;
+    display: table-cell;
+	vertical-align: middle;
+    text-align: center;
+    text-shadow: 5px 5px 5px grey;
+}
+#bienvenida
+{
+    padding-left: 0px;
+}
+#menuUsuarios
+{
+    background-color: lightgray;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+#menuUsuarios li
+{
+    background-color:white;
+        border-radius: 4px;
+}
+.fondoEncabezadoUsuario
+{
+    background-image: url(../resources/personas.png);
+    background-size: cover;
+    background-position: center;
+}
