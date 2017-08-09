@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Org.BouncyCastle.Crypto.Digests;
+using System;
 using System.Net.Http;
+using System.Text;
 using Xamarin.Forms;
 
 namespace GeoTurnosMobile
@@ -25,18 +27,16 @@ namespace GeoTurnosMobile
                 passEntry.Focus();
                 return;
             }
-
-            awaitActivityIndicator.IsRunning = true;
-            btnLogin.IsEnabled = false;
+            estaEsperando(true);
+            
             try
             {
                 HttpClient cliente = new HttpClient();
-                cliente.BaseAddress = new Uri("http://localhost:6901/");
-                string url = string.Format("/api/login?usuario={0}&password={1}", usuarioEntry.Text, passEntry.Text);
+                cliente.BaseAddress = new Uri("http://192.168.0.9:8081");
+                string url = string.Format("/api/login?usuario={0}&password={1}", usuarioEntry.Text, Hashear(passEntry.Text).ToUpper());
                 var response = await cliente.GetAsync(url);
 
-                btnLogin.IsEnabled = true;
-                awaitActivityIndicator.IsRunning = false;
+                estaEsperando(false);
 
                 if (response.StatusCode == System.Net.HttpStatusCode.InternalServerError)
                 {
@@ -52,18 +52,14 @@ namespace GeoTurnosMobile
                     return;
                 }
 
-
-
-
                 ///////////////////////////////////////////
                 //Si se loguea se redirecciona a 
-                await this.Navigation.PushModalAsync(new MenuPrincipal());
+                await Navigation.PushModalAsync(new MenuPrincipal());
                 //////////////////////////////////////////
             }
             catch (Exception ex)
             {
-                btnLogin.IsEnabled = true;
-                awaitActivityIndicator.IsRunning = false;
+                estaEsperando(false);
 
                 await DisplayAlert("Error", ex.Message, "Aceptar");
                 
@@ -77,7 +73,39 @@ namespace GeoTurnosMobile
 
         public void btnRegistrarseClicked(Object sender, EventArgs e)
         {
-            Device.OpenUri(new Uri("http://www.google.com"));
+            Device.OpenUri(new Uri("http://192.168.0.9:8080"));
         }
+        private void estaEsperando(bool esperar)
+        {
+            awaitActivityIndicator.IsRunning = esperar;
+            btnLogin.IsEnabled = !esperar;
+            usuarioEntry.IsEnabled = !esperar;
+            passEntry.IsEnabled = !esperar;
+            btnOlvidoPass.IsEnabled = !esperar;
+            btnRegistrarse.IsEnabled = !esperar;
+
+        }
+        private string Hashear(string textoPlano)
+        {
+            var encodeData = Encoding.UTF8.GetBytes(textoPlano);
+
+            Sha256Digest hash = new Sha256Digest();
+
+            hash.BlockUpdate(encodeData, 0, encodeData.Length);
+
+            byte[] compArr = new byte[hash.GetDigestSize()];
+
+            hash.DoFinal(compArr, 0);
+
+            StringBuilder sb = new StringBuilder();
+            
+            for (int i = 0; i < compArr.Length; i++)
+            {
+                sb.Append(compArr[i].ToString("x2"));
+            }
+                      
+            return sb.ToString();
+        }
+
     }
 }

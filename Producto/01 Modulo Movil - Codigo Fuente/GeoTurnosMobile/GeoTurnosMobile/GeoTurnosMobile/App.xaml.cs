@@ -9,7 +9,13 @@ namespace GeoTurnosMobile
         {
             InitializeComponent();
 
-            MainPage = new GeoTurnosMobile.MainPage();
+            /*
+             
+            ToDO: ver si el usuario ya estubo logueado, en caso que no mandarlo a la pagina de login sino mandarlo directamente al menu principal 
+
+             */
+
+            MainPage = new MainPage();
         }
 
         protected override void OnStart()
