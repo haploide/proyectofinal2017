@@ -217,13 +217,28 @@ namespace WebSite.Controllers
             if (ModelState.IsValid)
             {
 
-                if (!BaseDatosController.esUsuarioByEmail(model.Email))//Se fija si el email pertenece a algun usuario registrado
+                try
                 {
-                    // Don't reveal that the user does not exist or is not confirmed
-                    return View("ForgotPasswordConfirmation");
+                    if (!BaseDatosController.esUsuarioByEmail(model.Email))//Se fija si el email pertenece a algun usuario registrado
+                    {
+                        // Don't reveal that the user does not exist or is not confirmed
+                        return View("ForgotPasswordConfirmation");
+                    }
+
+                    //ToDo: Enviar email, generar un string en base64 con su email para usar como codigo de reseteo 
+
+                    using (EmailController email = new EmailController())
+                    {
+                        email.enviarMail(model.Email, "geoturnos@gmail.com", "Reset Pass", "ResetearPass");
+                    }
+                }
+                catch (Exception)
+                {
+
+                    ModelState.AddModelError("", "Error al procesar la solicitud. Por favor inténtalo nuevamente");
+                    return View(model);
                 }
 
-                //ToDo: Enviar email, generar un string en base64 con su email para usar como codigo de reseteo 
 
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }

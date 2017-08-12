@@ -1,6 +1,5 @@
 ﻿body {
     padding-top: 100px;
-    
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -23,206 +22,203 @@ textarea {
     max-width: 280px;
 }
 
-#titulosRegistrar
-{
+#titulosRegistrar {
     text-align: center;
     background: lightblue;
     padding: 15px;
     box-shadow: 2px 2px 20px black;
 }
 
-.lineaSeparadoraTitulo
-{
-    color:black;
-    border-color:black !important;
+.lineaSeparadoraTitulo {
+    color: black;
+    border-color: black !important;
 }
 
-.container
-{
-    width:100% !important;
+.container {
+    width: 100% !important;
 }
 
-.jumbotron
-{
+.jumbotron {
     box-shadow: 1px 10px 50px;
 }
 
-.menu
-{
-        min-height: 100px;
-        background-color: white;
-            border-color: lightgrey;
+.menu {
+    min-height: 100px;
+    background-color: white;
+    border-color: lightgrey;
 }
 
-.menu .container
-{
-        width:90% !important;
+    .menu .container {
+        width: 90% !important;
+    }
+
+.logoMenu {
+    max-height: 90px;
 }
 
-.logoMenu
-{
-    max-height:90px;
+@media only screen and (max-width:600px) {
+    .logoMenu {
+        max-width: 75%;
+    }
 }
 
-@media only screen and (max-width:600px)
-{
-    .logoMenu
-{
-    max-width:75%;
-}
+.barraMenu {
+    padding-top: 25px;
 }
 
-.barraMenu
-{
-    padding-top:25px;
-}
-.navbar-inverse .navbar-nav > li > a 
-{
-    color:black;
-}
-.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
-    color:lightslategrey;
-    background-color: transparent;
+.navbar-inverse .navbar-nav > li > a {
+    color: black;
 }
 
-.navbar-toggle 
-{
+    .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
+        color: lightslategrey;
+        background-color: transparent;
+    }
+
+.navbar-toggle {
     margin-top: 25px;
     background-color: lightgray;
 }
 
-.filaRegistrarCliente
-{
+.filaRegistrarCliente {
     background-color: aliceblue;
 }
-.filaLogin
-{
+
+.filaLogin {
     background-color: aliceblue;
-    text-align:center;
-    padding-top:40px;
-}
-@media only screen and (max-width: 767px)
-{
-    .loginInput
-{
-    
-    display:inline !important;
-}
+    text-align: center;
+    padding-top: 40px;
 }
 
-.filaOlvidoContraseña
-{
+@media only screen and (max-width: 767px) {
+    .loginInput {
+        display: inline !important;
+    }
+}
+
+.filaOlvidoContraseña {
     background-color: aliceblue;
-    text-align:center;
-    padding-top:40px;
+    text-align: center;
+    padding-top: 40px;
 }
 
-.grupoLogin
-{
-     padding-bottom:20px; 
-     text-align:left;
+.grupoLogin {
+    padding-bottom: 20px;
+    text-align: left;
 }
 
-.margenBot15
-{
+.margenBot15 {
     margin-bottom: 15px;
 }
 
-@media only screen and (max-width: 767px)
-{
-    .grupoLogin
-    {
-        padding-bottom:20px; 
-        text-align:center;
+@media only screen and (max-width: 767px) {
+    .grupoLogin {
+        padding-bottom: 20px;
+        text-align: center;
     }
-    .loginError
-    {
-        display:inherit;
+
+    .loginError {
+        display: inherit;
     }
 }
 
 
-.footer
-{
-    background-color:#808080;
-    color:white;
+.footer {
+    background-color: #808080;
+    color: white;
     padding: 20px;
 }
-.footer p
-{
-    margin:0px;
-}
 
-.filaRegistrarse
-{
+    .footer p {
+        margin: 0px;
+    }
+
+.filaRegistrarse {
     text-align: center;
     background-color: aliceblue;
-    padding-bottom:20px;
+    padding-bottom: 20px;
 }
 
-.grow:hover
-{
--webkit-transform: scale(1.05);
--ms-transform: scale(1.05);
-transform: scale(1.05);
-}
-.fotoUsuario
-{
-    max-width:200px; 
-    max-height:200px; 
-    width:100%; 
-    height:100%;
-    border-radius:100px;
+.grow:hover {
+    -webkit-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    transform: scale(1.05);
 }
 
-.fotoUsuarioPadre
-{
-        display: table;
+.fotoUsuario {
+    max-width: 200px;
+    max-height: 200px;
+    width: 100%;
+    height: 100%;
+    border-radius: 100px;
+}
+
+.fotoUsuarioPadre {
+    display: table;
     table-layout: fixed;
     width: 100%;
 }
 
-@media only screen and (max-width:500px) and (min-width:400px)
-{
-    #bienvenida h1
-{
-   font-size:30px;
+@media only screen and (max-width:500px) and (min-width:400px) {
+    #bienvenida h1 {
+        font-size: 30px;
+    }
 }
+
+@media only screen and (max-width:400px) {
+    #bienvenida h1 {
+        font-size: 20px;
+    }
 }
-@media only screen and (max-width:400px)
-{
-    #bienvenida h1
-{
-   font-size:20px;
-}
-}
-#bienvenida h1
-{
-        padding-top: 15%;
+
+#bienvenida h1 {
+    padding-top: 15%;
     display: table-cell;
-	vertical-align: middle;
+    vertical-align: middle;
     text-align: center;
     text-shadow: 5px 5px 5px grey;
 }
-#bienvenida
-{
+
+#bienvenida {
     padding-left: 0px;
 }
-#menuUsuarios
-{
+
+#menuUsuarios {
     background-color: lightgray;
     padding: 20px;
     margin-top: 20px;
 }
 
-#menuUsuarios li
-{
-    background-color:white;
-        border-radius: 4px;
-}
-.fondoEncabezadoUsuario
-{
+    #menuUsuarios li {
+        background-color: white;
+        
+    }
+
+        #menuUsuarios li a {
+            color: gray;
+        }
+
+    #menuUsuarios > li + li {
+        margin-left: 0px;
+    }
+
+    #menuUsuarios > li.active > a,
+    #menuUsuarios > li.active > a:hover,
+    #menuUsuarios > li.active > a:focus {
+        color: #337ab7;
+        background-color: white;
+        border-bottom: 3px solid #337ab7;
+        border-radius: 0px;
+        font-weight: bold;
+    }
+
+.fondoEncabezadoUsuario {
     background-image: url(../resources/personas.png);
     background-size: cover;
     background-position: center;
 }
+#mapa {
+    width:1000px;
+    height:500px;
+    align-self:center;
+  }

@@ -5,26 +5,35 @@
     var usuarioLogin = Session["usuarioLogin"] as UsuarioLogueado;
 }
 
-<div class="container" ng-controller="MiCuentaEmpresaPrestadoraController">
-    <div id="head" class="row" >
+<div class="container" role="main" ng-controller="MiCuentaEmpresaPrestadoraController">
+    <div id="head" class="row">
         @Html.Partial("_PartialCabeceraCuenta")
     </div>
 
-    <div id="menu" class="row">
-        <ul class="container nav nav-pills">
-            <li role="presentation" class="active"><a href="#">Opcion 1</a></li>
-            <li role="presentation"><a href="#">Opcion 2</a></li>
-            <li role="presentation"><a href="#">Opcion 3</a></li>
+    <div class="row">
+        <ul class="nav nav-pills" id="menuUsuarios">
+            <li id="principal" ng-click="clickMenu('principal')" role ="presentation" class="active">
+
+                @Ajax.ActionLink("Principal", "PrincipalEntidadPrestadora", new AjaxOptions() { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "bodyEntidad" })
+
+            </li>
+            <li id="geoposicion" ng-click="clickMenu('geoposicion')" role="presentation">
+
+                @Ajax.ActionLink("Gestionar Geolocalización", "GestionarGeolocalizacion", new AjaxOptions() { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "bodyEntidad" })
+
+            </li>
+
         </ul>
     </div>
 
-    <div id="body" class="row">
-
+    <div id="bodyEntidad" class="row">
+        @Html.Partial("_PartialPrincipalEntidadPrestadora");
 
     </div>
 
 </div>
 
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 <script>
     $(document).ready(function () {
 

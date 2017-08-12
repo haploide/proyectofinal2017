@@ -80,6 +80,19 @@ namespace WebSite.Controllers
             return PartialView("_PartialActivacionEmpresa");
         }
 
+        //
+        //GET: PrincipalEntidadPrestadora
+        public PartialViewResult PrincipalEntidadPrestadora()
+        {
+            return PartialView("_PartialPrincipalEntidadPrestadora");
+        }
+        //
+        //GET: GestionarGeolocalizacion
+        public PartialViewResult GestionarGeolocalizacion()
+        {
+            return PartialView("_PartialGestionarGeolocalizacion");
+        }
+
 
     }
 }

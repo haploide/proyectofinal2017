@@ -38,6 +38,7 @@ app.controller("AdministacionController", function ($scope, $http) {
 
         });
     }
+
     $scope.clickMenu = function (idLista) {
         $('li').removeClass('active');
 
@@ -46,9 +47,16 @@ app.controller("AdministacionController", function ($scope, $http) {
     }
 
 })
-app.controller("MiCuentaEmpresaPrestadoraController", function () {
+app.controller("MiCuentaEmpresaPrestadoraController", function ($scope) {
 
+    $scope.clickMenu = function (idLista) {
+        $('li').removeClass('active');
+
+        $('#' + idLista).attr("class", "active");
+
+    }
 })
+
 app.controller("MiCuentaClientePrestatarioController", function () {
 
 })

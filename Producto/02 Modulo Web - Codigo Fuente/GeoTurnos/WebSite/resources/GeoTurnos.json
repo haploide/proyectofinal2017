@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "geoturnos-176422",
+  "private_key_id": "f695ade491911eeb170d3927c590eb22522301b8",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCGaQkXdGzetBqM\nNvwfX5h1OBo9H2NR8y5J6nxkfGNiDEJlZTHKCbqi/+hlQVbA2YPunXkN8ysv2NS/\nHjZUmZtor2IEkfjFt6KT3ulZ4rB/b042QoG2NyWV5TBwl60c3LNf7vXKS77OAxJZ\nkFsaH66ow26oaCWqJSe+86jrhKY0eZ4S53X57MRuQ0khB2RmfaEMcokvaJhjYtyJ\nw0OKlr9VsQQHXMC9Zo1mRIwhBC3TmtWqt8q7XujtQmmOir1LXtIeCfZ/Mbj4a/FJ\n0m409HmUou0n3aqFvQWIG9jXlpqcxPy4x5mIjA7VycGMnY6NCutMkjWkG6ngZY/Z\npfxp8uDnAgMBAAECggEAMuzP54WSjCxj1JUuoDppepwXgOoICPAgrRu9JptkUi0/\n6MfW/ewCvShFZjvDwUyIaptaVrk3tyiproGlZxdN5PNyKTYfMdY6MFloQ0iaw6Wp\n1fAL0jyBrpHH8Rjem41ZHvNcR9m8ALT0Ol/xzGuNkt586iyPfLAYJ4aNDTLUgBO5\nh1J8cqbv+8supi7Rng2TBrg6/FrhjJdZnsW8P6+aySEibQUjREP+8hlCicwK3sQ/\nBsL2ApKlUJQnM+v0wYOavz70ZtAPbbuuVSeT9uAw3UBbDzI4LC/ilk0NdbhbmkEk\ng48/qn07LR7R2GEc52ASswUXrxB8txdB5RjpCFsAxQKBgQC8Gfx+/A5NG4AtMGc1\ni47ep8fCJJ5XE7tixWnGKCGXMZkdHnAA2Q6JmWtfKGwE1wuph/ZjZyhS+wsAq/oB\nTT5Rqe7i9xHqIG7o+JmYAElO/NxFPy0O78P0uMThCqv9i6gMarPl/E83yl7nFoPF\n6RYz62Ku+eRPPODhCOyUX4025QKBgQC27ZJWjtEs3OCEywP5gLbBUWaA02AuxOJL\n7t0q6U64xrOzEfEsurxJaWL4oy5g+KaOsXR35YjqpmXTvxJnwYWKkF5HpUFZSDND\nC05sqJoTQx0ttITWowJaIHopzPhKnLzNHtBMTU/up+K6GLQpSm4dWUe0r8rIYwe3\neiYbhd+P2wKBgFnhwPmcz+igf3sYafj4GujiG131yYOqdhwYYRbDDmoE1TlI1hRR\no9S0bs4lrpgReg0kXuPY4zfjpbpIc0oz8tdq8C+cB/9sSBMi16H+YQlRYp/kNE+y\n2lwR/mHai5y4IzDru9Ll4aSzGu4poAXt/yIIFDuwRRxn5r0hWor7rarRAoGBAKk/\njdIAOZDkm+bBX2ANswmSIuC2sZsUFrxiuMbnLirPzZu00gusimDx3NxnPpYB+Ti0\n/ymfedqBMl2Dv6e36bKWeGSZhajxoFw7rcfjBwsjYW/UQcPE9nwk6GKcfm2qLxUp\nmVe/gGEzfBbqnGZHszH8VNfcfiaBWbZska2NY5dZAoGBAJ1MmOa+DBeOpwpo7FDJ\nscEq8kRNvVYw30/XOk3uVdxQW26DgVb7Vnkg1mbSmLTurPWfhanlVOSG25CyTVkY\nuFY9FCV4oe0owA76ts8vUfZ7i6hHmyD3Ofac5w+y9nZl36bu8QvUrmzXUkyZpWUh\n1HfS1uI79Jdo+v7IQNC5lY6n\n-----END PRIVATE KEY-----\n",
+  "client_email": "geoturnosmail@geoturnos-176422.iam.gserviceaccount.com",
+  "client_id": "112212672384134242431",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/geoturnosmail%40geoturnos-176422.iam.gserviceaccount.com"
+}

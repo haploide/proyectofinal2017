@@ -12,18 +12,18 @@
         <ul class="nav nav-pills" id="menuUsuarios">
             <li id="principal" ng-click="clickMenu('principal')" role="presentation" class="active">
 
-                @Ajax.ActionLink("Principal", "PrincipalAdministracion", new AjaxOptions() { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "body" })
+                @Ajax.ActionLink("Principal", "PrincipalAdministracion", new AjaxOptions() { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "bodyAdministarcion" })
 
             </li>
             <li id="activacionEmpresa" ng-click="clickMenu('activacionEmpresa')" role="presentation">
 
-                @Ajax.ActionLink("Autorizar Empresa Prestadora", "ActivacionEmpresa", new AjaxOptions() { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "body" })
+                @Ajax.ActionLink("Autorizar Empresa Prestadora", "ActivacionEmpresa", new AjaxOptions() { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "bodyAdministarcion" })
 
             </li>
         </ul>
     </div>
 
-    <div id="body" class="row">
+    <div id="bodyAdministarcion" class="row">
         @Html.Partial("_PartialPrincipalAdministracion");
 
     </div>

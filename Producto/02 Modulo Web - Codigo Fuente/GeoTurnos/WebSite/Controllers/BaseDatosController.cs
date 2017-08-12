@@ -19,7 +19,7 @@ namespace WebSite.Controllers
 
                 try
                 {
-                    db.Database.Connection.Open();
+                    
                     if (empresa != null && db.Empresa != null)
                     {
                         if (empresa.idEmpresa != 0)
@@ -62,7 +62,7 @@ namespace WebSite.Controllers
 
                 try
                 {
-                    db.Database.Connection.Open();
+                    
                     if (cliente != null && db.Cliente != null)
                     {
                         if (cliente.idUsuario != 0)
@@ -105,7 +105,7 @@ namespace WebSite.Controllers
             {
                 try
                 {
-                    db.Database.Connection.Open();
+                    
                     if (!string.IsNullOrEmpty(usuario) && !string.IsNullOrEmpty(password) && db.Usuario != null && db.Usuario.Any())
                     {
                         Usuario user = db.Usuario.Where(u => u.usuario1 == usuario).First();
