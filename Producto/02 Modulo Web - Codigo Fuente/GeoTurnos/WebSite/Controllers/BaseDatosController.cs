@@ -114,11 +114,14 @@ namespace WebSite.Controllers
                         {
                             if (user.Empresa.Count == 1)
                             {
-                                usuariologuado = new UsuarioLogueado() { Empresa = user.Empresa.First(), TipoUsuario = TipoUsuario.Entidad, Usuario = user.usuario1 };
+                                Empresa emp = new Empresa(){logoEmpresa = user.Empresa.First().logoEmpresa, idEmpresa= user.Empresa.First().idEmpresa};
+
+                                usuariologuado = new UsuarioLogueado() { Empresa = emp, TipoUsuario = TipoUsuario.Entidad, Usuario = user.usuario1 };
                             }
                             else if (user.Cliente.Count == 1)
                             {
-                                usuariologuado = new UsuarioLogueado() { Prestatario = user.Cliente.First(), TipoUsuario = TipoUsuario.Prestatario, Usuario = user.usuario1 };
+                                Cliente cli = new Cliente() { foto=user.Cliente.First().foto, idCliente= user.Cliente.First().idCliente };
+                                usuariologuado = new UsuarioLogueado() { Prestatario = cli , TipoUsuario = TipoUsuario.Prestatario, Usuario = user.usuario1 };
                             }
                             else
                             {

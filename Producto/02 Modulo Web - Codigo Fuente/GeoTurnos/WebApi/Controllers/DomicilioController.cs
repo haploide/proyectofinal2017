@@ -30,6 +30,32 @@ namespace WebApi.Controllers
                 return InternalServerError(ex);
             }
         }
+        public IHttpActionResult Get(int id)
+        {
+            try
+            {
+                if (_db.Domicilio == null || !_db.Domicilio.Any())
+                {
+                    return NotFound();
+                }
+
+                Domicilio dom = (from d in _db.Domicilio
+                                join e in _db.Empresa on d.idDomicilio equals e.idDomicilio
+                                where e.idEmpresa == id
+                                select d).FirstOrDefault();
+                if (dom == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(dom);
+            }
+            catch (Exception ex)
+            {
+
+                return InternalServerError(ex);
+            }
+        }
 
         public IHttpActionResult Post([FromBody]Domicilio  dom)
         {
@@ -49,6 +75,40 @@ namespace WebApi.Controllers
                 _db.SaveChanges();
 
                 return Created("api/Domicilio/" + dom.idDomicilio , dom);
+
+            }
+            catch (Exception ex)
+            {
+
+                return InternalServerError(ex);
+            }
+        }
+        public IHttpActionResult Put(int id, [FromBody]Domicilio dom)
+        {
+            try
+            {
+                if (dom == null)
+                {
+                    return BadRequest();
+                }
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+                if (id != dom.idDomicilio)
+                {
+                    return BadRequest();
+                }
+                if (_db.Domicilio.Count(d => d.idDomicilio == id) == 0)
+                {
+                    return NotFound();
+                }
+                _db.Entry(dom).State = System.Data.Entity.EntityState.Modified;
+
+                _db.SaveChanges();
+
+                return Ok(dom);
+
 
             }
             catch (Exception ex)

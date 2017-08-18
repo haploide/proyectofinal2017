@@ -1,3 +1,17 @@
-﻿@{
+﻿@using Newtonsoft.Json;
+@using WebSite.Models;
+@using WebSite.App_Start;
+
+@{
+    if (Request.Cookies["usuariogeoturnos"]!=null&& Request.Cookies["usuariogeoturnos"].Value != null)
+    {
+        var usuarioLogin = JsonConvert.DeserializeObject<UsuarioLogueado>(BitConverter.ToString(Convert.FromBase64String(Request.Cookies["usuariogeoturnos"].Value)));
+
+        if (usuarioLogin != null)
+        {
+            Session["usuarioLogin"] = usuarioLogin;
+        }
+    }
+
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
