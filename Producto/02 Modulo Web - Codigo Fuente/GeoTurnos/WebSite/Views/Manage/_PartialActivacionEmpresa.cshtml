@@ -1,3 +1,32 @@
 ﻿<div>
     <h1>Activar Empresa</h1>
+    <div class="col-md-12 row">
+        <table class="table">
+            <tr>
+
+                <th ng-hide="true">idEmpresa</th>
+                <th>Logo</th>
+                <th>CUIT</th>
+                <th>Razón Social</th>
+                <th>Telefono</th>
+                <th>Dirección</th>
+                <th>Rubro</th>
+                <th>Estado</th>
+                
+            </tr>
+            <tr data-ng-repeat="emp in empresas ">
+                <th ng-hide="true">{{emp.idEmpresa }}</th>
+                <th>{{emp.CodigoReserva }}</th>
+                <th>{{emp.FechaReserva }}</th>
+                <th>{{emp.Cliente.Nombre+' '+res.Cliente.Apellido }}</th>
+                <th>{{emp.Vendedor.Nombre }}</th>
+                <th>{{emp.PrecioVenta }}</th>
+                <th>{{emp.IdCiudad }}</th>
+                <th>{{emp.IdPais }}</th>
+                <th><a ng-click="reservasList.delete(res)" class="btn btn-primary">Activar</a></th>
+
+            </tr>
+        </table>
+
+    </div>
 </div>

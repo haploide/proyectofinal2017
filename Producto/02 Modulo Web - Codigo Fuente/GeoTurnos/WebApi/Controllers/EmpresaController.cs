@@ -32,6 +32,27 @@ namespace WebApi.Controllers
             }
         }
 
+        public IHttpActionResult Get(int idEst)
+        {
+            try
+            {
+                if (_db.Empresa == null || !_db.Empresa.Any())
+                {
+                    return NotFound();
+                }
+                Empresa emp = _db.Empresa.FirstOrDefault(p => p.idEstado  == idEst);
+                if (emp == null)
+                {
+                    return NotFound();
+                }
+                return Ok(emp);
+            }
+            catch (Exception ex)
+            {
+
+                return InternalServerError(ex);
+            }
+        }
         // metrodo POST para crear un recurso nuevo
 
         public IHttpActionResult Post([FromBody]Empresa empresa)
