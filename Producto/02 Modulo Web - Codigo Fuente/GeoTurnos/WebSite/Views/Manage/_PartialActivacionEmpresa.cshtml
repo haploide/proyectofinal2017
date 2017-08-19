@@ -1,32 +1,35 @@
-﻿<div>
+﻿
+<div ng-controller="ActivarEmpresasController">
     <h1>Activar Empresa</h1>
     <div class="col-md-12 row">
-        <table class="table">
-            <tr>
+        <table class="table  table-striped">
+            <tr class="info">
 
                 <th ng-hide="true">idEmpresa</th>
                 <th>Logo</th>
                 <th>CUIT</th>
                 <th>Razón Social</th>
                 <th>Telefono</th>
+                <th>Email</th>
                 <th>Dirección</th>
                 <th>Rubro</th>
-                <th>Estado</th>
-                
+                <th>Activar</th>
+
             </tr>
-            <tr data-ng-repeat="emp in empresas ">
+            <tr data-ng-repeat="emp in empresas">
                 <th ng-hide="true">{{emp.idEmpresa }}</th>
-                <th>{{emp.CodigoReserva }}</th>
-                <th>{{emp.FechaReserva }}</th>
-                <th>{{emp.Cliente.Nombre+' '+res.Cliente.Apellido }}</th>
-                <th>{{emp.Vendedor.Nombre }}</th>
-                <th>{{emp.PrecioVenta }}</th>
-                <th>{{emp.IdCiudad }}</th>
-                <th>{{emp.IdPais }}</th>
-                <th><a ng-click="reservasList.delete(res)" class="btn btn-primary">Activar</a></th>
+                <th><img src="data:image/png;base64,{{emp.logoEmpresa}}" class="img-responsive img-thumbnail" style="height:40px;width:40px" /></th>
+                <th>{{emp.cuit }}</th>
+                <th>{{emp.razonSocial }}</th>
+                <th>{{emp.telefono }}</th>
+                <th>{{emp.email }}</th>
+                <th>{{emp.Domicilio.calle +' '+ emp.Domicilio.altura}}</th>
+                <th>{{emp.Rubro.nombre}}</th>
+                <th><a ng-click="" class="btn btn-primary">Activar</a></th>
 
             </tr>
         </table>
+
 
     </div>
 </div>

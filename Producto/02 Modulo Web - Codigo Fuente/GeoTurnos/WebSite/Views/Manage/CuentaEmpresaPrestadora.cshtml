@@ -12,28 +12,22 @@
 
     <div class="row">
         <ul class="nav nav-pills" id="menuUsuarios">
-            <li id="principal" ng-click="clickMenu('principal')" role ="presentation" class="active">
-
-                @Ajax.ActionLink("Principal", "PrincipalEntidadPrestadora", new AjaxOptions() { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "bodyEntidad" })
-
+            <li id="principal" ng-click="clickMenu('principal')" role="presentation" class="active">
+                <a href="">Principal</a>
             </li>
             <li id="geoposicion" ng-click="clickMenu('geoposicion')" role="presentation">
-
-                @Ajax.ActionLink("Gestionar Geolocalización", "GestionarGeolocalizacion", new AjaxOptions() { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "bodyEntidad" })
-
+                <a href="">Gestionar Geolocalización</a>
             </li>
 
         </ul>
     </div>
-
-    <div id="bodyEntidad" class="row">
-        @Html.Partial("_PartialPrincipalEntidadPrestadora");
-
+    {{alcance}}
+    <div id="bodyEntidad" class="row" ng-include="contenidoATraer">
+        {{alcance}}
     </div>
-
+    {{alcance}}
 </div>
 
-<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 <script>
     $(document).ready(function () {
 

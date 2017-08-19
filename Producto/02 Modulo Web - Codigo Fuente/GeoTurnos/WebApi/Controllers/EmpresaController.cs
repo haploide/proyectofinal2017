@@ -40,7 +40,7 @@ namespace WebApi.Controllers
                 {
                     return NotFound();
                 }
-                Empresa emp = _db.Empresa.FirstOrDefault(p => p.idEstado  == idEst);
+                var emp = _db.Empresa.Where(p => p.idEstado  == idEst);
                 if (emp == null)
                 {
                     return NotFound();

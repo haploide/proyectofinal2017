@@ -1,82 +1,9 @@
 ﻿var app = angular.module('geoturnos', []);
-app.controller("EmpresasController", function ($scope, $http) {
 
-    $scope.empresas = [];
-    $http({
-        method: 'GET',
-        url: 'http://localhost:6901/api/Empresa?idEst=2',
-        headers: {
-            'Accept': "application/json",
-            'Authorization': 'Bearer ' + sessionStorage.token
-        }
-    }).then(function (response) {
-        if (response.status === 200) {
-            angular.copy(response.data, $scope.empresas);
-        }
-
-
-    }, function (response) {
-        switch (response.status) {
-            case 400:
-                alert("Bad Request");
-                break;
-            case 401:
-                alert("Unauthorized");
-                break;
-            case 404:
-                alert("Not Found");
-                break;
-            case 500:
-                alert("Internal Server Error");
-                break;
-            default:
-                alert("Error no identificado");
-        }
-    }).then(function () {
-
-    });
-         
-  
-})
 
 app.controller("AdministacionController", function ($scope, $http) {
-
-    $scope.empresas = [];
-     $http({
-        method: 'GET',
-        url: 'http://localhost:6901/api/Empresa?idEst=2',
-        headers: {
-            'Accept': "application/json",
-            'Authorization': 'Bearer ' + sessionStorage.token
-        }
-    }).then(function (response) {
-        if (response.status === 200) {
-            angular.copy(response.data, $scope.empresas);
-        }
-       
-
-    }, function (response) {
-        switch (response.status) {
-            case 400:
-                alert("Bad Request");
-                break;
-            case 401:
-                alert("Unauthorized");
-                break;
-            case 404:
-                alert("Not Found");
-                break;
-            case 500:
-                alert("Internal Server Error");
-                break;
-            default:
-                alert("Error no identificado");
-        }
-    }).then(function () {
-
-    });
-
-
+    
+    $scope.contenidoATraer = 'PrincipalAdministracion';
     $scope.upDateEstadoEmpresa = function (emp) {
         $http({
             method: 'PUT',
@@ -118,21 +45,98 @@ app.controller("AdministacionController", function ($scope, $http) {
         $('li').removeClass('active');
 
         $('#' + idLista).attr("class", "active");
-        
+
+        $scope.cargarContenidoHtml(idLista);
     }
+
+    $scope.cargarContenidoHtml = function (contenido) {
+        switch (contenido) {
+            case 'principal':
+                $scope.contenidoATraer = 'PrincipalAdministracion';
+                break;
+            case 'activacionEmpresa':
+                $scope.contenidoATraer = 'ActivacionEmpresa';
+                break;
+
+        }
+
+
+    };
 
 })
 app.controller("MiCuentaEmpresaPrestadoraController", function ($scope) {
+    $scope.alcance = "MiCuentaEmpresaPrestadoraController";
+    $scope.contenidoATraer = 'PrincipalEntidadPrestadora';
 
     $scope.clickMenu = function (idLista) {
         $('li').removeClass('active');
 
         $('#' + idLista).attr("class", "active");
 
+        $scope.cargarContenidoHtml(idLista);
     }
+
+    $scope.cargarContenidoHtml = function (contenido) {
+        switch (contenido) {
+            case 'principal':
+                $scope.contenidoATraer = 'PrincipalEntidadPrestadora';
+                break;
+            case 'geoposicion':
+                $scope.contenidoATraer = 'GestionarGeolocalizacion';
+                break;
+
+        }
+
+
+    };
 })
 
 app.controller("MiCuentaClientePrestatarioController", function () {
+
+})
+app.controller("ActivarEmpresasController", function ($scope, $http) {
+
+    $scope.empresas = [];
+    $http({
+        method: 'GET',
+        url: 'http://localhost:6901/api/Empresa?idEst=2',
+        headers: {
+            'Accept': "application/json",
+
+        }
+    }).then(function (response) {
+        if (response.status === 200) {
+            angular.copy(response.data, $scope.empresas);
+        }
+
+
+    }, function (response) {
+        switch (response.status) {
+            case 400:
+                alert("Bad Request");
+                break;
+            case 401:
+                alert("Unauthorized");
+                break;
+            case 404:
+                alert("Not Found");
+                break;
+            case 500:
+                alert("Internal Server Error");
+                break;
+            default:
+                alert("Error no identificado");
+        }
+    }).then(function () {
+
+    });
+
+
+})
+app.controller("GestionGeoposicionController", function ($scope, $http) {
+    $scope.alcance="geo";
+
+
 
 })
 app.controller("registrarEmpresa", function ($scope, $http) {

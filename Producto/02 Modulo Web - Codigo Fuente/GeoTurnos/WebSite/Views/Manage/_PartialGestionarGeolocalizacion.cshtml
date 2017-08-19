@@ -1,11 +1,22 @@
 ﻿
 
-    <div>
-        <h1>Gestionar geolocalizacion</h1>
+    <div ng-controller="GestionGeoposicionController">
+        <h1>Gestionar geolocalizacion</h1>{{alcance}}
 
-        <div class="row ">
-            <div>
 
+        <div class="row">
+            <div class="form-inline">
+                
+                <div class="form-group">
+                    <label for="latitud">Latitud:</label>
+                    <input type="text" class="form-control" id="latitud" placeholder="Latidud"/>
+                </div>
+                <div class="form-group">
+                    <label for="longitud">Longitud:</label>
+                    <input type="text" class="form-control" id="longitud" placeholder="Longitud" />
+                </div>
+                    <button type="submit" class="btn btn-primary" onclick="actualizarMarcador()">Actualizar</button>
+                
             </div>
             <div id="mapa"></div>
 
@@ -15,9 +26,13 @@
     <script>
 
         var map;
-        var latitud = -34.397;
-        var longitud = 150.644;
-
+        var marker;
+       
+        var actualizarMarcador= function(){
+            map.setCenter({ lat: Number($('#latitud').val()), lng: Number($('#longitud').val()) })
+            
+        }
+        
         function getLocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(initMap);
@@ -32,10 +47,13 @@
                 center: posicion,
                 zoom: 15
             });
-            var marker = new google.maps.Marker({
+            marker = new google.maps.Marker({
                 position: posicion,
                 map: map
             });
+
+            $('#latitud').val(posicion.lat);
+            $('#longitud').val(posicion.lng);
         }
 
     </script>
