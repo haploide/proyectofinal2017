@@ -1,46 +1,9 @@
 ﻿var app = angular.module('geoturnos', []);
 
-
 app.controller("AdministacionController", function ($scope, $http) {
     
     $scope.contenidoATraer = 'PrincipalAdministracion';
-    $scope.upDateEstadoEmpresa = function (emp) {
-        $http({
-            method: 'PUT',
-            url: 'http://localhost:6901/api/Empresa/' + emp.idEmpresa,
-            data: $scope.empresa,
-            headers: {
-                'Accept': "application/json"
-            }
-
-        }).then(function (response) {
-            if (response.status === 201) {
-                alert('Estado cambiado');
-
-            }
-
-        }, function (response) {
-            switch (response.statusText) {
-                case 400:
-                    alert("Bad Request");
-                    break;
-                case 401:
-                    alert("Unauthorized");
-                    break;
-                case 404:
-                    alert("Not Found");
-                    break;
-                case 500:
-                    alert("Internal Server Error");
-                    break;
-                default:
-                    alert("Error no identificado");
-            }
-        }).then(function () {
-
-        });
-    }
-
+    
     $scope.clickMenu = function (idLista) {
         $('li').removeClass('active');
 
@@ -90,7 +53,6 @@ app.controller("MiCuentaEmpresaPrestadoraController", function ($scope) {
 
     };
 })
-
 app.controller("MiCuentaClientePrestatarioController", function () {
 
 })
@@ -131,12 +93,47 @@ app.controller("ActivarEmpresasController", function ($scope, $http) {
 
     });
 
+    $scope.upDateEstadoEmpresa = function (emp) {
+        $http({
+            method: 'PUT',
+            url: 'http://localhost:6901/api/Empresa/' + emp.idEmpresa,
+            data: $scope.empresa,
+            headers: {
+                'Accept': "application/json"
+            }
+
+        }).then(function (response) {
+            if (response.status === 201) {
+                alert('Estado cambiado');
+
+            }
+
+        }, function (response) {
+            switch (response.statusText) {
+                case 400:
+                    alert("Bad Request");
+                    break;
+                case 401:
+                    alert("Unauthorized");
+                    break;
+                case 404:
+                    alert("Not Found");
+                    break;
+                case 500:
+                    alert("Internal Server Error");
+                    break;
+                default:
+                    alert("Error no identificado");
+            }
+        }).then(function () {
+
+        });
+    }
 
 })
 app.controller("GestionGeoposicionController", function ($scope, $http) {
-    $scope.alcance="geo";
-
-
+    $scope.direccion = "Gran Malvina 2450";
+    
 
 })
 app.controller("registrarEmpresa", function ($scope, $http) {
@@ -447,5 +444,41 @@ app.controller("registrarUsuario", function ($scope, $http) {
     }
 
     $("#fechaNacimiento").jqxDateTimeInput({ theme: 'bootstrap', template: "primary", width: '275px', height: '25px' });
+
+})
+app.controller("BuscarTurnosController", function ($scope){
+
+    $scope.contenidoATraer = 'PrincipalBusqueda';
+
+    $scope.clickMenu = function (idLista) {
+        $('li').removeClass('active');
+
+        $('#' + idLista).attr("class", "active");
+
+        $scope.cargarContenidoHtml(idLista);
+    }
+
+    $scope.cargarContenidoHtml = function (contenido) {
+        switch (contenido) {
+            case 'principal':
+                $scope.contenidoATraer = 'PrincipalBusqueda';
+                break;
+            case 'geo':
+                $scope.contenidoATraer = 'BuscarPorGeoposicion';
+                break;
+            case 'filtros':
+                $scope.contenidoATraer = 'BuscarPorFiltrado';
+                break;
+
+        }
+
+
+    };
+
+})
+app.controller("BuscarTurnoGeoController", function ($scope, $http) {
+
+})
+app.controller("BuscarTurnoFiltradoController", function ($scope, $http) {
 
 })

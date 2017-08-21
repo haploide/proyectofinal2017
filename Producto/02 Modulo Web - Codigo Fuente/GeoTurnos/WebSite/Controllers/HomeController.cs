@@ -21,7 +21,7 @@ namespace WebSite.Controllers
 
             return View();
         }
-        [Autorizado(Roles =TipoUsuario.Administrador)]
+        [Autorizado]
         public ActionResult Contact()
         {
 
@@ -29,5 +29,30 @@ namespace WebSite.Controllers
 
             return View();
         }
+        //[Autorizado(Roles =TipoUsuario.Prestatario)]
+        public ActionResult BuscarTurnos()
+        {
+            return View();
+        }
+
+        //
+        //GET: PrincipalBusqueda
+        public PartialViewResult PrincipalBusqueda()
+        {
+            return PartialView("_PartialPrincipalBusqueda");
+        }
+        //
+        //GET: BuscarPorFiltrado
+        public PartialViewResult BuscarPorFiltrado()
+        {
+            return PartialView("_PartialBuscarPorFiltrado");
+        }
+        //
+        //GET: BuscarPorGeoposicion
+        public PartialViewResult BuscarPorGeoposicion()
+        {
+            return PartialView("_PartialBuscarPorGeoposicion");
+        }
+
     }
 }

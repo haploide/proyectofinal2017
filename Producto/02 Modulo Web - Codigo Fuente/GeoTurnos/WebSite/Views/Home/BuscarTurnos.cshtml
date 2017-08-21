@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Buscar Turno";
+}
+
+<div class="container" role="main" ng-controller="BuscarTurnosController">
+    <div id="encabezadoBuscador">
+        <h2>Bienvenido {Usuario} al buscador de GeoTurnos!!</h2>
+    </div>
+    <div class="row">
+        <ul class="nav nav-pills" id="menuUsuarios">
+            <li id="principal" ng-click="clickMenu('principal')" role="presentation" class="active">
+                <a href="">Principal</a>
+            </li>
+            <li id="geo" ng-click="clickMenu('geo')" role="presentation">
+                <a href="">Busqueda por Geoposición</a>
+            </li>
+            <li id="filtros" ng-click="clickMenu('filtros')" role="presentation">
+                <a href="">Busqueda por Filtrado</a>
+            </li>
+        </ul>
+    </div>
+    <div id="bodyBusqueda" class="row" ng-include="contenidoATraer">
+
+    </div>
+
+</div>
+

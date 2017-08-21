@@ -7,14 +7,15 @@
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/jqwidgescss")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/angular")
     <script src="~/js/angulargeoturnos.js"></script>
     <link rel="stylesheet" href="~/Content/Site.css" type="text/css" />
-    @Scripts.Render("~/bundles/jquery")
+    
     
 
 </head>
-<body>
+<body ng-app="geoturnos">
     <div class="navbar navbar-inverse navbar-fixed-top menu">
         <div class="container">
             <div class="navbar-header">
@@ -28,6 +29,7 @@
             <div class="navbar-collapse collapse barraMenu">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+                    <li >@Html.ActionLink("Sacar Turno ya!", "BuscarTurnos", "Home")</li>
                     <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
                     <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
                 </ul>
@@ -35,7 +37,7 @@
             </div>
         </div>
     </div>
-    <div class="container body-content" ng-app="geoturnos">
+    <div class="container body-content" >
         @RenderBody()
         <div class="row footer">
             

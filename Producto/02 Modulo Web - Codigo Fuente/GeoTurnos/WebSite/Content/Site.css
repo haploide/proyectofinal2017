@@ -71,9 +71,21 @@ textarea {
 }
 
     .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
-        color: lightslategrey;
-        background-color: transparent;
+        color: #337ab7;
+        background-color: lightblue;
+        border-color: #080808;
+        font-weight: bold;
     }
+
+.navbar-inverse .navbar-nav > .active > a,
+.navbar-inverse .navbar-nav > .active > a:hover,
+.navbar-inverse .navbar-nav > .active > a:focus {
+    color: #337ab7;
+    background-color: white;
+    border-bottom: 3px solid lightblue;
+    border-radius: 0px;
+    font-weight: bold;
+}
 
 .navbar-toggle {
     margin-top: 25px;
@@ -191,7 +203,6 @@ textarea {
 
     #menuUsuarios li {
         background-color: white;
-        
     }
 
         #menuUsuarios li a {
@@ -217,8 +228,9 @@ textarea {
     background-size: cover;
     background-position: center;
 }
+
 #mapa {
-    width:1000px;
-    height:500px;
-    align-self:center;
-  }
+    width: 1000px;
+    height: 500px;
+    align-self: center;
+}
