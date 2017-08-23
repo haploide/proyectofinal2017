@@ -2,9 +2,9 @@
 
 <div ng-controller="GestionGeoposicionController">
     <h1>Gestionar geolocalizacion</h1>
+    {{estado}}
 
-
-    <div class="row">
+    <div>
         <div class="form-inline">
 
             <div class="form-group">
@@ -18,17 +18,24 @@
             <button type="submit" class="btn btn-primary" onclick="actualizarMarcador()">Actualizar</button>
 
         </div>
+
+
         <div class="form-inline">
 
             <div class="form-group">
                 <label for="">Dirección:</label>
-                <input type="text" class="form-control" id="direccion" placeholder="Dirección" ng-model="direccion"/>
+                <input type="text" class="form-control" id="direccion" placeholder="Dirección" ng-model="calle"/>
 
             </div>
             <button type="submit" class="btn btn-primary" onclick="">Actualizar</button>
         </div>
-        <div id="mapa"></div>
 
+        <button type="submit" class="btn btn-primary" onclick="">Guardar Geoposición</button>
+
+        <div id="mapa">
+
+        </div>
+        
     </div>
 
 

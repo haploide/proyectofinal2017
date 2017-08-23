@@ -132,8 +132,47 @@ app.controller("ActivarEmpresasController", function ($scope, $http) {
 
 })
 app.controller("GestionGeoposicionController", function ($scope, $http) {
-    $scope.direccion = "Gran Malvina 2450";
-    
+    $scope.calle;
+    $scope.direccion;
+    $scope.estado = "cargando";
+
+    $http({
+        method: 'GET',
+        url: 'http://localhost:6901/api/domicilio/5',
+        headers: {
+            'Accept': "application/json",
+
+        }
+    }).then(function (response) {
+        if (response.status === 200) {
+            $scope.direccion = response.data;
+
+            $scope.calle = $scope.direccion.calle + ' ' + $scope.direccion.altura;
+        }
+
+
+    }, function (response) {
+        switch (response.status) {
+            case 400:
+                alert("Bad Request");
+                break;
+            case 401:
+                alert("Unauthorized");
+                break;
+            case 404:
+                alert("Not Found");
+                break;
+            case 500:
+                alert("Internal Server Error");
+                break;
+            default:
+                alert("Error no identificado");
+        }
+    }).then(function () {
+
+    });
+
+
 
 })
 app.controller("registrarEmpresa", function ($scope, $http) {
