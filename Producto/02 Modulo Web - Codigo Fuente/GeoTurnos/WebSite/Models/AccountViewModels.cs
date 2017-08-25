@@ -123,7 +123,7 @@ namespace WebSite.Models
         public int altura { get; set; }
 
 
-        [RegularExpression(@"^\d+$")]
+        //[RegularExpression(@"^\d+$")]
         [Display(Name = "Piso")]
         public int piso { get; set; }
 
@@ -183,7 +183,7 @@ namespace WebSite.Models
 
         [Required]
         [Display(Name = "Número de Documento")]
-        [RegularExpression(@"^\d +$")]
+        [RegularExpression(@"^\d+$")]
         public int nroDocumento { get; set; }
 
         [Required]
@@ -228,12 +228,12 @@ namespace WebSite.Models
         public string calle { get; set; }
 
         [Required]
-        [RegularExpression(@"^\d +$")]
+        [RegularExpression(@"^\d+$")]
         [Display(Name = "Altura")]
         public int altura { get; set; }
 
         [Display(Name = "Piso")]
-        [RegularExpression(@"^\d +$")]
+        //[RegularExpression(@"^\d+$")]
         public int piso { get; set; }
 
         [DataType(DataType.Text)]
