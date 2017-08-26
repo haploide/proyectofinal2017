@@ -584,22 +584,27 @@ app.controller("BuscarTurnoGeoController", function ($scope, $http) {
 
 })
 app.controller("BuscarTurnoFiltradoController", function ($scope, $http) {
-    $scope.empresas = [];
+
+    $scope.rubros = [];
+    $scope.provincias = [];
+    $scope.ciudades = [];
+    $scope.barrios = [];
+
+   
     $http({
         method: 'GET',
-        url: 'http://localhost:6901/api/Empresa?idEst=1',
+        url: 'http://localhost:6901/api/rubro',
         headers: {
-            'Accept': "application/json",
-
+            'Accept': "application/json"
         }
+
     }).then(function (response) {
         if (response.status === 200) {
-            angular.copy(response.data, $scope.empresas);
+            angular.copy(response.data, $scope.rubros);
         }
 
-
     }, function (response) {
-        switch (response.status) {
+        switch (response.statusText) {
             case 400:
                 alert("Bad Request");
                 break;
@@ -618,4 +623,154 @@ app.controller("BuscarTurnoFiltradoController", function ($scope, $http) {
     }).then(function () {
 
     });
+    $http({
+        method: 'GET',
+        url: 'http://localhost:6901/api/provincia',
+        headers: {
+            'Accept': "application/json"
+        }
+
+    }).then(function (response) {
+        if (response.status === 200) {
+            angular.copy(response.data, $scope.provincias);
+        }
+        this.isBusy = false;
+
+    }, function (response) {
+        switch (response.statusText) {
+            case 400:
+                alert("Bad Request");
+                break;
+            case 401:
+                alert("Unauthorized");
+                break;
+            case 404:
+                alert("Not Found");
+                break;
+            case 500:
+                alert("Internal Server Error");
+                break;
+            default:
+                alert("Error no identificado");
+        }
+    }).then(function () {
+
+    });
+
+    $scope.clickProvincias = function (idProvincia) {
+        this.isBusy = true;
+        $http({
+            method: 'GET',
+            url: 'http://localhost:6901/api/ciudad?id=' + idProvincia,
+            headers: {
+                'Accept': "application/json"
+            }
+
+        }).then(function (response) {
+            if (response.status === 200) {
+                angular.copy(response.data, $scope.ciudades);
+            }
+            this.isBusy = false;
+
+        }, function (response) {
+            switch (response.statusText) {
+                case 400:
+                    alert("Bad Request");
+                    break;
+                case 401:
+                    alert("Unauthorized");
+                    break;
+                case 404:
+                    alert("Not Found");
+                    break;
+                case 500:
+                    alert("Internal Server Error");
+                    break;
+                default:
+                    alert("Error no identificado");
+            }
+        }).then(function () {
+
+        });
+
+        $("#ciudades").removeAttr('disabled');
+
+    }
+    $scope.clickCiudades = function (idCiudad) {
+
+        this.isBusy = true;
+        $http({
+            method: 'GET',
+            url: 'http://localhost:6901/api/barrio?id=' + idCiudad,
+            headers: {
+                'Accept': "application/json"
+            }
+
+        }).then(function (response) {
+            if (response.status === 200) {
+                angular.copy(response.data, $scope.barrios);
+            }
+            this.isBusy = false;
+
+        }, function (response) {
+            switch (response.statusText) {
+                case 400:
+                    alert("Bad Request");
+                    break;
+                case 401:
+                    alert("Unauthorized");
+                    break;
+                case 404:
+                    alert("Not Found");
+                    break;
+                case 500:
+                    alert("Internal Server Error");
+                    break;
+                default:
+                    alert("Error no identificado");
+            }
+        }).then(function () {
+
+        });
+
+        $("#barrios").removeAttr('disabled');
+    }
+
+    $scope.filtrarEmpresas = function () {
+        $scope.empresas = [];
+
+        $http({
+            method: 'GET',
+            url: 'http://localhost:6901/api/Empresa?nombre='+$scope.nombre+'&rubro='+$scope.rubro+'&prov=Córdoba&ciudad=Villa+Carlos+Paz',
+            headers: {
+                'Accept': "application/json",
+
+            }
+        }).then(function (response) {
+            if (response.status === 200) {
+                angular.copy(response.data, $scope.empresas);
+            }
+
+
+        }, function (response) {
+            switch (response.status) {
+                case 400:
+                    alert("Bad Request");
+                    break;
+                case 401:
+                    alert("Unauthorized");
+                    break;
+                case 404:
+                    alert("Not Found");
+                    break;
+                case 500:
+                    alert("Internal Server Error");
+                    break;
+                default:
+                    alert("Error no identificado");
+            }
+        }).then(function () {
+
+        });
+    }
 })

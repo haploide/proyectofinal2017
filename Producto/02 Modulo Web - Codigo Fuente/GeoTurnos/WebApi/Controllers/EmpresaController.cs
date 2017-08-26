@@ -40,7 +40,7 @@ namespace WebApi.Controllers
                 {
                     return NotFound();
                 }
-                var emp = _db.Empresa.Where(p => p.idEstado  == idEst);
+                var emp = _db.Empresa.Where(p => p.idEstado == idEst);
                 if (emp == null)
                 {
                     return NotFound();
@@ -53,6 +53,41 @@ namespace WebApi.Controllers
                 return InternalServerError(ex);
             }
         }
+
+
+        public IHttpActionResult Get(string nombre, string rubro, string prov, string ciudad)
+        {
+            try
+            {
+                if (_db.Empresa == null || !_db.Empresa.Any())
+                {
+                    return NotFound();
+                }
+                var emp = (from e in _db.Empresa
+                           join r in _db.Rubro  on e.Rubro.idRubro   equals r.idRubro
+                           join d in _db.Domicilio  on e.idDomicilio equals d.idDomicilio
+                           join b in _db.Barrio on d.idBarrio equals b.idBarrio
+                           join c in _db.Ciudad on b.idCiudad equals c.idCiudad
+                           join p in _db.Provincia on c.idProvincia equals p.idProvincia  
+                           where e.razonSocial == nombre && e.Rubro.nombre==rubro && e.Domicilio.Barrio.Ciudad.nombre == ciudad && e.Domicilio.Barrio.Ciudad.Provincia.nombre==prov
+
+                           select e);
+                if (emp == null)
+                {
+                    return NotFound();
+                }
+                return Ok(emp);
+            }
+            catch (Exception ex)
+            {
+
+                return InternalServerError(ex);
+            }
+        }
+
+
+
+
         // metrodo POST para crear un recurso nuevo
 
         public IHttpActionResult Post([FromBody]Empresa empresa)
