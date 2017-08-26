@@ -18,8 +18,8 @@ namespace WebSite.Models
         public Usuario()
         {
             this.Cliente = new HashSet<Cliente>();
-            this.Empresa = new HashSet<Empresa>();
             this.RolPorUsuario = new HashSet<RolPorUsuario>();
+            this.Empresa = new HashSet<Empresa>();
         }
     
         public int idUsuario { get; set; }
@@ -33,10 +33,10 @@ namespace WebSite.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cliente> Cliente { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Empresa> Empresa { get; set; }
         public virtual Estado Estado { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RolPorUsuario> RolPorUsuario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Empresa> Empresa { get; set; }
     }
 }

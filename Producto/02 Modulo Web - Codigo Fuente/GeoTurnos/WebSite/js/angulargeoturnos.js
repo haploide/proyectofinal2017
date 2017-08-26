@@ -134,11 +134,10 @@ app.controller("ActivarEmpresasController", function ($scope, $http) {
 app.controller("GestionGeoposicionController", function ($scope, $http) {
     $scope.calle;
     $scope.direccion;
-    $scope.estado = "cargando";
-
+    
     $http({
         method: 'GET',
-        url: 'http://localhost:6901/api/domicilio/5',
+        url: 'http://localhost:6901/api/domicilio/' + $('#idEmpresa').val(),
         headers: {
             'Accept': "application/json",
 
@@ -148,6 +147,7 @@ app.controller("GestionGeoposicionController", function ($scope, $http) {
             $scope.direccion = response.data;
 
             $scope.calle = $scope.direccion.calle + ' ' + $scope.direccion.altura;
+               
         }
 
 
@@ -172,8 +172,60 @@ app.controller("GestionGeoposicionController", function ($scope, $http) {
 
     });
 
+    $scope.updateGeoposicion = function () {
+        $scope.direccion.latitud = Number($('#latitud').val());
+        $scope.direccion.longitud = Number($('#longitud').val());
+        
+        $http({
+            method: 'PUT',
+            url: 'http://localhost:6901/api/domicilio/' + $scope.direccion.idDomicilio,
+            data: $scope.direccion,
+            headers: {
+                'Accept': "application/json"
+            }
 
+        }).then(function (response) {
+            if (response.status === 200) {
+                alert('Geoposición Actualizada');
 
+            }
+
+        }, function (response) {
+            switch (response.statusText) {
+                case 400:
+                    alert("Bad Request");
+                    break;
+                case 401:
+                    alert("Unauthorized");
+                    break;
+                case 404:
+                    alert("Not Found");
+                    break;
+                case 500:
+                    alert("Internal Server Error");
+                    break;
+                default:
+                    alert("Error no identificado");
+            }
+        }).then(function () {
+
+        });
+    }
+
+    
+
+    $scope.updateGeoposicionDesdeDireccion = function () {
+
+        var consulta='https://maps.googleapis.com/maps/api/geocode/json?address=malvina+2450&key=AIzaSyDWMuUF9ciUfQtVEJEU7OCSSTO3-4Hewc8';
+        window.map.setCenter({ lat: -31.4240452, lng: -64.5083392 });
+
+        marker = new google.maps.Marker({
+            position: { lat: -31.4240452, lng: -64.5083392 },
+            map: map,
+            draggable: true,
+            icon: {url:'http://icons.iconarchive.com/icons/paomedia/small-n-flat/128/map-marker-icon.png'}
+        });
+    }
 })
 app.controller("registrarEmpresa", function ($scope, $http) {
     $scope.rubros = [];

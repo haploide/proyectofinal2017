@@ -18,8 +18,8 @@ namespace WebSite.Models
         public Estado()
         {
             this.Cliente = new HashSet<Cliente>();
-            this.Empresa = new HashSet<Empresa>();
             this.Usuario = new HashSet<Usuario>();
+            this.Empresa = new HashSet<Empresa>();
         }
     
         public int idEstado { get; set; }
@@ -28,8 +28,8 @@ namespace WebSite.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cliente> Cliente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Empresa> Empresa { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Usuario> Usuario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Empresa> Empresa { get; set; }
     }
 }

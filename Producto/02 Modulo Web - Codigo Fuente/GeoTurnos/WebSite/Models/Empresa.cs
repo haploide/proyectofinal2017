@@ -15,7 +15,7 @@ namespace WebSite.Models
     public partial class Empresa
     {
         public int idEmpresa { get; set; }
-        public Nullable<int> cuit { get; set; }
+        public Nullable<decimal> cuit { get; set; }
         public string razonSocial { get; set; }
         public string nombreFantasia { get; set; }
         public Nullable<System.DateTime> inicioActividades { get; set; }
@@ -27,9 +27,9 @@ namespace WebSite.Models
         public Nullable<int> idUsuario { get; set; }
         public Nullable<int> idEstado { get; set; }
     
-        public virtual Domicilio Domicilio { get; set; }
         public virtual Estado Estado { get; set; }
         public virtual Rubro Rubro { get; set; }
         public virtual Usuario Usuario { get; set; }
+        public virtual Domicilio Domicilio { get; set; }
     }
 }

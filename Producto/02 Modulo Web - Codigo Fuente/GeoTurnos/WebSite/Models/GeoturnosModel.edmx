@@ -48,8 +48,8 @@
           <Property Name="piso" Type="int" />
           <Property Name="departamento" Type="nvarchar" MaxLength="50" />
           <Property Name="torre" Type="nvarchar" MaxLength="50" />
-          <Property Name="latitud" Type="int" />
-          <Property Name="longitud" Type="int" />
+          <Property Name="latitud" Type="decimal" Precision="38" Scale="25" />
+          <Property Name="longitud" Type="decimal" Precision="38" Scale="25" />
           <Property Name="idBarrio" Type="int" />
         </EntityType>
         <EntityType Name="Empresa">
@@ -375,7 +375,7 @@
           <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="idCiudad" Type="Int32" />
           <NavigationProperty Name="Ciudad" Relationship="Self.FK_Barrio_Ciudad" FromRole="Barrio" ToRole="Ciudad" />
-          <NavigationProperty Name="Domicilio" Relationship="Self.FK_Domicilio_Barrio" FromRole="Barrio" ToRole="Domicilio" />
+          <NavigationProperty Name="Domicilio" Relationship="GeoTurnosModel.FK_Domicilio_Barrio" FromRole="Barrio" ToRole="Domicilio" />
         </EntityType>
         <EntityType Name="Ciudad">
           <Key>
@@ -403,48 +403,10 @@
           <Property Name="idDomicilio" Type="Int32" />
           <Property Name="idUsuario" Type="Int32" />
           <Property Name="idEstado" Type="Int32" />
-          <NavigationProperty Name="Domicilio" Relationship="Self.FK_Cliente_Domicilio" FromRole="Cliente" ToRole="Domicilio" />
           <NavigationProperty Name="Estado" Relationship="Self.FK_Cliente_Estado" FromRole="Cliente" ToRole="Estado" />
           <NavigationProperty Name="TipoDocumento" Relationship="Self.FK_Cliente_TipoDocumento" FromRole="Cliente" ToRole="TipoDocumento" />
           <NavigationProperty Name="Usuario" Relationship="Self.FK_Cliente_Usuario" FromRole="Cliente" ToRole="Usuario" />
-        </EntityType>
-        <EntityType Name="Domicilio">
-          <Key>
-            <PropertyRef Name="idDomicilio" />
-          </Key>
-          <Property Name="idDomicilio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="calle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="altura" Type="Int32" Nullable="false" />
-          <Property Name="piso" Type="Int32" />
-          <Property Name="departamento" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="torre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="latitud" Type="Int32" />
-          <Property Name="longitud" Type="Int32" />
-          <Property Name="idBarrio" Type="Int32" />
-          <NavigationProperty Name="Barrio" Relationship="Self.FK_Domicilio_Barrio" FromRole="Domicilio" ToRole="Barrio" />
-          <NavigationProperty Name="Cliente" Relationship="Self.FK_Cliente_Domicilio" FromRole="Domicilio" ToRole="Cliente" />
-          <NavigationProperty Name="Empresa" Relationship="Self.FK_Empresa_Domicilio" FromRole="Domicilio" ToRole="Empresa" />
-        </EntityType>
-        <EntityType Name="Empresa">
-          <Key>
-            <PropertyRef Name="idEmpresa" />
-          </Key>
-          <Property Name="idEmpresa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="cuit" Type="Int32" />
-          <Property Name="razonSocial" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="nombreFantasia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="inicioActividades" Type="DateTime" Precision="0" />
-          <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="logoEmpresa" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="idDomicilio" Type="Int32" />
-          <Property Name="idRubro" Type="Int32" />
-          <Property Name="idUsuario" Type="Int32" />
-          <Property Name="idEstado" Type="Int32" />
-          <NavigationProperty Name="Domicilio" Relationship="Self.FK_Empresa_Domicilio" FromRole="Empresa" ToRole="Domicilio" />
-          <NavigationProperty Name="Estado" Relationship="Self.FK_Empresa_Estado" FromRole="Empresa" ToRole="Estado" />
-          <NavigationProperty Name="Rubro" Relationship="Self.FK_Empresa_Rubro" FromRole="Empresa" ToRole="Rubro" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK_Empresa_Usuario" FromRole="Empresa" ToRole="Usuario" />
+          <NavigationProperty Name="Domicilio" Relationship="GeoTurnosModel.FK_Cliente_Domicilio" FromRole="Cliente" ToRole="Domicilio" />
         </EntityType>
         <EntityType Name="Estado">
           <Key>
@@ -453,8 +415,8 @@
           <Property Name="idEstado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Cliente" Relationship="Self.FK_Cliente_Estado" FromRole="Estado" ToRole="Cliente" />
-          <NavigationProperty Name="Empresa" Relationship="Self.FK_Empresa_Estado" FromRole="Estado" ToRole="Empresa" />
           <NavigationProperty Name="Usuario" Relationship="Self.FK_Usuario_Estado" FromRole="Estado" ToRole="Usuario" />
+          <NavigationProperty Name="Empresa" Relationship="GeoTurnosModel.FK_Empresa_Estado" FromRole="Estado" ToRole="Empresa" />
         </EntityType>
         <EntityType Name="Provincia">
           <Key>
@@ -488,7 +450,7 @@
           </Key>
           <Property Name="idRubro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Empresa" Relationship="Self.FK_Empresa_Rubro" FromRole="Rubro" ToRole="Empresa" />
+          <NavigationProperty Name="Empresa" Relationship="GeoTurnosModel.FK_Empresa_Rubro" FromRole="Rubro" ToRole="Empresa" />
         </EntityType>
         <EntityType Name="TipoDocumento">
           <Key>
@@ -511,9 +473,9 @@
           <Property Name="respuestaSeguridad2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="idEstado" Type="Int32" />
           <NavigationProperty Name="Cliente" Relationship="Self.FK_Cliente_Usuario" FromRole="Usuario" ToRole="Cliente" />
-          <NavigationProperty Name="Empresa" Relationship="Self.FK_Empresa_Usuario" FromRole="Usuario" ToRole="Empresa" />
           <NavigationProperty Name="Estado" Relationship="Self.FK_Usuario_Estado" FromRole="Usuario" ToRole="Estado" />
           <NavigationProperty Name="RolPorUsuario" Relationship="Self.FK_RolPorUsuario_Usuario" FromRole="Usuario" ToRole="RolPorUsuario" />
+          <NavigationProperty Name="Empresa" Relationship="GeoTurnosModel.FK_Empresa_Usuario" FromRole="Usuario" ToRole="Empresa" />
         </EntityType>
         <Association Name="FK_Barrio_Ciudad">
           <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="0..1" />
@@ -527,18 +489,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Domicilio_Barrio">
-          <End Role="Barrio" Type="Self.Barrio" Multiplicity="0..1" />
-          <End Role="Domicilio" Type="Self.Domicilio" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Barrio">
-              <PropertyRef Name="idBarrio" />
-            </Principal>
-            <Dependent Role="Domicilio">
-              <PropertyRef Name="idBarrio" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Ciudad_Provincia">
           <End Role="Provincia" Type="Self.Provincia" Multiplicity="0..1" />
           <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="*" />
@@ -548,18 +498,6 @@
             </Principal>
             <Dependent Role="Ciudad">
               <PropertyRef Name="idProvincia" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Cliente_Domicilio">
-          <End Role="Domicilio" Type="Self.Domicilio" Multiplicity="0..1" />
-          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Domicilio">
-              <PropertyRef Name="idDomicilio" />
-            </Principal>
-            <Dependent Role="Cliente">
-              <PropertyRef Name="idDomicilio" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -595,54 +533,6 @@
               <PropertyRef Name="idUsuario" />
             </Principal>
             <Dependent Role="Cliente">
-              <PropertyRef Name="idUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Empresa_Domicilio">
-          <End Role="Domicilio" Type="Self.Domicilio" Multiplicity="0..1" />
-          <End Role="Empresa" Type="Self.Empresa" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Domicilio">
-              <PropertyRef Name="idDomicilio" />
-            </Principal>
-            <Dependent Role="Empresa">
-              <PropertyRef Name="idDomicilio" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Empresa_Estado">
-          <End Role="Estado" Type="Self.Estado" Multiplicity="0..1" />
-          <End Role="Empresa" Type="Self.Empresa" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Estado">
-              <PropertyRef Name="idEstado" />
-            </Principal>
-            <Dependent Role="Empresa">
-              <PropertyRef Name="idEstado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Empresa_Rubro">
-          <End Role="Rubro" Type="Self.Rubro" Multiplicity="0..1" />
-          <End Role="Empresa" Type="Self.Empresa" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Rubro">
-              <PropertyRef Name="idRubro" />
-            </Principal>
-            <Dependent Role="Empresa">
-              <PropertyRef Name="idRubro" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Empresa_Usuario">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
-          <End Role="Empresa" Type="Self.Empresa" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="idUsuario" />
-            </Principal>
-            <Dependent Role="Empresa">
               <PropertyRef Name="idUsuario" />
             </Dependent>
           </ReferentialConstraint>
@@ -687,8 +577,6 @@
           <EntitySet Name="Barrio" EntityType="Self.Barrio" />
           <EntitySet Name="Ciudad" EntityType="Self.Ciudad" />
           <EntitySet Name="Cliente" EntityType="Self.Cliente" />
-          <EntitySet Name="Domicilio" EntityType="Self.Domicilio" />
-          <EntitySet Name="Empresa" EntityType="Self.Empresa" />
           <EntitySet Name="Estado" EntityType="Self.Estado" />
           <EntitySet Name="Provincia" EntityType="Self.Provincia" />
           <EntitySet Name="Rol" EntityType="Self.Rol" />
@@ -700,17 +588,9 @@
             <End Role="Ciudad" EntitySet="Ciudad" />
             <End Role="Barrio" EntitySet="Barrio" />
           </AssociationSet>
-          <AssociationSet Name="FK_Domicilio_Barrio" Association="Self.FK_Domicilio_Barrio">
-            <End Role="Barrio" EntitySet="Barrio" />
-            <End Role="Domicilio" EntitySet="Domicilio" />
-          </AssociationSet>
           <AssociationSet Name="FK_Ciudad_Provincia" Association="Self.FK_Ciudad_Provincia">
             <End Role="Provincia" EntitySet="Provincia" />
             <End Role="Ciudad" EntitySet="Ciudad" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Cliente_Domicilio" Association="Self.FK_Cliente_Domicilio">
-            <End Role="Domicilio" EntitySet="Domicilio" />
-            <End Role="Cliente" EntitySet="Cliente" />
           </AssociationSet>
           <AssociationSet Name="FK_Cliente_Estado" Association="Self.FK_Cliente_Estado">
             <End Role="Estado" EntitySet="Estado" />
@@ -724,22 +604,6 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Cliente" EntitySet="Cliente" />
           </AssociationSet>
-          <AssociationSet Name="FK_Empresa_Domicilio" Association="Self.FK_Empresa_Domicilio">
-            <End Role="Domicilio" EntitySet="Domicilio" />
-            <End Role="Empresa" EntitySet="Empresa" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Empresa_Estado" Association="Self.FK_Empresa_Estado">
-            <End Role="Estado" EntitySet="Estado" />
-            <End Role="Empresa" EntitySet="Empresa" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Empresa_Rubro" Association="Self.FK_Empresa_Rubro">
-            <End Role="Rubro" EntitySet="Rubro" />
-            <End Role="Empresa" EntitySet="Empresa" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Empresa_Usuario" Association="Self.FK_Empresa_Usuario">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="Empresa" EntitySet="Empresa" />
-          </AssociationSet>
           <AssociationSet Name="FK_Usuario_Estado" Association="Self.FK_Usuario_Estado">
             <End Role="Estado" EntitySet="Estado" />
             <End Role="Usuario" EntitySet="Usuario" />
@@ -752,7 +616,143 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="RolPorUsuario" EntitySet="RolPorUsuario" />
           </AssociationSet>
+          <EntitySet Name="Empresa" EntityType="GeoTurnosModel.Empresa" />
+          <AssociationSet Name="FK_Empresa_Estado" Association="GeoTurnosModel.FK_Empresa_Estado">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Empresa" EntitySet="Empresa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empresa_Rubro" Association="GeoTurnosModel.FK_Empresa_Rubro">
+            <End Role="Rubro" EntitySet="Rubro" />
+            <End Role="Empresa" EntitySet="Empresa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empresa_Usuario" Association="GeoTurnosModel.FK_Empresa_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Empresa" EntitySet="Empresa" />
+          </AssociationSet>
+          <EntitySet Name="Domicilio" EntityType="GeoTurnosModel.Domicilio" />
+          <AssociationSet Name="FK_Domicilio_Barrio" Association="GeoTurnosModel.FK_Domicilio_Barrio">
+            <End Role="Barrio" EntitySet="Barrio" />
+            <End Role="Domicilio" EntitySet="Domicilio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cliente_Domicilio" Association="GeoTurnosModel.FK_Cliente_Domicilio">
+            <End Role="Domicilio" EntitySet="Domicilio" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empresa_Domicilio" Association="GeoTurnosModel.FK_Empresa_Domicilio">
+            <End Role="Domicilio" EntitySet="Domicilio" />
+            <End Role="Empresa" EntitySet="Empresa" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Empresa">
+          <Key>
+            <PropertyRef Name="idEmpresa" />
+          </Key>
+          <Property Name="idEmpresa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cuit" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="razonSocial" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="nombreFantasia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="inicioActividades" Type="DateTime" Precision="0" />
+          <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="logoEmpresa" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idDomicilio" Type="Int32" />
+          <Property Name="idRubro" Type="Int32" />
+          <Property Name="idUsuario" Type="Int32" />
+          <Property Name="idEstado" Type="Int32" />
+          <NavigationProperty Name="Estado" Relationship="GeoTurnosModel.FK_Empresa_Estado" FromRole="Empresa" ToRole="Estado" />
+          <NavigationProperty Name="Rubro" Relationship="GeoTurnosModel.FK_Empresa_Rubro" FromRole="Empresa" ToRole="Rubro" />
+          <NavigationProperty Name="Usuario" Relationship="GeoTurnosModel.FK_Empresa_Usuario" FromRole="Empresa" ToRole="Usuario" />
+          <NavigationProperty Name="Domicilio" Relationship="GeoTurnosModel.FK_Empresa_Domicilio" FromRole="Empresa" ToRole="Domicilio" />
+        </EntityType>
+        <Association Name="FK_Empresa_Estado">
+          <End Type="GeoTurnosModel.Estado" Role="Estado" Multiplicity="0..1" />
+          <End Type="GeoTurnosModel.Empresa" Role="Empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="idEstado" />
+            </Principal>
+            <Dependent Role="Empresa">
+              <PropertyRef Name="idEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empresa_Rubro">
+          <End Type="GeoTurnosModel.Rubro" Role="Rubro" Multiplicity="0..1" />
+          <End Type="GeoTurnosModel.Empresa" Role="Empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rubro">
+              <PropertyRef Name="idRubro" />
+            </Principal>
+            <Dependent Role="Empresa">
+              <PropertyRef Name="idRubro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empresa_Usuario">
+          <End Type="GeoTurnosModel.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="GeoTurnosModel.Empresa" Role="Empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Empresa">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Domicilio">
+          <Key>
+            <PropertyRef Name="idDomicilio" />
+          </Key>
+          <Property Name="idDomicilio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="calle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="altura" Type="Int32" Nullable="false" />
+          <Property Name="piso" Type="Int32" />
+          <Property Name="departamento" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="torre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="latitud" Type="Decimal" Precision="38" Scale="25" />
+          <Property Name="longitud" Type="Decimal" Precision="38" Scale="25" />
+          <Property Name="idBarrio" Type="Int32" />
+          <NavigationProperty Name="Barrio" Relationship="GeoTurnosModel.FK_Domicilio_Barrio" FromRole="Domicilio" ToRole="Barrio" />
+          <NavigationProperty Name="Cliente" Relationship="GeoTurnosModel.FK_Cliente_Domicilio" FromRole="Domicilio" ToRole="Cliente" />
+          <NavigationProperty Name="Empresa" Relationship="GeoTurnosModel.FK_Empresa_Domicilio" FromRole="Domicilio" ToRole="Empresa" />
+        </EntityType>
+        <Association Name="FK_Domicilio_Barrio">
+          <End Type="GeoTurnosModel.Barrio" Role="Barrio" Multiplicity="0..1" />
+          <End Type="GeoTurnosModel.Domicilio" Role="Domicilio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Barrio">
+              <PropertyRef Name="idBarrio" />
+            </Principal>
+            <Dependent Role="Domicilio">
+              <PropertyRef Name="idBarrio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cliente_Domicilio">
+          <End Type="GeoTurnosModel.Domicilio" Role="Domicilio" Multiplicity="0..1" />
+          <End Type="GeoTurnosModel.Cliente" Role="Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Domicilio">
+              <PropertyRef Name="idDomicilio" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="idDomicilio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empresa_Domicilio">
+          <End Type="GeoTurnosModel.Domicilio" Role="Domicilio" Multiplicity="0..1" />
+          <End Type="GeoTurnosModel.Empresa" Role="Empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Domicilio">
+              <PropertyRef Name="idDomicilio" />
+            </Principal>
+            <Dependent Role="Empresa">
+              <PropertyRef Name="idDomicilio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -790,39 +790,6 @@
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="fechaNacimiento" ColumnName="fechaNacimiento" />
                 <ScalarProperty Name="idDomicilio" ColumnName="idDomicilio" />
-                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
-                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Domicilio">
-            <EntityTypeMapping TypeName="GeoTurnosModel.Domicilio">
-              <MappingFragment StoreEntitySet="Domicilio">
-                <ScalarProperty Name="idDomicilio" ColumnName="idDomicilio" />
-                <ScalarProperty Name="calle" ColumnName="calle" />
-                <ScalarProperty Name="altura" ColumnName="altura" />
-                <ScalarProperty Name="piso" ColumnName="piso" />
-                <ScalarProperty Name="departamento" ColumnName="departamento" />
-                <ScalarProperty Name="torre" ColumnName="torre" />
-                <ScalarProperty Name="latitud" ColumnName="latitud" />
-                <ScalarProperty Name="longitud" ColumnName="longitud" />
-                <ScalarProperty Name="idBarrio" ColumnName="idBarrio" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Empresa">
-            <EntityTypeMapping TypeName="GeoTurnosModel.Empresa">
-              <MappingFragment StoreEntitySet="Empresa">
-                <ScalarProperty Name="idEmpresa" ColumnName="idEmpresa" />
-                <ScalarProperty Name="cuit" ColumnName="cuit" />
-                <ScalarProperty Name="razonSocial" ColumnName="razonSocial" />
-                <ScalarProperty Name="nombreFantasia" ColumnName="nombreFantasia" />
-                <ScalarProperty Name="inicioActividades" ColumnName="inicioActividades" />
-                <ScalarProperty Name="telefono" ColumnName="telefono" />
-                <ScalarProperty Name="logoEmpresa" ColumnName="logoEmpresa" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="idDomicilio" ColumnName="idDomicilio" />
-                <ScalarProperty Name="idRubro" ColumnName="idRubro" />
                 <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
                 <ScalarProperty Name="idEstado" ColumnName="idEstado" />
               </MappingFragment>
@@ -888,6 +855,39 @@
                 <ScalarProperty Name="preguntaSeguridad2" ColumnName="preguntaSeguridad2" />
                 <ScalarProperty Name="respuestaSeguridad2" ColumnName="respuestaSeguridad2" />
                 <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empresa">
+            <EntityTypeMapping TypeName="GeoTurnosModel.Empresa">
+              <MappingFragment StoreEntitySet="Empresa">
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="idRubro" ColumnName="idRubro" />
+                <ScalarProperty Name="idDomicilio" ColumnName="idDomicilio" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="logoEmpresa" ColumnName="logoEmpresa" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="inicioActividades" ColumnName="inicioActividades" />
+                <ScalarProperty Name="nombreFantasia" ColumnName="nombreFantasia" />
+                <ScalarProperty Name="razonSocial" ColumnName="razonSocial" />
+                <ScalarProperty Name="cuit" ColumnName="cuit" />
+                <ScalarProperty Name="idEmpresa" ColumnName="idEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Domicilio">
+            <EntityTypeMapping TypeName="GeoTurnosModel.Domicilio">
+              <MappingFragment StoreEntitySet="Domicilio">
+                <ScalarProperty Name="idBarrio" ColumnName="idBarrio" />
+                <ScalarProperty Name="longitud" ColumnName="longitud" />
+                <ScalarProperty Name="latitud" ColumnName="latitud" />
+                <ScalarProperty Name="torre" ColumnName="torre" />
+                <ScalarProperty Name="departamento" ColumnName="departamento" />
+                <ScalarProperty Name="piso" ColumnName="piso" />
+                <ScalarProperty Name="altura" ColumnName="altura" />
+                <ScalarProperty Name="calle" ColumnName="calle" />
+                <ScalarProperty Name="idDomicilio" ColumnName="idDomicilio" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

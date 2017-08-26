@@ -27,9 +27,9 @@ namespace WebApi.Models
         public Nullable<int> idUsuario { get; set; }
         public Nullable<int> idEstado { get; set; }
     
-        public virtual Domicilio Domicilio { get; set; }
         public virtual Estado Estado { get; set; }
         public virtual TipoDocumento TipoDocumento { get; set; }
         public virtual Usuario Usuario { get; set; }
+        public virtual Domicilio Domicilio { get; set; }
     }
 }

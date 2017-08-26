@@ -8,8 +8,6 @@
         <EntityTypeShape EntityType="GeoTurnosModel.Barrio" Width="1.5" PointX="1.5" PointY="10.125" IsExpanded="true" />
         <EntityTypeShape EntityType="GeoTurnosModel.Ciudad" Width="1.5" PointX="1.5" PointY="13.125" IsExpanded="true" />
         <EntityTypeShape EntityType="GeoTurnosModel.Cliente" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="GeoTurnosModel.Domicilio" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GeoTurnosModel.Empresa" Width="1.5" PointX="6" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="GeoTurnosModel.Estado" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GeoTurnosModel.Provincia" Width="1.5" PointX="1.5" PointY="16.375" IsExpanded="true" />
         <EntityTypeShape EntityType="GeoTurnosModel.Rol" Width="1.5" PointX="8.75" PointY="2.125" IsExpanded="true" />
@@ -17,20 +15,22 @@
         <EntityTypeShape EntityType="GeoTurnosModel.Rubro" Width="1.5" PointX="3.75" PointY="1.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GeoTurnosModel.TipoDocumento" Width="1.5" PointX="0.75" PointY="18.875" IsExpanded="true" />
         <AssociationConnector Association="GeoTurnosModel.FK_Barrio_Ciudad" ManuallyRouted="false" />
-        <AssociationConnector Association="GeoTurnosModel.FK_Domicilio_Barrio" ManuallyRouted="false" />
         <AssociationConnector Association="GeoTurnosModel.FK_Ciudad_Provincia" ManuallyRouted="false" />
-        <AssociationConnector Association="GeoTurnosModel.FK_Cliente_Domicilio" ManuallyRouted="false" />
         <AssociationConnector Association="GeoTurnosModel.FK_Cliente_Estado" ManuallyRouted="false" />
         <AssociationConnector Association="GeoTurnosModel.FK_Cliente_TipoDocumento" ManuallyRouted="false" />
-        <AssociationConnector Association="GeoTurnosModel.FK_Empresa_Domicilio" ManuallyRouted="false" />
-        <AssociationConnector Association="GeoTurnosModel.FK_Empresa_Estado" ManuallyRouted="false" />
-        <AssociationConnector Association="GeoTurnosModel.FK_Empresa_Rubro" ManuallyRouted="false" />
         <AssociationConnector Association="GeoTurnosModel.FK_RolPorUsuario_Rol" ManuallyRouted="false" />
         <EntityTypeShape EntityType="GeoTurnosModel.Usuario" Width="1.5" PointX="3" PointY="18.875" />
         <AssociationConnector Association="GeoTurnosModel.FK_Cliente_Usuario" />
-        <AssociationConnector Association="GeoTurnosModel.FK_Empresa_Usuario" />
         <AssociationConnector Association="GeoTurnosModel.FK_Usuario_Estado" />
         <AssociationConnector Association="GeoTurnosModel.FK_RolPorUsuario_Usuario" />
+        <EntityTypeShape EntityType="GeoTurnosModel.Domicilio" Width="1.5" PointX="0.875" PointY="1.5" />
+        <AssociationConnector Association="GeoTurnosModel.FK_Domicilio_Barrio" />
+        <AssociationConnector Association="GeoTurnosModel.FK_Cliente_Domicilio" />
+        <EntityTypeShape EntityType="GeoTurnosModel.Empresa" Width="1.5" PointX="6" PointY="9.75" />
+        <AssociationConnector Association="GeoTurnosModel.FK_Empresa_Domicilio" />
+        <AssociationConnector Association="GeoTurnosModel.FK_Empresa_Estado" />
+        <AssociationConnector Association="GeoTurnosModel.FK_Empresa_Rubro" />
+        <AssociationConnector Association="GeoTurnosModel.FK_Empresa_Usuario" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

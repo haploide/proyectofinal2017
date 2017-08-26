@@ -27,8 +27,8 @@ namespace WebSite.Models
         public Nullable<int> piso { get; set; }
         public string departamento { get; set; }
         public string torre { get; set; }
-        public Nullable<int> latitud { get; set; }
-        public Nullable<int> longitud { get; set; }
+        public Nullable<decimal> latitud { get; set; }
+        public Nullable<decimal> longitud { get; set; }
         public Nullable<int> idBarrio { get; set; }
     
         public virtual Barrio Barrio { get; set; }

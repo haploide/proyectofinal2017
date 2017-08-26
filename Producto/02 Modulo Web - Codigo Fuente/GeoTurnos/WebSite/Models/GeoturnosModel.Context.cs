@@ -28,8 +28,6 @@ namespace WebSite.Models
         public virtual DbSet<Barrio> Barrio { get; set; }
         public virtual DbSet<Ciudad> Ciudad { get; set; }
         public virtual DbSet<Cliente> Cliente { get; set; }
-        public virtual DbSet<Domicilio> Domicilio { get; set; }
-        public virtual DbSet<Empresa> Empresa { get; set; }
         public virtual DbSet<Estado> Estado { get; set; }
         public virtual DbSet<Provincia> Provincia { get; set; }
         public virtual DbSet<Rol> Rol { get; set; }
@@ -37,5 +35,7 @@ namespace WebSite.Models
         public virtual DbSet<Rubro> Rubro { get; set; }
         public virtual DbSet<TipoDocumento> TipoDocumento { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
+        public virtual DbSet<Empresa> Empresa { get; set; }
+        public virtual DbSet<Domicilio> Domicilio { get; set; }
     }
 }

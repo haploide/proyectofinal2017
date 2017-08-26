@@ -1,48 +1,49 @@
-﻿
-
+﻿@using WebSite.App_Start
+@{
+    var usuarioLogin = Session["usuarioLogin"] as UsuarioLogueado;
+}
 <div ng-controller="GestionGeoposicionController">
-    <h1>Gestionar geolocalizacion</h1>
-    {{estado}}
-
     <div>
+        <input id="idEmpresa" type="hidden" value="@usuarioLogin.Empresa.idEmpresa" />
         <div class="form-inline">
 
             <div class="form-group">
                 <label for="latitud">Latitud:</label>
-                <input type="text" class="form-control" id="latitud" placeholder="Latidud" ng-model="latitud" />
+                <input type="text" class="form-control" id="latitud" placeholder="Latidud"/>
+                
             </div>
             <div class="form-group">
                 <label for="longitud">Longitud:</label>
-                <input type="text" class="form-control" id="longitud" placeholder="Longitud" ng-model="longitud"/>
+                <input type="text" class="form-control" id="longitud" placeholder="Longitud"/>
+                
             </div>
-            <button type="submit" class="btn btn-primary" onclick="actualizarMarcador()">Actualizar</button>
+            <button type="submit" class="btn btn-primary" onclick="actualizarMarcador()">Ajustar</button>
 
         </div>
-
-
+        
         <div class="form-inline">
 
             <div class="form-group">
                 <label for="">Dirección:</label>
-                <input type="text" class="form-control" id="direccion" placeholder="Dirección" ng-model="calle"/>
+                <input type="text" class="form-control" id="direccion" placeholder="Dirección" ng-model="calle" />
 
             </div>
-            <button type="submit" class="btn btn-primary" onclick="">Actualizar</button>
+            <button type="submit" class="btn btn-primary" ng-click="updateGeoposicionDesdeDireccion()">Actualizar</button>
         </div>
 
-        <button type="submit" class="btn btn-primary" onclick="">Guardar Geoposición</button>
+        <button type="submit" class="btn btn-primary" ng-click="updateGeoposicion()">Guardar Geoposición</button>
 
         <div id="mapa">
 
         </div>
-        
+
     </div>
 
 
 </div>
 <script>
 
-    var map;
+    
     var marker;
 
     var actualizarMarcador = function () {
@@ -65,7 +66,7 @@
         $('#latitud').val(posicion.lat);
         $('#longitud').val(posicion.lng);
 
-        map = new google.maps.Map(document.getElementById('mapa'), {
+        window.map = new google.maps.Map(document.getElementById('mapa'), {
             center: posicion,
             zoom: 15
         });
@@ -77,7 +78,7 @@
         });
 
         marker.addListener('drag', handleEvent)
-        
+
     }
     function handleEvent(event) {
         $('#latitud').val(event.latLng.lat());

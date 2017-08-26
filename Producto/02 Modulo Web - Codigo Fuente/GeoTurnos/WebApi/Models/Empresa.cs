@@ -15,7 +15,7 @@ namespace WebApi.Models
     public partial class Empresa
     {
         public int idEmpresa { get; set; }
-        public Nullable<int> cuit { get; set; }
+        public Nullable<decimal> cuit { get; set; }
         public string razonSocial { get; set; }
         public string nombreFantasia { get; set; }
         public Nullable<System.DateTime> inicioActividades { get; set; }
