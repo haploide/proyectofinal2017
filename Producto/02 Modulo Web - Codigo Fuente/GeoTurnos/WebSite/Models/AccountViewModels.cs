@@ -70,7 +70,7 @@ namespace WebSite.Models
 
         [RegularExpression(@"^\d+$")]
         [Display(Name = "Cuit")]
-        public int cuit { get; set; }
+        public decimal cuit { get; set; }
 
         [Required]
         [DataType(DataType.Text)]

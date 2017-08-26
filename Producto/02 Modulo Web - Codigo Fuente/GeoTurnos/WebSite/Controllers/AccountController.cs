@@ -127,15 +127,23 @@ namespace WebSite.Controllers
 
                 cliente.Domicilio = domicilio;
                 cliente.Usuario = usuario;
-                
-                var resultado = BaseDatosController.GuardarCliente (cliente);
 
-                if (resultado)
+                try
                 {
-                    UsuarioLogueado usuarioLogin = new UsuarioLogueado() { Usuario = model.usuario1, TipoUsuario = TipoUsuario.Prestatario, Prestatario  = cliente  };
-                    HttpContext.Session["usuarioLogin"] = usuarioLogin;
+                    var resultado = BaseDatosController.GuardarCliente(cliente);
 
-                    return RedirectToAction("Index", "Home");
+                    if (resultado)
+                    {
+                        UsuarioLogueado usuarioLogin = new UsuarioLogueado() { Usuario = model.usuario1, TipoUsuario = TipoUsuario.Prestatario, Prestatario = cliente };
+                        HttpContext.Session["usuarioLogin"] = usuarioLogin;
+
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+                catch (Exception)
+                {
+                    ModelState.AddModelError("", "Error al procesar la solicitud. Por favor inténtalo nuevamente");
+                    return View(model);
                 }
 
             }

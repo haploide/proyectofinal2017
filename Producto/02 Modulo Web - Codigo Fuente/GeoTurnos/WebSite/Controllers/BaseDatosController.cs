@@ -65,7 +65,7 @@ namespace WebSite.Controllers
                     
                     if (cliente != null && db.Cliente != null)
                     {
-                        if (cliente.idUsuario != 0)
+                        if (cliente.idCliente != 0)
                         {
                             db.Entry(cliente).State = System.Data.Entity.EntityState.Modified;
                         }

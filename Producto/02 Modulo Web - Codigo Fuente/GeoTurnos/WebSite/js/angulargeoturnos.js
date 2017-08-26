@@ -229,15 +229,63 @@ app.controller("GestionGeoposicionController", function ($scope, $http) {
 
     $scope.updateGeoposicionDesdeDireccion = function () {
 
-        var consulta='https://maps.googleapis.com/maps/api/geocode/json?address=malvina+2450&key=AIzaSyDWMuUF9ciUfQtVEJEU7OCSSTO3-4Hewc8';
-        window.map.setCenter({ lat: -31.4240452, lng: -64.5083392 });
+        var dirABuscar = $scope.calle.split(' ');
+        var query = '';
 
-        marker = new google.maps.Marker({
-            position: { lat: -31.4240452, lng: -64.5083392 },
-            map: map,
-            draggable: true,
-            icon: {url:'http://icons.iconarchive.com/icons/paomedia/small-n-flat/128/map-marker-icon.png'}
-        });
+        for (i = 0; i < dirABuscar.length; i++) {
+            
+            query = query + dirABuscar[i] + '+';
+
+        } 
+
+        if (query != '') {
+            var consulta = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + query + '&key=AIzaSyDWMuUF9ciUfQtVEJEU7OCSSTO3-4Hewc8';
+        }
+
+        $http({
+        method: 'GET',
+        url: consulta,
+        headers: {
+            'Accept': "application/json",
+
+        }
+    }).then(function (response) {
+        if (response.data.status === 'OK') {
+            var posicion = { lat: response.data.results.geometry.location.lat, lng: response.data.results.geometry.location.lng }
+            window.map.setCenter(posicion);
+            marker.setPosition(posicion);
+        }
+
+
+    }, function (response) {
+        switch (response.status) {
+            case 400:
+                alert("Bad Request");
+                break;
+            case 401:
+                alert("Unauthorized");
+                break;
+            case 404:
+                alert("Not Found");
+                break;
+            case 500:
+                alert("Internal Server Error");
+                break;
+            default:
+                alert("Error no identificado");
+        }
+    }).then(function () {
+
+    });
+
+        //window.map.setCenter({ lat: -31.4240452, lng: -64.5083392 });
+
+        //marker = new google.maps.Marker({
+        //    position: { lat: -31.4240452, lng: -64.5083392 },
+        //    map: map,
+        //    draggable: true,
+        //    icon: {url:'http://icons.iconarchive.com/icons/paomedia/small-n-flat/128/map-marker-icon.png'}
+        //});
     }
 })
 app.controller("registrarEmpresa", function ($scope, $http) {

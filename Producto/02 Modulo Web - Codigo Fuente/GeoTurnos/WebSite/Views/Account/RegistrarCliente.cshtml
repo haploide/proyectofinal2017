@@ -1,4 +1,8 @@
 ﻿@model WebSite.Models.RegistrarClienteViewModel
+
+@{
+    ViewBag.Title = "Registro de Cliente";
+}
 <link rel="stylesheet" href="~/Content/Site.css" type="text/css" />
 
 @using (Html.BeginForm("RegistrarCliente", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
@@ -260,7 +264,7 @@
 
         reader.onload = function (event) {
             imgtag.src = event.target.result;
-            imgbyte.value = event.target.result.replace(/^data:image\/(png|jpg);base64,/, "");
+            imgbyte.value = event.target.result.replace(/^data:image\/(png|jpg|jpeg);base64,/, "");
 
         };
 
