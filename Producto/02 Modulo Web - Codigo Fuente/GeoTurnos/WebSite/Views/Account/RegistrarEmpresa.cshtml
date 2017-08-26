@@ -243,7 +243,7 @@
 
                     reader.onload = function (event) {
                         imgtag.src = event.target.result;
-                        imgbyte.value = event.target.result.replace(/^data:image\/(png|jpg);base64,/, "");
+                        imgbyte.value = event.target.result.replace(/^data:image\/(png|jpg|jpeg);base64,/, "");
 
                     };
 
