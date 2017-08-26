@@ -94,17 +94,30 @@ app.controller("ActivarEmpresasController", function ($scope, $http) {
     });
 
     $scope.upDateEstadoEmpresa = function (emp) {
+        // aca se cambia el estado de la empresa para activarla
+        emp.idEstado = 1;
+        emp.Estado.idEstado = 1;
         $http({
+
             method: 'PUT',
             url: 'http://localhost:6901/api/Empresa/' + emp.idEmpresa,
-            data: $scope.empresa,
+            data: emp,
             headers: {
                 'Accept': "application/json"
             }
 
         }).then(function (response) {
-            if (response.status === 201) {
+            if (response.status === 200) {
+
+                for (var i = 0; i < $scope.empresas.length ; i++) {
+                    if( $scope.empresas[i].idEmpresa == emp.idEmpresa)
+                    {
+                        $scope.empresas.splice(i, 1);
+                    }
+                }
                 alert('Estado cambiado');
+
+
 
             }
 
@@ -571,5 +584,38 @@ app.controller("BuscarTurnoGeoController", function ($scope, $http) {
 
 })
 app.controller("BuscarTurnoFiltradoController", function ($scope, $http) {
+    $scope.empresas = [];
+    $http({
+        method: 'GET',
+        url: 'http://localhost:6901/api/Empresa?idEst=1',
+        headers: {
+            'Accept': "application/json",
 
+        }
+    }).then(function (response) {
+        if (response.status === 200) {
+            angular.copy(response.data, $scope.empresas);
+        }
+
+
+    }, function (response) {
+        switch (response.status) {
+            case 400:
+                alert("Bad Request");
+                break;
+            case 401:
+                alert("Unauthorized");
+                break;
+            case 404:
+                alert("Not Found");
+                break;
+            case 500:
+                alert("Internal Server Error");
+                break;
+            default:
+                alert("Error no identificado");
+        }
+    }).then(function () {
+
+    });
 })
