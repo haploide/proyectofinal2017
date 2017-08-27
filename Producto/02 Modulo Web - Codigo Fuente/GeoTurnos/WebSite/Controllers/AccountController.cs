@@ -90,11 +90,11 @@ namespace WebSite.Controllers
                 ModelState.AddModelError("", "Error al procesar la solicitud. Por favor inténtalo nuevamente");
                 return View(model);
             }
-            
+
 
 
         }
-        
+
         //
         // GET: /Account/Register
         [AllowAnonymous]
@@ -120,10 +120,10 @@ namespace WebSite.Controllers
         {
             if (ModelState.IsValid)
             {
-               
+
                 Domicilio domicilio = new Domicilio() { altura = model.altura, calle = model.calle, piso = model.piso, departamento = model.departamento, torre = model.torre, idBarrio = model.idBarrio };
                 Usuario usuario = new Usuario() { usuario1 = model.usuario1, contraseña = System.Web.Helpers.Crypto.SHA256(model.contraseña), preguntaSeguridad1 = model.preguntaSeguridad1, respuestaSeguridad1 = model.respuestaSeguridad1, preguntaSeguridad2 = model.preguntaSeguridad2, respuestaSeguridad2 = model.respuestaSeguridad2, idEstado = (int)EstadoUsuario.Activo };
-                Cliente  cliente = new Cliente() {apellido = model.apellido, fechaNacimiento = model.fechaNacimiento,foto=model.foto,nombre=model.nombre,nroDocumento=model.nroDocumento, idTipoDocumento = model.idTipoDocumento, telefono = model.telefono, email = model.email, idEstado = (int)EstadoEmpresa.PendienteDeActivacion };
+                Cliente cliente = new Cliente() { apellido = model.apellido, fechaNacimiento = model.fechaNacimiento, foto = model.foto, nombre = model.nombre, nroDocumento = model.nroDocumento, idTipoDocumento = model.idTipoDocumento, telefono = model.telefono, email = model.email, idEstado = (int)EstadoEmpresa.PendienteDeActivacion };
 
                 cliente.Domicilio = domicilio;
                 cliente.Usuario = usuario;
@@ -167,26 +167,34 @@ namespace WebSite.Controllers
         {
             if (ModelState.IsValid)
             {
-                
-                    Domicilio domicilio = new Domicilio() { altura = model.altura, calle=model.calle, piso=model.piso, departamento=model.departamento, torre=model.torre, idBarrio=model.idBarrio };
-                    Usuario usuario = new Usuario() { usuario1=model.usuario1, contraseña=System.Web.Helpers.Crypto.SHA256(model.contraseña), preguntaSeguridad1=model.preguntaSeguridad1, respuestaSeguridad1=model.respuestaSeguridad1, preguntaSeguridad2=model.preguntaSeguridad2, respuestaSeguridad2=model.respuestaSeguridad2, idEstado=(int)EstadoUsuario.Activo};
-                    Empresa empresa = new Empresa() { cuit=model.cuit, razonSocial=model.razonSocial, nombreFantasia=model.nombreFantasia, inicioActividades=model.inicioActividades, telefono=model.telefono,  email=model.email, idEstado=(int)EstadoEmpresa.PendienteDeActivacion, idRubro=model.idRubro, logoEmpresa=model.logoEmpresa };
 
-                    empresa.Domicilio = domicilio;
-                    empresa.Usuario = usuario;
+                Domicilio domicilio = new Domicilio() { altura = model.altura, calle = model.calle, piso = model.piso, departamento = model.departamento, torre = model.torre, idBarrio = model.idBarrio };
+                Usuario usuario = new Usuario() { usuario1 = model.usuario1, contraseña = System.Web.Helpers.Crypto.SHA256(model.contraseña), preguntaSeguridad1 = model.preguntaSeguridad1, respuestaSeguridad1 = model.respuestaSeguridad1, preguntaSeguridad2 = model.preguntaSeguridad2, respuestaSeguridad2 = model.respuestaSeguridad2, idEstado = (int)EstadoUsuario.Activo };
+                Empresa empresa = new Empresa() { cuit = model.cuit, razonSocial = model.razonSocial, nombreFantasia = model.nombreFantasia, inicioActividades = model.inicioActividades, telefono = model.telefono, email = model.email, idEstado = (int)EstadoEmpresa.PendienteDeActivacion, idRubro = model.idRubro, logoEmpresa = model.logoEmpresa };
 
-                    var resultado = BaseDatosController.GuardarEmpresa(empresa);
-                
-                if (resultado)
+                empresa.Domicilio = domicilio;
+                empresa.Usuario = usuario;
+
+                try
                 {
-                    UsuarioLogueado usuarioLogin = new UsuarioLogueado() { Usuario = model.usuario1, TipoUsuario = TipoUsuario.Entidad , Empresa=empresa};
-                    HttpContext.Session["usuarioLogin"] = usuarioLogin;
-                    
-                    //ToDO: Mandar Email a la cuenta del administrador advirtiendo que se registro una nueva empresa y debe autorizarla
+                    var resultado = BaseDatosController.GuardarEmpresa(empresa);
 
-                    return RedirectToAction("Index", "Home"); 
+                    if (resultado)
+                    {
+                        UsuarioLogueado usuarioLogin = new UsuarioLogueado() { Usuario = model.usuario1, TipoUsuario = TipoUsuario.Entidad, Empresa = empresa };
+                        HttpContext.Session["usuarioLogin"] = usuarioLogin;
+
+                        //ToDO: Mandar Email a la cuenta del administrador advirtiendo que se registro una nueva empresa y debe autorizarla
+
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
-                
+                catch (Exception)
+                {
+                    ModelState.AddModelError("", "Error al procesar la solicitud. Por favor inténtalo nuevamente");
+                    return View(model);
+                }
+
             }
 
             // If we got this far, something failed, redisplay form
@@ -306,8 +314,8 @@ namespace WebSite.Controllers
             return View();
         }
 
-        
-        
+
+
         //
         // POST: /Account/LogOff
         [HttpPost]
