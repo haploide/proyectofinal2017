@@ -803,7 +803,7 @@ app.controller("BuscarTurnoFiltradoController", function ($scope, $http) {
 
         $http({
             method: 'GET',
-            url: 'http://localhost:6901/api/Empresa?nombre='+$scope.nombre+'&rubro='+$scope.rubro+'&prov=Córdoba&ciudad=Villa+Carlos+Paz',
+            url: 'http://localhost:6901/api/Empresa?nombre='+$scope.nombre+'&rubro='+$scope.rubro+'&prov='+$scope.prov+'&ciudad='+$scope.ciudad,
             headers: {
                 'Accept': "application/json",
 
