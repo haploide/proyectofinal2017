@@ -20,7 +20,6 @@ app.controller("AdministacionController", function ($scope, $http) {
             case 'activacionEmpresa':
                 $scope.contenidoATraer = 'ActivacionEmpresa';
                 break;
-
         }
 
 
@@ -251,9 +250,24 @@ app.controller("GestionGeoposicionController", function ($scope, $http) {
         }
     }).then(function (response) {
         if (response.data.status === 'OK') {
-            var posicion = { lat: response.data.results.geometry.location.lat, lng: response.data.results.geometry.location.lng }
+            //TODO: con for recorrer el vector que debuelve la peticion y ver que pertenezcan a la misma provincia
+            var posicion = { lat: response.data.results[0].geometry.location.lat, lng: response.data.results[0].geometry.location.lng }
             window.map.setCenter(posicion);
-            marker.setPosition(posicion);
+            window.marker.setPosition(posicion);
+            $('#latitud').val(posicion.lat);
+            $('#longitud').val(posicion.lng);
+        }
+        if (response.data.status === 'ZERO_RESULTS') {
+            alert('No hubo resultados');
+        }
+        if (response.data.status === 'REQUEST_DENIED') {
+            alert('Petición rechazada');
+        }
+        if (response.data.status === 'INVALID_REQUEST') {
+            alert('Petición invalida');
+        }
+        if (response.data.status === 'UNKNOWN_ERROR') {
+            alert('Error no identificado');
         }
 
 
