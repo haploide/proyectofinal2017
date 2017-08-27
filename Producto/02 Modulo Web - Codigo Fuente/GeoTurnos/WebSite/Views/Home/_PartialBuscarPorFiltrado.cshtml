@@ -28,7 +28,7 @@
         <div class="form-group">
             <div class="col-md-2">
                 <label for="provincias">Provincia:</label>
-                <select class="form-control" id="provincias">
+                <select  ng-model="prov"  class="form-control" id="provincias">
                     <option disabled selected>Seleccione...</option>
                     <option value="{{provincia.idProvincia}}" ng-repeat="provincia in provincias" ng-click="clickProvincias(provincia.idProvincia)">{{provincia.nombre}}</option>
                 </select>
@@ -39,7 +39,7 @@
 
             <div class="col-md-2">
                 <label for="ciudades">Ciudad</label>
-                <select class="form-control" id="ciudades" disabled>
+                <select  ng-model="ciudad"  class="form-control" id="ciudades" disabled>
                     <option disabled selected>Seleccione...</option>
                     <option value="{{ciudad.idCiudad}}" ng-repeat="ciudad in ciudades" ng-click="clickCiudades(ciudad.idCiudad)">{{ciudad.nombre}}</option>
                 </select>
