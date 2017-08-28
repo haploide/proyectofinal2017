@@ -671,6 +671,172 @@ app.controller("BuscarTurnosController", function ($scope){
 })
 app.controller("BuscarTurnoGeoController", function ($scope, $http) {
 
+    $scope.rubros = [];
+    $scope.provincias = [];
+    $scope.ciudades = [];
+
+    $http({
+        method: 'GET',
+        url: 'http://localhost:6901/api/rubro',
+        headers: {
+            'Accept': "application/json"
+        }
+
+    }).then(function (response) {
+        if (response.status === 200) {
+            angular.copy(response.data, $scope.rubros);
+        }
+
+    }, function (response) {
+        switch (response.statusText) {
+            case 400:
+                alert("Bad Request");
+                break;
+            case 401:
+                alert("Unauthorized");
+                break;
+            case 404:
+                alert("Not Found");
+                break;
+            case 500:
+                alert("Internal Server Error");
+                break;
+            default:
+                alert("Error no identificado");
+        }
+    }).then(function () {
+
+    });
+    $http({
+        method: 'GET',
+        url: 'http://localhost:6901/api/provincia',
+        headers: {
+            'Accept': "application/json"
+        }
+
+    }).then(function (response) {
+        if (response.status === 200) {
+            angular.copy(response.data, $scope.provincias);
+        }
+        this.isBusy = false;
+
+    }, function (response) {
+        switch (response.statusText) {
+            case 400:
+                alert("Bad Request");
+                break;
+            case 401:
+                alert("Unauthorized");
+                break;
+            case 404:
+                alert("Not Found");
+                break;
+            case 500:
+                alert("Internal Server Error");
+                break;
+            default:
+                alert("Error no identificado");
+        }
+    }).then(function () {
+
+    });
+
+    $scope.clickProvincias = function (idProvincia) {
+        this.isBusy = true;
+        $http({
+            method: 'GET',
+            url: 'http://localhost:6901/api/ciudad?id=' + idProvincia,
+            headers: {
+                'Accept': "application/json"
+            }
+
+        }).then(function (response) {
+            if (response.status === 200) {
+                angular.copy(response.data, $scope.ciudades);
+            }
+            this.isBusy = false;
+
+        }, function (response) {
+            switch (response.statusText) {
+                case 400:
+                    alert("Bad Request");
+                    break;
+                case 401:
+                    alert("Unauthorized");
+                    break;
+                case 404:
+                    alert("Not Found");
+                    break;
+                case 500:
+                    alert("Internal Server Error");
+                    break;
+                default:
+                    alert("Error no identificado");
+            }
+        }).then(function () {
+
+        });
+
+        $("#ciudades").removeAttr('disabled');
+
+    }
+    $scope.filtrarEmpresas = function () {
+        $scope.empresas = [];
+        $scope.marcadores = [];
+
+        $http({
+            method: 'GET',
+            url: 'http://localhost:6901/api/Empresa?rubro=' + $scope.rubro + '&prov=' + $scope.prov + '&ciudad=' + $scope.ciudad,
+            headers: {
+                'Accept': "application/json",
+
+            }
+        }).then(function (response) {
+            if (response.status === 200) {
+                angular.copy(response.data, $scope.empresas);
+
+                $scope.empresas.forEach($scope.cargarMarcadores)
+            }
+
+
+        }, function (response) {
+            switch (response.status) {
+                case 400:
+                    alert("Bad Request");
+                    break;
+                case 401:
+                    alert("Unauthorized");
+                    break;
+                case 404:
+                    alert("Not Found");
+                    break;
+                case 500:
+                    alert("Internal Server Error");
+                    break;
+                default:
+                    alert("Error no identificado");
+            }
+        }).then(function () {
+
+        });
+    }
+    $scope.cargarMarcadores=function(item, index){
+        
+
+        //var posicion={lat:,lng:} poner las de cada item
+        var posicion = { lat: -31.4470012, lng: -64.5186509 }
+
+        marcadores.push(
+        new google.maps.Marker({
+            position: posicion,
+            map: map,
+            draggable: true,
+            //icon: {url:'http://icons.iconarchive.com/icons/paomedia/small-n-flat/128/map-marker-icon.png'} ToDo: hacer los iconos por cada rubro
+        })
+        );
+    }
+
+
 })
 app.controller("BuscarTurnoFiltradoController", function ($scope, $http) {
 

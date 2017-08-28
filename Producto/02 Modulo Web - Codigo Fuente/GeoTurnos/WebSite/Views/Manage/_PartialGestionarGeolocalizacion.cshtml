@@ -33,7 +33,7 @@
 
         <button type="submit" class="btn btn-primary" ng-click="updateGeoposicion()">Guardar Geoposición</button>
 
-        <div id="mapa">
+        <div id="mapa" class="container">
 
         </div>
 
@@ -42,23 +42,16 @@
 
 </div>
 <script>
-
-    
-    
-
     var actualizarMarcador = function () {
         map.setCenter({ lat: Number($('#latitud').val()), lng: Number($('#longitud').val()) });
         marker.setPosition({ lat: Number($('#latitud').val()), lng: Number($('#longitud').val()) });
 
     }
-
     function getLocation() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(initMap);
         }
     }
-
-
     function initMap(position) {
 
         var posicion = { lat: position.coords.latitude, lng: position.coords.longitude };

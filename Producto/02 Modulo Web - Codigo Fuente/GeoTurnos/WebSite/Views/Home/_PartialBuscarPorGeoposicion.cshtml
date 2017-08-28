@@ -1,8 +1,61 @@
-﻿<div class="container" >
-    <div class="row"><h1>Busqueda por Geoposición</h1></div>
+﻿<div class="container" ng-controller="BuscarTurnoGeoController">
+    
+    <div class="row col-md-3">
+        <h3>Filtros</h3>
+        <div class="container">
 
-    <div class="row">Filtros</div>
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label>Rubros:</label>
+                    <select ng-model="rubro" class="form-control" name="idRubro" id="rubros">
+                        <option Value="" disabled>Seleccione...</option>
+                        <option value="{{rubro.idRubro}}" ng-repeat="rubro in rubros">{{rubro.nombre}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="provincias">Provincia:</label>
+                    <select ng-model="prov" class="form-control" id="provincias">
+                        <option value="" disabled>Seleccione...</option>
+                        <option value="{{provincia.idProvincia}}" ng-repeat="provincia in provincias" ng-click="clickProvincias(provincia.idProvincia)">{{provincia.nombre}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="ciudades">Ciudad</label>
+                    <select ng-model="ciudad" class="form-control" id="ciudades" disabled>
+                        <option value="" disabled>Seleccione...</option>
+                        <option value="{{ciudad.idCiudad}}" ng-repeat="ciudad in ciudades" ng-click="clickCiudades(ciudad.idCiudad)">{{ciudad.nombre}}</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" ng-click="filtrarEmpresas()">Aplicar Filtro</button>
+            </form>
+        </div>
+    </div>
 
-    <div class="row">Mapa con resultados</div>
+    <div class="row col-md-9">
+        <div id="mapa" class="container">
+         
+        </div>
+    </div>
 
 </div>
+<script>
+    
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(initMap);
+        }
+    }
+    function initMap(position) {
+
+        var posicion = { lat: position.coords.latitude, lng: position.coords.longitude };
+        
+        window.map = new google.maps.Map(document.getElementById('mapa'), {
+            center: posicion,
+            zoom: 15
+        });
+        
+
+    }
+    
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzq0gLckDLJjIGJ6cKhhe7CU6Z-eHsOAQ&callback=getLocation" async defer></script>
