@@ -651,6 +651,7 @@ app.controller("BuscarTurnoFiltradoController", function ($scope, $http) {
     $scope.provincias = [];
     $scope.ciudades = [];
     $scope.barrios = [];
+    $scope.optionSelected = true;
 
    
     $http({
