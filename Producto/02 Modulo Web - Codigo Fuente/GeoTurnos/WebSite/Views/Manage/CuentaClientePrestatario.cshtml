@@ -6,6 +6,40 @@
 }
 
 <div class="container" role="main" ng-controller="MiCuentaClientePrestatarioController">
-    @Html.Partial("_PartialCabeceraCuenta")
+    
+    <div id="head" class="row">
+       @Html.Partial("_PartialCabeceraCuenta")
+    </div>
+
+    <div class="row">
+        <ul class="nav nav-pills" id="menuUsuarios">
+            <li id="principal" ng-click="clickMenu('principal')" role="presentation" class="active">
+                <a href="">Principal</a>
+            </li>
+            <li id="gestiondatos" ng-click="clickMenu('gestiondatos')" role="presentation">
+                <a href="">Gestionar Mis Datos</a>
+            </li>
+            
+
+        </ul>
+    </div>
+
+    <div id="bodyEntidad" class="container" ng-include="contenidoATraer">
+
+    </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+
+        var base64 = '@Convert.ToBase64String(@usuarioLogin.Prestatario.foto)';
+        if (base64 != '') {
+            var imgtag = document.getElementById("avatar");
+            imgtag.src = 'data:image/png;base64,' + base64;
+            var divBienvenida = document.getElementById("bienvenida");
+            divBienvenida.innerHTML = "<h1>Bienvenido @usuarioLogin.Usuario</h1>";
+        }
+
+    });
+</script>
 

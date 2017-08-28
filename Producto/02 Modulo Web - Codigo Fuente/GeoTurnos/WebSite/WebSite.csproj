@@ -424,6 +424,9 @@
     <Content Include="Views\Home\_PartialBuscarPorGeoposicion.cshtml" />
     <Content Include="Views\Home\_PartialBuscarPorFiltrado.cshtml" />
     <Content Include="Views\Home\_PartialPrincipalBusqueda.cshtml" />
+    <Content Include="Views\Manage\_PartialGestionarDatosEmpresa.cshtml" />
+    <Content Include="Views\Manage\_PartialPrincipalClientePrestatario.cshtml" />
+    <Content Include="Views\Manage\_PartialGestionarDatosCliente.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

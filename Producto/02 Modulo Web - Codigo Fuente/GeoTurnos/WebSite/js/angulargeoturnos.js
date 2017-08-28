@@ -27,7 +27,7 @@ app.controller("AdministacionController", function ($scope, $http) {
 
 })
 app.controller("MiCuentaEmpresaPrestadoraController", function ($scope) {
-    $scope.alcance = "MiCuentaEmpresaPrestadoraController";
+    
     $scope.contenidoATraer = 'PrincipalEntidadPrestadora';
 
     $scope.clickMenu = function (idLista) {
@@ -46,6 +46,9 @@ app.controller("MiCuentaEmpresaPrestadoraController", function ($scope) {
             case 'geoposicion':
                 $scope.contenidoATraer = 'GestionarGeolocalizacion';
                 break;
+            case 'datosEmpresa':
+                $scope.contenidoATraer = 'GestionarDatosEmpresa';
+                break;
 
         }
 
@@ -54,6 +57,30 @@ app.controller("MiCuentaEmpresaPrestadoraController", function ($scope) {
 })
 app.controller("MiCuentaClientePrestatarioController", function () {
 
+    $scope.contenidoATraer = 'PrincipalClientePrestatario';
+
+    $scope.clickMenu = function (idLista) {
+        $('li').removeClass('active');
+
+        $('#' + idLista).attr("class", "active");
+
+        $scope.cargarContenidoHtml(idLista);
+    }
+
+    $scope.cargarContenidoHtml = function (contenido) {
+        switch (contenido) {
+            case 'principal':
+                $scope.contenidoATraer = 'PrincipalClientePrestatario';
+                break;
+            case 'gestiondatos':
+                $scope.contenidoATraer = 'GestionarDatosCliente';
+                break;
+            
+
+        }
+
+
+    };
 })
 app.controller("ActivarEmpresasController", function ($scope, $http) {
 
