@@ -1,63 +1,50 @@
 ﻿
-<div ng-controller="BuscarTurnoFiltradoController">
-    <div class="row"><h1>Busqueda por Filtrado</h1></div>
+<div class="container" ng-controller="BuscarTurnoFiltradoController">
+    <div class="row col-md-2">
+        <h3>Filtros</h3>
+        <div class="container">
+            
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="empresa">Empresa:</label>
+                    <input ng-model="nombre" type="text" class="form-control" id="empresa" placeholder="Empresa" />
+                </div>
 
-    <div class="row">
+                <div class="form-group">
+                    <label>Rubros:</label>
+                    <select ng-model="rubro" class="form-control" name="idRubro" id="rubros">
+                        <option Value="" disabled>Seleccione...</option>
+                        <option value="{{rubro.idRubro}}" ng-repeat="rubro in rubros">{{rubro.nombre}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="provincias">Provincia:</label>
+                    <select ng-model="prov" class="form-control" id="provincias">
+                        <option value="" disabled>Seleccione...</option>
+                        <option value="{{provincia.idProvincia}}" ng-repeat="provincia in provincias" ng-click="clickProvincias(provincia.idProvincia)">{{provincia.nombre}}</option>
+                    </select>
 
+                </div>
+                <div class="form-group">
+                    <label for="ciudades">Ciudad</label>
+                    <select ng-model="ciudad" class="form-control" id="ciudades" disabled>
+                        <option value="" disabled>Seleccione...</option>
+                        <option value="{{ciudad.idCiudad}}" ng-repeat="ciudad in ciudades" ng-click="clickCiudades(ciudad.idCiudad)">{{ciudad.nombre}}</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" ng-click="filtrarEmpresas()">Aplicar Filtro</button>
+            </form>
 
-        <div class="form-group">
-            <div class="col-md-2">
-                <label for="empresa">Empresa:</label>
-                <input ng-model="nombre" type="text" class="form-control" id="empresa" placeholder="empresa" />
-
-            </div>
         </div>
-
-        <div class="form-group">
-
-            <div class="col-md-2">
-                <label>Rubros:</label>
-                <select ng-model="rubro" class="form-control" name="idRubro" id="rubros">
-                    <option disabled selected>Seleccione...</option>
-                    <option  value="{{rubro.idRubro}}" ng-repeat="rubro in rubros">{{rubro.nombre}}</option>
-
-                </select>
-            </div>
-
-        </div>
-        <div class="form-group">
-            <div class="col-md-2">
-                <label for="provincias">Provincia:</label>
-                <select class="form-control" id="provincias">
-                    <option disabled selected>Seleccione...</option>
-                    <option value="{{provincia.idProvincia}}" ng-repeat="provincia in provincias" ng-click="clickProvincias(provincia.idProvincia)">{{provincia.nombre}}</option>
-                </select>
-
-            </div>
-        </div>
-        <div class="form-group">
-
-            <div class="col-md-2">
-                <label for="ciudades">Ciudad</label>
-                <select class="form-control" id="ciudades" disabled>
-                    <option disabled selected>Seleccione...</option>
-                    <option value="{{ciudad.idCiudad}}" ng-repeat="ciudad in ciudades" ng-click="clickCiudades(ciudad.idCiudad)">{{ciudad.nombre}}</option>
-                </select>
-            </div>
-        </div>
-        <button type="submit" class="btn btn-primary" ng-click="filtrarEmpresas()">Buscar</button>
     </div>
 
+    <div class="row col-md-10">
 
-<div class="row">
-
-    <div>
-        <h1>Resultados de la búsqueda</h1>
-        <div class="container row">
+        <div class="container">
+            <h3>Resultados</h3>
             <div class="table-responsive">
                 <table class="table table-striped">
                     <tr class="info">
-
                         <th ng-hide="true">idEmpresa</th>
                         <th>Rubro</th>
                         <th>Logo</th>
@@ -66,9 +53,7 @@
                         <th>Telefono</th>
                         <th>Email</th>
                         <th>Dirección</th>
-
-                        <th>Activar</th>
-
+                        <th></th>
                     </tr>
                     <tr class="media" data-ng-repeat="emp in empresas">
                         <th ng-hide="true">{{emp.idEmpresa }}</th>
@@ -79,15 +64,11 @@
                         <th>{{emp.telefono }}</th>
                         <th>{{emp.email }}</th>
                         <th>{{emp.Domicilio.calle +' '+ emp.Domicilio.altura}}</th>
-
                         <th><a ng-click="" class="btn btn-primary">Ver Turnos Dispobibles</a></th>
-
                     </tr>
                 </table>
             </div>
-
-
         </div>
     </div>
 </div>
-</div>
+

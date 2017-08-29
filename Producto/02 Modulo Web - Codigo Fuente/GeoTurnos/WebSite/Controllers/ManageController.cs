@@ -92,7 +92,24 @@ namespace WebSite.Controllers
         {
             return PartialView("_PartialGestionarGeolocalizacion");
         }
-
+        //
+        //GET: GestionarDatosEmpresa
+        public PartialViewResult GestionarDatosEmpresa()
+        {
+            return PartialView("_PartialGestionarDatosEmpresa");
+        }
+        //
+        //GET: PrincipalClientePrestatario
+        public PartialViewResult PrincipalClientePrestatario()
+        {
+            return PartialView("_PartialPrincipalClientePrestatario");
+        }
+        //
+        //GET: GestionarDatosCliente
+        public PartialViewResult GestionarDatosCliente()
+        {
+            return PartialView("_PartialGestionarDatosCliente");
+        }
 
     }
 }

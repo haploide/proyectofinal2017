@@ -15,6 +15,9 @@
             <li id="principal" ng-click="clickMenu('principal')" role="presentation" class="active">
                 <a href="">Principal</a>
             </li>
+            <li id="datosEmpresa" ng-click="clickMenu('datosEmpresa')" role="presentation">
+                <a href="">Gestionar Datos de la Empresa</a>
+            </li>
             <li id="geoposicion" ng-click="clickMenu('geoposicion')" role="presentation">
                 <a href="">Gestionar Geolocalización</a>
             </li>
@@ -22,7 +25,7 @@
         </ul>
     </div>
     
-    <div id="bodyEntidad" class="row" ng-include="contenidoATraer">
+    <div id="bodyEntidad" class="container" ng-include="contenidoATraer">
         
     </div>
     

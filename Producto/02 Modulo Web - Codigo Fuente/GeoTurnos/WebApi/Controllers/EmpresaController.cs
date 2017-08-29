@@ -55,7 +55,7 @@ namespace WebApi.Controllers
         }
 
 
-        public IHttpActionResult Get(string nombre, string rubro, string prov, string ciudad)
+        public IHttpActionResult Get(string nombre, int rubro, int prov, int ciudad)
         {
             try
             {
@@ -69,7 +69,7 @@ namespace WebApi.Controllers
                            join b in _db.Barrio on d.idBarrio equals b.idBarrio
                            join c in _db.Ciudad on b.idCiudad equals c.idCiudad
                            join p in _db.Provincia on c.idProvincia equals p.idProvincia  
-                           where e.razonSocial == nombre && e.Rubro.nombre==rubro && e.Domicilio.Barrio.Ciudad.nombre == ciudad && e.Domicilio.Barrio.Ciudad.Provincia.nombre==prov
+                           where e.razonSocial == nombre && e.Rubro.idRubro==rubro && e.Domicilio.Barrio.Ciudad.idCiudad == ciudad && e.Domicilio.Barrio.Ciudad.Provincia.idProvincia==prov
 
                            select e);
                 if (emp == null)
