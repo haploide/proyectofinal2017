@@ -994,9 +994,16 @@ app.controller("BuscarTurnoFiltradoController", function ($scope, $http) {
     $scope.filtrarEmpresas = function () {
         $scope.empresas = [];
 
+        var nombreEmp = '';
+
+        if ($scope.nombre!=undefined) {
+            nombreEmp = $scope.nombre;
+        }
+
+
         $http({
             method: 'GET',
-            url: 'http://localhost:6901/api/Empresa?nombre='+$scope.nombre+'&rubro='+$scope.rubro+'&prov='+$scope.prov+'&ciudad='+$scope.ciudad,
+            url: 'http://localhost:6901/api/Empresa?nombre=' + nombreEmp + '&rubro=' + $scope.rubro + '&prov=' + $scope.prov + '&ciudad=' + $scope.ciudad,
             headers: {
                 'Accept': "application/json",
 
