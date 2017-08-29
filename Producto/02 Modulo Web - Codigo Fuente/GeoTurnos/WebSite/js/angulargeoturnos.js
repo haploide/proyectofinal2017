@@ -184,9 +184,37 @@ app.controller("GestionGeoposicionController", function ($scope, $http) {
     }).then(function (response) {
         if (response.status === 200) {
             $scope.direccion = response.data;
-
             $scope.calle = $scope.direccion.calle + ' ' + $scope.direccion.altura;
-               
+
+            if ($scope.direccion.latitud != null) {
+
+                window.marker = new google.maps.Marker({
+                    position: { lat: $scope.direccion.latitud, lng: $scope.direccion.longitud },
+                    map: window.map,
+                    draggable: true,
+                    icon: {url:'http://localhost:6907/../resources/marker.png'}
+                });
+
+                window.marker.addListener('drag', handleEvent)
+
+                $('#latitud').val($scope.direccion.latitud);
+                $('#longitud').val($scope.direccion.longitud);
+            }
+            else {
+
+                window.marker = new google.maps.Marker({
+                    position: window.posicionActual,
+                    map: window.map,
+                    draggable: true,
+                    icon: {url:'http://localhost:6907/../resources/marker.png'} 
+                });
+
+                window.marker.addListener('drag', handleEvent)
+
+                $('#latitud').val(window.posicionActual.lat);
+                $('#longitud').val(window.posicionActual.lng);
+            }
+
         }
 
 
@@ -319,14 +347,7 @@ app.controller("GestionGeoposicionController", function ($scope, $http) {
 
     });
 
-        //window.map.setCenter({ lat: -31.4240452, lng: -64.5083392 });
-
-        //marker = new google.maps.Marker({
-        //    position: { lat: -31.4240452, lng: -64.5083392 },
-        //    map: map,
-        //    draggable: true,
-        //    icon: {url:'http://icons.iconarchive.com/icons/paomedia/small-n-flat/128/map-marker-icon.png'}
-        //});
+        
     }
 })
 app.controller("registrarEmpresa", function ($scope, $http) {
@@ -800,8 +821,11 @@ app.controller("BuscarTurnoGeoController", function ($scope, $http) {
                 if ($scope.empresas.length>0) {
                     $scope.empresas.forEach($scope.cargarMarcadores);
                 } else {
-                    alert('No se encontraron empresas');
+                    
                 }
+            }
+            if ($scope.marcadores.length === 0) {
+                alert('No se encontraron empresas');
             }
 
 

@@ -39,8 +39,8 @@
 </div>
 <script>
     var actualizarMarcador = function () {
-        map.setCenter({ lat: Number($('#latitud').val()), lng: Number($('#longitud').val()) });
-        marker.setPosition({ lat: Number($('#latitud').val()), lng: Number($('#longitud').val()) });
+        window.map.setCenter({ lat: Number($('#latitud').val()), lng: Number($('#longitud').val()) });
+        window.marker.setPosition({ lat: Number($('#latitud').val()), lng: Number($('#longitud').val()) });
 
     }
     function getLocation() {
@@ -50,24 +50,13 @@
     }
     function initMap(position) {
 
-        var posicion = { lat: position.coords.latitude, lng: position.coords.longitude };
-
-        $('#latitud').val(posicion.lat);
-        $('#longitud').val(posicion.lng);
+        window.posicionActual = { lat: position.coords.latitude, lng: position.coords.longitude };
 
         window.map = new google.maps.Map(document.getElementById('mapa'), {
-            center: posicion,
+            center: window.posicionActual,
             zoom: 15
         });
-        window.marker = new google.maps.Marker({
-            position: posicion,
-            map: map,
-            draggable: true,
-            //icon: {url:'http://icons.iconarchive.com/icons/paomedia/small-n-flat/128/map-marker-icon.png'} ToDo: hacer los iconos por cada rubro
-        });
-
-        marker.addListener('drag', handleEvent)
-
+        
     }
     function handleEvent(event) {
         $('#latitud').val(event.latLng.lat());
