@@ -1,4 +1,4 @@
-﻿
+﻿<link rel="stylesheet" href="~/Content/Site.css" type="text/css" />
 <div class="container" ng-controller="ActivarEmpresasController">
    
         <div class="table-responsive">
@@ -16,7 +16,7 @@
                     <th>Activar</th>
 
                 </tr>
-                <tr class="media" data-ng-repeat="emp in empresas">
+                <tr class="media filaActivarEmpresa" data-ng-repeat="emp in empresas">
                     <th ng-hide="true">{{emp.idEmpresa }}</th>
                     <th class="media-left media-middle"><img src="data:image/png;base64,{{emp.logoEmpresa}}" class="media-object" style="height:40px;width:40px" /></th>
                     <th>{{emp.cuit }}</th>
