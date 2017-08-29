@@ -786,7 +786,7 @@ app.controller("BuscarTurnoGeoController", function ($scope, $http) {
 
         $http({
             method: 'GET',
-            url: 'http://localhost:6901/api/Empresa?rubro=' + $scope.rubro + '&prov=' + $scope.prov + '&ciudad=' + $scope.ciudad,
+            url: 'http://localhost:6901/api/Empresa?nombre=&rubro=' + $scope.rubro + '&prov=' + $scope.prov + '&ciudad=' + $scope.ciudad,
             headers: {
                 'Accept': "application/json",
 
@@ -795,7 +795,11 @@ app.controller("BuscarTurnoGeoController", function ($scope, $http) {
             if (response.status === 200) {
                 angular.copy(response.data, $scope.empresas);
 
-                $scope.empresas.forEach($scope.cargarMarcadores)
+                if ($scope.empresas.length>0) {
+                    $scope.empresas.forEach($scope.cargarMarcadores)
+                } else {
+                    alert('No se encontraron empresas')
+                }
             }
 
 
@@ -823,16 +827,18 @@ app.controller("BuscarTurnoGeoController", function ($scope, $http) {
     $scope.cargarMarcadores=function(item, index){
         
 
-        //var posicion={lat:,lng:} poner las de cada item
-        var posicion = { lat: -31.4470012, lng: -64.5186509 }
+        if (item.Domicilio.latitud!=null) {
+            var posicion = { lat: item.Domicilio.latitud, lng: item.Domicilio.longitud }
 
-        
-        window.marker= new google.maps.Marker({
-            position: posicion,
-            map: map,
-            draggable: true,
-            //icon: {url:'http://icons.iconarchive.com/icons/paomedia/small-n-flat/128/map-marker-icon.png'} ToDo: hacer los iconos por cada rubro
-        });
+            window.marker = new google.maps.Marker({
+                position: posicion,
+                map: map,
+                icon: {url:'http://localhost:6907/../resources/marker.png'} 
+                //ToDo: hacer los iconos por cada rubro
+            });
+
+            $scope.marcadores.push(window.marker);
+        }
     }
 
 
