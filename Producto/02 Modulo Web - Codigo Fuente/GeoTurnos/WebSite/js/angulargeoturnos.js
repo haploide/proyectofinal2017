@@ -674,6 +674,8 @@ app.controller("BuscarTurnoGeoController", function ($scope, $http) {
     $scope.rubros = [];
     $scope.provincias = [];
     $scope.ciudades = [];
+    $scope.marcadores = [];
+    $scope.empresas = [];
 
     $http({
         method: 'GET',
@@ -781,8 +783,8 @@ app.controller("BuscarTurnoGeoController", function ($scope, $http) {
 
     }
     $scope.filtrarEmpresas = function () {
-        $scope.empresas = [];
-        $scope.marcadores = [];
+        
+        $scope.limpiarMarcadores();
 
         $http({
             method: 'GET',
@@ -796,9 +798,9 @@ app.controller("BuscarTurnoGeoController", function ($scope, $http) {
                 angular.copy(response.data, $scope.empresas);
 
                 if ($scope.empresas.length>0) {
-                    $scope.empresas.forEach($scope.cargarMarcadores)
+                    $scope.empresas.forEach($scope.cargarMarcadores);
                 } else {
-                    alert('No se encontraron empresas')
+                    alert('No se encontraron empresas');
                 }
             }
 
@@ -839,6 +841,14 @@ app.controller("BuscarTurnoGeoController", function ($scope, $http) {
 
             $scope.marcadores.push(window.marker);
         }
+    }
+    $scope.limpiarMarcadores = function () {
+        for (var i = 0; i < $scope.marcadores.length; i++) {
+            $scope.marcadores[i].setMap(null);
+
+        }
+        $scope.marcadores = [];
+        $scope.empresas = [];
     }
 
 
