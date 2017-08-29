@@ -55,7 +55,7 @@ namespace WebApi.Controllers
         }
 
 
-        public IHttpActionResult Get(string nombre, int rubro, int prov, int ciudad)
+        public IHttpActionResult Get(string nombre, int? rubro, int? prov, int? ciudad)
         {
             try
             {
@@ -63,13 +63,21 @@ namespace WebApi.Controllers
                 {
                     return NotFound();
                 }
+
+                //var emp = _db.Empresa.Where(e => e.Estado.idEstado == 1);
+
                 var emp = (from e in _db.Empresa
-                           join r in _db.Rubro  on e.Rubro.idRubro   equals r.idRubro
-                           join d in _db.Domicilio  on e.idDomicilio equals d.idDomicilio
+                           join r in _db.Rubro on e.Rubro.idRubro equals r.idRubro
+                           join d in _db.Domicilio on e.idDomicilio equals d.idDomicilio
                            join b in _db.Barrio on d.idBarrio equals b.idBarrio
                            join c in _db.Ciudad on b.idCiudad equals c.idCiudad
-                           join p in _db.Provincia on c.idProvincia equals p.idProvincia  
-                           where e.razonSocial == nombre && e.Rubro.idRubro==rubro && e.Domicilio.Barrio.Ciudad.idCiudad == ciudad && e.Domicilio.Barrio.Ciudad.Provincia.idProvincia==prov
+                           join p in _db.Provincia on c.idProvincia equals p.idProvincia
+                           where e.idEstado == 1
+
+                           && (nombre!=null?e.razonSocial.ToUpper().Contains(nombre.ToUpper()):true)
+                           && (rubro!=null?r.idRubro == rubro:true)
+                           && (ciudad !=null? c.idCiudad == ciudad:true)
+                           &&(prov!=null?p.idProvincia == prov:true)
 
                            select e);
                 if (emp == null)
@@ -107,7 +115,7 @@ namespace WebApi.Controllers
 
                 _db.SaveChanges();
 
-                return Created("api/Empresa/" + empresa.idEmpresa , empresa);
+                return Created("api/Empresa/" + empresa.idEmpresa, empresa);
 
             }
             catch (Exception ex)
@@ -142,7 +150,7 @@ namespace WebApi.Controllers
             }
         }
 
-        public IHttpActionResult Put(int id, [FromBody]Empresa  emrpesa)
+        public IHttpActionResult Put(int id, [FromBody]Empresa emrpesa)
         {
             try
             {
@@ -154,7 +162,7 @@ namespace WebApi.Controllers
                 {
                     return BadRequest(ModelState);
                 }
-                if (id != emrpesa.idEmpresa )
+                if (id != emrpesa.idEmpresa)
                 {
                     return BadRequest();
                 }

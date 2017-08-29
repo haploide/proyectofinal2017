@@ -826,14 +826,13 @@ app.controller("BuscarTurnoGeoController", function ($scope, $http) {
         //var posicion={lat:,lng:} poner las de cada item
         var posicion = { lat: -31.4470012, lng: -64.5186509 }
 
-        marcadores.push(
-        new google.maps.Marker({
+        
+        window.marker= new google.maps.Marker({
             position: posicion,
             map: map,
             draggable: true,
             //icon: {url:'http://icons.iconarchive.com/icons/paomedia/small-n-flat/128/map-marker-icon.png'} ToDo: hacer los iconos por cada rubro
-        })
-        );
+        });
     }
 
 
