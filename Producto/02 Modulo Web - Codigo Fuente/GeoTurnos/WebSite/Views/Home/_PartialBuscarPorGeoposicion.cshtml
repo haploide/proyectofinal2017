@@ -8,21 +8,21 @@
                 <div class="form-group">
                     <label>Rubros:</label>
                     <select ng-model="rubro" class="form-control" name="idRubro" id="rubros">
-                        <option Value="" disabled>Seleccione...</option>
+                        <option Value="">Seleccione...</option>
                         <option value="{{rubro.idRubro}}" ng-repeat="rubro in rubros">{{rubro.nombre}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="provincias">Provincia:</label>
                     <select ng-model="prov" class="form-control" id="provincias">
-                        <option value="" disabled>Seleccione...</option>
+                        <option value="">Seleccione...</option>
                         <option value="{{provincia.idProvincia}}" ng-repeat="provincia in provincias" ng-click="clickProvincias(provincia.idProvincia)">{{provincia.nombre}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="ciudades">Ciudad</label>
                     <select ng-model="ciudad" class="form-control" id="ciudades" disabled>
-                        <option value="" disabled>Seleccione...</option>
+                        <option value="">Seleccione...</option>
                         <option value="{{ciudad.idCiudad}}" ng-repeat="ciudad in ciudades" ng-click="clickCiudades(ciudad.idCiudad)">{{ciudad.nombre}}</option>
                     </select>
                 </div>
