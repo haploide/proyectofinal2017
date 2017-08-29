@@ -3,43 +3,39 @@
     var usuarioLogin = Session["usuarioLogin"] as UsuarioLogueado;
 }
 <div ng-controller="GestionGeoposicionController">
-    <div>
-        <input id="idEmpresa" type="hidden" value="@usuarioLogin.Empresa.idEmpresa" />
-        <div class="form-inline">
 
-            <div class="form-group">
-                <label for="latitud">Latitud:</label>
-                <input type="text" class="form-control" id="latitud" placeholder="Latidud"/>
-                
-            </div>
-            <div class="form-group">
-                <label for="longitud">Longitud:</label>
-                <input type="text" class="form-control" id="longitud" placeholder="Longitud"/>
-                
-            </div>
-            <button type="submit" class="btn btn-primary" onclick="actualizarMarcador()">Ajustar</button>
 
+    <div class="row gestionGeoposicion">
+
+        <div class="col-lg-3 col-md-3">
+            <input id="idEmpresa" type="hidden" value="@usuarioLogin.Empresa.idEmpresa" />
+            
+                <div class="form-group">
+                    <label for="latitud">Latitud:</label>
+                    <input type="text" class="form-control" id="latitud" placeholder="Latidud" />
+                </div>
+                <div class="form-group">
+                    <label for="longitud">Longitud:</label>
+                    <input type="text" class="form-control" id="longitud" placeholder="Longitud" />
+
+                </div>
+                <button type="submit" class="btn btn-primary botonesGeoposicion" onclick="actualizarMarcador()">Ajustar</button>
+            
+            
+                <div class="form-group">
+                    <label for="">Dirección:</label>
+                    <input type="text" class="form-control" id="direccion" placeholder="Dirección" ng-model="calle" />
+                </div>
+                <button type="submit" class="btn btn-primary botonesGeoposicion" ng-click="updateGeoposicionDesdeDireccion()">Actualizar</button>
+                <button type="submit" class="btn btn-primary botonesGeoposicion" ng-click="updateGeoposicion()">Guardar Geoposición</button>
+            
         </div>
-        
-        <div class="form-inline">
-
-            <div class="form-group">
-                <label for="">Dirección:</label>
-                <input type="text" class="form-control" id="direccion" placeholder="Dirección" ng-model="calle" />
+        <div class="col-md-9 col-lg-9">
+            <div id="mapa" class="container">
 
             </div>
-            <button type="submit" class="btn btn-primary" ng-click="updateGeoposicionDesdeDireccion()">Actualizar</button>
         </div>
-
-        <button type="submit" class="btn btn-primary" ng-click="updateGeoposicion()">Guardar Geoposición</button>
-
-        <div id="mapa" class="container">
-
-        </div>
-
     </div>
-
-
 </div>
 <script>
     var actualizarMarcador = function () {

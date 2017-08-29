@@ -290,3 +290,15 @@ textarea {
 {
      line-height: 30px;
 }
+
+.gestionGeoposicion
+{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.botonesGeoposicion
+{
+    margin-bottom: 20px;
+    margin-top:20px;
+}
