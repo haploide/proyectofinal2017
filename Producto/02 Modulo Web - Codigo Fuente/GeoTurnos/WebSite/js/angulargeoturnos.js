@@ -195,6 +195,8 @@ app.controller("GestionGeoposicionController", function ($scope, $http) {
                     icon: {url:'http://localhost:6907/../resources/marker.png'}
                 });
 
+                window.map.setCenter({ lat: $scope.direccion.latitud, lng: $scope.direccion.longitud });
+
                 window.marker.addListener('drag', handleEvent)
 
                 $('#latitud').val($scope.direccion.latitud);
@@ -210,6 +212,8 @@ app.controller("GestionGeoposicionController", function ($scope, $http) {
                 });
 
                 window.marker.addListener('drag', handleEvent)
+
+                window.map.setCenter(window.posicionActual);
 
                 $('#latitud').val(window.posicionActual.lat);
                 $('#longitud').val(window.posicionActual.lng);
@@ -293,7 +297,7 @@ app.controller("GestionGeoposicionController", function ($scope, $http) {
         } 
 
         if (query != '') {
-            var consulta = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + query + '&key=AIzaSyDWMuUF9ciUfQtVEJEU7OCSSTO3-4Hewc8';
+            var consulta = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + query + '&key=AIzaSyDNnhH_2YL10wxOEhbDodNQvl20H8FD1Ns';
         }
 
         $http({
