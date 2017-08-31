@@ -199,6 +199,8 @@ app.controller("GestionGeoposicionController", function ($scope, $http) {
 
                 window.marker.addListener('drag', handleEvent)
 
+                window.map.setCenter({ lat: $scope.direccion.latitud, lng: $scope.direccion.longitud });
+
                 $('#latitud').val($scope.direccion.latitud);
                 $('#longitud').val($scope.direccion.longitud);
             }
