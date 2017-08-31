@@ -889,6 +889,7 @@ app.controller("BuscarTurnoFiltradoController", function ($scope, $http) {
     $scope.barrios = [];
     $scope.optionSelected = true;
 
+    $("#loader").jqxLoader({ width: 100, height: 60, imagePosition: 'bottom', theme: 'bootstrap', text: 'Cargando...', textPosition: 'top', isModal: true });
    
     $http({
         method: 'GET',
@@ -1036,6 +1037,9 @@ app.controller("BuscarTurnoFiltradoController", function ($scope, $http) {
     }
 
     $scope.filtrarEmpresas = function () {
+        $('#loader').jqxLoader('open');
+
+
         $scope.empresas = [];
 
         var nombreEmp = '';
@@ -1076,7 +1080,7 @@ app.controller("BuscarTurnoFiltradoController", function ($scope, $http) {
                     alert("Error no identificado");
             }
         }).then(function () {
-
+            $('#loader').jqxLoader('close');
         });
     }
 })
