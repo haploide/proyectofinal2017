@@ -161,29 +161,29 @@ namespace WebSite.Models
         [Compare("contraseña", ErrorMessage = "El password y la confirmación no coinciden.")]
         public string confirmarcontraseña { get; set; }
 
-        [Required]
+        
         [DataType(DataType.Text)]
         [Display(Name = "Primer Pregunta de Seguridad")]
         public string preguntaSeguridad1 { get; set; }
 
-        [Required]
+        
         [DataType(DataType.Text)]
         [Display(Name = "Primer Respuesta de Seguridad")]
         public string respuestaSeguridad1 { get; set; }
 
-        [Required]
+        
         [DataType(DataType.Text)]
         [Display(Name = "Segunda Pregunta de Seguridad")]
         public string preguntaSeguridad2 { get; set; }
 
-        [Required]
+        
         [DataType(DataType.Text)]
         [Display(Name = "Segunda Respuesta de Seguridad")]
         public string respuestaSeguridad2 { get; set; }
 
         [Required]
         [Display(Name = "Número de Documento")]
-        [RegularExpression(@"^\d+$")]
+        [RegularExpression(@"^\d+$", ErrorMessage = "El campo Número de Documento es numérico")]
         public int nroDocumento { get; set; }
 
         [Required]
@@ -228,13 +228,13 @@ namespace WebSite.Models
         public string calle { get; set; }
 
         [Required]
-        [RegularExpression(@"^\d+$")]
+        [RegularExpression(@"^\d+$", ErrorMessage = "El campo Altura es numérico")]
         [Display(Name = "Altura")]
         public int altura { get; set; }
 
         [Display(Name = "Piso")]
-        //[RegularExpression(@"^\d+$")]
-        public int piso { get; set; }
+        [RegularExpression(@"^\d+$",ErrorMessage = "El campo Piso es numérico")]
+        public string piso { get; set; }
 
         [DataType(DataType.Text)]
         [Display(Name = "Departamento")]

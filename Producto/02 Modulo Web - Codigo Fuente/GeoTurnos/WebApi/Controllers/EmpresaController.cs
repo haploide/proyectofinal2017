@@ -54,7 +54,7 @@ namespace WebApi.Controllers
             }
         }
 
-
+        
         public IHttpActionResult Get(string nombre, int? rubro, int? prov, int? ciudad)
         {
             try

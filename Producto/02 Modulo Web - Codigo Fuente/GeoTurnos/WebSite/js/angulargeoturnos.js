@@ -1,9 +1,9 @@
 ﻿var app = angular.module('geoturnos', []);
 
 app.controller("AdministacionController", function ($scope, $http) {
-    
+
     $scope.contenidoATraer = 'PrincipalAdministracion';
-    
+
     $scope.clickMenu = function (idLista) {
         $('li').removeClass('active');
 
@@ -27,7 +27,7 @@ app.controller("AdministacionController", function ($scope, $http) {
 
 })
 app.controller("MiCuentaEmpresaPrestadoraController", function ($scope) {
-    
+
     $scope.contenidoATraer = 'PrincipalEntidadPrestadora';
 
     $scope.clickMenu = function (idLista) {
@@ -75,7 +75,7 @@ app.controller("MiCuentaClientePrestatarioController", function () {
             case 'gestiondatos':
                 $scope.contenidoATraer = 'GestionarDatosCliente';
                 break;
-            
+
 
         }
 
@@ -136,8 +136,7 @@ app.controller("ActivarEmpresasController", function ($scope, $http) {
             if (response.status === 200) {
 
                 for (var i = 0; i < $scope.empresas.length ; i++) {
-                    if( $scope.empresas[i].idEmpresa == emp.idEmpresa)
-                    {
+                    if ($scope.empresas[i].idEmpresa == emp.idEmpresa) {
                         $scope.empresas.splice(i, 1);
                     }
                 }
@@ -173,7 +172,7 @@ app.controller("ActivarEmpresasController", function ($scope, $http) {
 app.controller("GestionGeoposicionController", function ($scope, $http) {
     $scope.calle;
     $scope.direccion;
-    
+
     $http({
         method: 'GET',
         url: 'http://localhost:6901/api/domicilio/' + $('#idEmpresa').val(),
@@ -192,7 +191,7 @@ app.controller("GestionGeoposicionController", function ($scope, $http) {
                     position: { lat: $scope.direccion.latitud, lng: $scope.direccion.longitud },
                     map: window.map,
                     draggable: true,
-                    icon: {url:'http://localhost:6907/../resources/marker.png'}
+                    icon: { url: 'http://localhost:6907/../resources/marker.png' }
                 });
 
                 window.map.setCenter({ lat: $scope.direccion.latitud, lng: $scope.direccion.longitud });
@@ -208,7 +207,7 @@ app.controller("GestionGeoposicionController", function ($scope, $http) {
                     position: window.posicionActual,
                     map: window.map,
                     draggable: true,
-                    icon: {url:'http://localhost:6907/../resources/marker.png'} 
+                    icon: { url: 'http://localhost:6907/../resources/marker.png' }
                 });
 
                 window.marker.addListener('drag', handleEvent)
@@ -246,7 +245,7 @@ app.controller("GestionGeoposicionController", function ($scope, $http) {
     $scope.updateGeoposicion = function () {
         $scope.direccion.latitud = Number($('#latitud').val());
         $scope.direccion.longitud = Number($('#longitud').val());
-        
+
         $http({
             method: 'PUT',
             url: 'http://localhost:6901/api/domicilio/' + $scope.direccion.idDomicilio,
@@ -283,7 +282,7 @@ app.controller("GestionGeoposicionController", function ($scope, $http) {
         });
     }
 
-    
+
 
     $scope.updateGeoposicionDesdeDireccion = function () {
 
@@ -291,67 +290,67 @@ app.controller("GestionGeoposicionController", function ($scope, $http) {
         var query = '';
 
         for (i = 0; i < dirABuscar.length; i++) {
-            
+
             query = query + dirABuscar[i] + '+';
 
-        } 
+        }
 
         if (query != '') {
             var consulta = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + query + '&key=AIzaSyDNnhH_2YL10wxOEhbDodNQvl20H8FD1Ns';
         }
 
         $http({
-        method: 'GET',
-        url: consulta,
-        headers: {
-            'Accept': "application/json",
+            method: 'GET',
+            url: consulta,
+            headers: {
+                'Accept': "application/json",
 
-        }
-    }).then(function (response) {
-        if (response.data.status === 'OK') {
-            //TODO: con for recorrer el vector que debuelve la peticion y ver que pertenezcan a la misma provincia
-            var posicion = { lat: response.data.results[0].geometry.location.lat, lng: response.data.results[0].geometry.location.lng }
-            window.map.setCenter(posicion);
-            window.marker.setPosition(posicion);
-            $('#latitud').val(posicion.lat);
-            $('#longitud').val(posicion.lng);
-        }
-        if (response.data.status === 'ZERO_RESULTS') {
-            alert('No hubo resultados');
-        }
-        if (response.data.status === 'REQUEST_DENIED') {
-            alert('Petición rechazada');
-        }
-        if (response.data.status === 'INVALID_REQUEST') {
-            alert('Petición invalida');
-        }
-        if (response.data.status === 'UNKNOWN_ERROR') {
-            alert('Error no identificado');
-        }
+            }
+        }).then(function (response) {
+            if (response.data.status === 'OK') {
+                //TODO: con for recorrer el vector que debuelve la peticion y ver que pertenezcan a la misma provincia
+                var posicion = { lat: response.data.results[0].geometry.location.lat, lng: response.data.results[0].geometry.location.lng }
+                window.map.setCenter(posicion);
+                window.marker.setPosition(posicion);
+                $('#latitud').val(posicion.lat);
+                $('#longitud').val(posicion.lng);
+            }
+            if (response.data.status === 'ZERO_RESULTS') {
+                alert('No hubo resultados');
+            }
+            if (response.data.status === 'REQUEST_DENIED') {
+                alert('Petición rechazada');
+            }
+            if (response.data.status === 'INVALID_REQUEST') {
+                alert('Petición invalida');
+            }
+            if (response.data.status === 'UNKNOWN_ERROR') {
+                alert('Error no identificado');
+            }
 
 
-    }, function (response) {
-        switch (response.status) {
-            case 400:
-                alert("Bad Request");
-                break;
-            case 401:
-                alert("Unauthorized");
-                break;
-            case 404:
-                alert("Not Found");
-                break;
-            case 500:
-                alert("Internal Server Error");
-                break;
-            default:
-                alert("Error no identificado");
-        }
-    }).then(function () {
+        }, function (response) {
+            switch (response.status) {
+                case 400:
+                    alert("Bad Request");
+                    break;
+                case 401:
+                    alert("Unauthorized");
+                    break;
+                case 404:
+                    alert("Not Found");
+                    break;
+                case 500:
+                    alert("Internal Server Error");
+                    break;
+                default:
+                    alert("Error no identificado");
+            }
+        }).then(function () {
 
-    });
+        });
 
-        
+
     }
 })
 app.controller("registrarEmpresa", function ($scope, $http) {
@@ -514,8 +513,7 @@ app.controller("registrarUsuario", function ($scope, $http) {
     $scope.provincias = [];
     $scope.ciudades = [];
     $scope.barrios = [];
-
-    this.isBusy = true;
+        
     $http({
         method: 'GET',
         url: 'http://localhost:6901/api/tipoDocumento',
@@ -529,22 +527,9 @@ app.controller("registrarUsuario", function ($scope, $http) {
         }
 
     }, function (response) {
-        switch (response.statusText) {
-            case 400:
-                alert("Bad Request");
-                break;
-            case 401:
-                alert("Unauthorized");
-                break;
-            case 404:
-                alert("Not Found");
-                break;
-            case 500:
-                alert("Internal Server Error");
-                break;
-            default:
-                alert("Error no identificado");
-        }
+        
+        httpNegativoSinContenedor(response.status);
+
     }).then(function () {
 
     });
@@ -562,31 +547,18 @@ app.controller("registrarUsuario", function ($scope, $http) {
         this.isBusy = false;
 
     }, function (response) {
-        switch (response.statusText) {
-            case 400:
-                alert("Bad Request");
-                break;
-            case 401:
-                alert("Unauthorized");
-                break;
-            case 404:
-                alert("Not Found");
-                break;
-            case 500:
-                alert("Internal Server Error");
-                break;
-            default:
-                alert("Error no identificado");
-        }
+
+        httpNegativoSinContenedor(response.status);
+
     }).then(function () {
 
     });
 
-    $scope.clickProvincias = function (idProvincia) {
+    $scope.clickProvincias = function () {
         this.isBusy = true;
         $http({
             method: 'GET',
-            url: 'http://localhost:6901/api/ciudad?id=' + idProvincia,
+            url: 'http://localhost:6901/api/ciudad?id=' + $scope.prov,
             headers: {
                 'Accept': "application/json"
             }
@@ -598,22 +570,9 @@ app.controller("registrarUsuario", function ($scope, $http) {
             this.isBusy = false;
 
         }, function (response) {
-            switch (response.statusText) {
-                case 400:
-                    alert("Bad Request");
-                    break;
-                case 401:
-                    alert("Unauthorized");
-                    break;
-                case 404:
-                    alert("Not Found");
-                    break;
-                case 500:
-                    alert("Internal Server Error");
-                    break;
-                default:
-                    alert("Error no identificado");
-            }
+            
+            httpNegativoSinContenedor(response.status);
+
         }).then(function () {
 
         });
@@ -638,22 +597,9 @@ app.controller("registrarUsuario", function ($scope, $http) {
             this.isBusy = false;
 
         }, function (response) {
-            switch (response.statusText) {
-                case 400:
-                    alert("Bad Request");
-                    break;
-                case 401:
-                    alert("Unauthorized");
-                    break;
-                case 404:
-                    alert("Not Found");
-                    break;
-                case 500:
-                    alert("Internal Server Error");
-                    break;
-                default:
-                    alert("Error no identificado");
-            }
+            
+            httpNegativoSinContenedor(response.status);
+
         }).then(function () {
 
         });
@@ -664,7 +610,7 @@ app.controller("registrarUsuario", function ($scope, $http) {
     $("#fechaNacimiento").jqxDateTimeInput({ theme: 'bootstrap', template: "primary", width: '275px', height: '25px' });
 
 })
-app.controller("BuscarTurnosController", function ($scope){
+app.controller("BuscarTurnosController", function ($scope) {
 
     $scope.contenidoATraer = 'PrincipalBusqueda';
 
@@ -687,10 +633,7 @@ app.controller("BuscarTurnosController", function ($scope){
             case 'filtros':
                 $scope.contenidoATraer = 'BuscarPorFiltrado';
                 break;
-
         }
-
-
     };
 
 })
@@ -701,6 +644,8 @@ app.controller("BuscarTurnoGeoController", function ($scope, $http) {
     $scope.ciudades = [];
     $scope.marcadores = [];
     $scope.empresas = [];
+
+    $("#loader").jqxLoader({ width: 100, height: 60, imagePosition: 'bottom', theme: 'bootstrap', text: 'Cargando...', textPosition: 'top', isModal: true });
 
     $http({
         method: 'GET',
@@ -715,22 +660,9 @@ app.controller("BuscarTurnoGeoController", function ($scope, $http) {
         }
 
     }, function (response) {
-        switch (response.statusText) {
-            case 400:
-                alert("Bad Request");
-                break;
-            case 401:
-                alert("Unauthorized");
-                break;
-            case 404:
-                alert("Not Found");
-                break;
-            case 500:
-                alert("Internal Server Error");
-                break;
-            default:
-                alert("Error no identificado");
-        }
+
+        httpNegativo(response.status);
+
     }).then(function () {
 
     });
@@ -748,31 +680,18 @@ app.controller("BuscarTurnoGeoController", function ($scope, $http) {
         this.isBusy = false;
 
     }, function (response) {
-        switch (response.statusText) {
-            case 400:
-                alert("Bad Request");
-                break;
-            case 401:
-                alert("Unauthorized");
-                break;
-            case 404:
-                alert("Not Found");
-                break;
-            case 500:
-                alert("Internal Server Error");
-                break;
-            default:
-                alert("Error no identificado");
-        }
+
+        httpNegativo(response.status);
+
     }).then(function () {
 
     });
 
-    $scope.clickProvincias = function (idProvincia) {
+    $scope.clickProvincias = function () {
         this.isBusy = true;
         $http({
             method: 'GET',
-            url: 'http://localhost:6901/api/ciudad?id=' + idProvincia,
+            url: 'http://localhost:6901/api/ciudad?id=' + $scope.prov,
             headers: {
                 'Accept': "application/json"
             }
@@ -784,22 +703,9 @@ app.controller("BuscarTurnoGeoController", function ($scope, $http) {
             this.isBusy = false;
 
         }, function (response) {
-            switch (response.statusText) {
-                case 400:
-                    alert("Bad Request");
-                    break;
-                case 401:
-                    alert("Unauthorized");
-                    break;
-                case 404:
-                    alert("Not Found");
-                    break;
-                case 500:
-                    alert("Internal Server Error");
-                    break;
-                default:
-                    alert("Error no identificado");
-            }
+
+            httpNegativo(response.status);
+
         }).then(function () {
 
         });
@@ -808,7 +714,9 @@ app.controller("BuscarTurnoGeoController", function ($scope, $http) {
 
     }
     $scope.filtrarEmpresas = function () {
-        
+
+        $('#loader').jqxLoader('open');
+
         $scope.limpiarMarcadores();
 
         $http({
@@ -822,48 +730,38 @@ app.controller("BuscarTurnoGeoController", function ($scope, $http) {
             if (response.status === 200) {
                 angular.copy(response.data, $scope.empresas);
 
-                if ($scope.empresas.length>0) {
+                if ($scope.empresas.length > 0) {
                     $scope.empresas.forEach($scope.cargarMarcadores);
                 } else {
-                    
+
                 }
             }
             if ($scope.marcadores.length === 0) {
-                alert('No se encontraron empresas');
-            }
 
+                notificar($("#notificaciones"), $("#mensajeNotificacion"), $("#contenedorNotificaciones"), 'info', 'Búsqueda sin resultados');
+
+            }
 
         }, function (response) {
-            switch (response.status) {
-                case 400:
-                    alert("Bad Request");
-                    break;
-                case 401:
-                    alert("Unauthorized");
-                    break;
-                case 404:
-                    alert("Not Found");
-                    break;
-                case 500:
-                    alert("Internal Server Error");
-                    break;
-                default:
-                    alert("Error no identificado");
-            }
+
+            httpNegativo(response.status);
+
         }).then(function () {
+
+            $('#loader').jqxLoader('close');
 
         });
     }
-    $scope.cargarMarcadores=function(item, index){
-        
+    $scope.cargarMarcadores = function (item, index) {
 
-        if (item.Domicilio.latitud!=null) {
+
+        if (item.Domicilio.latitud != null) {
             var posicion = { lat: item.Domicilio.latitud, lng: item.Domicilio.longitud }
 
             window.marker = new google.maps.Marker({
                 position: posicion,
                 map: map,
-                icon: {url:'http://localhost:6907/../resources/marker.png'} 
+                icon: { url: 'http://localhost:6907/../resources/marker.png' }
                 //ToDo: hacer los iconos por cada rubro
             });
 
@@ -886,11 +784,10 @@ app.controller("BuscarTurnoFiltradoController", function ($scope, $http) {
     $scope.rubros = [];
     $scope.provincias = [];
     $scope.ciudades = [];
-    $scope.barrios = [];
     $scope.optionSelected = true;
 
     $("#loader").jqxLoader({ width: 100, height: 60, imagePosition: 'bottom', theme: 'bootstrap', text: 'Cargando...', textPosition: 'top', isModal: true });
-   
+
     $http({
         method: 'GET',
         url: 'http://localhost:6901/api/rubro',
@@ -904,22 +801,9 @@ app.controller("BuscarTurnoFiltradoController", function ($scope, $http) {
         }
 
     }, function (response) {
-        switch (response.statusText) {
-            case 400:
-                alert("Bad Request");
-                break;
-            case 401:
-                alert("Unauthorized");
-                break;
-            case 404:
-                alert("Not Found");
-                break;
-            case 500:
-                alert("Internal Server Error");
-                break;
-            default:
-                alert("Error no identificado");
-        }
+
+        httpNegativo(response.status);
+
     }).then(function () {
 
     });
@@ -937,31 +821,17 @@ app.controller("BuscarTurnoFiltradoController", function ($scope, $http) {
         this.isBusy = false;
 
     }, function (response) {
-        switch (response.statusText) {
-            case 400:
-                alert("Bad Request");
-                break;
-            case 401:
-                alert("Unauthorized");
-                break;
-            case 404:
-                alert("Not Found");
-                break;
-            case 500:
-                alert("Internal Server Error");
-                break;
-            default:
-                alert("Error no identificado");
-        }
+
+        httpNegativo(response.status);
+
     }).then(function () {
 
     });
 
-    $scope.clickProvincias = function (idProvincia) {
-        this.isBusy = true;
+    $scope.clickProvincias = function () {
         $http({
             method: 'GET',
-            url: 'http://localhost:6901/api/ciudad?id=' + idProvincia,
+            url: 'http://localhost:6901/api/ciudad?id=' + $scope.prov,
             headers: {
                 'Accept': "application/json"
             }
@@ -973,22 +843,9 @@ app.controller("BuscarTurnoFiltradoController", function ($scope, $http) {
             this.isBusy = false;
 
         }, function (response) {
-            switch (response.statusText) {
-                case 400:
-                    alert("Bad Request");
-                    break;
-                case 401:
-                    alert("Unauthorized");
-                    break;
-                case 404:
-                    alert("Not Found");
-                    break;
-                case 500:
-                    alert("Internal Server Error");
-                    break;
-                default:
-                    alert("Error no identificado");
-            }
+
+            httpNegativo(response.status);
+
         }).then(function () {
 
         });
@@ -996,55 +853,14 @@ app.controller("BuscarTurnoFiltradoController", function ($scope, $http) {
         $("#ciudades").removeAttr('disabled');
 
     }
-    $scope.clickCiudades = function (idCiudad) {
-
-        this.isBusy = true;
-        $http({
-            method: 'GET',
-            url: 'http://localhost:6901/api/barrio?id=' + idCiudad,
-            headers: {
-                'Accept': "application/json"
-            }
-
-        }).then(function (response) {
-            if (response.status === 200) {
-                angular.copy(response.data, $scope.barrios);
-            }
-            this.isBusy = false;
-
-        }, function (response) {
-            switch (response.statusText) {
-                case 400:
-                    alert("Bad Request");
-                    break;
-                case 401:
-                    alert("Unauthorized");
-                    break;
-                case 404:
-                    alert("Not Found");
-                    break;
-                case 500:
-                    alert("Internal Server Error");
-                    break;
-                default:
-                    alert("Error no identificado");
-            }
-        }).then(function () {
-
-        });
-
-        $("#barrios").removeAttr('disabled');
-    }
-
     $scope.filtrarEmpresas = function () {
         $('#loader').jqxLoader('open');
-        
 
         $scope.empresas = [];
 
         var nombreEmp = '';
 
-        if ($scope.nombre!=undefined) {
+        if ($scope.nombre != undefined) {
             nombreEmp = $scope.nombre;
         }
 
@@ -1064,29 +880,16 @@ app.controller("BuscarTurnoFiltradoController", function ($scope, $http) {
 
                 }
                 else {
-                    
+
                     notificar($("#notificaciones"), $("#mensajeNotificacion"), $("#contenedorNotificaciones"), 'info', 'Búsqueda sin resultados');
                 }
             }
 
 
         }, function (response) {
-            switch (response.status) {
-                case 400:
-                    alert("Bad Request");
-                    break;
-                case 401:
-                    alert("Unauthorized");
-                    break;
-                case 404:
-                    alert("Not Found");
-                    break;
-                case 500:
-                    alert("Internal Server Error");
-                    break;
-                default:
-                    alert("Error no identificado");
-            }
+
+            httpNegativo(response.status);
+
         }).then(function () {
             $('#loader').jqxLoader('close');
         });
@@ -1100,4 +903,54 @@ var notificar = function (notificacion, contenedorMensaje, contenedor, template,
     });
     contenedorMensaje.html(mensaje);
     notificacion.jqxNotification("open");
+}
+var httpNegativo = function (status) {
+
+    switch (status) {
+        case 400:
+            notificar($("#notificaciones"), $("#mensajeNotificacion"), $("#contenedorNotificaciones"), 'warning', 'Solicitud errónea');
+            break;
+        case 401:
+            notificar($("#notificaciones"), $("#mensajeNotificacion"), $("#contenedorNotificaciones"), 'warning', 'No está autorizado para hacer esta petición');
+            break;
+        case 404:
+            notificar($("#notificaciones"), $("#mensajeNotificacion"), $("#contenedorNotificaciones"), 'warning', 'No se encontro el recurso solicitado');
+            break;
+        case 500:
+            notificar($("#notificaciones"), $("#mensajeNotificacion"), $("#contenedorNotificaciones"), 'error', 'Error interno del servidor');
+            break;
+        default:
+            notificar($("#notificaciones"), $("#mensajeNotificacion"), $("#contenedorNotificaciones"), 'error', 'Error no identificado');
+
+    }
+
+}
+var notificarSinContenedor = function (notificacion, contenedorMensaje, offset, template, mensaje) {
+    notificacion.jqxNotification({
+        width: 300, position: "bottom-left", opacity: 0.9, animationOpenDelay: 800, autoClose: true, autoCloseDelay: 3000,
+        template: template, showCloseButton: false, browserBoundsOffset: offset
+    });
+    contenedorMensaje.html(mensaje);
+    notificacion.jqxNotification("open");
+}
+var httpNegativoSinContenedor = function (status) {
+    var offset = 200;
+    switch (status) {
+        case 400:
+            notificarSinContenedor($("#notificaciones"), $("#mensajeNotificacion"), offset, 'warning', 'Solicitud errónea');
+            break;
+        case 401:
+            notificarSinContenedor($("#notificaciones"), $("#mensajeNotificacion"), offset, 'warning', 'No está autorizado para hacer esta petición');
+            break;
+        case 404:
+            notificarSinContenedor($("#notificaciones"), $("#mensajeNotificacion"), offset, 'warning', 'No se encontro el recurso solicitado');
+            break;
+        case 500:
+            notificarSinContenedor($("#notificaciones"), $("#mensajeNotificacion"), offset, 'error', 'Error interno del servidor');
+            break;
+        default:
+            notificarSinContenedor($("#notificaciones"), $("#mensajeNotificacion"), offset, 'error', 'Error no identificado');
+
+    }
+
 }

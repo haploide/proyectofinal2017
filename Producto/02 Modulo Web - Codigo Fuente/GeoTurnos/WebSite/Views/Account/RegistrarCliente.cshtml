@@ -21,6 +21,7 @@
 
             </div>
         </div>
+       
         <div class="row filaRegistrarCliente">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <br />
@@ -91,9 +92,9 @@
                 <div class="form-group">
                     <label class="control-label col-md-4" for="provincias">Provincia</label>
                     <div class="col-md-8">
-                        <select class="form-control" id="paices">
-                            <option disabled selected>Seleccione...</option>
-                            <option value="{{provincia.idProvincia}}" ng-repeat="provincia in provincias" ng-click="clickProvincias(provincia.idProvincia)">{{provincia.nombre}}</option>
+                        <select class="form-control" id="paices" ng-model="prov" ng-change="clickProvincias()">
+                            <option value="" disabled>Seleccione...</option>
+                            <option value="{{provincia.idProvincia}}" ng-repeat="provincia in provincias" >{{provincia.nombre}}</option>
                         </select>
                     </div>
                 </div>
@@ -237,7 +238,10 @@
 
 
             </div>
+            
         </div>
+        <div id="notificaciones"><div id="mensajeNotificacion"></div></div>
+        
         <div class="row filaRegistrarCliente">
             <hr />
             <div class="col-md-6  col-sm-6">

@@ -199,31 +199,30 @@ textarea {
     background-color: lightgray;
     margin-top: 20px;
     border-radius: 10px;
-   
-    
 }
 
     #menuUsuarios li {
         background-color: lightgray;
         padding-top: 20px;
-        padding-bottom:20px;
+        padding-bottom: 20px;
         border-left: 1px solid white;
         border-right: 1px solid white;
     }
-    #menuUsuarios li:first-child {
-        border-left: none;
-        border-top-left-radius: 10px;
-        border-bottom-left-radius: 10px;
-    }
+
+        #menuUsuarios li:first-child {
+            border-left: none;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+        }
 
         #menuUsuarios li a {
             color: black;
             font-weight: bold;
         }
-        #menuUsuarios li:hover, #menuUsuarios li a:hover {
-            
-            background-color:gray;
-        }
+
+            #menuUsuarios li:hover, #menuUsuarios li a:hover {
+                background-color: gray;
+            }
 
     #menuUsuarios > li + li {
         margin-left: 0px;
@@ -238,19 +237,16 @@ textarea {
         border-radius: 0px;
         font-weight: bold;*/
     /*}*/
-    #menuUsuarios > li.active > a, #menuUsuarios > li.active
-    {
-        background-color:gray;
-        color:white !important;
+    #menuUsuarios > li.active > a, #menuUsuarios > li.active {
+        background-color: gray;
+        color: white !important;
     }
-    #menuUsuarios > li.active
 
-
-.fondoEncabezadoUsuario {
-    background-image: url(../resources/personas.png);
-    background-size: cover;
-    background-position: center;
-}
+        #menuUsuarios > li.active .fondoEncabezadoUsuario {
+            background-image: url(../resources/personas.png);
+            background-size: cover;
+            background-position: center;
+        }
 
 #mapa {
     width: 100%;
@@ -258,52 +254,44 @@ textarea {
     align-self: center;
 }
 
-.filaActivarEmpresa th
-{
+.filaActivarEmpresa th {
     vertical-align: middle !important;
 }
 
-.filaActivarEmpresa th img
-{
-    width:auto !important;
-}
+    .filaActivarEmpresa th img {
+        width: auto !important;
+    }
 
-.filaActivarEmpresa
-{
+.filaActivarEmpresa {
     background-color: lightyellow;
 }
 
-.info th
-{
-    background-color:red;
+.info th {
+    background-color: red;
 }
 
-.about
-{
-    
+.about {
     padding-bottom: 30px;
     padding-top: 30px;
-   
 }
 
-.about h4
-{
-     line-height: 30px;
-}
+    .about h4 {
+        line-height: 30px;
+    }
 
-.gestionGeoposicion
-{
+.gestionGeoposicion {
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
-.botonesGeoposicion
-{
+.botonesGeoposicion {
     margin-bottom: 20px;
-    margin-top:20px;
+    margin-top: 20px;
 }
-.contenedorNotificaciones{
+
+.contenedorNotificaciones {
     margin: auto;
-    width: 300px; 
-    height: 100px; 
-    }
+    width: 300px;
+    height: 100px;
+    margin-top: 20px;
+}

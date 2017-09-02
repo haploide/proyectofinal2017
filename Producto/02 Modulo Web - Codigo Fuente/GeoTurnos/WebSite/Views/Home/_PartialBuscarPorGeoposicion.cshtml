@@ -14,31 +14,35 @@
                 </div>
                 <div class="form-group">
                     <label for="provincias">Provincia:</label>
-                    <select ng-model="prov" class="form-control" id="provincias">
+                    <select ng-model="prov" class="form-control" id="provincias" ng-change="clickProvincias()">
                         <option value="">Seleccione...</option>
-                        <option value="{{provincia.idProvincia}}" ng-repeat="provincia in provincias" ng-click="clickProvincias(provincia.idProvincia)">{{provincia.nombre}}</option>
+                        <option value="{{provincia.idProvincia}}" ng-repeat="provincia in provincias" >{{provincia.nombre}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="ciudades">Ciudad</label>
                     <select ng-model="ciudad" class="form-control" id="ciudades" disabled>
                         <option value="">Seleccione...</option>
-                        <option value="{{ciudad.idCiudad}}" ng-repeat="ciudad in ciudades" ng-click="clickCiudades(ciudad.idCiudad)">{{ciudad.nombre}}</option>
+                        <option value="{{ciudad.idCiudad}}" ng-repeat="ciudad in ciudades">{{ciudad.nombre}}</option>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary" ng-click="filtrarEmpresas()">Aplicar Filtro</button>
             </form>
         </div>
+        <div id="notificaciones"><div id="mensajeNotificacion"></div></div>
+        <div id="contenedorNotificaciones" class="contenedorNotificaciones"></div>
     </div>
 
     <div class="row col-md-9">
         <div id="mapa" class="container">
          
         </div>
+        
     </div>
-
+    <div id="loader"></div>
 </div>
 <script>
+    
     
     function getLocation() {
         if (navigator.geolocation) {
@@ -47,6 +51,8 @@
     }
     function initMap(position) {
 
+        
+
         var posicion = { lat: position.coords.latitude, lng: position.coords.longitude };
         
         window.map = new google.maps.Map(document.getElementById('mapa'), {
@@ -54,7 +60,7 @@
             zoom: 15
         });
         
-
+        
     }
     
 </script>
