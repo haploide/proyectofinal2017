@@ -1038,7 +1038,7 @@ app.controller("BuscarTurnoFiltradoController", function ($scope, $http) {
 
     $scope.filtrarEmpresas = function () {
         $('#loader').jqxLoader('open');
-
+        
 
         $scope.empresas = [];
 
@@ -1058,7 +1058,15 @@ app.controller("BuscarTurnoFiltradoController", function ($scope, $http) {
             }
         }).then(function (response) {
             if (response.status === 200) {
-                angular.copy(response.data, $scope.empresas);
+                if (response.data.length > 0) {
+
+                    angular.copy(response.data, $scope.empresas);
+
+                }
+                else {
+                    
+                    notificar($("#notificaciones"), $("#mensajeNotificacion"), $("#contenedorNotificaciones"), 'info', 'Búsqueda sin resultados');
+                }
             }
 
 
@@ -1084,3 +1092,12 @@ app.controller("BuscarTurnoFiltradoController", function ($scope, $http) {
         });
     }
 })
+
+var notificar = function (notificacion, contenedorMensaje, contenedor, template, mensaje) {
+    notificacion.jqxNotification({
+        width: 300, position: "bottom-left", opacity: 0.9, animationOpenDelay: 800, autoClose: true, autoCloseDelay: 3000,
+        template: template, appendContainer: contenedor, showCloseButton: false
+    });
+    contenedorMensaje.html(mensaje);
+    notificacion.jqxNotification("open");
+}

@@ -302,3 +302,8 @@ textarea {
     margin-bottom: 20px;
     margin-top:20px;
 }
+.contenedorNotificaciones{
+    margin: auto;
+    width: 300px; 
+    height: 100px; 
+    }
