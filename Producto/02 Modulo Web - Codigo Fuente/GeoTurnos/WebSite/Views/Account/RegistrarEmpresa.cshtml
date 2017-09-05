@@ -88,28 +88,30 @@
                     <div class="form-group">
                         <label class="control-label col-md-4" for="provincias">Provincia</label>
                         <div class="col-md-8">
-                            <select class="form-control" id="paices">
-                                <option disabled selected>Seleccione...</option>
-                                <option value="{{provincia.idProvincia}}" ng-repeat="provincia in provincias" ng-click="clickProvincias(provincia.idProvincia)">{{provincia.nombre}}</option>
+                            <select ng-model="provinciaSel" ng-change="clickProvincias()" class="form-control" id="paices">
+                                <option value="" disabled>Seleccione...</option>
+                                <option value="{{provincia.idProvincia}}" ng-repeat="provincia in provincias" >{{provincia.nombre}}</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-4" for="ciudades">Ciudad</label>
                         <div class="col-md-8">
-                            <select class="form-control" id="ciudades" disabled>
-                                <option disabled selected>Seleccione...</option>
-                                <option value="{{ciudad.idCiudad}}" ng-repeat="ciudad in ciudades" ng-click="clickCiudades(ciudad.idCiudad)">{{ciudad.nombre}}</option>
+                            <select ng-model="ciudadSel" ng-change="clickCiudades()" class="form-control" id="ciudades" disabled>
+                                <option value="" disabled>Seleccione...</option>
+                                <option value="{{ciudad.idCiudad}}" ng-repeat="ciudad in ciudades" >{{ciudad.nombre}}</option>
                             </select>
+                            
                         </div>
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(model => model.idBarrio, htmlAttributes: new { @class = "control-label col-md-4" })
                         <div class="col-md-8">
-                            <select class="form-control" name="idBarrio" id="barrios" disabled>
-                                <option disabled selected>Seleccione...</option>
+                            <select ng-model="barrioSel" class="form-control" name="idBarrio" id="barrios" disabled>
+                                <option value="" disabled>Seleccione...</option>
                                 <option value="{{barrio.idBarrio}}" ng-repeat="barrio in barrios">{{barrio.nombre}}</option>
                             </select>
+                            
                         </div>
                     </div>
 
@@ -214,7 +216,7 @@
                 </div>
             </div>
 
-
+        <div id="notificaciones"><div id="mensajeNotificacion"></div></div>
 
         <div class="row filaRegistrarCliente">
             <hr />

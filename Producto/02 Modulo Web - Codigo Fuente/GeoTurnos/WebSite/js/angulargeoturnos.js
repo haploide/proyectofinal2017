@@ -99,22 +99,9 @@ app.controller("ActivarEmpresasController", function ($scope, $http) {
 
 
     }, function (response) {
-        switch (response.status) {
-            case 400:
-                alert("Bad Request");
-                break;
-            case 401:
-                alert("Unauthorized");
-                break;
-            case 404:
-                alert("Not Found");
-                break;
-            case 500:
-                alert("Internal Server Error");
-                break;
-            default:
-                alert("Error no identificado");
-        }
+        
+        httpNegativo(response.status);
+
     }).then(function () {
 
     });
@@ -140,29 +127,15 @@ app.controller("ActivarEmpresasController", function ($scope, $http) {
                         $scope.empresas.splice(i, 1);
                     }
                 }
-                alert('Estado cambiado');
-
-
+                
+                notificar($("#notificaciones"), $("#mensajeNotificacion"), $("#contenedorNotificaciones"), 'success', 'Empresa activada correctamente');
 
             }
 
         }, function (response) {
-            switch (response.statusText) {
-                case 400:
-                    alert("Bad Request");
-                    break;
-                case 401:
-                    alert("Unauthorized");
-                    break;
-                case 404:
-                    alert("Not Found");
-                    break;
-                case 500:
-                    alert("Internal Server Error");
-                    break;
-                default:
-                    alert("Error no identificado");
-            }
+            
+            httpNegativo(response.status);
+
         }).then(function () {
 
         });
@@ -198,8 +171,6 @@ app.controller("GestionGeoposicionController", function ($scope, $http) {
 
                 window.marker.addListener('drag', handleEvent)
 
-                window.map.setCenter({ lat: $scope.direccion.latitud, lng: $scope.direccion.longitud });
-
                 $('#latitud').val($scope.direccion.latitud);
                 $('#longitud').val($scope.direccion.longitud);
             }
@@ -224,22 +195,9 @@ app.controller("GestionGeoposicionController", function ($scope, $http) {
 
 
     }, function (response) {
-        switch (response.status) {
-            case 400:
-                alert("Bad Request");
-                break;
-            case 401:
-                alert("Unauthorized");
-                break;
-            case 404:
-                alert("Not Found");
-                break;
-            case 500:
-                alert("Internal Server Error");
-                break;
-            default:
-                alert("Error no identificado");
-        }
+        
+        httpNegativo(response.status);
+
     }).then(function () {
 
     });
@@ -258,27 +216,15 @@ app.controller("GestionGeoposicionController", function ($scope, $http) {
 
         }).then(function (response) {
             if (response.status === 200) {
-                alert('Geoposición Actualizada');
+                
+                notificar($("#notificaciones"), $("#mensajeNotificacion"), $("#contenedorNotificaciones"), 'success', 'Geoposición Actualizada');
 
             }
 
         }, function (response) {
-            switch (response.statusText) {
-                case 400:
-                    alert("Bad Request");
-                    break;
-                case 401:
-                    alert("Unauthorized");
-                    break;
-                case 404:
-                    alert("Not Found");
-                    break;
-                case 500:
-                    alert("Internal Server Error");
-                    break;
-                default:
-                    alert("Error no identificado");
-            }
+
+            httpNegativo(response.status);
+
         }).then(function () {
 
         });
@@ -318,36 +264,27 @@ app.controller("GestionGeoposicionController", function ($scope, $http) {
                 $('#longitud').val(posicion.lng);
             }
             if (response.data.status === 'ZERO_RESULTS') {
-                alert('No hubo resultados');
+                
+                notificar($("#notificaciones"), $("#mensajeNotificacion"), $("#contenedorNotificaciones"), 'info', 'No hubo resultados');
             }
             if (response.data.status === 'REQUEST_DENIED') {
-                alert('Petición rechazada');
+                
+                notificar($("#notificaciones"), $("#mensajeNotificacion"), $("#contenedorNotificaciones"), 'error', 'Petición rechazada');
             }
             if (response.data.status === 'INVALID_REQUEST') {
-                alert('Petición invalida');
+                
+                notificar($("#notificaciones"), $("#mensajeNotificacion"), $("#contenedorNotificaciones"), 'warning', 'Petición invalida');
             }
             if (response.data.status === 'UNKNOWN_ERROR') {
-                alert('Error no identificado');
+                alert('');
+                notificar($("#notificaciones"), $("#mensajeNotificacion"), $("#contenedorNotificaciones"), 'error', 'Error no identificado');
             }
 
 
         }, function (response) {
-            switch (response.status) {
-                case 400:
-                    alert("Bad Request");
-                    break;
-                case 401:
-                    alert("Unauthorized");
-                    break;
-                case 404:
-                    alert("Not Found");
-                    break;
-                case 500:
-                    alert("Internal Server Error");
-                    break;
-                default:
-                    alert("Error no identificado");
-            }
+            
+            httpNegativo(response.status);
+
         }).then(function () {
 
         });
@@ -375,22 +312,9 @@ app.controller("registrarEmpresa", function ($scope, $http) {
         }
 
     }, function (response) {
-        switch (response.statusText) {
-            case 400:
-                alert("Bad Request");
-                break;
-            case 401:
-                alert("Unauthorized");
-                break;
-            case 404:
-                alert("Not Found");
-                break;
-            case 500:
-                alert("Internal Server Error");
-                break;
-            default:
-                alert("Error no identificado");
-        }
+        
+        httpNegativoSinContenedor(response.status);
+
     }).then(function () {
 
     });
@@ -408,31 +332,18 @@ app.controller("registrarEmpresa", function ($scope, $http) {
         this.isBusy = false;
 
     }, function (response) {
-        switch (response.statusText) {
-            case 400:
-                alert("Bad Request");
-                break;
-            case 401:
-                alert("Unauthorized");
-                break;
-            case 404:
-                alert("Not Found");
-                break;
-            case 500:
-                alert("Internal Server Error");
-                break;
-            default:
-                alert("Error no identificado");
-        }
+        
+        httpNegativoSinContenedor(response.status);
+
     }).then(function () {
 
     });
 
-    $scope.clickProvincias = function (idProvincia) {
+    $scope.clickProvincias = function () {
         this.isBusy = true;
         $http({
             method: 'GET',
-            url: 'http://localhost:6901/api/ciudad?id=' + idProvincia,
+            url: 'http://localhost:6901/api/ciudad?id=' + $scope.provinciaSel,
             headers: {
                 'Accept': "application/json"
             }
@@ -444,22 +355,9 @@ app.controller("registrarEmpresa", function ($scope, $http) {
             this.isBusy = false;
 
         }, function (response) {
-            switch (response.statusText) {
-                case 400:
-                    alert("Bad Request");
-                    break;
-                case 401:
-                    alert("Unauthorized");
-                    break;
-                case 404:
-                    alert("Not Found");
-                    break;
-                case 500:
-                    alert("Internal Server Error");
-                    break;
-                default:
-                    alert("Error no identificado");
-            }
+            
+            httpNegativoSinContenedor(response.status);
+
         }).then(function () {
 
         });
@@ -467,12 +365,12 @@ app.controller("registrarEmpresa", function ($scope, $http) {
         $("#ciudades").removeAttr('disabled');
 
     }
-    $scope.clickCiudades = function (idCiudad) {
+    $scope.clickCiudades = function () {
 
         this.isBusy = true;
         $http({
             method: 'GET',
-            url: 'http://localhost:6901/api/barrio?id=' + idCiudad,
+            url: 'http://localhost:6901/api/barrio?id=' + $scope.ciudadSel,
             headers: {
                 'Accept': "application/json"
             }
@@ -484,22 +382,9 @@ app.controller("registrarEmpresa", function ($scope, $http) {
             this.isBusy = false;
 
         }, function (response) {
-            switch (response.statusText) {
-                case 400:
-                    alert("Bad Request");
-                    break;
-                case 401:
-                    alert("Unauthorized");
-                    break;
-                case 404:
-                    alert("Not Found");
-                    break;
-                case 500:
-                    alert("Internal Server Error");
-                    break;
-                default:
-                    alert("Error no identificado");
-            }
+            
+            httpNegativoSinContenedor(response.status);
+
         }).then(function () {
 
         });
@@ -546,8 +431,7 @@ app.controller("registrarUsuario", function ($scope, $http) {
         if (response.status === 200) {
             angular.copy(response.data, $scope.provincias);
         }
-        this.isBusy = false;
-
+        
     }, function (response) {
 
         httpNegativoSinContenedor(response.status);
@@ -557,10 +441,10 @@ app.controller("registrarUsuario", function ($scope, $http) {
     });
 
     $scope.clickProvincias = function () {
-        this.isBusy = true;
+        
         $http({
             method: 'GET',
-            url: 'http://localhost:6901/api/ciudad?id=' + $scope.prov,
+            url: 'http://localhost:6901/api/ciudad?id=' + $scope.provinciaSel,
             headers: {
                 'Accept': "application/json"
             }
@@ -569,7 +453,7 @@ app.controller("registrarUsuario", function ($scope, $http) {
             if (response.status === 200) {
                 angular.copy(response.data, $scope.ciudades);
             }
-            this.isBusy = false;
+            
 
         }, function (response) {
             
@@ -582,12 +466,11 @@ app.controller("registrarUsuario", function ($scope, $http) {
         $("#ciudades").removeAttr('disabled');
 
     }
-    $scope.clickCiudades = function (idCiudad) {
+    $scope.clickCiudades = function () {
 
-        this.isBusy = true;
         $http({
             method: 'GET',
-            url: 'http://localhost:6901/api/barrio?id=' + idCiudad,
+            url: 'http://localhost:6901/api/barrio?id=' + $scope.ciudadSel,
             headers: {
                 'Accept': "application/json"
             }
@@ -596,8 +479,7 @@ app.controller("registrarUsuario", function ($scope, $http) {
             if (response.status === 200) {
                 angular.copy(response.data, $scope.barrios);
             }
-            this.isBusy = false;
-
+            
         }, function (response) {
             
             httpNegativoSinContenedor(response.status);
@@ -936,7 +818,7 @@ var notificarSinContenedor = function (notificacion, contenedorMensaje, offset, 
     notificacion.jqxNotification("open");
 }
 var httpNegativoSinContenedor = function (status) {
-    var offset = 200;
+    var offset = 50;
     switch (status) {
         case 400:
             notificarSinContenedor($("#notificaciones"), $("#mensajeNotificacion"), offset, 'warning', 'Solicitud errónea');

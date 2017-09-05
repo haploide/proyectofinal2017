@@ -1,10 +1,10 @@
 ﻿<link rel="stylesheet" href="~/Content/Site.css" type="text/css" />
+
 <div class="container" ng-controller="ActivarEmpresasController">
-   
+    <div style="margin-top: 20px;">
         <div class="table-responsive">
             <table class="table table-striped">
                 <tr class="info">
-
                     <th ng-hide="true">idEmpresa</th>
                     <th>Logo</th>
                     <th>CUIT</th>
@@ -14,7 +14,6 @@
                     <th>Dirección</th>
                     <th>Rubro</th>
                     <th>Activar</th>
-
                 </tr>
                 <tr class="media filaActivarEmpresa" data-ng-repeat="emp in empresas">
                     <th ng-hide="true">{{emp.idEmpresa }}</th>
@@ -26,11 +25,11 @@
                     <th>{{emp.Domicilio.calle +' '+ emp.Domicilio.altura}}</th>
                     <th>{{emp.Rubro.nombre}}</th>
                     <th><a ng-click="upDateEstadoEmpresa(emp)" class="btn btn-primary">Activar</a></th>
-
                 </tr>
             </table>
         </div>
 
-
-   
+        <div id="notificaciones"><div id="mensajeNotificacion"></div></div>
+        <div id="contenedorNotificaciones" class="contenedorNotificaciones"></div>
+    </div>
 </div>

@@ -2,14 +2,15 @@
 @{
     var usuarioLogin = Session["usuarioLogin"] as UsuarioLogueado;
 }
-<div ng-controller="GestionGeoposicionController">
+<div class="container" ng-controller="GestionGeoposicionController">
 
 
-    <div class="row gestionGeoposicion">
+    <div  class="row gestionGeoposicion">
 
         <div class="col-lg-3 col-md-3">
-            <input id="idEmpresa" type="hidden" value="@usuarioLogin.Empresa.idEmpresa" />
-            
+            <div class="container">
+                <input id="idEmpresa" type="hidden" value="@usuarioLogin.Empresa.idEmpresa" />
+
                 <div class="form-group">
                     <label for="latitud">Latitud:</label>
                     <input type="text" class="form-control" id="latitud" placeholder="Latidud" />
@@ -20,15 +21,17 @@
 
                 </div>
                 <button type="submit" class="btn btn-primary botonesGeoposicion" onclick="actualizarMarcador()">Ajustar</button>
-            
-            
+
+
                 <div class="form-group">
                     <label for="">Dirección:</label>
                     <input type="text" class="form-control" id="direccion" placeholder="Dirección" ng-model="calle" />
                 </div>
                 <button type="submit" class="btn btn-primary botonesGeoposicion" ng-click="updateGeoposicionDesdeDireccion()">Actualizar</button>
                 <button type="submit" class="btn btn-primary botonesGeoposicion" ng-click="updateGeoposicion()">Guardar Geoposición</button>
-            
+            </div>
+            <div id="notificaciones"><div id="mensajeNotificacion"></div></div>
+            <div id="contenedorNotificaciones" class="contenedorNotificaciones"></div>
         </div>
         <div class="col-md-9 col-lg-9">
             <div id="mapa" class="container">
