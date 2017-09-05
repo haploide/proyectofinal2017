@@ -30,13 +30,32 @@
           <Property Name="nroDocumento" Type="int" />
           <Property Name="nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="apellido" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="telefono" Type="nchar" MaxLength="10" />
+          <Property Name="telefono" Type="nchar" MaxLength="20" />
           <Property Name="foto" Type="image" />
           <Property Name="email" Type="nvarchar" MaxLength="50" />
           <Property Name="fechaNacimiento" Type="date" />
           <Property Name="idDomicilio" Type="int" />
           <Property Name="idUsuario" Type="int" />
           <Property Name="idEstado" Type="int" />
+        </EntityType>
+        <EntityType Name="DiaSemana">
+          <Key>
+            <PropertyRef Name="id_dia" />
+          </Key>
+          <Property Name="id_dia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DiaXParametroAgenda">
+          <Key>
+            <PropertyRef Name="id_param_agenda" />
+            <PropertyRef Name="id_dia" />
+          </Key>
+          <Property Name="id_param_agenda" Type="int" Nullable="false" />
+          <Property Name="id_dia" Type="int" Nullable="false" />
+          <Property Name="hora_inicio" Type="time" Precision="7" Nullable="false" />
+          <Property Name="hora_fin" Type="time" Precision="7" Nullable="false" />
+          <Property Name="hora_inicio_receso" Type="time" Precision="7" />
+          <Property Name="hora_fin_receso" Type="time" Precision="7" />
         </EntityType>
         <EntityType Name="Domicilio">
           <Key>
@@ -62,7 +81,7 @@
           <Property Name="nombreFantasia" Type="nvarchar" MaxLength="50" />
           <Property Name="inicioActividades" Type="date" />
           <Property Name="telefono" Type="nvarchar" MaxLength="50" />
-          <Property Name="logoEmpresa" Type="image" />
+          <Property Name="logoEmpresa" Type="image" Nullable="false" />
           <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="idDomicilio" Type="int" />
           <Property Name="idRubro" Type="int" />
@@ -75,6 +94,15 @@
           </Key>
           <Property Name="idEstado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ParametroAgenda">
+          <Key>
+            <PropertyRef Name="id_param_agenda" />
+          </Key>
+          <Property Name="id_param_agenda" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="duracion_turno" Type="int" Nullable="false" />
+          <Property Name="id_empresa" Type="int" Nullable="false" />
+          <Property Name="atiende_feriado" Type="bit" />
         </EntityType>
         <EntityType Name="Provincia">
           <Key>
@@ -197,6 +225,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DiaXParametroAgenda_DiaSemana">
+          <End Role="DiaSemana" Type="Self.DiaSemana" Multiplicity="1" />
+          <End Role="DiaXParametroAgenda" Type="Self.DiaXParametroAgenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DiaSemana">
+              <PropertyRef Name="id_dia" />
+            </Principal>
+            <Dependent Role="DiaXParametroAgenda">
+              <PropertyRef Name="id_dia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DiaXParametroAgenda_ParametroAgenda">
+          <End Role="ParametroAgenda" Type="Self.ParametroAgenda" Multiplicity="1" />
+          <End Role="DiaXParametroAgenda" Type="Self.DiaXParametroAgenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParametroAgenda">
+              <PropertyRef Name="id_param_agenda" />
+            </Principal>
+            <Dependent Role="DiaXParametroAgenda">
+              <PropertyRef Name="id_param_agenda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Domicilio_Barrio">
           <End Role="Barrio" Type="Self.Barrio" Multiplicity="0..1" />
           <End Role="Domicilio" Type="Self.Domicilio" Multiplicity="*" />
@@ -257,6 +309,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ParametroAgenda_Empresa">
+          <End Role="Empresa" Type="Self.Empresa" Multiplicity="1" />
+          <End Role="ParametroAgenda" Type="Self.ParametroAgenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresa">
+              <PropertyRef Name="idEmpresa" />
+            </Principal>
+            <Dependent Role="ParametroAgenda">
+              <PropertyRef Name="id_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_RolPorUsuario_Rol">
           <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
           <End Role="RolPorUsuario" Type="Self.RolPorUsuario" Multiplicity="*" />
@@ -297,9 +361,12 @@
           <EntitySet Name="Barrio" EntityType="Self.Barrio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ciudad" EntityType="Self.Ciudad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DiaSemana" EntityType="Self.DiaSemana" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DiaXParametroAgenda" EntityType="Self.DiaXParametroAgenda" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Domicilio" EntityType="Self.Domicilio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Empresa" EntityType="Self.Empresa" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Estado" EntityType="Self.Estado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ParametroAgenda" EntityType="Self.ParametroAgenda" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Provincia" EntityType="Self.Provincia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RolPorUsuario" EntityType="Self.RolPorUsuario" Schema="dbo" store:Type="Tables" />
@@ -330,6 +397,14 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Cliente" EntitySet="Cliente" />
           </AssociationSet>
+          <AssociationSet Name="FK_DiaXParametroAgenda_DiaSemana" Association="Self.FK_DiaXParametroAgenda_DiaSemana">
+            <End Role="DiaSemana" EntitySet="DiaSemana" />
+            <End Role="DiaXParametroAgenda" EntitySet="DiaXParametroAgenda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DiaXParametroAgenda_ParametroAgenda" Association="Self.FK_DiaXParametroAgenda_ParametroAgenda">
+            <End Role="ParametroAgenda" EntitySet="ParametroAgenda" />
+            <End Role="DiaXParametroAgenda" EntitySet="DiaXParametroAgenda" />
+          </AssociationSet>
           <AssociationSet Name="FK_Domicilio_Barrio" Association="Self.FK_Domicilio_Barrio">
             <End Role="Barrio" EntitySet="Barrio" />
             <End Role="Domicilio" EntitySet="Domicilio" />
@@ -349,6 +424,10 @@
           <AssociationSet Name="FK_Empresa_Usuario" Association="Self.FK_Empresa_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Empresa" EntitySet="Empresa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ParametroAgenda_Empresa" Association="Self.FK_ParametroAgenda_Empresa">
+            <End Role="Empresa" EntitySet="Empresa" />
+            <End Role="ParametroAgenda" EntitySet="ParametroAgenda" />
           </AssociationSet>
           <AssociationSet Name="FK_RolPorUsuario_Rol" Association="Self.FK_RolPorUsuario_Rol">
             <End Role="Rol" EntitySet="Rol" />
@@ -394,7 +473,7 @@
           <Property Name="nroDocumento" Type="Int32" />
           <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="telefono" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="telefono" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
           <Property Name="foto" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="fechaNacimiento" Type="DateTime" Precision="0" />
@@ -580,6 +659,21 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Empresa" EntitySet="Empresa" />
           </AssociationSet>
+          <EntitySet Name="DiaSemana" EntityType="GeoTurnosModel.DiaSemana" />
+          <EntitySet Name="DiaXParametroAgenda" EntityType="GeoTurnosModel.DiaXParametroAgenda" />
+          <EntitySet Name="ParametroAgenda" EntityType="GeoTurnosModel.ParametroAgenda" />
+          <AssociationSet Name="FK_DiaXParametroAgenda_DiaSemana" Association="GeoTurnosModel.FK_DiaXParametroAgenda_DiaSemana">
+            <End Role="DiaSemana" EntitySet="DiaSemana" />
+            <End Role="DiaXParametroAgenda" EntitySet="DiaXParametroAgenda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DiaXParametroAgenda_ParametroAgenda" Association="GeoTurnosModel.FK_DiaXParametroAgenda_ParametroAgenda">
+            <End Role="ParametroAgenda" EntitySet="ParametroAgenda" />
+            <End Role="DiaXParametroAgenda" EntitySet="DiaXParametroAgenda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ParametroAgenda_Empresa" Association="GeoTurnosModel.FK_ParametroAgenda_Empresa">
+            <End Role="Empresa" EntitySet="Empresa" />
+            <End Role="ParametroAgenda" EntitySet="ParametroAgenda" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Usuario">
           <Key>
@@ -681,7 +775,7 @@
           <Property Name="nombreFantasia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="inicioActividades" Type="DateTime" Precision="0" />
           <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="logoEmpresa" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="logoEmpresa" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="idDomicilio" Type="Int32" />
           <Property Name="idRubro" Type="Int32" />
@@ -737,6 +831,73 @@
             </Principal>
             <Dependent Role="Empresa">
               <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DiaSemana">
+          <Key>
+            <PropertyRef Name="id_dia" />
+          </Key>
+          <Property Name="id_dia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DiaXParametroAgenda">
+          <Key>
+            <PropertyRef Name="id_param_agenda" />
+            <PropertyRef Name="id_dia" />
+          </Key>
+          <Property Name="id_param_agenda" Type="Int32" Nullable="false" />
+          <Property Name="id_dia" Type="Int32" Nullable="false" />
+          <Property Name="hora_inicio" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="hora_fin" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="hora_inicio_receso" Type="Time" Precision="7" />
+          <Property Name="hora_fin_receso" Type="Time" Precision="7" />
+          <NavigationProperty Name="DiaSemana" Relationship="GeoTurnosModel.FK_DiaXParametroAgenda_DiaSemana" FromRole="DiaXParametroAgenda" ToRole="DiaSemana" />
+          <NavigationProperty Name="ParametroAgenda" Relationship="GeoTurnosModel.FK_DiaXParametroAgenda_ParametroAgenda" FromRole="DiaXParametroAgenda" ToRole="ParametroAgenda" />
+        </EntityType>
+        <EntityType Name="ParametroAgenda">
+          <Key>
+            <PropertyRef Name="id_param_agenda" />
+          </Key>
+          <Property Name="id_param_agenda" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="duracion_turno" Type="Int32" Nullable="false" />
+          <Property Name="id_empresa" Type="Int32" Nullable="false" />
+          <Property Name="atiende_feriado" Type="Boolean" />
+          <NavigationProperty Name="Empresa" Relationship="GeoTurnosModel.FK_ParametroAgenda_Empresa" FromRole="ParametroAgenda" ToRole="Empresa" />
+        </EntityType>
+        <Association Name="FK_DiaXParametroAgenda_DiaSemana">
+          <End Type="GeoTurnosModel.DiaSemana" Role="DiaSemana" Multiplicity="1" />
+          <End Type="GeoTurnosModel.DiaXParametroAgenda" Role="DiaXParametroAgenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DiaSemana">
+              <PropertyRef Name="id_dia" />
+            </Principal>
+            <Dependent Role="DiaXParametroAgenda">
+              <PropertyRef Name="id_dia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DiaXParametroAgenda_ParametroAgenda">
+          <End Type="GeoTurnosModel.ParametroAgenda" Role="ParametroAgenda" Multiplicity="1" />
+          <End Type="GeoTurnosModel.DiaXParametroAgenda" Role="DiaXParametroAgenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParametroAgenda">
+              <PropertyRef Name="id_param_agenda" />
+            </Principal>
+            <Dependent Role="DiaXParametroAgenda">
+              <PropertyRef Name="id_param_agenda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ParametroAgenda_Empresa">
+          <End Type="GeoTurnosModel.Empresa" Role="Empresa" Multiplicity="1" />
+          <End Type="GeoTurnosModel.ParametroAgenda" Role="ParametroAgenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresa">
+              <PropertyRef Name="idEmpresa" />
+            </Principal>
+            <Dependent Role="ParametroAgenda">
+              <PropertyRef Name="id_empresa" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -875,6 +1036,36 @@
                 <ScalarProperty Name="razonSocial" ColumnName="razonSocial" />
                 <ScalarProperty Name="cuit" ColumnName="cuit" />
                 <ScalarProperty Name="idEmpresa" ColumnName="idEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DiaSemana">
+            <EntityTypeMapping TypeName="GeoTurnosModel.DiaSemana">
+              <MappingFragment StoreEntitySet="DiaSemana">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id_dia" ColumnName="id_dia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DiaXParametroAgenda">
+            <EntityTypeMapping TypeName="GeoTurnosModel.DiaXParametroAgenda">
+              <MappingFragment StoreEntitySet="DiaXParametroAgenda">
+                <ScalarProperty Name="hora_fin_receso" ColumnName="hora_fin_receso" />
+                <ScalarProperty Name="hora_inicio_receso" ColumnName="hora_inicio_receso" />
+                <ScalarProperty Name="hora_fin" ColumnName="hora_fin" />
+                <ScalarProperty Name="hora_inicio" ColumnName="hora_inicio" />
+                <ScalarProperty Name="id_dia" ColumnName="id_dia" />
+                <ScalarProperty Name="id_param_agenda" ColumnName="id_param_agenda" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ParametroAgenda">
+            <EntityTypeMapping TypeName="GeoTurnosModel.ParametroAgenda">
+              <MappingFragment StoreEntitySet="ParametroAgenda">
+                <ScalarProperty Name="atiende_feriado" ColumnName="atiende_feriado" />
+                <ScalarProperty Name="id_empresa" ColumnName="id_empresa" />
+                <ScalarProperty Name="duracion_turno" ColumnName="duracion_turno" />
+                <ScalarProperty Name="id_param_agenda" ColumnName="id_param_agenda" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

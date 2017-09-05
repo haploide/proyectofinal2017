@@ -37,5 +37,8 @@ namespace WebApi.Models
         public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<Domicilio> Domicilio { get; set; }
         public virtual DbSet<Empresa> Empresa { get; set; }
+        public virtual DbSet<DiaSemana> DiaSemana { get; set; }
+        public virtual DbSet<DiaXParametroAgenda> DiaXParametroAgenda { get; set; }
+        public virtual DbSet<ParametroAgenda> ParametroAgenda { get; set; }
     }
 }
