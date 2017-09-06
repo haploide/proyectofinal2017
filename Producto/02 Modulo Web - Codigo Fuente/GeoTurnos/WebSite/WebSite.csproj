@@ -268,6 +268,7 @@
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PerfilViewModels.cs" />
     <Compile Include="Models\Provincia.cs">
       <DependentUpon>GeoturnosModel.tt</DependentUpon>
     </Compile>
@@ -430,6 +431,8 @@
     <Content Include="Views\Manage\_PartialGestionarDatosEmpresa.cshtml" />
     <Content Include="Views\Manage\_PartialPrincipalClientePrestatario.cshtml" />
     <Content Include="Views\Manage\_PartialGestionarDatosCliente.cshtml" />
+    <Content Include="Views\Home\PerfilEmpresa.cshtml" />
+    <Content Include="Views\Home\PerfilCliente.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

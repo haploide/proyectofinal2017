@@ -14,6 +14,20 @@ namespace WebSite
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name:"RuteoEmpresa",
+                url: "Home/PerfilEmpresa/{nombreEmpresa}",
+                defaults: new {controller= "Home", action= "PerfilEmpresa" }
+                
+                );
+
+            routes.MapRoute(
+                name: "RuteoCliente",
+                url: "Home/PerfilCliente/{nombreCliente}",
+                defaults: new { controller = "Home", action = "PerfilCliente" }
+
+                );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

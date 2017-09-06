@@ -65,7 +65,7 @@
                         <th>{{emp.telefono }}</th>
                         <th>{{emp.email }}</th>
                         <th>{{emp.Domicilio.calle +' '+ emp.Domicilio.altura}}</th>
-                        <th><a ng-click="" class="btn btn-primary">Ver Turnos Dispobibles</a></th>
+                        <th><a ng-href="@Url.Action("PerfilEmpresa","Home")/{{emp.razonSocial }}" class="btn btn-primary">Ir a Empresa</a></th>
                     </tr>
                 </table>
             </div>

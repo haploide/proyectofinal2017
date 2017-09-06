@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebSite.App_Start;
+using WebSite.Models;
 
 namespace WebSite.Controllers
 {
@@ -53,6 +54,21 @@ namespace WebSite.Controllers
         {
             return PartialView("_PartialBuscarPorGeoposicion");
         }
+        
+        public ActionResult PerfilEmpresa(string nombreEmpresa)
+        {
+            var model = new PerfilEmpresaViewModels() { razonSocial = nombreEmpresa };
 
+
+
+            return View(model);
+        }
+
+        public ActionResult PerfilCliente(string nombreCliente)
+        {
+            var model = new PerfilClienteViewModels() { nombre = nombreCliente };
+
+            return View(model);
+        }
     }
 }
