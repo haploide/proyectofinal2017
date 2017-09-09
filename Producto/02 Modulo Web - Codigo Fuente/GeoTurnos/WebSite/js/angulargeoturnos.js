@@ -784,7 +784,7 @@ app.controller("BuscarTurnoFiltradoController", function ($scope, $http) {
 })
 app.controller("GestionarAgendaTurnosController", function ($scope, $http) {
 
-    function openCity(evt, cityName) {
+    $scope.openCity= function (evt, cityName) {
         // Declare all variables
         var i, tabcontent, tablinks;
 
@@ -802,7 +802,7 @@ app.controller("GestionarAgendaTurnosController", function ($scope, $http) {
 
         // Show the current tab, and add an "active" class to the link that opened the tab
         document.getElementById(cityName).style.display = "block";
-        evt.currentTarget.className += " active";
+        //evt.currentTarget.className += " active";  No esta andando
     }
 
     

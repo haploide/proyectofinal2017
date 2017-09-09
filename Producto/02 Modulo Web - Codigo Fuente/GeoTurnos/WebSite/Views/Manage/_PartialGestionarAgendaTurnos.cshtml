@@ -3,22 +3,24 @@
 <div class="container GestionarAgendaTurnos" ng-controller="GestionarAgendaTurnosController">
     
     <div class="tab">
-        <button class="tablinks" onclick="openCity(event, 'London')">London</button>
-        <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
-        <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
+        <button class="tablinks" ng-click="openCity(event, 'plantilla')">Definir Plantilla</button>
+        <button class="tablinks" ng-click="openCity(event, 'Paris')">Paris</button>
+        <button class="tablinks" ng-click="openCity(event, 'Tokyo')">Tokyo</button>
     </div>
 
-    <div id="London" class="tabcontent">
-        <h3>London</h3>
-        <p>London is the capital city of England.</p>
+    <div id="plantilla" class="tabcontent">
+        <div ng-include="'GestionarPlantillaTurnos'">
+
+
+        </div>
     </div>
 
-    <div id="Paris" class="tabcontent">
+    <div id="Paris" class="tabcontent" hidden>
         <h3>Paris</h3>
         <p>Paris is the capital of France.</p>
     </div>
 
-    <div id="Tokyo" class="tabcontent">
+    <div id="Tokyo" class="tabcontent" hidden>
         <h3>Tokyo</h3>
         <p>Tokyo is the capital of Japan.</p>
     </div>
