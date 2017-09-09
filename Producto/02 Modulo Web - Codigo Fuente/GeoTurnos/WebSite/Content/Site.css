@@ -332,3 +332,16 @@ textarea {
     font-size: 25px;
     color: #e6090e;
 }
+
+.btn-primary {
+    transition-duration: 0.4s;
+}
+
+.btn-primary:hover {
+    border-radius: 20px !important;
+    transition-duration: 0.4s;
+}
+
+.home2 div{
+    padding:50px;
+}
