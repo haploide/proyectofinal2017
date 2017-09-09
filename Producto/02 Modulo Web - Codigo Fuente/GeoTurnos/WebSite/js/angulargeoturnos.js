@@ -49,6 +49,9 @@ app.controller("MiCuentaEmpresaPrestadoraController", function ($scope) {
             case 'datosEmpresa':
                 $scope.contenidoATraer = 'GestionarDatosEmpresa';
                 break;
+            case 'gestionAgenda':
+                $scope.contenidoATraer = 'GestionarAgendaTurnos';
+                break;
 
         }
 
