@@ -434,6 +434,7 @@
     <Content Include="Views\Home\PerfilEmpresa.cshtml" />
     <Content Include="Views\Home\PerfilCliente.cshtml" />
     <Content Include="Views\Manage\_PartialGestionarAgendaTurnos.cshtml" />
+    <Content Include="Views\Manage\_PartialGestionarPlantillaTurnos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

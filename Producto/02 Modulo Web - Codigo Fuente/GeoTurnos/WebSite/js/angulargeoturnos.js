@@ -782,6 +782,18 @@ app.controller("BuscarTurnoFiltradoController", function ($scope, $http) {
         });
     }
 })
+app.controller("GestionarAgendaTurnosController", function ($scope, $http) {
+
+
+
+
+
+
+
+
+
+
+})
 
 var notificar = function (notificacion, contenedorMensaje, contenedor, template, mensaje) {
     notificacion.jqxNotification({
