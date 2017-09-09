@@ -1,23 +1,21 @@
 ﻿<link href="~/Content/Site.css" rel="stylesheet" />
 
-<div class="container GestionarAgendaTurnos" ng-controller="GestionarAgendaTurnosController">
+<div class="GestionarAgendaTurnos" ng-controller="GestionarAgendaTurnosController">
     
     <div class="tab">
-        <button class="tablinks" ng-click="openCity($event, 'plantilla')">Definir Plantilla</button>
-        <button class="tablinks" ng-click="openCity($event, 'Paris')">Paris</button>
-        <button class="tablinks" ng-click="openCity($event, 'Tokyo')">Tokyo</button>
+        <button class="tablinks active" ng-click="submenu($event, 'plantilla')" id="defaultOpen">Definir Plantilla</button>
+        <button class="tablinks" ng-click="submenu($event, 'visualizarAgenda')">Visualizar Agenda</button>
+        <button class="tablinks" ng-click="submenu($event, 'Tokyo')">Tokyo</button>
     </div>
 
     <div id="plantilla" class="tabcontent">
         <div ng-include="'GestionarPlantillaTurnos'">
-
-
         </div>
     </div>
 
-    <div id="Paris" class="tabcontent" hidden>
-        <h3>Paris</h3>
-        <p>Paris is the capital of France.</p>
+    <div id="visualizarAgenda" class="tabcontent" hidden>
+        <h3>Visualizar Agenda</h3>
+        <p>Visualizar Agenda</p>
     </div>
 
     <div id="Tokyo" class="tabcontent" hidden>
