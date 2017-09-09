@@ -40,5 +40,7 @@ namespace WebApi.Models
         public virtual DbSet<DiaSemana> DiaSemana { get; set; }
         public virtual DbSet<DiaXParametroAgenda> DiaXParametroAgenda { get; set; }
         public virtual DbSet<ParametroAgenda> ParametroAgenda { get; set; }
+        public virtual DbSet<Comentarios> Comentarios { get; set; }
+        public virtual DbSet<DireccionComentario> DireccionComentario { get; set; }
     }
 }

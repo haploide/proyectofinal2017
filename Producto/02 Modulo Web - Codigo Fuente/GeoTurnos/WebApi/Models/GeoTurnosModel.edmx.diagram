@@ -37,6 +37,11 @@
         <AssociationConnector Association="GeoTurnosModel.FK_DiaXParametroAgenda_DiaSemana" />
         <AssociationConnector Association="GeoTurnosModel.FK_DiaXParametroAgenda_ParametroAgenda" />
         <AssociationConnector Association="GeoTurnosModel.FK_ParametroAgenda_Empresa" />
+        <EntityTypeShape EntityType="GeoTurnosModel.Comentarios" Width="1.5" PointX="11.25" PointY="6.875" />
+        <EntityTypeShape EntityType="GeoTurnosModel.DireccionComentario" Width="1.5" PointX="9" PointY="5.5" />
+        <AssociationConnector Association="GeoTurnosModel.FK_Comentarios_cliente" />
+        <AssociationConnector Association="GeoTurnosModel.FK_Comentarios_DireccionComentario" />
+        <AssociationConnector Association="GeoTurnosModel.FK_Comentarios_Empresa" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

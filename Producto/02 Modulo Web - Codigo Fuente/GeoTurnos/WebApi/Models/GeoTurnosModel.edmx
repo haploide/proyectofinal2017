@@ -38,12 +38,24 @@
           <Property Name="idUsuario" Type="int" />
           <Property Name="idEstado" Type="int" />
         </EntityType>
+        <EntityType Name="Comentarios">
+          <Key>
+            <PropertyRef Name="Id_comentario" />
+          </Key>
+          <Property Name="Id_comentario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nro" Type="int" Nullable="false" />
+          <Property Name="id_cliente" Type="int" Nullable="false" />
+          <Property Name="id_empresa" Type="int" Nullable="false" />
+          <Property Name="comentario" Type="varchar" MaxLength="200" />
+          <Property Name="fecha_comentario" Type="date" Nullable="false" />
+          <Property Name="id_direccion" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="DiaSemana">
           <Key>
             <PropertyRef Name="id_dia" />
           </Key>
           <Property Name="id_dia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nombre" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="DiaXParametroAgenda">
           <Key>
@@ -56,6 +68,13 @@
           <Property Name="hora_fin" Type="time" Precision="7" Nullable="false" />
           <Property Name="hora_inicio_receso" Type="time" Precision="7" />
           <Property Name="hora_fin_receso" Type="time" Precision="7" />
+        </EntityType>
+        <EntityType Name="DireccionComentario">
+          <Key>
+            <PropertyRef Name="Id_direccion" />
+          </Key>
+          <Property Name="Id_direccion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="direccion" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Domicilio">
           <Key>
@@ -225,6 +244,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Comentarios_cliente">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Comentarios" Type="Self.Comentarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="Comentarios">
+              <PropertyRef Name="id_cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comentarios_DireccionComentario">
+          <End Role="DireccionComentario" Type="Self.DireccionComentario" Multiplicity="1" />
+          <End Role="Comentarios" Type="Self.Comentarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DireccionComentario">
+              <PropertyRef Name="Id_direccion" />
+            </Principal>
+            <Dependent Role="Comentarios">
+              <PropertyRef Name="id_direccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comentarios_Empresa">
+          <End Role="Empresa" Type="Self.Empresa" Multiplicity="1" />
+          <End Role="Comentarios" Type="Self.Comentarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresa">
+              <PropertyRef Name="idEmpresa" />
+            </Principal>
+            <Dependent Role="Comentarios">
+              <PropertyRef Name="id_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DiaXParametroAgenda_DiaSemana">
           <End Role="DiaSemana" Type="Self.DiaSemana" Multiplicity="1" />
           <End Role="DiaXParametroAgenda" Type="Self.DiaXParametroAgenda" Multiplicity="*" />
@@ -361,8 +416,10 @@
           <EntitySet Name="Barrio" EntityType="Self.Barrio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ciudad" EntityType="Self.Ciudad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comentarios" EntityType="Self.Comentarios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DiaSemana" EntityType="Self.DiaSemana" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DiaXParametroAgenda" EntityType="Self.DiaXParametroAgenda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DireccionComentario" EntityType="Self.DireccionComentario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Domicilio" EntityType="Self.Domicilio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Empresa" EntityType="Self.Empresa" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Estado" EntityType="Self.Estado" Schema="dbo" store:Type="Tables" />
@@ -396,6 +453,18 @@
           <AssociationSet Name="FK_Cliente_Usuario" Association="Self.FK_Cliente_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comentarios_cliente" Association="Self.FK_Comentarios_cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Comentarios" EntitySet="Comentarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comentarios_DireccionComentario" Association="Self.FK_Comentarios_DireccionComentario">
+            <End Role="DireccionComentario" EntitySet="DireccionComentario" />
+            <End Role="Comentarios" EntitySet="Comentarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comentarios_Empresa" Association="Self.FK_Comentarios_Empresa">
+            <End Role="Empresa" EntitySet="Empresa" />
+            <End Role="Comentarios" EntitySet="Comentarios" />
           </AssociationSet>
           <AssociationSet Name="FK_DiaXParametroAgenda_DiaSemana" Association="Self.FK_DiaXParametroAgenda_DiaSemana">
             <End Role="DiaSemana" EntitySet="DiaSemana" />
@@ -674,6 +743,20 @@
             <End Role="Empresa" EntitySet="Empresa" />
             <End Role="ParametroAgenda" EntitySet="ParametroAgenda" />
           </AssociationSet>
+          <EntitySet Name="Comentarios" EntityType="GeoTurnosModel.Comentarios" />
+          <EntitySet Name="DireccionComentario" EntityType="GeoTurnosModel.DireccionComentario" />
+          <AssociationSet Name="FK_Comentarios_cliente" Association="GeoTurnosModel.FK_Comentarios_cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Comentarios" EntitySet="Comentarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comentarios_DireccionComentario" Association="GeoTurnosModel.FK_Comentarios_DireccionComentario">
+            <End Role="DireccionComentario" EntitySet="DireccionComentario" />
+            <End Role="Comentarios" EntitySet="Comentarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comentarios_Empresa" Association="GeoTurnosModel.FK_Comentarios_Empresa">
+            <End Role="Empresa" EntitySet="Empresa" />
+            <End Role="Comentarios" EntitySet="Comentarios" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Usuario">
           <Key>
@@ -839,7 +922,7 @@
             <PropertyRef Name="id_dia" />
           </Key>
           <Property Name="id_dia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="DiaXParametroAgenda">
           <Key>
@@ -897,6 +980,64 @@
               <PropertyRef Name="idEmpresa" />
             </Principal>
             <Dependent Role="ParametroAgenda">
+              <PropertyRef Name="id_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Comentarios">
+          <Key>
+            <PropertyRef Name="Id_comentario" />
+          </Key>
+          <Property Name="Id_comentario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nro" Type="Int32" Nullable="false" />
+          <Property Name="id_cliente" Type="Int32" Nullable="false" />
+          <Property Name="id_empresa" Type="Int32" Nullable="false" />
+          <Property Name="comentario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_comentario" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="id_direccion" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="GeoTurnosModel.FK_Comentarios_cliente" FromRole="Comentarios" ToRole="Cliente" />
+          <NavigationProperty Name="DireccionComentario" Relationship="GeoTurnosModel.FK_Comentarios_DireccionComentario" FromRole="Comentarios" ToRole="DireccionComentario" />
+          <NavigationProperty Name="Empresa" Relationship="GeoTurnosModel.FK_Comentarios_Empresa" FromRole="Comentarios" ToRole="Empresa" />
+        </EntityType>
+        <EntityType Name="DireccionComentario">
+          <Key>
+            <PropertyRef Name="Id_direccion" />
+          </Key>
+          <Property Name="Id_direccion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_Comentarios_cliente">
+          <End Type="GeoTurnosModel.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="GeoTurnosModel.Comentarios" Role="Comentarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="Comentarios">
+              <PropertyRef Name="id_cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comentarios_DireccionComentario">
+          <End Type="GeoTurnosModel.DireccionComentario" Role="DireccionComentario" Multiplicity="1" />
+          <End Type="GeoTurnosModel.Comentarios" Role="Comentarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DireccionComentario">
+              <PropertyRef Name="Id_direccion" />
+            </Principal>
+            <Dependent Role="Comentarios">
+              <PropertyRef Name="id_direccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comentarios_Empresa">
+          <End Type="GeoTurnosModel.Empresa" Role="Empresa" Multiplicity="1" />
+          <End Type="GeoTurnosModel.Comentarios" Role="Comentarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresa">
+              <PropertyRef Name="idEmpresa" />
+            </Principal>
+            <Dependent Role="Comentarios">
               <PropertyRef Name="id_empresa" />
             </Dependent>
           </ReferentialConstraint>
@@ -1066,6 +1207,27 @@
                 <ScalarProperty Name="id_empresa" ColumnName="id_empresa" />
                 <ScalarProperty Name="duracion_turno" ColumnName="duracion_turno" />
                 <ScalarProperty Name="id_param_agenda" ColumnName="id_param_agenda" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comentarios">
+            <EntityTypeMapping TypeName="GeoTurnosModel.Comentarios">
+              <MappingFragment StoreEntitySet="Comentarios">
+                <ScalarProperty Name="id_direccion" ColumnName="id_direccion" />
+                <ScalarProperty Name="fecha_comentario" ColumnName="fecha_comentario" />
+                <ScalarProperty Name="comentario" ColumnName="comentario" />
+                <ScalarProperty Name="id_empresa" ColumnName="id_empresa" />
+                <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
+                <ScalarProperty Name="nro" ColumnName="nro" />
+                <ScalarProperty Name="Id_comentario" ColumnName="Id_comentario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DireccionComentario">
+            <EntityTypeMapping TypeName="GeoTurnosModel.DireccionComentario">
+              <MappingFragment StoreEntitySet="DireccionComentario">
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="Id_direccion" ColumnName="Id_direccion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
