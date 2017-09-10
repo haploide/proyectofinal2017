@@ -812,11 +812,18 @@ app.controller("GestionarAgendaTurnosController", function ($scope, $http) {
 })
 app.controller("GestionarPlantillaAgenda", function ($scope, $http) {
 
-    $('#horarioLunes').jqxRangeSelector({
+    $scope.duracionTurnosData = [20,40,60];
+    
+    $('.selectorRango').jqxRangeSelector({
         width: 750, height: 10, min: new Date(2014, 5, 1, 0, 0, 0), max: new Date(2014, 5, 1, 24, 0, 0), range: { from: new Date(2014, 5, 1, 8, 0, 0), to: new Date(2014, 5, 1, 17, 0, 0) },
-        majorTicksInterval: { hours: 4 }, minorTicksInterval: { minutes: 30 }, labelsFormat: 'H:mm tt', markersFormat: 'H:mm tt'
+        majorTicksInterval: { hours: 4 }, minorTicksInterval: { minutes: 30 }, labelsFormat: 'H:mm tt', markersFormat: 'H:mm tt', showMinorTicks: true, disabled: true
     });
 
+    $scope.habilitarSelector = function (origen, datos) {
+
+        $('#' + origen).jqxRangeSelector({ disabled: !datos });
+        
+    }
 
 
 })
