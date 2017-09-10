@@ -1,12 +1,22 @@
-﻿<div class="container">
+﻿<div class="container" ng-controller="GestionarPlantillaAgenda">
 
     <div class="row">
 
         <div class="col-md-3">
             <h3>Dias Laborales</h3>
+
+            <input type="checkbox" id="chkDomingo">Domingo
+            <input type="checkbox" id="chkLunes">Lunes
+            <input type="checkbox" id="chkMartes">Martes
+            <input type="checkbox" id="chkMiercoles">Miercoles
+            <input type="checkbox" id="chkJueves">Jueves
+            <input type="checkbox" id="chkViernes">Viernes
+            <input type="checkbox" id="chkSabado">Sabados
         </div>
         <div class="col-md-9">
             <h3>Horario Laborable</h3>
+
+            <div id="horarioLunes"></div>
 
         </div>
 
