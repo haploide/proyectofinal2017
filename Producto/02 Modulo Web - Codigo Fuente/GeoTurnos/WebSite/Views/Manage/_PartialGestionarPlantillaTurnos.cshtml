@@ -7,33 +7,33 @@
 
 
         <div class="form-group">
-            <input type="checkbox" id="chkDomingo" ng-model="chkDomingo" ng-change="habilitarSelector('horarioDomingo',chkDomingo)">Domingo
+            <md-checkbox id="chkDomingo" ng-model="chkDomingo" ng-change="habilitarSelector('horarioDomingo',chkDomingo)">Domingo</md-checkbox>
             <div id="horarioDomingo" class="selectorRango"></div>
         </div>
 
 
         <div class="form-group">
-            <input type="checkbox" id="chkLunes" ng-model="chkLunes" ng-change="habilitarSelector('horarioLunes', chkLunes)">Lunes
+            <md-checkbox id="chkLunes" ng-model="chkLunes" ng-change="habilitarSelector('horarioLunes', chkLunes)">Lunes</md-checkbox>
             <div id="horarioLunes" class="selectorRango"></div>
         </div>
         <div class="form-group">
-            <input type="checkbox" id="chkMartes" ng-model="chkMartes" ng-change="habilitarSelector('horarioMartes',chkMartes)">Martes
+            <md-checkbox id="chkMartes" ng-model="chkMartes" ng-change="habilitarSelector('horarioMartes',chkMartes)">Martes</md-checkbox>
             <div id="horarioMartes" class="selectorRango"></div>
         </div>
         <div class="form-group">
-            <input type="checkbox" id="chkMiercoles" ng-model="chkMiercoles" ng-change="habilitarSelector('horarioMiercoles',chkMiercoles)">Miercoles
+            <md-checkbox id="chkMiercoles" ng-model="chkMiercoles" ng-change="habilitarSelector('horarioMiercoles',chkMiercoles)">Miercoles</md-checkbox>
             <div id="horarioMiercoles" class="selectorRango"></div>
         </div>
         <div class="form-group">
-            <input type="checkbox" id="chkJueves" ng-model="chkJueves" ng-change="habilitarSelector('horarioJueves',chkJueves)">Jueves
+            <md-checkbox id="chkJueves" ng-model="chkJueves" ng-change="habilitarSelector('horarioJueves',chkJueves)">Jueves</md-checkbox>
             <div id="horarioJueves" class="selectorRango"></div>
         </div>
         <div class="form-group">
-            <input type="checkbox" id="chkViernes" ng-model="chkViernes" ng-change="habilitarSelector('horarioViernes',chkViernes)">Viernes
+            <md-checkbox id="chkViernes" ng-model="chkViernes" ng-change="habilitarSelector('horarioViernes',chkViernes)">Viernes</md-checkbox>
             <div id="horarioViernes" class="selectorRango"></div>
         </div>
         <div class="form-group">
-            <input type="checkbox" id="chkSabado" ng-model="chkSabados" ng-change="habilitarSelector('horarioSabados',chkSabados)">Sabados
+            <md-checkbox id="chkSabado" ng-model="chkSabados" ng-change="habilitarSelector('horarioSabados',chkSabados)">Sabados</md-checkbox>
             <div id="horarioSabados" class="selectorRango"></div>
         </div>
 
@@ -44,24 +44,17 @@
                 <option value="{{duracion}}" ng-repeat="duracion in duracionTurnosData">{{duracion + ' Min'}}</option>
             </select>
         </div>
+        
 
         <div class="form-group">
-            <input type="checkbox" id="chkFeriadosLaborables" ng-model="chkFeriadosLaborables">Feriados Laborables
+            <md-checkbox id="chkFeriadosLaborables" ng-model="chkFeriadosLaborables" aria-label="Trabaja Feriados?">
+                Feriados Laborables
+            </md-checkbox>
         </div>
 
+        
         <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-</form>
-
-
-
-
-
-
-
-
-
-
-
+    </form>
 
 
 

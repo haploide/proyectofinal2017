@@ -1,5 +1,10 @@
-﻿var app = angular.module('geoturnos', []);
+﻿var app = angular.module('geoturnos', ['ngMaterial']);
 
+app.config(function ($mdThemingProvider) {
+    $mdThemingProvider.theme('default')
+    .accentPalette('blue');
+
+});
 app.controller("AdministacionController", function ($scope, $http) {
 
     $scope.contenidoATraer = 'PrincipalAdministracion';
@@ -812,7 +817,7 @@ app.controller("GestionarAgendaTurnosController", function ($scope, $http) {
 })
 app.controller("GestionarPlantillaAgenda", function ($scope, $http) {
 
-    $scope.duracionTurnosData = [20,40,60];
+    $scope.duracionTurnosData = [15,20,30,40,60];
     
     $('.selectorRango').jqxRangeSelector({
         width: 750, height: 10, min: new Date(2014, 5, 1, 0, 0, 0), max: new Date(2014, 5, 1, 24, 0, 0), range: { from: new Date(2014, 5, 1, 8, 0, 0), to: new Date(2014, 5, 1, 17, 0, 0) },
