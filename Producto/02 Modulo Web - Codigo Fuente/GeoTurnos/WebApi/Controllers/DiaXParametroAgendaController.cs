@@ -61,6 +61,42 @@ namespace WebApi.Controllers
 
 
 
+        public IHttpActionResult Put(int id, [FromBody]DiaXParametroAgenda diaXparam)
+        {
+            try
+            {
+                if (diaXparam == null)
+                {
+                    return BadRequest();
+                }
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+                if (id != diaXparam.id_param_agenda)
+                {
+                    return BadRequest();
+                }
+                if (_db.DiaXParametroAgenda.Count(e => e.id_param_agenda == id) == 0)
+                {
+                    return NotFound();
+                }
+                _db.Entry(diaXparam).State = System.Data.Entity.EntityState.Modified;
+
+                _db.SaveChanges();
+
+                return Ok(diaXparam);
+
+
+            }
+            catch (Exception ex)
+            {
+
+                return InternalServerError(ex);
+            }
+        }
+
+
 
         protected override void Dispose(bool disposing)
         {
