@@ -32,7 +32,7 @@ namespace WebApi.Controllers
         }
 
 
-        public IHttpActionResult Get(int id)
+        public IHttpActionResult Get(int id)//id de la empresa
         {
             try
             {
@@ -40,7 +40,7 @@ namespace WebApi.Controllers
                 {
                     return NotFound();
                 }
-                ParametroAgenda paramAg = _db.ParametroAgenda.FirstOrDefault(p => p.id_param_agenda == id);
+                ParametroAgenda paramAg = _db.ParametroAgenda.FirstOrDefault(p => p.id_empresa == id);
                 if (paramAg == null)
                 {
                     return NotFound();
@@ -60,7 +60,7 @@ namespace WebApi.Controllers
         {
             try
             {
-                if (_db.ParametroAgenda == null || !_db.ParametroAgenda.Any())
+                if (_db.ParametroAgenda == null /*|| !_db.ParametroAgenda.Any()*/)
                 {
                     return NotFound();
                 }

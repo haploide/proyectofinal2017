@@ -36,7 +36,7 @@ namespace WebApi.Controllers
         {
             try
             {
-                if (_db.DiaXParametroAgenda == null || !_db.DiaXParametroAgenda.Any())
+                if (_db.DiaXParametroAgenda == null /*|| !_db.DiaXParametroAgenda.Any()*/)
                 {
                     return NotFound();
                 }

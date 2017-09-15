@@ -107,7 +107,7 @@ app.controller("ActivarEmpresasController", function ($scope, $http) {
 
 
     }, function (response) {
-        
+
         httpNegativo(response.status);
 
     }).then(function () {
@@ -135,13 +135,13 @@ app.controller("ActivarEmpresasController", function ($scope, $http) {
                         $scope.empresas.splice(i, 1);
                     }
                 }
-                
+
                 notificar($("#notificaciones"), $("#mensajeNotificacion"), $("#contenedorNotificaciones"), 'success', 'Empresa activada correctamente');
 
             }
 
         }, function (response) {
-            
+
             httpNegativo(response.status);
 
         }).then(function () {
@@ -203,7 +203,7 @@ app.controller("GestionGeoposicionController", function ($scope, $http) {
 
 
     }, function (response) {
-        
+
         httpNegativo(response.status);
 
     }).then(function () {
@@ -224,7 +224,7 @@ app.controller("GestionGeoposicionController", function ($scope, $http) {
 
         }).then(function (response) {
             if (response.status === 200) {
-                
+
                 notificar($("#notificaciones"), $("#mensajeNotificacion"), $("#contenedorNotificaciones"), 'success', 'Geoposición Actualizada');
 
             }
@@ -272,15 +272,15 @@ app.controller("GestionGeoposicionController", function ($scope, $http) {
                 $('#longitud').val(posicion.lng);
             }
             if (response.data.status === 'ZERO_RESULTS') {
-                
+
                 notificar($("#notificaciones"), $("#mensajeNotificacion"), $("#contenedorNotificaciones"), 'info', 'No hubo resultados');
             }
             if (response.data.status === 'REQUEST_DENIED') {
-                
+
                 notificar($("#notificaciones"), $("#mensajeNotificacion"), $("#contenedorNotificaciones"), 'error', 'Petición rechazada');
             }
             if (response.data.status === 'INVALID_REQUEST') {
-                
+
                 notificar($("#notificaciones"), $("#mensajeNotificacion"), $("#contenedorNotificaciones"), 'warning', 'Petición invalida');
             }
             if (response.data.status === 'UNKNOWN_ERROR') {
@@ -290,7 +290,7 @@ app.controller("GestionGeoposicionController", function ($scope, $http) {
 
 
         }, function (response) {
-            
+
             httpNegativo(response.status);
 
         }).then(function () {
@@ -320,7 +320,7 @@ app.controller("registrarEmpresa", function ($scope, $http) {
         }
 
     }, function (response) {
-        
+
         httpNegativoSinContenedor(response.status);
 
     }).then(function () {
@@ -340,7 +340,7 @@ app.controller("registrarEmpresa", function ($scope, $http) {
         this.isBusy = false;
 
     }, function (response) {
-        
+
         httpNegativoSinContenedor(response.status);
 
     }).then(function () {
@@ -363,7 +363,7 @@ app.controller("registrarEmpresa", function ($scope, $http) {
             this.isBusy = false;
 
         }, function (response) {
-            
+
             httpNegativoSinContenedor(response.status);
 
         }).then(function () {
@@ -390,7 +390,7 @@ app.controller("registrarEmpresa", function ($scope, $http) {
             this.isBusy = false;
 
         }, function (response) {
-            
+
             httpNegativoSinContenedor(response.status);
 
         }).then(function () {
@@ -408,7 +408,7 @@ app.controller("registrarUsuario", function ($scope, $http) {
     $scope.provincias = [];
     $scope.ciudades = [];
     $scope.barrios = [];
-        
+
     $http({
         method: 'GET',
         url: 'http://localhost:6901/api/tipoDocumento',
@@ -422,7 +422,7 @@ app.controller("registrarUsuario", function ($scope, $http) {
         }
 
     }, function (response) {
-        
+
         httpNegativoSinContenedor(response.status);
 
     }).then(function () {
@@ -439,7 +439,7 @@ app.controller("registrarUsuario", function ($scope, $http) {
         if (response.status === 200) {
             angular.copy(response.data, $scope.provincias);
         }
-        
+
     }, function (response) {
 
         httpNegativoSinContenedor(response.status);
@@ -449,7 +449,7 @@ app.controller("registrarUsuario", function ($scope, $http) {
     });
 
     $scope.clickProvincias = function () {
-        
+
         $http({
             method: 'GET',
             url: 'http://localhost:6901/api/ciudad?id=' + $scope.provinciaSel,
@@ -461,10 +461,10 @@ app.controller("registrarUsuario", function ($scope, $http) {
             if (response.status === 200) {
                 angular.copy(response.data, $scope.ciudades);
             }
-            
+
 
         }, function (response) {
-            
+
             httpNegativoSinContenedor(response.status);
 
         }).then(function () {
@@ -487,9 +487,9 @@ app.controller("registrarUsuario", function ($scope, $http) {
             if (response.status === 200) {
                 angular.copy(response.data, $scope.barrios);
             }
-            
+
         }, function (response) {
-            
+
             httpNegativoSinContenedor(response.status);
 
         }).then(function () {
@@ -789,7 +789,7 @@ app.controller("BuscarTurnoFiltradoController", function ($scope, $http) {
 })
 app.controller("GestionarAgendaTurnosController", function ($scope, $http) {
 
-    $scope.submenu= function (evt, nombreMenu) {
+    $scope.submenu = function (evt, nombreMenu) {
         // Declare all variables
         var i, tabcontent, tablinks;
 
@@ -807,18 +807,23 @@ app.controller("GestionarAgendaTurnosController", function ($scope, $http) {
 
         // Show the current tab, and add an "active" class to the link that opened the tab
         document.getElementById(nombreMenu).style.display = "block";
-        evt.currentTarget.className += " active"; 
+        evt.currentTarget.className += " active";
     }
 
-    
+
 
 
 
 })
 app.controller("GestionarPlantillaAgenda", function ($scope, $http) {
 
-    $scope.duracionTurnosData = [15,20,30,40,60];
-    
+    $scope.duracionTurnosData = [15, 20, 30, 40, 60];
+
+    $scope.idPlantilla = -1;
+    $scope.chkFeriadosLaborables = false;
+
+    $("#loader").jqxLoader({ width: 100, height: 60, imagePosition: 'bottom', theme: 'bootstrap', text: 'Cargando...', textPosition: 'top', isModal: true });
+
     $('.selectorRango').jqxRangeSelector({
         width: 750, height: 10, min: new Date(2014, 5, 1, 0, 0, 0), max: new Date(2014, 5, 1, 24, 0, 0), range: { from: new Date(2014, 5, 1, 8, 0, 0), to: new Date(2014, 5, 1, 17, 0, 0) },
         majorTicksInterval: { hours: 4 }, minorTicksInterval: { minutes: 30 }, labelsFormat: 'H:mm tt', markersFormat: 'H:mm tt', showMinorTicks: true, disabled: true
@@ -827,9 +832,164 @@ app.controller("GestionarPlantillaAgenda", function ($scope, $http) {
     $scope.habilitarSelector = function (origen, datos) {
 
         $('#' + origen).jqxRangeSelector({ disabled: !datos });
-        
+
     }
 
+    $('#loader').jqxLoader('open');
+
+    $http({
+        method: 'GET',
+        url: 'http://localhost:6901/api/ParametroAgenda/' + retornarid(),
+        headers: {
+            'Accept': "application/json",
+
+        }
+    }).then(function (response) {
+        if (response.status === 200) {
+
+            $scope.idPlantilla = response.data.id_param_agenda;
+
+            $scope.duracionTurnoModel = response.data.duracion_turno;
+
+            $scope.chkFeriadosLaborables = response.data.atiende_feriado;
+
+            $http({
+                method: 'GET',
+                url: 'http://localhost:6901/api/DiaXParametroAgenda/' + response.data.id_param_agenda,
+                headers: {
+                    'Accept': "application/json",
+
+                }
+            }).then(function (response) {
+                if (response.status === 200) {
+
+                    for (i = 0; i < response.data.length; i++) {
+
+                        var checkbox = $("md-checkbox[id_dia*='" + response.data[i].id_dia + "']");
+
+                        $scope[checkbox[0].attributes['ng-model'].nodeValue] = true;
+
+
+                    }
+
+                    
+
+                }
+
+            }, function (response) {
+
+                httpNegativo(response.status);
+
+            }).then(function () {
+
+            });
+
+        }
+
+    }, function (response) {
+
+        switch (response.status) {
+            case 400:
+                notificar($("#notificaciones"), $("#mensajeNotificacion"), $("#contenedorNotificaciones"), 'warning', 'Solicitud errónea');
+                break;
+            case 401:
+                notificar($("#notificaciones"), $("#mensajeNotificacion"), $("#contenedorNotificaciones"), 'warning', 'No está autorizado para hacer esta petición');
+                break;
+            case 404:
+                
+                break;
+            case 500:
+                notificar($("#notificaciones"), $("#mensajeNotificacion"), $("#contenedorNotificaciones"), 'error', 'Error interno del servidor');
+                break;
+            default:
+                notificar($("#notificaciones"), $("#mensajeNotificacion"), $("#contenedorNotificaciones"), 'error', 'Error no identificado');
+
+        }
+
+    }).then(function () {
+        $('#loader').jqxLoader('close');
+    });
+
+    $scope.guardarPlantilla = function () {
+
+        $('#loader').jqxLoader('open');
+
+        if ($scope.idPlantilla === -1) {
+
+            var nuevaPlantilla = {};
+
+            nuevaPlantilla.duracion_turno = $scope.duracionTurnoModel;
+            nuevaPlantilla.id_empresa = retornarid();
+            nuevaPlantilla.atiende_feriado = $scope.chkFeriadosLaborables;
+
+            $http({
+                method: 'POST',
+                url: 'http://localhost:6901/api/ParametroAgenda/',
+                data: nuevaPlantilla,
+                headers: {
+                    'Accept': "application/json",
+
+                }
+            }).then(function (response) {
+                if (response.status === 201) {
+
+                    var array = $('.diaschk');
+                   
+
+
+                    for (i = 0; i < array.length; i++) {
+
+                        if ($scope[array[i].attributes['ng-model'].nodeValue]) {
+
+                            var dia = {};
+
+                            dia.id_param_agenda = response.data.id_param_agenda;
+                            dia.id_dia = Number(array[i].attributes['id_dia'].value);
+
+                            var rango = $('#horario' + array[i].innerText).jqxRangeSelector('getRange');
+
+                            dia.hora_inicio = moment(rango.from.getTime()).format('hh:mm:ss');
+                            dia.hora_fin = moment(rango.to.getTime()).format('hh:mm:ss');;
+
+                            $http({
+                                method: 'POST',
+                                url: 'http://localhost:6901/api/DiaXParametroAgenda',
+                                data: dia,
+                                headers: {
+                                    'Accept': "application/json",
+
+                                }
+                            }).then(function (response) { }, function (response) {
+
+                                httpNegativo(response.status);
+
+                            }).then(function () {
+
+                            });
+
+                        }
+
+                    }
+
+                }
+
+            }, function (response) {
+
+                httpNegativo(response.status);
+
+            }).then(function () {
+                $('#loader').jqxLoader('close');
+                notificar($("#notificaciones"), $("#mensajeNotificacion"), $("#contenedorNotificaciones"), 'success', 'Plantilla guardada con éxito');
+            });
+
+        }
+        else {
+            $('#loader').jqxLoader('close');
+            notificar($("#notificaciones"), $("#mensajeNotificacion"), $("#contenedorNotificaciones"), 'success', 'Plantilla guardada con éxito');
+            //TODO: Falta un update
+        }
+
+    }
 
 })
 
