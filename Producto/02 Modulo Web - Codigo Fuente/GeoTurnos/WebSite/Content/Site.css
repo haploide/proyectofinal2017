@@ -399,8 +399,23 @@ div.tab button.active {
 
     float: left;
     padding: 0px 12px;
-    border: 1px solid #ccc;
+    border: 1px solid gray;
     width: 85%;
     /*height: 300px;*/
 }
 /*------------------------------------------------------------------------------*/
+.plantillaDias{
+    margin-bottom: 15px;
+    margin-top: 15px;
+    border: 1px solid;
+    padding: 10px;
+    background-color: #e1f1ff;
+}
+.jqx-rangeselector, .jqx-rangeselector-content, .jqx-rangeselector-slider, .jqx-rangeselector-markers, .jqx-rangeselector-ticks-container, .jqx-rangeselector-ticks, .jqx-rangeselector-shutter {
+    margin: auto;
+}
+
+.md-label
+{
+    font-size: 18px;
+}
