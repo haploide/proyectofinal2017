@@ -849,7 +849,7 @@ app.controller("GestionarPlantillaAgenda", function ($scope, $http) {
 
             $scope.idPlantilla = response.data.id_param_agenda;
 
-            $scope.duracionTurnoModel = response.data.duracion_turno;
+            $('#duracionTurno').val(response.data.duracion_turno);
 
             $scope.chkFeriadosLaborables = response.data.atiende_feriado;
 
@@ -869,6 +869,12 @@ app.controller("GestionarPlantillaAgenda", function ($scope, $http) {
 
                         $scope[checkbox[0].attributes['ng-model'].nodeValue] = true;
 
+                        var rangoselector = $('#horario' + checkbox[0].innerText);
+
+                        var from = response.data[i].hora_inicio.split(':');
+                        var to = response.data[i].hora_fin.split(':');
+
+                        rangoselector.jqxRangeSelector({ disabled: false }).jqxRangeSelector('setRange', new Date(2014, 5, 1, Number(from[0]), Number(from[1]), 0), new Date(2014, 5, 1, Number(to[0]), Number(to[1]), 0));
 
                     }
 
@@ -935,21 +941,19 @@ app.controller("GestionarPlantillaAgenda", function ($scope, $http) {
 
                     var array = $('.diaschk');
                    
-
-
                     for (i = 0; i < array.length; i++) {
 
                         if ($scope[array[i].attributes['ng-model'].nodeValue]) {
 
                             var dia = {};
-
+                            $scope.idPlantilla = response.data.id_param_agenda;
                             dia.id_param_agenda = response.data.id_param_agenda;
                             dia.id_dia = Number(array[i].attributes['id_dia'].value);
 
                             var rango = $('#horario' + array[i].innerText).jqxRangeSelector('getRange');
 
-                            dia.hora_inicio = moment(rango.from.getTime()).format('hh:mm:ss');
-                            dia.hora_fin = moment(rango.to.getTime()).format('hh:mm:ss');;
+                            dia.hora_inicio = moment(rango.from.getTime()).format('HH:mm:ss');
+                            dia.hora_fin = moment(rango.to.getTime()).format('HH:mm:ss');;
 
                             $http({
                                 method: 'POST',
