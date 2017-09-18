@@ -677,6 +677,16 @@ app.controller("BuscarTurnoFiltradoController", function ($scope, $http) {
     $scope.provincias = [];
     $scope.ciudades = [];
     $scope.optionSelected = true;
+   
+    $scope.crearCalificacion = function () {
+        // Create jqxRating
+        $("#jqxRating").jqxRating({ width: 350, height: 35, theme: 'classic' });
+        $("#jqxRating").on('change', function (event) {
+            $("#rate").find('span').remove();
+            $("#rate").append('<span>' + event.value + '</span');
+        });
+
+    }
 
     $("#loader").jqxLoader({ width: 100, height: 60, imagePosition: 'bottom', theme: 'bootstrap', text: 'Cargando...', textPosition: 'top', isModal: true });
 
@@ -786,6 +796,13 @@ app.controller("BuscarTurnoFiltradoController", function ($scope, $http) {
             $('#loader').jqxLoader('close');
         });
     }
+   
+
+
+
+
+
+    
 })
 app.controller("GestionarAgendaTurnosController", function ($scope, $http) {
 
