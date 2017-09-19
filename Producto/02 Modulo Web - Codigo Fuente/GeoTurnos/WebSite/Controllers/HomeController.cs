@@ -54,7 +54,7 @@ namespace WebSite.Controllers
         {
             return PartialView("_PartialBuscarPorGeoposicion");
         }
-        
+        //[Autorizado(Roles =TipoUsuario.Prestatario)]
         public ActionResult PerfilEmpresa(string nombreEmpresa)
         {
             var model = new PerfilEmpresaViewModels() { razonSocial = nombreEmpresa };
