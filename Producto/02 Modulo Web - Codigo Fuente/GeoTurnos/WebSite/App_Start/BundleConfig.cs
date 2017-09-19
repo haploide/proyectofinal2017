@@ -25,6 +25,29 @@ namespace WebSite
                         "~/Scripts/jqxcore.js",
                         "~/Scripts/globalization/globalize.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/jqwidgests").Include(
+                        "~/Scripts/jqxdatetimeinput.js",
+                        "~/Scripts/jqxcalendar.js",
+                        "~/Scripts/jqxloader.js",
+                        "~/Scripts/jqxbuttons.js",
+                        "~/Scripts/jqxnotification.js",
+                        "~/Scripts/jqxrangeselector.js",
+                        "~/Scripts/jqxscrollbar.js",
+                        "~/Scripts/jqxdata.js",
+                        "~/Scripts/jqxdate.js",
+                        "~/Scripts/jqxscheduler.js",
+                        "~/Scripts/jqxscheduler.api.js",
+                        "~/Scripts/jqxmenu.js",
+                        "~/Scripts/jqxtooltip.js",
+                        "~/Scripts/jqxwindow.js",
+                        "~/Scripts/jqxcheckbox.js",
+                        "~/Scripts/jqxlistbox.js",
+                        "~/Scripts/jqxdropdownlist.js",
+                        "~/Scripts/jqxnumberinput.js",
+                        "~/Scripts/jqxradiobutton.js",
+                         "~/Scripts/jqxinput.js"
+                        ));
+
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
