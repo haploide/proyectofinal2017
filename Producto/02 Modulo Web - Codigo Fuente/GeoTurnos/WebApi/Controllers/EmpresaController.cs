@@ -72,14 +72,19 @@ namespace WebApi.Controllers
                            join b in _db.Barrio on d.idBarrio equals b.idBarrio
                            join c in _db.Ciudad on b.idCiudad equals c.idCiudad
                            join p in _db.Provincia on c.idProvincia equals p.idProvincia
+                           join com in _db.Comentarios on e.idEmpresa equals  com.id_empresa
                            where e.idEstado == 1
 
                            && (nombre!=null?e.razonSocial.ToUpper().Contains(nombre.ToUpper()):true)
                            && (rubro!=null?r.idRubro == rubro:true)
                            && (ciudad !=null? c.idCiudad == ciudad:true)
                            &&(prov!=null?p.idProvincia == prov:true)
-
-                           select e);
+                           //&&(com.id_direccion ==1)
+                           select new 
+                           {
+                               e,
+                               com.nro 
+                           });
                 if (emp == null)
                 {
                     return NotFound();
