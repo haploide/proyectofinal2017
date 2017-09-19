@@ -15,7 +15,7 @@ namespace WebApi.Models
     public partial class Comentarios
     {
         public int Id_comentario { get; set; }
-        public int nro { get; set; }
+        public decimal nro { get; set; }
         public int id_cliente { get; set; }
         public int id_empresa { get; set; }
         public string comentario { get; set; }

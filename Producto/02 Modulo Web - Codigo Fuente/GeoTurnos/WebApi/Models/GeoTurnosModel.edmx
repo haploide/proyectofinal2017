@@ -43,7 +43,7 @@
             <PropertyRef Name="Id_comentario" />
           </Key>
           <Property Name="Id_comentario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nro" Type="int" Nullable="false" />
+          <Property Name="nro" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="id_cliente" Type="int" Nullable="false" />
           <Property Name="id_empresa" Type="int" Nullable="false" />
           <Property Name="comentario" Type="varchar" MaxLength="200" />
@@ -743,8 +743,8 @@
             <End Role="Empresa" EntitySet="Empresa" />
             <End Role="ParametroAgenda" EntitySet="ParametroAgenda" />
           </AssociationSet>
-          <EntitySet Name="Comentarios" EntityType="GeoTurnosModel.Comentarios" />
           <EntitySet Name="DireccionComentario" EntityType="GeoTurnosModel.DireccionComentario" />
+          <EntitySet Name="Comentarios" EntityType="GeoTurnosModel.Comentarios" />
           <AssociationSet Name="FK_Comentarios_cliente" Association="GeoTurnosModel.FK_Comentarios_cliente">
             <End Role="Cliente" EntitySet="Cliente" />
             <End Role="Comentarios" EntitySet="Comentarios" />
@@ -757,7 +757,7 @@
             <End Role="Empresa" EntitySet="Empresa" />
             <End Role="Comentarios" EntitySet="Comentarios" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="Usuario">
           <Key>
             <PropertyRef Name="idUsuario" />
@@ -984,12 +984,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="DireccionComentario">
+          <Key>
+            <PropertyRef Name="Id_direccion" />
+          </Key>
+          <Property Name="Id_direccion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="Comentarios">
           <Key>
             <PropertyRef Name="Id_comentario" />
           </Key>
           <Property Name="Id_comentario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nro" Type="Int32" Nullable="false" />
+          <Property Name="nro" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="id_cliente" Type="Int32" Nullable="false" />
           <Property Name="id_empresa" Type="Int32" Nullable="false" />
           <Property Name="comentario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
@@ -998,13 +1005,6 @@
           <NavigationProperty Name="Cliente" Relationship="GeoTurnosModel.FK_Comentarios_cliente" FromRole="Comentarios" ToRole="Cliente" />
           <NavigationProperty Name="DireccionComentario" Relationship="GeoTurnosModel.FK_Comentarios_DireccionComentario" FromRole="Comentarios" ToRole="DireccionComentario" />
           <NavigationProperty Name="Empresa" Relationship="GeoTurnosModel.FK_Comentarios_Empresa" FromRole="Comentarios" ToRole="Empresa" />
-        </EntityType>
-        <EntityType Name="DireccionComentario">
-          <Key>
-            <PropertyRef Name="Id_direccion" />
-          </Key>
-          <Property Name="Id_direccion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_Comentarios_cliente">
           <End Type="GeoTurnosModel.Cliente" Role="Cliente" Multiplicity="1" />
@@ -1042,7 +1042,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1210,6 +1210,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="DireccionComentario">
+            <EntityTypeMapping TypeName="GeoTurnosModel.DireccionComentario">
+              <MappingFragment StoreEntitySet="DireccionComentario">
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="Id_direccion" ColumnName="Id_direccion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Comentarios">
             <EntityTypeMapping TypeName="GeoTurnosModel.Comentarios">
               <MappingFragment StoreEntitySet="Comentarios">
@@ -1220,14 +1228,6 @@
                 <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
                 <ScalarProperty Name="nro" ColumnName="nro" />
                 <ScalarProperty Name="Id_comentario" ColumnName="Id_comentario" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DireccionComentario">
-            <EntityTypeMapping TypeName="GeoTurnosModel.DireccionComentario">
-              <MappingFragment StoreEntitySet="DireccionComentario">
-                <ScalarProperty Name="direccion" ColumnName="direccion" />
-                <ScalarProperty Name="Id_direccion" ColumnName="Id_direccion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

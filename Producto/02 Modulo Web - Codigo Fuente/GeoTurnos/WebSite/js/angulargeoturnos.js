@@ -647,8 +647,8 @@ app.controller("BuscarTurnoGeoController", function ($scope, $http) {
     $scope.cargarMarcadores = function (item, index) {
 
 
-        if (item.Domicilio.latitud != null) {
-            var posicion = { lat: item.Domicilio.latitud, lng: item.Domicilio.longitud }
+        if (item.e.Domicilio.latitud != null) {
+            var posicion = { lat: item.e.Domicilio.latitud, lng: item.e.Domicilio.longitud }
 
             window.marker = new google.maps.Marker({
                 position: posicion,
