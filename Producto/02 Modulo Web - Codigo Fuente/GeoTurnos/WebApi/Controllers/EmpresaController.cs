@@ -65,25 +65,29 @@ namespace WebApi.Controllers
                 }
 
                 //var emp = _db.Empresa.Where(e => e.Estado.idEstado == 1);
-
+                Double prom = 0;
                 var emp = (from e in _db.Empresa
                            join r in _db.Rubro on e.Rubro.idRubro equals r.idRubro
                            join d in _db.Domicilio on e.idDomicilio equals d.idDomicilio
                            join b in _db.Barrio on d.idBarrio equals b.idBarrio
                            join c in _db.Ciudad on b.idCiudad equals c.idCiudad
                            join p in _db.Provincia on c.idProvincia equals p.idProvincia
-                           join com in _db.Comentarios on e.idEmpresa equals  com.id_empresa
+                           join com in _db.Comentarios on e.idEmpresa equals  com.id_empresa into comEmpresa
+                           from CE in comEmpresa.DefaultIfEmpty()
+                           
                            where e.idEstado == 1
 
                            && (nombre!=null?e.razonSocial.ToUpper().Contains(nombre.ToUpper()):true)
                            && (rubro!=null?r.idRubro == rubro:true)
                            && (ciudad !=null? c.idCiudad == ciudad:true)
                            &&(prov!=null?p.idProvincia == prov:true)
-                           //&&(com.id_direccion ==1)
+                           &&((CE!= null )? CE.id_direccion == 1:true)
+                          
                            select new 
                            {
                                e,
-                               com.nro 
+                               CE
+                               //prom 
                            });
                 if (emp == null)
                 {
