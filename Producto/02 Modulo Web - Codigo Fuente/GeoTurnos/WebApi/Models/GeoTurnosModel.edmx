@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="GeoTurnosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="GeoTurnosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Barrio">
           <Key>
             <PropertyRef Name="idBarrio" />
@@ -100,7 +100,7 @@
           <Property Name="nombreFantasia" Type="nvarchar" MaxLength="50" />
           <Property Name="inicioActividades" Type="date" />
           <Property Name="telefono" Type="nvarchar" MaxLength="50" />
-          <Property Name="logoEmpresa" Type="image" Nullable="false" />
+          <Property Name="logoEmpresa" Type="varbinary(max)" Nullable="false" />
           <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="idDomicilio" Type="int" />
           <Property Name="idRubro" Type="int" />
@@ -171,6 +171,34 @@
           <Property Name="preguntaSeguridad2" Type="nvarchar" MaxLength="50" />
           <Property Name="respuestaSeguridad2" Type="nvarchar" MaxLength="50" />
           <Property Name="idEstado" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GeoTurnos.dbo.VistaFiltroEmpresa' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VistaFiltroEmpresa">
+          <Key>
+            <PropertyRef Name="razonSocial" />
+            <PropertyRef Name="logoEmpresa" />
+            <PropertyRef Name="email" />
+            <PropertyRef Name="nombre" />
+            <PropertyRef Name="altura" />
+            <PropertyRef Name="calle" />
+            <PropertyRef Name="idRubro" />
+            <PropertyRef Name="idCiudad" />
+            <PropertyRef Name="idProvincia" />
+          </Key>
+          <Property Name="cuit" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="razonSocial" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="telefono" Type="nvarchar" MaxLength="50" />
+          <Property Name="logoEmpresa" Type="varbinary(max)" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="comentario" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="altura" Type="int" Nullable="false" />
+          <Property Name="calle" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="idRubro" Type="int" Nullable="false" />
+          <Property Name="idCiudad" Type="int" Nullable="false" />
+          <Property Name="idProvincia" Type="int" Nullable="false" />
+          <Property Name="id_direccion" Type="int" />
         </EntityType>
         <Association Name="FK_Barrio_Ciudad">
           <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="0..1" />
@@ -430,6 +458,23 @@
           <EntitySet Name="Rubro" EntityType="Self.Rubro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoDocumento" EntityType="Self.TipoDocumento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VistaFiltroEmpresa" EntityType="Self.VistaFiltroEmpresa" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VistaFiltroEmpresa].[cuit] AS [cuit], 
+    [VistaFiltroEmpresa].[razonSocial] AS [razonSocial], 
+    [VistaFiltroEmpresa].[telefono] AS [telefono], 
+    [VistaFiltroEmpresa].[logoEmpresa] AS [logoEmpresa], 
+    [VistaFiltroEmpresa].[email] AS [email], 
+    [VistaFiltroEmpresa].[nombre] AS [nombre], 
+    [VistaFiltroEmpresa].[comentario] AS [comentario], 
+    [VistaFiltroEmpresa].[altura] AS [altura], 
+    [VistaFiltroEmpresa].[calle] AS [calle], 
+    [VistaFiltroEmpresa].[idRubro] AS [idRubro], 
+    [VistaFiltroEmpresa].[idCiudad] AS [idCiudad], 
+    [VistaFiltroEmpresa].[idProvincia] AS [idProvincia], 
+    [VistaFiltroEmpresa].[id_direccion] AS [id_direccion]
+    FROM [dbo].[VistaFiltroEmpresa] AS [VistaFiltroEmpresa]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Barrio_Ciudad" Association="Self.FK_Barrio_Ciudad">
             <End Role="Ciudad" EntitySet="Ciudad" />
             <End Role="Barrio" EntitySet="Barrio" />
@@ -757,6 +802,7 @@
             <End Role="Empresa" EntitySet="Empresa" />
             <End Role="Comentarios" EntitySet="Comentarios" />
           </AssociationSet>
+          <EntitySet Name="VistaFiltroEmpresa" EntityType="GeoTurnosModel.VistaFiltroEmpresa" />
           </EntityContainer>
         <EntityType Name="Usuario">
           <Key>
@@ -1042,6 +1088,32 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="VistaFiltroEmpresa">
+          <Key>
+            <PropertyRef Name="razonSocial" />
+            <PropertyRef Name="logoEmpresa" />
+            <PropertyRef Name="email" />
+            <PropertyRef Name="nombre" />
+            <PropertyRef Name="altura" />
+            <PropertyRef Name="calle" />
+            <PropertyRef Name="idRubro" />
+            <PropertyRef Name="idCiudad" />
+            <PropertyRef Name="idProvincia" />
+          </Key>
+          <Property Name="cuit" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="razonSocial" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="logoEmpresa" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="comentario" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="altura" Type="Int32" Nullable="false" />
+          <Property Name="calle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idRubro" Type="Int32" Nullable="false" />
+          <Property Name="idCiudad" Type="Int32" Nullable="false" />
+          <Property Name="idProvincia" Type="Int32" Nullable="false" />
+          <Property Name="id_direccion" Type="Int32" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1228,6 +1300,25 @@
                 <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
                 <ScalarProperty Name="nro" ColumnName="nro" />
                 <ScalarProperty Name="Id_comentario" ColumnName="Id_comentario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VistaFiltroEmpresa">
+            <EntityTypeMapping TypeName="GeoTurnosModel.VistaFiltroEmpresa">
+              <MappingFragment StoreEntitySet="VistaFiltroEmpresa">
+                <ScalarProperty Name="id_direccion" ColumnName="id_direccion" />
+                <ScalarProperty Name="idProvincia" ColumnName="idProvincia" />
+                <ScalarProperty Name="idCiudad" ColumnName="idCiudad" />
+                <ScalarProperty Name="idRubro" ColumnName="idRubro" />
+                <ScalarProperty Name="calle" ColumnName="calle" />
+                <ScalarProperty Name="altura" ColumnName="altura" />
+                <ScalarProperty Name="comentario" ColumnName="comentario" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="logoEmpresa" ColumnName="logoEmpresa" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="razonSocial" ColumnName="razonSocial" />
+                <ScalarProperty Name="cuit" ColumnName="cuit" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

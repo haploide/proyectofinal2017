@@ -1015,6 +1015,7 @@ app.controller("GestionarPlantillaAgenda", function ($scope, $http) {
 })
 app.controller("SchedulerController", function ($scope, $http) {
 
+    var camposDatos = { background: "background", };
 
     $(document).ready(function () {
         var appointments = new Array();
