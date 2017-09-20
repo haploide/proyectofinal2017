@@ -107,7 +107,7 @@ app.controller("ActivarEmpresasController", function ($scope, $http) {
 
 
     }, function (response) {
-        
+
         httpNegativo(response.status);
 
     }).then(function () {
@@ -135,13 +135,13 @@ app.controller("ActivarEmpresasController", function ($scope, $http) {
                         $scope.empresas.splice(i, 1);
                     }
                 }
-                
+
                 notificar($("#notificaciones"), $("#mensajeNotificacion"), $("#contenedorNotificaciones"), 'success', 'Empresa activada correctamente');
 
             }
 
         }, function (response) {
-            
+
             httpNegativo(response.status);
 
         }).then(function () {
@@ -203,7 +203,7 @@ app.controller("GestionGeoposicionController", function ($scope, $http) {
 
 
     }, function (response) {
-        
+
         httpNegativo(response.status);
 
     }).then(function () {
@@ -224,7 +224,7 @@ app.controller("GestionGeoposicionController", function ($scope, $http) {
 
         }).then(function (response) {
             if (response.status === 200) {
-                
+
                 notificar($("#notificaciones"), $("#mensajeNotificacion"), $("#contenedorNotificaciones"), 'success', 'Geoposición Actualizada');
 
             }
@@ -272,15 +272,15 @@ app.controller("GestionGeoposicionController", function ($scope, $http) {
                 $('#longitud').val(posicion.lng);
             }
             if (response.data.status === 'ZERO_RESULTS') {
-                
+
                 notificar($("#notificaciones"), $("#mensajeNotificacion"), $("#contenedorNotificaciones"), 'info', 'No hubo resultados');
             }
             if (response.data.status === 'REQUEST_DENIED') {
-                
+
                 notificar($("#notificaciones"), $("#mensajeNotificacion"), $("#contenedorNotificaciones"), 'error', 'Petición rechazada');
             }
             if (response.data.status === 'INVALID_REQUEST') {
-                
+
                 notificar($("#notificaciones"), $("#mensajeNotificacion"), $("#contenedorNotificaciones"), 'warning', 'Petición invalida');
             }
             if (response.data.status === 'UNKNOWN_ERROR') {
@@ -290,7 +290,7 @@ app.controller("GestionGeoposicionController", function ($scope, $http) {
 
 
         }, function (response) {
-            
+
             httpNegativo(response.status);
 
         }).then(function () {
@@ -320,7 +320,7 @@ app.controller("registrarEmpresa", function ($scope, $http) {
         }
 
     }, function (response) {
-        
+
         httpNegativoSinContenedor(response.status);
 
     }).then(function () {
@@ -340,7 +340,7 @@ app.controller("registrarEmpresa", function ($scope, $http) {
         this.isBusy = false;
 
     }, function (response) {
-        
+
         httpNegativoSinContenedor(response.status);
 
     }).then(function () {
@@ -363,7 +363,7 @@ app.controller("registrarEmpresa", function ($scope, $http) {
             this.isBusy = false;
 
         }, function (response) {
-            
+
             httpNegativoSinContenedor(response.status);
 
         }).then(function () {
@@ -390,7 +390,7 @@ app.controller("registrarEmpresa", function ($scope, $http) {
             this.isBusy = false;
 
         }, function (response) {
-            
+
             httpNegativoSinContenedor(response.status);
 
         }).then(function () {
@@ -408,7 +408,7 @@ app.controller("registrarUsuario", function ($scope, $http) {
     $scope.provincias = [];
     $scope.ciudades = [];
     $scope.barrios = [];
-        
+
     $http({
         method: 'GET',
         url: 'http://localhost:6901/api/tipoDocumento',
@@ -422,7 +422,7 @@ app.controller("registrarUsuario", function ($scope, $http) {
         }
 
     }, function (response) {
-        
+
         httpNegativoSinContenedor(response.status);
 
     }).then(function () {
@@ -439,7 +439,7 @@ app.controller("registrarUsuario", function ($scope, $http) {
         if (response.status === 200) {
             angular.copy(response.data, $scope.provincias);
         }
-        
+
     }, function (response) {
 
         httpNegativoSinContenedor(response.status);
@@ -449,7 +449,7 @@ app.controller("registrarUsuario", function ($scope, $http) {
     });
 
     $scope.clickProvincias = function () {
-        
+
         $http({
             method: 'GET',
             url: 'http://localhost:6901/api/ciudad?id=' + $scope.provinciaSel,
@@ -461,10 +461,10 @@ app.controller("registrarUsuario", function ($scope, $http) {
             if (response.status === 200) {
                 angular.copy(response.data, $scope.ciudades);
             }
-            
+
 
         }, function (response) {
-            
+
             httpNegativoSinContenedor(response.status);
 
         }).then(function () {
@@ -487,9 +487,9 @@ app.controller("registrarUsuario", function ($scope, $http) {
             if (response.status === 200) {
                 angular.copy(response.data, $scope.barrios);
             }
-            
+
         }, function (response) {
-            
+
             httpNegativoSinContenedor(response.status);
 
         }).then(function () {
@@ -647,8 +647,8 @@ app.controller("BuscarTurnoGeoController", function ($scope, $http) {
     $scope.cargarMarcadores = function (item, index) {
 
 
-        if (item.Domicilio.latitud != null) {
-            var posicion = { lat: item.Domicilio.latitud, lng: item.Domicilio.longitud }
+        if (item.e.Domicilio.latitud != null) {
+            var posicion = { lat: item.e.Domicilio.latitud, lng: item.e.Domicilio.longitud }
 
             window.marker = new google.maps.Marker({
                 position: posicion,
@@ -677,6 +677,16 @@ app.controller("BuscarTurnoFiltradoController", function ($scope, $http) {
     $scope.provincias = [];
     $scope.ciudades = [];
     $scope.optionSelected = true;
+   
+    $scope.crearCalificacion = function () {
+        // Create jqxRating
+        $("#jqxRating").jqxRating({ width: 350, height: 35, theme: 'classic' });
+        $("#jqxRating").on('change', function (event) {
+            $("#rate").find('span').remove();
+            $("#rate").append('<span>' + event.value + '</span');
+        });
+
+    }
 
     $("#loader").jqxLoader({ width: 100, height: 60, imagePosition: 'bottom', theme: 'bootstrap', text: 'Cargando...', textPosition: 'top', isModal: true });
 
@@ -786,10 +796,17 @@ app.controller("BuscarTurnoFiltradoController", function ($scope, $http) {
             $('#loader').jqxLoader('close');
         });
     }
+   
+
+
+
+
+
+    
 })
 app.controller("GestionarAgendaTurnosController", function ($scope, $http) {
 
-    $scope.submenu= function (evt, nombreMenu) {
+    $scope.submenu = function (evt, nombreMenu) {
         // Declare all variables
         var i, tabcontent, tablinks;
 
@@ -807,18 +824,23 @@ app.controller("GestionarAgendaTurnosController", function ($scope, $http) {
 
         // Show the current tab, and add an "active" class to the link that opened the tab
         document.getElementById(nombreMenu).style.display = "block";
-        evt.currentTarget.className += " active"; 
+        evt.currentTarget.className += " active";
     }
 
-    
+
 
 
 
 })
 app.controller("GestionarPlantillaAgenda", function ($scope, $http) {
 
-    $scope.duracionTurnosData = [15,20,30,40,60];
-    
+    $scope.duracionTurnosData = [15, 20, 30, 40, 60];
+
+    $scope.idPlantilla = -1;
+    $scope.chkFeriadosLaborables = false;
+
+    $("#loader").jqxLoader({ width: 100, height: 60, imagePosition: 'bottom', theme: 'bootstrap', text: 'Cargando...', textPosition: 'top', isModal: true });
+
     $('.selectorRango').jqxRangeSelector({
         width: 750, height: 10, min: new Date(2014, 5, 1, 0, 0, 0), max: new Date(2014, 5, 1, 24, 0, 0), range: { from: new Date(2014, 5, 1, 8, 0, 0), to: new Date(2014, 5, 1, 17, 0, 0) },
         majorTicksInterval: { hours: 4 }, minorTicksInterval: { minutes: 30 }, labelsFormat: 'H:mm tt', markersFormat: 'H:mm tt', showMinorTicks: true, disabled: true
@@ -827,11 +849,292 @@ app.controller("GestionarPlantillaAgenda", function ($scope, $http) {
     $scope.habilitarSelector = function (origen, datos) {
 
         $('#' + origen).jqxRangeSelector({ disabled: !datos });
-        
+
     }
+
+    $('#loader').jqxLoader('open');
+
+    $http({
+        method: 'GET',
+        url: 'http://localhost:6901/api/ParametroAgenda/' + retornarid(),
+        headers: {
+            'Accept': "application/json",
+
+        }
+    }).then(function (response) {
+        if (response.status === 200) {
+
+            $scope.idPlantilla = response.data.id_param_agenda;
+
+            $('#duracionTurno').val(response.data.duracion_turno);
+
+            $scope.chkFeriadosLaborables = response.data.atiende_feriado;
+
+            $http({
+                method: 'GET',
+                url: 'http://localhost:6901/api/DiaXParametroAgenda/' + response.data.id_param_agenda,
+                headers: {
+                    'Accept': "application/json",
+
+                }
+            }).then(function (response) {
+                if (response.status === 200) {
+
+                    for (i = 0; i < response.data.length; i++) {
+
+                        var checkbox = $("md-checkbox[id_dia*='" + response.data[i].id_dia + "']");
+
+                        $scope[checkbox[0].attributes['ng-model'].nodeValue] = true;
+
+                        var rangoselector = $('#horario' + checkbox[0].innerText);
+
+                        var from = response.data[i].hora_inicio.split(':');
+                        var to = response.data[i].hora_fin.split(':');
+
+                        rangoselector.jqxRangeSelector({ disabled: false }).jqxRangeSelector('setRange', new Date(2014, 5, 1, Number(from[0]), Number(from[1]), 0), new Date(2014, 5, 1, Number(to[0]), Number(to[1]), 0));
+
+                    }
+
+                    
+
+                }
+
+            }, function (response) {
+
+                httpNegativo(response.status);
+
+            }).then(function () {
+
+            });
+
+        }
+
+    }, function (response) {
+
+        switch (response.status) {
+            case 400:
+                notificar($("#notificaciones"), $("#mensajeNotificacion"), $("#contenedorNotificaciones"), 'warning', 'Solicitud errónea');
+                break;
+            case 401:
+                notificar($("#notificaciones"), $("#mensajeNotificacion"), $("#contenedorNotificaciones"), 'warning', 'No está autorizado para hacer esta petición');
+                break;
+            case 404:
+                
+                break;
+            case 500:
+                notificar($("#notificaciones"), $("#mensajeNotificacion"), $("#contenedorNotificaciones"), 'error', 'Error interno del servidor');
+                break;
+            default:
+                notificar($("#notificaciones"), $("#mensajeNotificacion"), $("#contenedorNotificaciones"), 'error', 'Error no identificado');
+
+        }
+
+    }).then(function () {
+        $('#loader').jqxLoader('close');
+    });
+
+    $scope.guardarPlantilla = function () {
+
+        $('#loader').jqxLoader('open');
+
+        if ($scope.idPlantilla === -1) {
+
+            var nuevaPlantilla = {};
+
+            nuevaPlantilla.duracion_turno = $scope.duracionTurnoModel;
+            nuevaPlantilla.id_empresa = retornarid();
+            nuevaPlantilla.atiende_feriado = $scope.chkFeriadosLaborables;
+
+            $http({
+                method: 'POST',
+                url: 'http://localhost:6901/api/ParametroAgenda/',
+                data: nuevaPlantilla,
+                headers: {
+                    'Accept': "application/json",
+
+                }
+            }).then(function (response) {
+                if (response.status === 201) {
+
+                    var array = $('.diaschk');
+                   
+                    for (i = 0; i < array.length; i++) {
+
+                        if ($scope[array[i].attributes['ng-model'].nodeValue]) {
+
+                            var dia = {};
+                            $scope.idPlantilla = response.data.id_param_agenda;
+                            dia.id_param_agenda = response.data.id_param_agenda;
+                            dia.id_dia = Number(array[i].attributes['id_dia'].value);
+
+                            var rango = $('#horario' + array[i].innerText).jqxRangeSelector('getRange');
+
+                            dia.hora_inicio = moment(rango.from.getTime()).format('HH:mm:ss');
+                            dia.hora_fin = moment(rango.to.getTime()).format('HH:mm:ss');;
+
+                            $http({
+                                method: 'POST',
+                                url: 'http://localhost:6901/api/DiaXParametroAgenda',
+                                data: dia,
+                                headers: {
+                                    'Accept': "application/json",
+
+                                }
+                            }).then(function (response) { }, function (response) {
+
+                                httpNegativo(response.status);
+
+                            }).then(function () {
+
+                            });
+
+                        }
+
+                    }
+
+                }
+
+            }, function (response) {
+
+                httpNegativo(response.status);
+
+            }).then(function () {
+                $('#loader').jqxLoader('close');
+                notificar($("#notificaciones"), $("#mensajeNotificacion"), $("#contenedorNotificaciones"), 'success', 'Plantilla guardada con éxito');
+            });
+
+        }
+        else {
+            $('#loader').jqxLoader('close');
+            notificar($("#notificaciones"), $("#mensajeNotificacion"), $("#contenedorNotificaciones"), 'success', 'Plantilla guardada con éxito');
+            //TODO: Falta un update
+        }
+
+    }
+
+})
+app.controller("SchedulerController", function ($scope, $http) {
+
+    var camposDatos = { background: "background", };
+
+    $(document).ready(function () {
+        var appointments = new Array();
+        var appointment1 = {
+            id: "id1",
+            description: "George brings projector for presentations.",
+            location: "",
+            subject: "Quarterly Project Review Meeting",
+            calendar: "Room 1",
+            start: new Date(2017, 10, 23, 9, 0, 0),
+            end: new Date(2017, 10, 23, 16, 0, 0)
+        }
+        var appointment2 = {
+            id: "id2",
+            description: "",
+            location: "",
+            subject: "IT Group Mtg.",
+            calendar: "Room 2",
+            start: new Date(2017, 10, 24, 10, 0, 0),
+            end: new Date(2017, 10, 24, 15, 0, 0)
+        }
+        var appointment3 = {
+            id: "id3",
+            description: "",
+            location: "",
+            subject: "Course Social Media",
+            calendar: "Room 3",
+            start: new Date(2017, 10, 27, 11, 0, 0),
+            end: new Date(2017, 10, 27, 13, 0, 0)
+        }
+        var appointment4 = {
+            id: "id4",
+            description: "",
+            location: "",
+            subject: "New Projects Planning",
+            calendar: "Room 2",
+            start: new Date(2017, 10, 23, 16, 0, 0),
+            end: new Date(2017, 10, 23, 18, 0, 0)
+        }
+        var appointment5 = {
+            id: "id5",
+            description: "",
+            location: "",
+            subject: "Interview with James",
+            calendar: "Room 1",
+            start: new Date(2017, 10, 25, 15, 0, 0),
+            end: new Date(2017, 10, 25, 17, 0, 0)
+        }
+        var appointment6 = {
+            id: "id6",
+            description: "",
+            location: "",
+            subject: "Interview with Nancy",
+            calendar: "Room 4",
+            start: new Date(2017, 10, 26, 14, 0, 0),
+            end: new Date(2017, 10, 26, 16, 0, 0)
+        }
+        appointments.push(appointment1);
+        appointments.push(appointment2);
+        appointments.push(appointment3);
+        appointments.push(appointment4);
+        appointments.push(appointment5);
+        appointments.push(appointment6);
+        // prepare the data
+        var source =
+        {
+            dataType: "array",
+            dataFields: [
+                { name: 'id', type: 'string' },
+                { name: 'description', type: 'string' },
+                { name: 'location', type: 'string' },
+                { name: 'subject', type: 'string' },
+                { name: 'calendar', type: 'string' },
+                { name: 'start', type: 'date' },
+                { name: 'end', type: 'date' }
+            ],
+            id: 'id',
+            localData: appointments
+        };
+        var adapter = new $.jqx.dataAdapter(source);
+        $("#scheduler").jqxScheduler({
+            date: new $.jqx.date(2017, 11, 23),
+            width: 850,
+            height: 600,
+            source: adapter,
+            view: 'weekView',
+            showLegend: true,
+            ready: function () {
+                $("#scheduler").jqxScheduler('ensureAppointmentVisible', 'id1');
+            },
+            resources:
+            {
+                colorScheme: "scheme05",
+                dataField: "calendar",
+                source: new $.jqx.dataAdapter(source)
+            },
+            appointmentDataFields:
+            {
+                from: "start",
+                to: "end",
+                id: "id",
+                description: "description",
+                location: "location",
+                subject: "subject",
+                resourceId: "calendar"
+            },
+            views:
+            [
+                'dayView',
+                'weekView',
+                'monthView'
+            ]
+        });
+    });
+
 
 
 })
+
 
 var notificar = function (notificacion, contenedorMensaje, contenedor, template, mensaje) {
     notificacion.jqxNotification({

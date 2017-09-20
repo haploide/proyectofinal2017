@@ -211,6 +211,9 @@
       <DependentUpon>GeoTurnosModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UsuarioMobile.cs" />
+    <Compile Include="Models\VistaFiltroEmpresa.cs">
+      <DependentUpon>GeoTurnosModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

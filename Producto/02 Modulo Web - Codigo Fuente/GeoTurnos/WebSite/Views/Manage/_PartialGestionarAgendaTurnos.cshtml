@@ -5,7 +5,7 @@
     <div class="tab">
         <button class="tablinks active" ng-click="submenu($event, 'plantilla')" id="defaultOpen">Definir Plantilla</button>
         <button class="tablinks" ng-click="submenu($event, 'visualizarAgenda')">Visualizar Agenda</button>
-        <button class="tablinks" ng-click="submenu($event, 'Tokyo')">Tokyo</button>
+        <button class="tablinks" ng-click="submenu($event, 'historial')">Historial Agendas</button>
     </div>
 
     <div id="plantilla" class="tabcontent" ng-include="'GestionarPlantillaTurnos'">
@@ -17,9 +17,9 @@
         <p>Visualizar Agenda</p>
     </div>
 
-    <div id="Tokyo" class="tabcontent" hidden>
-        <h3>Tokyo</h3>
-        <p>Tokyo is the capital of Japan.</p>
+    <div id="historial" class="tabcontent" hidden>
+        <h3>Historial Agendas</h3>
+        <p>Historial Agendas</p>
     </div>
 
 
