@@ -176,6 +176,7 @@
 warning 6002: The table/view 'GeoTurnos.dbo.VistaFiltroEmpresa' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VistaFiltroEmpresa">
           <Key>
+            <PropertyRef Name="idEmpresa" />
             <PropertyRef Name="razonSocial" />
             <PropertyRef Name="logoEmpresa" />
             <PropertyRef Name="email" />
@@ -186,6 +187,7 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaFiltroEmpresa' does not have a 
             <PropertyRef Name="idCiudad" />
             <PropertyRef Name="idProvincia" />
           </Key>
+          <Property Name="idEmpresa" Type="int" Nullable="false" />
           <Property Name="cuit" Type="decimal" Precision="18" Scale="0" />
           <Property Name="razonSocial" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="telefono" Type="nvarchar" MaxLength="50" />
@@ -460,6 +462,7 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaFiltroEmpresa' does not have a 
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VistaFiltroEmpresa" EntityType="Self.VistaFiltroEmpresa" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
+    [VistaFiltroEmpresa].[idEmpresa] AS [idEmpresa], 
     [VistaFiltroEmpresa].[cuit] AS [cuit], 
     [VistaFiltroEmpresa].[razonSocial] AS [razonSocial], 
     [VistaFiltroEmpresa].[telefono] AS [telefono], 
@@ -1090,6 +1093,7 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaFiltroEmpresa' does not have a 
         </Association>
         <EntityType Name="VistaFiltroEmpresa">
           <Key>
+            <PropertyRef Name="idEmpresa" />
             <PropertyRef Name="razonSocial" />
             <PropertyRef Name="logoEmpresa" />
             <PropertyRef Name="email" />
@@ -1100,6 +1104,7 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaFiltroEmpresa' does not have a 
             <PropertyRef Name="idCiudad" />
             <PropertyRef Name="idProvincia" />
           </Key>
+          <Property Name="idEmpresa" Type="Int32" Nullable="false" />
           <Property Name="cuit" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="razonSocial" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -1319,6 +1324,7 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaFiltroEmpresa' does not have a 
                 <ScalarProperty Name="telefono" ColumnName="telefono" />
                 <ScalarProperty Name="razonSocial" ColumnName="razonSocial" />
                 <ScalarProperty Name="cuit" ColumnName="cuit" />
+                <ScalarProperty Name="idEmpresa" ColumnName="idEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

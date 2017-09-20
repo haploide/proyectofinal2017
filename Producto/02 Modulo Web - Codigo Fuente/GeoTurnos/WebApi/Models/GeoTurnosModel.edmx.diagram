@@ -42,7 +42,7 @@
         <AssociationConnector Association="GeoTurnosModel.FK_Comentarios_cliente" />
         <AssociationConnector Association="GeoTurnosModel.FK_Comentarios_DireccionComentario" />
         <AssociationConnector Association="GeoTurnosModel.FK_Comentarios_Empresa" />
-        <EntityTypeShape EntityType="GeoTurnosModel.VistaFiltroEmpresa" Width="1.5" PointX="5.625" PointY="5.125" />
+        <EntityTypeShape EntityType="GeoTurnosModel.VistaFiltroEmpresa" Width="1.5" PointX="7.625" PointY="14" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -14,6 +14,7 @@ namespace WebApi.Models
     
     public partial class VistaFiltroEmpresa
     {
+        public int idEmpresa { get; set; }
         public Nullable<decimal> cuit { get; set; }
         public string razonSocial { get; set; }
         public string telefono { get; set; }
