@@ -31,6 +31,90 @@ namespace WebApi.Controllers
             }
         }
 
+        public IHttpActionResult Get(int id)//Obtener id del Rubro
+        {
+            try
+            {
+                if (_db.Rubro == null || !_db.Rubro.Any())
+                {
+                    return NotFound();
+                }
+                Rubro rubro = _db.Rubro.FirstOrDefault(p => p.idRubro == id);
+                if (rubro == null)
+                {
+                    return NotFound();
+                }
+                return Ok(rubro);
+
+            }
+            catch (Exception ex)
+            {
+
+                return InternalServerError(ex);
+            }
+        }
+
+        public IHttpActionResult Post([FromBody]Rubro rubro)
+        {
+            try
+            {
+                if (_db.Rubro == null /*|| !_db.ParametroAgenda.Any()*/)
+                {
+                    return NotFound();
+                }
+                if (rubro == null)
+                {
+                    return BadRequest();
+                }
+
+                _db.Rubro.Add(rubro);
+
+                _db.SaveChanges();
+
+                return Created("api/Rubro/" + rubro.idRubro, rubro);
+
+            }
+            catch (Exception ex)
+            {
+
+                return InternalServerError(ex);
+            }
+        }
+
+        public IHttpActionResult Put(int id, [FromBody]Rubro rubro)
+        {
+            try
+            {
+                if (rubro == null)
+                {
+                    return BadRequest();
+                }
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+                if (id != rubro.idRubro)
+                {
+                    return BadRequest();
+                }
+                if (_db.Rubro.Count(e => e.idRubro == id) == 0)
+                {
+                    return NotFound();
+                }
+                _db.Entry(rubro).State = System.Data.Entity.EntityState.Modified;
+
+                _db.SaveChanges();
+
+                return Ok(rubro);
+            }
+            catch (Exception ex)
+            {
+
+                return InternalServerError(ex);
+            }
+        }
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
