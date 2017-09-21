@@ -45,7 +45,8 @@ namespace WebSite
                         "~/Scripts/jqxdropdownlist.js",
                         "~/Scripts/jqxnumberinput.js",
                         "~/Scripts/jqxradiobutton.js",
-                         "~/Scripts/jqxinput.js"
+                        "~/Scripts/jqxinput.js",
+                        "~/Scripts/jqxrating.js"
                         ));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're

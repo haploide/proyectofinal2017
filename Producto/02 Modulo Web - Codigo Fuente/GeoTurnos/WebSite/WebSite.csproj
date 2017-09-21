@@ -410,6 +410,7 @@
     <Content Include="Scripts\jqxnumberinput.js" />
     <Content Include="Scripts\jqxradiobutton.js" />
     <Content Include="Scripts\jqxrangeselector.js" />
+    <Content Include="Scripts\jqxrating.js" />
     <Content Include="Scripts\jqxscheduler.api.js" />
     <Content Include="Scripts\jqxscheduler.js" />
     <Content Include="Scripts\jqxscrollbar.js" />

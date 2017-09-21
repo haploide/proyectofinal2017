@@ -1018,7 +1018,7 @@ app.controller("GestionarPlantillaAgenda", function ($scope, $http) {
 })
 app.controller("SchedulerController", function ($scope, $http) {
 
-    var camposDatos = { background: "background", };
+    var camposDatos = { description: "description", draggable: "draggable", from: "from", id: "id", resizable: "resizable", resourceId: "resourceId", readOnly: "readOnly", style: "style", status: "status", to: "to", tooltip: "tooltip", timeZone: "timeZone" };
 
     $(document).ready(function () {
         var appointments = new Array();
@@ -1104,6 +1104,8 @@ app.controller("SchedulerController", function ($scope, $http) {
             width: 850,
             height: 600,
             source: adapter,
+            appointmentDataFields: camposDatos,
+            appointmentTooltips: true,
             view: 'weekView',
             showLegend: true,
             ready: function () {
