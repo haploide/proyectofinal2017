@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2cfd83ece12f4fc5877f2c4d4db473cd" Name="Diagram1" ZoomLevel="100">
+      <Diagram DiagramId="2cfd83ece12f4fc5877f2c4d4db473cd" Name="Diagram1" ZoomLevel="70">
         <EntityTypeShape EntityType="GeoTurnosModel.Barrio" Width="1.5" PointX="1.5" PointY="10.125" IsExpanded="true" />
         <EntityTypeShape EntityType="GeoTurnosModel.Ciudad" Width="1.5" PointX="1.5" PointY="13.125" IsExpanded="true" />
         <EntityTypeShape EntityType="GeoTurnosModel.Cliente" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />

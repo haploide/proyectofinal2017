@@ -59,14 +59,14 @@
                     </tr>
                     <tr class="media" data-ng-repeat="emp in empresas">
                         <th ng-hide="true">{{emp.e.idEmpresa }}</th>
-                        <th>{{emp.e.Rubro.nombre}}</th>
+                        <th>{{emp.e.nombre}}</th>
                         <th class="media-left media-middle"><img src="data:image/png;base64,{{emp.e.logoEmpresa}}" class="media-object" style="height:40px;width:40px" /></th>
                         <th>{{emp.e.cuit }}</th>
                         <th>{{emp.e.razonSocial }}</th>
                         <th>{{emp.e.telefono }}</th>
                         <th>{{emp.e.email }}</th>
-                        <th>{{emp.e.Domicilio.calle +' '+ emp.e.Domicilio.altura}}</th>
-                        <th>{{emp.CE.nro }}</th>
+                        <th>{{emp.e.calle +' '+ emp.e.altura}}</th>
+                        <th onloadstart="verCalificacion()" ><div id='jqxRating'></div></th>
                         <th><a ng-href="@Url.Action("PerfilEmpresa","Home")/{{emp.razonSocial }}" class="btn btn-primary">Ir a Empresa</a></th>
                     </tr>
                 </table>

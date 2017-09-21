@@ -677,19 +677,22 @@ app.controller("BuscarTurnoFiltradoController", function ($scope, $http) {
     $scope.provincias = [];
     $scope.ciudades = [];
     $scope.optionSelected = true;
+    $scope.verCalificacion = function () {
+        $("#jqxRating").jqxRating({
+            width: 350,
+            height: 35,
+            value: 4
+        });
+
+    }
    
     $scope.crearCalificacion = function () {
-        // Create jqxRating
-        $("#jqxRating").jqxRating({ width: 350, height: 35, theme: 'classic' });
-        $("#jqxRating").on('change', function (event) {
-            $("#rate").find('span').remove();
-            $("#rate").append('<span>' + event.value + '</span');
-        });
+        
 
     }
 
     $("#loader").jqxLoader({ width: 100, height: 60, imagePosition: 'bottom', theme: 'bootstrap', text: 'Cargando...', textPosition: 'top', isModal: true });
-
+    
     $http({
         method: 'GET',
         url: 'http://localhost:6901/api/rubro',
@@ -769,7 +772,7 @@ app.controller("BuscarTurnoFiltradoController", function ($scope, $http) {
 
         $http({
             method: 'GET',
-            url: 'http://localhost:6901/api/Empresa?nombre=' + nombreEmp + '&rubro=' + $scope.rubro + '&prov=' + $scope.prov + '&ciudad=' + $scope.ciudad,
+            url: 'http://localhost:6901/api/VistaFiltroEmpresa?nombre=' + nombreEmp + '&rubro=' + $scope.rubro + '&prov=' + $scope.prov + '&ciudad=' + $scope.ciudad,
             headers: {
                 'Accept': "application/json",
 
