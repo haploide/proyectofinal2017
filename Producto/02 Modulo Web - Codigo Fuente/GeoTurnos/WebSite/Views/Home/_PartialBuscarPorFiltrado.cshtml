@@ -44,7 +44,7 @@
             <h3>Resultados</h3>
             
             <div class="table-responsive">
-                <table class="table table-striped">
+                <table ng-open="verCalificacion()" class="table table-striped">
                     <tr class="info">
                         <th ng-hide="true">idEmpresa</th>
                         <th>Rubro</th>
@@ -66,7 +66,7 @@
                         <th>{{emp.e.telefono }}</th>
                         <th>{{emp.e.email }}</th>
                         <th>{{emp.e.calle +' '+ emp.e.altura}}</th>
-                        <th onloadstart="verCalificacion()" ><div id='jqxRating'></div></th>
+                        <th><span id="estrella{{emp.e.idEmpresa}}"></span></th>
                         <th><a ng-href="@Url.Action("PerfilEmpresa","Home")/{{emp.razonSocial }}" class="btn btn-primary">Ir a Empresa</a></th>
                     </tr>
                 </table>

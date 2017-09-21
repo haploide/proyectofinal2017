@@ -676,23 +676,30 @@ app.controller("BuscarTurnoFiltradoController", function ($scope, $http) {
     $scope.rubros = [];
     $scope.provincias = [];
     $scope.ciudades = [];
+    $scope.empresas = [];
     $scope.optionSelected = true;
     $scope.verCalificacion = function () {
-        $("#jqxRating").jqxRating({
-            width: 350,
-            height: 35,
-            value: 4
-        });
+
+
+
+        for (var i = 0; i < $scope.empresas.length; i++) {
+            if ($scope.empresas[i].e.comentario != null) {
+                var estrella = $('#estrella' + $scope.empresas[i].e.idEmpresa);
+                if (estrella.length > 0) {
+                    estrella.jqxRating({
+                        width: 100, height: 35, value: $scope.empresas[i].e.comentario, disabled: true
+                    });
+                }
+            }
+        }
+
+
 
     }
-   
-    $scope.crearCalificacion = function () {
-        
 
-    }
 
     $("#loader").jqxLoader({ width: 100, height: 60, imagePosition: 'bottom', theme: 'bootstrap', text: 'Cargando...', textPosition: 'top', isModal: true });
-    
+
     $http({
         method: 'GET',
         url: 'http://localhost:6901/api/rubro',
@@ -761,7 +768,7 @@ app.controller("BuscarTurnoFiltradoController", function ($scope, $http) {
     $scope.filtrarEmpresas = function () {
         $('#loader').jqxLoader('open');
 
-        $scope.empresas = [];
+
 
         var nombreEmp = '';
 
@@ -799,13 +806,13 @@ app.controller("BuscarTurnoFiltradoController", function ($scope, $http) {
             $('#loader').jqxLoader('close');
         });
     }
-   
 
 
 
 
 
-    
+
+
 })
 app.controller("GestionarAgendaTurnosController", function ($scope, $http) {
 
@@ -898,7 +905,7 @@ app.controller("GestionarPlantillaAgenda", function ($scope, $http) {
 
                     }
 
-                    
+
 
                 }
 
@@ -922,7 +929,7 @@ app.controller("GestionarPlantillaAgenda", function ($scope, $http) {
                 notificar($("#notificaciones"), $("#mensajeNotificacion"), $("#contenedorNotificaciones"), 'warning', 'No está autorizado para hacer esta petición');
                 break;
             case 404:
-                
+
                 break;
             case 500:
                 notificar($("#notificaciones"), $("#mensajeNotificacion"), $("#contenedorNotificaciones"), 'error', 'Error interno del servidor');
@@ -960,7 +967,7 @@ app.controller("GestionarPlantillaAgenda", function ($scope, $http) {
                 if (response.status === 201) {
 
                     var array = $('.diaschk');
-                   
+
                     for (i = 0; i < array.length; i++) {
 
                         if ($scope[array[i].attributes['ng-model'].nodeValue]) {
