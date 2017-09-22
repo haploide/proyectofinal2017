@@ -70,5 +70,12 @@ namespace WebSite.Controllers
 
             return View(model);
         }
+
+        //
+        //GET: ComentariosRating
+        public PartialViewResult ComentariosRating()
+        {
+            return PartialView("_PartialComentariosRating");
+        }
     }
 }

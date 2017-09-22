@@ -1023,6 +1023,12 @@ app.controller("GestionarPlantillaAgenda", function ($scope, $http) {
     }
 
 })
+app.controller("PerfilEmpresaController", function ($scope, $http) {
+
+    $scope.contenidoATraer = '/Home/ComentariosRating';
+
+
+});
 app.controller("SchedulerController", function ($scope, $http) {
 
     var camposDatos = { description: "description", draggable: "draggable", from: "from", id: "id", resizable: "resizable", resourceId: "resourceId", readOnly: "readOnly", style: "style", status: "status", to: "to", tooltip: "tooltip", timeZone: "timeZone" };
@@ -1115,7 +1121,12 @@ app.controller("SchedulerController", function ($scope, $http) {
         
     });
 });
+app.controller("ComentariosRatingController", function ($scope, $http) {
+    
 
+
+
+});
 
 
 

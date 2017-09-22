@@ -352,7 +352,6 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\angular.min.js.map" />
     <Content Include="Scripts\angular-route.min.js.map" />
     <EntityDeploy Include="Models\GeoturnosModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -366,7 +365,7 @@
     </Content>
     <Content Include="Scripts\angular-animate.min.js.map" />
     <Content Include="Scripts\angular-aria.min.js.map" />
-    <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Scripts\angular.min.js.map" />
     <Content Include="Scripts\globalization\globalize.culture.cs-CZ.js" />
     <Content Include="Scripts\globalization\globalize.culture.de-DE.js" />
     <Content Include="Scripts\globalization\globalize.culture.en-CA.js" />
@@ -381,12 +380,13 @@
     <Content Include="Scripts\globalization\globalize.culture.ru-RU.js" />
     <Content Include="Scripts\globalization\globalize.culture.sa-IN.js" />
     <Content Include="Scripts\globalization\globalize.js" />
-    <Content Include="Scripts\jquery-3.1.1.js" />
-    <Content Include="Scripts\jquery-3.1.1.min.js" />
-    <Content Include="Scripts\jquery-3.1.1.slim.js" />
-    <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
-    <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.1.1.min.map" />
+    <None Include="Scripts\jquery-3.2.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.2.1.js" />
+    <Content Include="Scripts\jquery-3.2.1.min.js" />
+    <Content Include="Scripts\jquery-3.2.1.slim.js" />
+    <Content Include="Scripts\jquery-3.2.1.slim.min.js" />
+    <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.2.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
@@ -468,6 +468,7 @@
     <Content Include="Views\Home\PerfilCliente.cshtml" />
     <Content Include="Views\Manage\_PartialGestionarAgendaTurnos.cshtml" />
     <Content Include="Views\Manage\_PartialGestionarPlantillaTurnos.cshtml" />
+    <Content Include="Views\Home\_PartialComentariosRating.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

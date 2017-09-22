@@ -3,8 +3,8 @@
     ViewBag.Title = "PerfilEmpresa";
 }
 
-<div class="container">
-    
+<div class="container" ng-controller="PerfilEmpresaController">
+   
     
     <div class="row" >
         <div class="col-md-3" style="background-color:chartreuse;">
@@ -24,7 +24,7 @@
 
     <div class="row">
     
-        <div class="col-md-12" style="background-color:coral;">comentarios y raiting de cada uno  (formulario parcial?)</div>
+        <div ng-include="contenidoATraer"></div>
     
     </div>
 
