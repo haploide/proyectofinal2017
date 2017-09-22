@@ -23,9 +23,7 @@ namespace WebApi.Controllers
                 {
                     return NotFound();
                 }
-
                 
-                Double prom = 0;
                 var emp = (from e in _db.VistaFiltroEmpresa
                           
                            where 1==1
@@ -35,7 +33,7 @@ namespace WebApi.Controllers
                            && (ciudad != null ? e.idCiudad == ciudad : true)
                            && (prov != null ? e.idProvincia == prov : true)
                            && ((e.id_direccion  != null) ? e.id_direccion == 1 : true)
-
+                           orderby e.comentario descending
                            select new
                            {
                                e,

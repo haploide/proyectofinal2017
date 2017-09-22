@@ -687,7 +687,7 @@ app.controller("BuscarTurnoFiltradoController", function ($scope, $http) {
                 var estrella = $('#estrella' + $scope.empresas[i].e.idEmpresa);
                 if (estrella.length > 0) {
                     estrella.jqxRating({
-                        width: 100, height: 35, value: $scope.empresas[i].e.comentario, disabled: true
+                        width: 100, height: 35, value: $scope.empresas[i].e.comentario, disabled: true, precision: 0.5
                     });
                 }
             }
@@ -1026,126 +1026,99 @@ app.controller("GestionarPlantillaAgenda", function ($scope, $http) {
 app.controller("SchedulerController", function ($scope, $http) {
 
     var camposDatos = { description: "description", draggable: "draggable", from: "from", id: "id", resizable: "resizable", resourceId: "resourceId", readOnly: "readOnly", style: "style", status: "status", to: "to", tooltip: "tooltip", timeZone: "timeZone" };
+    var localizacion = {
+        days: {
+            // full day names
+            names: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"],
+            // abbreviated day names
+            namesAbbr: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+            // shortest day names
+            namesShort: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"]
+        },
+        months: {
+            // full month names (13 months for lunar calendards -- 13th month should be "" if not lunar)
+            names: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octuber", "Noviembre", "Diciembre", ""],
+            // abbreviated month names
+            namesAbbr: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dec", ""]
+        },
+        loadString: "Cargando...",
+        clearString: "Limpiar",
+        todayString: "Hoy",
+        dayViewString: "Día",
+        weekViewString: "Semana",
+        monthViewString: "Semana",
+        toolBarPreviousButtonString: "Anterior",
+        toolBarNextButtonString: "Siguiente",
 
-    $(document).ready(function () {
-        var appointments = new Array();
-        var appointment1 = {
-            id: "id1",
-            description: "George brings projector for presentations.",
-            location: "",
-            subject: "Quarterly Project Review Meeting",
-            calendar: "Room 1",
-            start: new Date(2017, 10, 23, 9, 0, 0),
-            end: new Date(2017, 10, 23, 16, 0, 0)
-        }
-        var appointment2 = {
-            id: "id2",
-            description: "",
-            location: "",
-            subject: "IT Group Mtg.",
-            calendar: "Room 2",
-            start: new Date(2017, 10, 24, 10, 0, 0),
-            end: new Date(2017, 10, 24, 15, 0, 0)
-        }
-        var appointment3 = {
-            id: "id3",
-            description: "",
-            location: "",
-            subject: "Course Social Media",
-            calendar: "Room 3",
-            start: new Date(2017, 10, 27, 11, 0, 0),
-            end: new Date(2017, 10, 27, 13, 0, 0)
-        }
-        var appointment4 = {
-            id: "id4",
-            description: "",
-            location: "",
-            subject: "New Projects Planning",
-            calendar: "Room 2",
-            start: new Date(2017, 10, 23, 16, 0, 0),
-            end: new Date(2017, 10, 23, 18, 0, 0)
-        }
-        var appointment5 = {
-            id: "id5",
-            description: "",
-            location: "",
-            subject: "Interview with James",
-            calendar: "Room 1",
-            start: new Date(2017, 10, 25, 15, 0, 0),
-            end: new Date(2017, 10, 25, 17, 0, 0)
-        }
-        var appointment6 = {
-            id: "id6",
-            description: "",
-            location: "",
-            subject: "Interview with Nancy",
-            calendar: "Room 4",
-            start: new Date(2017, 10, 26, 14, 0, 0),
-            end: new Date(2017, 10, 26, 16, 0, 0)
-        }
-        appointments.push(appointment1);
-        appointments.push(appointment2);
-        appointments.push(appointment3);
-        appointments.push(appointment4);
-        appointments.push(appointment5);
-        appointments.push(appointment6);
-        // prepare the data
-        var source =
+    };
+
+    var vista = [{
+        type: 'weekView', workTime: { fromDayOfWeek: 2, toDayOfWeek: 6, fromHour: 8, toHour: 18 }, timeRuler: {
+            scale: 'halfHour', scaleStartHour: 07, scaleEndHour: 18
+    }
+}];
+
+    var appointments = [];
+
+    var source =
+    {
+        dataType: "array",
+        dataFields: [
+            { name: 'id', type: 'string' },
+            { name: 'description', type: 'string' },
+            { name: 'location', type: 'string' },
+            { name: 'subject', type: 'string' },
+            { name: 'calendar', type: 'string' },
+            { name: 'start', type: 'date' },
+            { name: 'end', type: 'date' }
+        ],
+        id: 'id',
+        localData: appointments
+    };
+    var adapter = new $.jqx.dataAdapter(source);
+    $("#scheduler").jqxScheduler({
+        date: new $.jqx.date('todayDate'),
+        width: 850,
+        height: 700,
+        source: adapter,
+        appointmentDataFields: camposDatos,
+        appointmentTooltips: true,
+        columnsHeight: 25,
+        contextMenu: false,
+        enableHover: false,
+        editDialog: false,
+        //min: new $.jqx.date('todayDate'),
+        localization: localizacion,
+        legendPosition: 'top',
+        theme: 'bootstrap',
+        timeZone: 'Argentina Standard Time',
+        view: 'weekView',
+        showLegend: true,
+        resources:
         {
-            dataType: "array",
-            dataFields: [
-                { name: 'id', type: 'string' },
-                { name: 'description', type: 'string' },
-                { name: 'location', type: 'string' },
-                { name: 'subject', type: 'string' },
-                { name: 'calendar', type: 'string' },
-                { name: 'start', type: 'date' },
-                { name: 'end', type: 'date' }
-            ],
-            id: 'id',
-            localData: appointments
-        };
-        var adapter = new $.jqx.dataAdapter(source);
-        $("#scheduler").jqxScheduler({
-            date: new $.jqx.date(2017, 11, 23),
-            width: 850,
-            height: 600,
-            source: adapter,
-            appointmentDataFields: camposDatos,
-            appointmentTooltips: true,
-            view: 'weekView',
-            showLegend: true,
-            ready: function () {
-                $("#scheduler").jqxScheduler('ensureAppointmentVisible', 'id1');
-            },
-            resources:
-            {
-                colorScheme: "scheme05",
-                dataField: "calendar",
-                source: new $.jqx.dataAdapter(source)
-            },
-            appointmentDataFields:
-            {
-                from: "start",
-                to: "end",
-                id: "id",
-                description: "description",
-                location: "location",
-                subject: "subject",
-                resourceId: "calendar"
-            },
-            views:
-            [
-                'dayView',
-                'weekView',
-                'monthView'
-            ]
-        });
+            colorScheme: "scheme05",
+            dataField: "calendar",
+            orientation: "horizontal",
+            source: new $.jqx.dataAdapter(source)
+        },
+        appointmentDataFields:
+        {
+            from: "start",
+            to: "end",
+            id: "id",
+            description: "description",
+            location: "location",
+            subject: "subject",
+            resourceId: "calendar"
+        },
+        views: vista
+        
     });
+});
 
 
 
-})
+
 
 
 var notificar = function (notificacion, contenedorMensaje, contenedor, template, mensaje) {
