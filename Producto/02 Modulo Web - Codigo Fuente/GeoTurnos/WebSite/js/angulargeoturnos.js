@@ -1031,7 +1031,20 @@ app.controller("PerfilEmpresaController", function ($scope, $http) {
 });
 app.controller("SchedulerController", function ($scope, $http) {
 
-    var camposDatos = { description: "description", draggable: "draggable", from: "from", id: "id", resizable: "resizable", resourceId: "resourceId", readOnly: "readOnly", style: "style", status: "status", to: "to", tooltip: "tooltip", timeZone: "timeZone" };
+    /*
+
+        TRAER INFORMACION DE LA EMPRESA   
+
+    */
+
+    //TODO: LLAMADA A LA WEBAPI PARA TRAER PARAMETROS
+
+    /*
+    
+    CONFIGURACION DEL SCHEDULER
+    
+    */
+    
     var localizacion = {
         days: {
             // full day names
@@ -1060,23 +1073,29 @@ app.controller("SchedulerController", function ($scope, $http) {
 
     var vista = [{
         type: 'weekView', workTime: { fromDayOfWeek: 2, toDayOfWeek: 6, fromHour: 8, toHour: 18 }, timeRuler: {
-            scale: 'halfHour', scaleStartHour: 07, scaleEndHour: 18
-    }
-}];
+            scale: 'tenMinutes', scaleStartHour: 07, scaleEndHour: 18
+        }
+    }];
+
+    var camposDatos = { description: "description", draggable: "draggable", from: "from", id: "id", resizable: "resizable", readOnly: "readOnly", to: "to", tooltip: "tooltip", timeZone: "timeZone", subject: "subject", resourceId: "calendar" };
 
     var appointments = [];
-
+           
     var source =
     {
         dataType: "array",
         dataFields: [
             { name: 'id', type: 'string' },
             { name: 'description', type: 'string' },
-            { name: 'location', type: 'string' },
+            { name: 'draggable', type: 'boolean' },
+            { name: 'resizable', type: 'boolean' },
+            { name: 'readOnly', type: 'boolean' },
             { name: 'subject', type: 'string' },
+            { name: 'tooltip', type: 'string' },
             { name: 'calendar', type: 'string' },
-            { name: 'start', type: 'date' },
-            { name: 'end', type: 'date' }
+            { name: 'timeZone', type: 'string' },
+            { name: 'from', type: 'date' },
+            { name: 'to', type: 'date' }
         ],
         id: 'id',
         localData: appointments
@@ -1104,25 +1123,50 @@ app.controller("SchedulerController", function ($scope, $http) {
         {
             colorScheme: "scheme05",
             dataField: "calendar",
-            orientation: "horizontal",
             source: new $.jqx.dataAdapter(source)
         },
-        appointmentDataFields:
-        {
-            from: "start",
-            to: "end",
-            id: "id",
-            description: "description",
-            location: "location",
-            subject: "subject",
-            resourceId: "calendar"
-        },
         views: vista
-        
+
     });
+    
+
+    /*
+    
+    EVENTOS
+    
+    */
+    var diasLaborables = [2, 3, 4, 5, 6];
+    var horarioLaborable = { from: 08, to: 18 };
+
+
+    $('#scheduler').on('cellClick', function (event) {
+
+        var fechayhora = event.args.date;
+        if ($.inArray(fechayhora.dayOfWeek(), diasLaborables) != -1) {
+            if ((fechayhora.hour() >= horarioLaborable.from) && (fechayhora.hour() < horarioLaborable.to)) {
+
+                var turno = { description: "Turno", draggable: false, from: fechayhora, id: "01", resizable: false, calendar: "Ocupado", readOnly: true, to: fechayhora.addMinutes(40), tooltip: "Ocupado", timeZone: 'Argentina Standard Time', subject:'Ocupado' };
+
+                $('#scheduler').jqxScheduler('addAppointment', turno);
+            }
+            else {
+                alert('No Trabaja en ese Horario');
+            }
+        } else {
+            alert('No Trabaja Ese dia');
+        }
+
+        //var args = event.args; var cell = args.cell; var date = args.date;
+
+
+    });
+
+
+
+
 });
 app.controller("ComentariosRatingController", function ($scope, $http) {
-    
+
 
 
 
