@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GeoTurnosMobile.MenuPrincipal">
+    
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="White">
+            
+
+            <Button x:Name="btnNuevoTurno"
+                    HorizontalOptions="Center"
+                    Text="Nuevo Turno"
+                    Clicked="btnNuevoTurnoClicked"/>
+
+            <Button x:Name="btnMisTurnos"
+                    HorizontalOptions="Center"
+                    Text="Mis Turnos"
+                    Clicked="btnMisTurnosClicked"/>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

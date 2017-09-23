@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:GeoTurnosMobile"
+             x:Class="GeoTurnosMobile.MainPage">
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="10,30,10,10" Spacing="10" BackgroundColor="White">
+                <Image Source="Logo.png"></Image>
+
+                <ActivityIndicator x:Name="awaitActivityIndicator"/>
+                <Entry x:Name="usuarioEntry"
+                   Placeholder="Ingrese Usuario"
+                   HorizontalTextAlignment="Center"/>
+
+                <Entry x:Name="passEntry"
+                   IsPassword="True"
+                   Placeholder="Ingrese Password"
+                   HorizontalTextAlignment="Center"/>
+                
+
+                <Button x:Name="btnLogin"
+                    HorizontalOptions="Center"
+                    Text="Login"
+                    Clicked="btnLoginClicked"/>
+
+                <Button x:Name="btnOlvidoPass"
+                    HorizontalOptions="Center"
+                    Text="Olvido su Password"
+                    Clicked="btnOlvidoPassClicked"/>
+
+                <Button x:Name="btnRegistrarse"
+                    HorizontalOptions="Center"
+                    Text="Registrarse"
+                    Clicked="btnRegistrarseClicked"/>
+
+
+            </StackLayout>
+        </ScrollView>
+
+    </ContentPage.Content>
+
+</ContentPage>
