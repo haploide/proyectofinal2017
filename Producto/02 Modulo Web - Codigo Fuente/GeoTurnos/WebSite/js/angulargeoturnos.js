@@ -25,6 +25,9 @@ app.controller("AdministacionController", function ($scope, $http) {
             case 'activacionEmpresa':
                 $scope.contenidoATraer = 'ActivacionEmpresa';
                 break;
+            case 'gestionRubro':
+                $scope.contenidoATraer = 'GestionRubro';
+                break;
         }
 
 
@@ -103,6 +106,66 @@ app.controller("ActivarEmpresasController", function ($scope, $http) {
     }).then(function (response) {
         if (response.status === 200) {
             angular.copy(response.data, $scope.empresas);
+        }
+
+
+    }, function (response) {
+
+        httpNegativo(response.status);
+
+    }).then(function () {
+
+    });
+
+    $scope.upDateEstadoEmpresa = function (emp) {
+        // aca se cambia el estado de la empresa para activarla
+        emp.idEstado = 1;
+        emp.Estado.idEstado = 1;
+        $http({
+
+            method: 'PUT',
+            url: 'http://localhost:6901/api/Empresa/' + emp.idEmpresa,
+            data: emp,
+            headers: {
+                'Accept': "application/json"
+            }
+
+        }).then(function (response) {
+            if (response.status === 200) {
+
+                for (var i = 0; i < $scope.empresas.length ; i++) {
+                    if ($scope.empresas[i].idEmpresa == emp.idEmpresa) {
+                        $scope.empresas.splice(i, 1);
+                    }
+                }
+
+                notificar($("#notificaciones"), $("#mensajeNotificacion"), $("#contenedorNotificaciones"), 'success', 'Empresa activada correctamente');
+
+            }
+
+        }, function (response) {
+
+            httpNegativo(response.status);
+
+        }).then(function () {
+
+        });
+    }
+
+})
+app.controller("GestionRubroController", function ($scope, $http) {
+
+    $scope.rubro = [];
+    $http({
+        method: 'GET',
+        url: 'http://localhost:6901/api/Rubro',
+        headers: {
+            'Accept': "application/json",
+
+        }
+    }).then(function (response) {
+        if (response.status === 200) {
+            angular.copy(response.data, $scope.rubro);
         }
 
 

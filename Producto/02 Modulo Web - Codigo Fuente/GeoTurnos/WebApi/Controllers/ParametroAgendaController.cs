@@ -43,6 +43,7 @@ namespace WebApi.Controllers
                 ParametroAgenda paramAg = _db.ParametroAgenda.FirstOrDefault(p => p.id_empresa == id);
                 if (paramAg == null)
                 {
+                    
                     return NotFound();
                 }
                 return Ok(paramAg);

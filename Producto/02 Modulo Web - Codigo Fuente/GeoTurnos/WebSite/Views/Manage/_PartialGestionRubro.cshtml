@@ -1,0 +1,24 @@
+﻿<link rel="stylesheet" href="~/Content/Site.css" type="text/css" />
+
+<div class="container" ng-controller="GestionRubroController">
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-lg-6">
+            <table class="table table-striped">
+                <tr class="info">
+                    <th ng-hide="true">idRubro</th>
+                    <th>Rubro</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr class="media filaActivarEmpresa" data-ng-repeat="rub in rubro">
+                    <th ng-hide="true">{{rub.idRubro }}</th>
+                    <th>{{rub.nombre}}</th>
+                    <th><a ng-click="upDateEstadoEmpresa(emp)" class="btn btn-primary">Modificar</a></th>
+                    <th><a ng-click="upDateEstadoEmpresa(emp)" class="btn btn-danger">Eliminar</a></th>
+                </tr>
+            </table>
+        </div>
+        <div id="notificaciones"><div id="mensajeNotificacion"></div></div>
+        <div id="contenedorNotificaciones" class="contenedorNotificaciones"></div>
+    </div>
+</div>

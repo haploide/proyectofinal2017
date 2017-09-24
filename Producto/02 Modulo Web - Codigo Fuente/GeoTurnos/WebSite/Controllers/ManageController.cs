@@ -75,6 +75,14 @@ namespace WebSite.Controllers
         }
         //
         //GET: ActivacionEmpresa
+
+        public PartialViewResult GestionRubro()
+        {
+            return PartialView("_PartialGestionRubro");
+        }
+        //
+        //GET: GestionRubro
+
         public PartialViewResult ActivacionEmpresa()
         {
             return PartialView("_PartialActivacionEmpresa");

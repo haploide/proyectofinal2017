@@ -342,6 +342,15 @@ textarea {
     border-radius: 20px !important;
     transition-duration: 0.4s;
 }
+.btn-danger {
+    transition-duration: 0.4s;
+    background-color: #d9534f;
+}
+
+.btn-danger:hover {
+    border-radius: 20px !important;
+    transition-duration: 0.4s;
+}
 
 .home2 div{
     padding:50px;
