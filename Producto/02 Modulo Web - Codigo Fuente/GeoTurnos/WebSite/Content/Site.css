@@ -428,3 +428,18 @@ div.tab button.active {
 {
     font-size: 18px;
 }
+
+.tituloGestionarRubro
+{
+    font-size:30px;
+}
+.botonNuevoRubro
+{
+    margin-left: 30px;
+    margin-top: -5px;
+}
+
+.botonGuardarRubro
+{
+        margin-bottom: 20px;
+}
