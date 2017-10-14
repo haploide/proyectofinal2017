@@ -7,7 +7,7 @@
             <hr style="border-top: 2px solid #1d2980;"/>
             <div class="form-group">
                 <label for="rubro">Rubro:</label>
-                <input type="text" class="form-control" id="rubro"/>
+                <input type="text" ng-model="nombreRubro" class="form-control" id="rubro"/>
             </div>
             <button type="submit" class="btn btn-primary botonGuardarRubro" ng-click="guardarRubro()">Guardar Rubro</button>
         </div>
@@ -22,7 +22,7 @@
                 <tr class="media filaActivarEmpresa" data-ng-repeat="rub in rubro">
                     <th ng-hide="true">{{rub.idRubro }}</th>
                     <th>{{rub.nombre}}</th>
-                    <th><a ng-click="upDatoRubro(rub)" class="btn btn-primary">Modificar</a></th>
+                    <th><a ng-click="upDateRubro(rub)" class="btn btn-primary">Modificar</a></th>
                     <th><a ng-click="eliminarRubro(rub)" class="btn btn-danger">Eliminar</a></th>
                 </tr>
             </table>

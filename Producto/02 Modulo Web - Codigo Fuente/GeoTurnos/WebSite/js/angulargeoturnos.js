@@ -167,8 +167,7 @@ app.controller("GestionRubroController", function ($scope, $http) {
         if (response.status === 200) {
             angular.copy(response.data, $scope.rubro);
         }
-
-
+        
     }, function (response) {
 
         httpNegativo(response.status);
@@ -176,6 +175,29 @@ app.controller("GestionRubroController", function ($scope, $http) {
     }).then(function () {
 
     });
+
+    $scope.guardarRubro = function () {
+        alert("Hola Mundo!");
+        var nuevoRubro = {};
+        nuevoRubro.nombre = $scope.nombreRubro;
+        $http({
+            method: 'POST',
+            url: 'http://localhost:6901/api/Rubro',
+            data: nuevoRubro,
+            headers: {
+                'Accept': "application/json",
+
+            }
+        }).then(function (response) { }, function (response) {
+
+            httpNegativo(response.status);
+
+        }).then(function () {
+
+        });
+
+        alert("Hola Mundo!");
+    }
 
     $scope.upDateEstadoEmpresa = function (emp) {
         // aca se cambia el estado de la empresa para activarla
@@ -479,7 +501,7 @@ app.controller("registrarUsuario", function ($scope, $http) {
             'Accept': "application/json"
         }
 
-    }).then(function (response) {
+    }).then(function (response) {   
         if (response.status === 200) {
             angular.copy(response.data, $scope.tipoDoc);
         }
