@@ -1119,7 +1119,7 @@ app.controller("SchedulerController", function ($scope, $http) {
         },
         months: {
             // full month names (13 months for lunar calendards -- 13th month should be "" if not lunar)
-            names: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octuber", "Noviembre", "Diciembre", ""],
+            names: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre", ""],
             // abbreviated month names
             namesAbbr: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dec", ""]
         },
@@ -1140,10 +1140,10 @@ app.controller("SchedulerController", function ($scope, $http) {
         }
     }];
 
-    var camposDatos = { description: "description", draggable: "draggable", from: "from", id: "id", resizable: "resizable", readOnly: "readOnly", to: "to", tooltip: "tooltip", timeZone: "timeZone", subject: "subject", resourceId: "calendar" };
+    var camposDatos = { description: "description", background: "background", draggable: "draggable", from: "from", id: "id", resizable: "resizable", readOnly: "readOnly", to: "to", tooltip: "tooltip", timeZone: "timeZone", subject: "subject", borderColor: "borderColor", resourceId: "calendar" };
 
     var appointments = [];
-           
+    
     var source =
     {
         dataType: "array",
@@ -1154,6 +1154,8 @@ app.controller("SchedulerController", function ($scope, $http) {
             { name: 'resizable', type: 'boolean' },
             { name: 'readOnly', type: 'boolean' },
             { name: 'subject', type: 'string' },
+            { name: 'background', type: 'string' },
+            { name: 'borderColor', type: 'string' },
             { name: 'tooltip', type: 'string' },
             { name: 'calendar', type: 'string' },
             { name: 'timeZone', type: 'string' },
@@ -1208,7 +1210,7 @@ app.controller("SchedulerController", function ($scope, $http) {
         if ($.inArray(fechayhora.dayOfWeek(), diasLaborables) != -1) {
             if ((fechayhora.hour() >= horarioLaborable.from) && (fechayhora.hour() < horarioLaborable.to)) {
 
-                var turno = { description: "Turno", draggable: false, from: fechayhora, id: "01", resizable: false, calendar: "Ocupado", readOnly: true, to: fechayhora.addMinutes(40), tooltip: "Ocupado", timeZone: 'Argentina Standard Time', subject:'Ocupado' };
+                var turno = { description: "Turno", draggable: false, from: fechayhora, id: "01", resizable: false, calendar: "Mi turno", readOnly: true, to: fechayhora.addMinutes(30), tooltip: "Mi turno", timeZone: 'Argentina Standard Time', subject: 'Mi turno', background: '#6EB97D', borderColor: '#6EB97D' };
 
                 $('#scheduler').jqxScheduler('addAppointment', turno);
             }
@@ -1220,12 +1222,19 @@ app.controller("SchedulerController", function ($scope, $http) {
         }
 
         //var args = event.args; var cell = args.cell; var date = args.date;
-
-
+        
     });
 
+    var app1 = { description: "Turno", draggable: false, from: new $.jqx.date(2017, 10, 3, 8, 0, 0, 0), id: "02", resizable: false, calendar: "Ocupado", readOnly: true, to: new $.jqx.date(2017, 10, 3, 8, 30, 0, 0), tooltip: "Ocupado", timeZone: 'Argentina Standard Time', subject: 'Ocupado', background: '#66BCE5', borderColor: '#66BCE5' };
+    var app2 = { description: "Turno", draggable: false, from: new $.jqx.date(2017, 10, 4, 9, 30, 0, 0), id: "03", resizable: false, calendar: "Ocupado", readOnly: true, to: new $.jqx.date(2017, 10, 4, 10, 0, 0, 0), tooltip: "Ocupado", timeZone: 'Argentina Standard Time', subject: 'Ocupado', background: '#66BCE5', borderColor: '#66BCE5' };
+    var app3 = { description: "Turno", draggable: false, from: new $.jqx.date(2017, 10, 5, 9, 0, 0, 0), id: "04", resizable: false, calendar: "Ocupado", readOnly: true, to: new $.jqx.date(2017, 10, 5, 9, 30, 0, 0), tooltip: "Ocupado", timeZone: 'Argentina Standard Time', subject: 'Ocupado', background: '#66BCE5', borderColor: '#66BCE5' };
+    var app4 = { description: "Turno", draggable: false, from: new $.jqx.date(2017, 10, 4, 9, 0, 0, 0), id: "05", resizable: false, calendar: "Ocupado", readOnly: true, to: new $.jqx.date(2017, 10, 4, 9, 30, 0, 0), tooltip: "Ocupado", timeZone: 'Argentina Standard Time', subject: 'Ocupado', background: '#66BCE5', borderColor: '#66BCE5' };
 
+    $('#scheduler').jqxScheduler('addAppointment', app1);
+    $('#scheduler').jqxScheduler('addAppointment', app2);
 
+    $('#scheduler').jqxScheduler('addAppointment', app3);
+    $('#scheduler').jqxScheduler('addAppointment', app4);
 
 });
 app.controller("ComentariosRatingController", function ($scope, $http) {
