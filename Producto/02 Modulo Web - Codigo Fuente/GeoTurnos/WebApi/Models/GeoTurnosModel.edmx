@@ -49,6 +49,7 @@
           <Property Name="comentario" Type="varchar" MaxLength="200" />
           <Property Name="fecha_comentario" Type="date" Nullable="false" />
           <Property Name="id_direccion" Type="int" Nullable="false" />
+          <Property Name="titulo" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="DiaSemana">
           <Key>
@@ -194,13 +195,15 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaFiltroEmpresa' does not have a 
           <Property Name="logoEmpresa" Type="varbinary(max)" Nullable="false" />
           <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="comentario" Type="decimal" Precision="38" Scale="6" />
           <Property Name="altura" Type="int" Nullable="false" />
           <Property Name="calle" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="idRubro" Type="int" Nullable="false" />
           <Property Name="idCiudad" Type="int" Nullable="false" />
           <Property Name="idProvincia" Type="int" Nullable="false" />
           <Property Name="id_direccion" Type="int" />
+          <Property Name="comentario" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="latitud" Type="decimal" Precision="38" Scale="25" />
+          <Property Name="longitud" Type="decimal" Precision="38" Scale="25" />
         </EntityType>
         <Association Name="FK_Barrio_Ciudad">
           <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="0..1" />
@@ -469,13 +472,15 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaFiltroEmpresa' does not have a 
     [VistaFiltroEmpresa].[logoEmpresa] AS [logoEmpresa], 
     [VistaFiltroEmpresa].[email] AS [email], 
     [VistaFiltroEmpresa].[nombre] AS [nombre], 
-    [VistaFiltroEmpresa].[comentario] AS [comentario], 
     [VistaFiltroEmpresa].[altura] AS [altura], 
     [VistaFiltroEmpresa].[calle] AS [calle], 
     [VistaFiltroEmpresa].[idRubro] AS [idRubro], 
     [VistaFiltroEmpresa].[idCiudad] AS [idCiudad], 
     [VistaFiltroEmpresa].[idProvincia] AS [idProvincia], 
-    [VistaFiltroEmpresa].[id_direccion] AS [id_direccion]
+    [VistaFiltroEmpresa].[id_direccion] AS [id_direccion], 
+    [VistaFiltroEmpresa].[comentario] AS [comentario], 
+    [VistaFiltroEmpresa].[latitud] AS [latitud], 
+    [VistaFiltroEmpresa].[longitud] AS [longitud]
     FROM [dbo].[VistaFiltroEmpresa] AS [VistaFiltroEmpresa]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Barrio_Ciudad" Association="Self.FK_Barrio_Ciudad">
@@ -1054,6 +1059,7 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaFiltroEmpresa' does not have a 
           <NavigationProperty Name="Cliente" Relationship="GeoTurnosModel.FK_Comentarios_cliente" FromRole="Comentarios" ToRole="Cliente" />
           <NavigationProperty Name="DireccionComentario" Relationship="GeoTurnosModel.FK_Comentarios_DireccionComentario" FromRole="Comentarios" ToRole="DireccionComentario" />
           <NavigationProperty Name="Empresa" Relationship="GeoTurnosModel.FK_Comentarios_Empresa" FromRole="Comentarios" ToRole="Empresa" />
+          <Property Name="titulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_Comentarios_cliente">
           <End Type="GeoTurnosModel.Cliente" Role="Cliente" Multiplicity="1" />
@@ -1118,6 +1124,8 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaFiltroEmpresa' does not have a 
           <Property Name="idCiudad" Type="Int32" Nullable="false" />
           <Property Name="idProvincia" Type="Int32" Nullable="false" />
           <Property Name="id_direccion" Type="Int32" />
+          <Property Name="latitud" Type="Decimal" Precision="38" Scale="25" />
+          <Property Name="longitud" Type="Decimal" Precision="38" Scale="25" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1298,6 +1306,7 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaFiltroEmpresa' does not have a 
           <EntitySetMapping Name="Comentarios">
             <EntityTypeMapping TypeName="GeoTurnosModel.Comentarios">
               <MappingFragment StoreEntitySet="Comentarios">
+                <ScalarProperty Name="titulo" ColumnName="titulo" />
                 <ScalarProperty Name="id_direccion" ColumnName="id_direccion" />
                 <ScalarProperty Name="fecha_comentario" ColumnName="fecha_comentario" />
                 <ScalarProperty Name="comentario" ColumnName="comentario" />
@@ -1311,6 +1320,8 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaFiltroEmpresa' does not have a 
           <EntitySetMapping Name="VistaFiltroEmpresa">
             <EntityTypeMapping TypeName="GeoTurnosModel.VistaFiltroEmpresa">
               <MappingFragment StoreEntitySet="VistaFiltroEmpresa">
+                <ScalarProperty Name="longitud" ColumnName="longitud" />
+                <ScalarProperty Name="latitud" ColumnName="latitud" />
                 <ScalarProperty Name="id_direccion" ColumnName="id_direccion" />
                 <ScalarProperty Name="idProvincia" ColumnName="idProvincia" />
                 <ScalarProperty Name="idCiudad" ColumnName="idCiudad" />

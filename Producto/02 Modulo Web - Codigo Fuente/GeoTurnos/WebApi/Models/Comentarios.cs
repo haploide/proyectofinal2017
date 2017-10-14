@@ -21,6 +21,7 @@ namespace WebApi.Models
         public string comentario { get; set; }
         public System.DateTime fecha_comentario { get; set; }
         public int id_direccion { get; set; }
+        public string titulo { get; set; }
     
         public virtual Cliente Cliente { get; set; }
         public virtual DireccionComentario DireccionComentario { get; set; }

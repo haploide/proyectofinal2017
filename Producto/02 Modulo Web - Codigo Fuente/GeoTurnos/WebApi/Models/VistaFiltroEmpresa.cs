@@ -28,5 +28,7 @@ namespace WebApi.Models
         public int idCiudad { get; set; }
         public int idProvincia { get; set; }
         public Nullable<int> id_direccion { get; set; }
+        public Nullable<decimal> latitud { get; set; }
+        public Nullable<decimal> longitud { get; set; }
     }
 }

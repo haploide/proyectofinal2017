@@ -52,6 +52,28 @@ namespace WebApi.Controllers
             }
         }
 
+        public IHttpActionResult Get()
+        {
+            try
+            {
+                if (_db.VistaFiltroEmpresa == null || !_db.VistaFiltroEmpresa.Any())
+                {
+                    return NotFound();
+                }
 
+                var emp = _db.VistaFiltroEmpresa;
+
+                if (emp == null)
+                {
+                    return NotFound();
+                }
+                return Ok(emp);
+            }
+            catch (Exception ex)
+            {
+
+                return InternalServerError(ex);
+            }
+        }
     }
 }
