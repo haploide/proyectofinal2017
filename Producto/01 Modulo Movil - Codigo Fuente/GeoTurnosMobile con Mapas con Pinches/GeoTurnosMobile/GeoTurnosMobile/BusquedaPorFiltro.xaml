@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GeoTurnosMobile.BusquedaPorFiltro">
+    <ContentPage.Content>
+        <StackLayout Spacing="100" x:Name="layout"> 
+            <Label FontSize = "30" Text="FILTROS" Margin = "0, 100, 0, 0" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand"/>
+
+            <Entry x:Name="empresaEntry"
+                   Placeholder="Ingrese el Nombre de la Empresa"
+                   HorizontalTextAlignment="Center"/>
+            
+            <Picker x:Name="rubro" Title="RUBROS" SelectedIndexChanged="OnModeChosen">
+                <Picker.Items>
+                    <x:String>Peluquería</x:String>
+                    <x:String>Cancha de Fútbol</x:String>
+                    <x:String>Dentista</x:String>
+                    <x:String>Taller Mecánico</x:String>
+                </Picker.Items>
+
+            </Picker>
+            
+            <Button x:Name="btnBuscar"
+                    HorizontalOptions="Center"
+                    Text="Buscar"
+                    Clicked="btnBuscar_Clicked"/>
+            
+            <BoxView HeightRequest="500" VerticalOptions="End" HorizontalOptions="FillAndExpand" />
+
+            
+
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>
