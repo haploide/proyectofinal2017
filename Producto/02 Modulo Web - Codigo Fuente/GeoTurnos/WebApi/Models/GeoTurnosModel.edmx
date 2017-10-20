@@ -205,6 +205,50 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaFiltroEmpresa' does not have a 
           <Property Name="latitud" Type="decimal" Precision="38" Scale="25" />
           <Property Name="longitud" Type="decimal" Precision="38" Scale="25" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaClientes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VistaTurnosAgendaVigenteParaClientes">
+          <Key>
+            <PropertyRef Name="idAgenda" />
+            <PropertyRef Name="mes" />
+            <PropertyRef Name="año" />
+            <PropertyRef Name="idEmpresa" />
+            <PropertyRef Name="idEstado" />
+          </Key>
+          <Property Name="idAgenda" Type="int" Nullable="false" />
+          <Property Name="mes" Type="int" Nullable="false" />
+          <Property Name="año" Type="int" Nullable="false" />
+          <Property Name="idEmpresa" Type="int" Nullable="false" />
+          <Property Name="idEstado" Type="int" Nullable="false" />
+          <Property Name="idTurno" Type="int" />
+          <Property Name="fecha" Type="datetime" />
+          <Property Name="horaDesde" Type="time" Precision="7" />
+          <Property Name="horaHasta" Type="time" Precision="7" />
+          <Property Name="idCliente" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VistaTurnosAgendaVigenteParaEmpresa">
+          <Key>
+            <PropertyRef Name="idEmpresa" />
+            <PropertyRef Name="idEstado" />
+            <PropertyRef Name="año" />
+            <PropertyRef Name="mes" />
+            <PropertyRef Name="idAgenda" />
+          </Key>
+          <Property Name="idEmpresa" Type="int" Nullable="false" />
+          <Property Name="idEstado" Type="int" Nullable="false" />
+          <Property Name="año" Type="int" Nullable="false" />
+          <Property Name="mes" Type="int" Nullable="false" />
+          <Property Name="idAgenda" Type="int" Nullable="false" />
+          <Property Name="fecha" Type="datetime" />
+          <Property Name="horaDesde" Type="time" Precision="7" />
+          <Property Name="horaHasta" Type="time" Precision="7" />
+          <Property Name="idCliente" Type="int" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="50" />
+          <Property Name="apellido" Type="nvarchar" MaxLength="50" />
+          <Property Name="idTurno" Type="int" />
+        </EntityType>
         <Association Name="FK_Barrio_Ciudad">
           <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="0..1" />
           <End Role="Barrio" Type="Self.Barrio" Multiplicity="*" />
@@ -482,6 +526,36 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaFiltroEmpresa' does not have a 
     [VistaFiltroEmpresa].[latitud] AS [latitud], 
     [VistaFiltroEmpresa].[longitud] AS [longitud]
     FROM [dbo].[VistaFiltroEmpresa] AS [VistaFiltroEmpresa]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VistaTurnosAgendaVigenteParaClientes" EntityType="Self.VistaTurnosAgendaVigenteParaClientes" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VistaTurnosAgendaVigenteParaClientes].[idAgenda] AS [idAgenda], 
+    [VistaTurnosAgendaVigenteParaClientes].[mes] AS [mes], 
+    [VistaTurnosAgendaVigenteParaClientes].[año] AS [año], 
+    [VistaTurnosAgendaVigenteParaClientes].[idEmpresa] AS [idEmpresa], 
+    [VistaTurnosAgendaVigenteParaClientes].[idEstado] AS [idEstado], 
+    [VistaTurnosAgendaVigenteParaClientes].[idTurno] AS [idTurno], 
+    [VistaTurnosAgendaVigenteParaClientes].[fecha] AS [fecha], 
+    [VistaTurnosAgendaVigenteParaClientes].[horaDesde] AS [horaDesde], 
+    [VistaTurnosAgendaVigenteParaClientes].[horaHasta] AS [horaHasta], 
+    [VistaTurnosAgendaVigenteParaClientes].[idCliente] AS [idCliente]
+    FROM [dbo].[VistaTurnosAgendaVigenteParaClientes] AS [VistaTurnosAgendaVigenteParaClientes]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VistaTurnosAgendaVigenteParaEmpresa" EntityType="Self.VistaTurnosAgendaVigenteParaEmpresa" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VistaTurnosAgendaVigenteParaEmpresa].[idEmpresa] AS [idEmpresa], 
+    [VistaTurnosAgendaVigenteParaEmpresa].[idEstado] AS [idEstado], 
+    [VistaTurnosAgendaVigenteParaEmpresa].[año] AS [año], 
+    [VistaTurnosAgendaVigenteParaEmpresa].[mes] AS [mes], 
+    [VistaTurnosAgendaVigenteParaEmpresa].[idAgenda] AS [idAgenda], 
+    [VistaTurnosAgendaVigenteParaEmpresa].[fecha] AS [fecha], 
+    [VistaTurnosAgendaVigenteParaEmpresa].[horaDesde] AS [horaDesde], 
+    [VistaTurnosAgendaVigenteParaEmpresa].[horaHasta] AS [horaHasta], 
+    [VistaTurnosAgendaVigenteParaEmpresa].[idCliente] AS [idCliente], 
+    [VistaTurnosAgendaVigenteParaEmpresa].[nombre] AS [nombre], 
+    [VistaTurnosAgendaVigenteParaEmpresa].[apellido] AS [apellido], 
+    [VistaTurnosAgendaVigenteParaEmpresa].[idTurno] AS [idTurno]
+    FROM [dbo].[VistaTurnosAgendaVigenteParaEmpresa] AS [VistaTurnosAgendaVigenteParaEmpresa]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Barrio_Ciudad" Association="Self.FK_Barrio_Ciudad">
             <End Role="Ciudad" EntitySet="Ciudad" />
@@ -811,6 +885,8 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaFiltroEmpresa' does not have a 
             <End Role="Comentarios" EntitySet="Comentarios" />
           </AssociationSet>
           <EntitySet Name="VistaFiltroEmpresa" EntityType="GeoTurnosModel.VistaFiltroEmpresa" />
+          <EntitySet Name="VistaTurnosAgendaVigenteParaClientes" EntityType="GeoTurnosModel.VistaTurnosAgendaVigenteParaClientes" />
+          <EntitySet Name="VistaTurnosAgendaVigenteParaEmpresa" EntityType="GeoTurnosModel.VistaTurnosAgendaVigenteParaEmpresa" />
           </EntityContainer>
         <EntityType Name="Usuario">
           <Key>
@@ -1127,6 +1203,46 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaFiltroEmpresa' does not have a 
           <Property Name="latitud" Type="Decimal" Precision="38" Scale="25" />
           <Property Name="longitud" Type="Decimal" Precision="38" Scale="25" />
         </EntityType>
+        <EntityType Name="VistaTurnosAgendaVigenteParaClientes">
+          <Key>
+            <PropertyRef Name="idAgenda" />
+            <PropertyRef Name="mes" />
+            <PropertyRef Name="año" />
+            <PropertyRef Name="idEmpresa" />
+            <PropertyRef Name="idEstado" />
+          </Key>
+          <Property Name="idAgenda" Type="Int32" Nullable="false" />
+          <Property Name="mes" Type="Int32" Nullable="false" />
+          <Property Name="año" Type="Int32" Nullable="false" />
+          <Property Name="idEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="idEstado" Type="Int32" Nullable="false" />
+          <Property Name="idTurno" Type="Int32" />
+          <Property Name="fecha" Type="DateTime" Precision="3" />
+          <Property Name="horaDesde" Type="Time" Precision="7" />
+          <Property Name="horaHasta" Type="Time" Precision="7" />
+          <Property Name="idCliente" Type="Int32" />
+        </EntityType>
+        <EntityType Name="VistaTurnosAgendaVigenteParaEmpresa">
+          <Key>
+            <PropertyRef Name="idEmpresa" />
+            <PropertyRef Name="idEstado" />
+            <PropertyRef Name="año" />
+            <PropertyRef Name="mes" />
+            <PropertyRef Name="idAgenda" />
+          </Key>
+          <Property Name="idEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="idEstado" Type="Int32" Nullable="false" />
+          <Property Name="año" Type="Int32" Nullable="false" />
+          <Property Name="mes" Type="Int32" Nullable="false" />
+          <Property Name="idAgenda" Type="Int32" Nullable="false" />
+          <Property Name="fecha" Type="DateTime" Precision="3" />
+          <Property Name="horaDesde" Type="Time" Precision="7" />
+          <Property Name="horaHasta" Type="Time" Precision="7" />
+          <Property Name="idCliente" Type="Int32" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idTurno" Type="Int32" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1335,6 +1451,40 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaFiltroEmpresa' does not have a 
                 <ScalarProperty Name="telefono" ColumnName="telefono" />
                 <ScalarProperty Name="razonSocial" ColumnName="razonSocial" />
                 <ScalarProperty Name="cuit" ColumnName="cuit" />
+                <ScalarProperty Name="idEmpresa" ColumnName="idEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VistaTurnosAgendaVigenteParaClientes">
+            <EntityTypeMapping TypeName="GeoTurnosModel.VistaTurnosAgendaVigenteParaClientes">
+              <MappingFragment StoreEntitySet="VistaTurnosAgendaVigenteParaClientes">
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="horaHasta" ColumnName="horaHasta" />
+                <ScalarProperty Name="horaDesde" ColumnName="horaDesde" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="idTurno" ColumnName="idTurno" />
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+                <ScalarProperty Name="idEmpresa" ColumnName="idEmpresa" />
+                <ScalarProperty Name="año" ColumnName="año" />
+                <ScalarProperty Name="mes" ColumnName="mes" />
+                <ScalarProperty Name="idAgenda" ColumnName="idAgenda" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VistaTurnosAgendaVigenteParaEmpresa">
+            <EntityTypeMapping TypeName="GeoTurnosModel.VistaTurnosAgendaVigenteParaEmpresa">
+              <MappingFragment StoreEntitySet="VistaTurnosAgendaVigenteParaEmpresa">
+                <ScalarProperty Name="idTurno" ColumnName="idTurno" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="horaHasta" ColumnName="horaHasta" />
+                <ScalarProperty Name="horaDesde" ColumnName="horaDesde" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="idAgenda" ColumnName="idAgenda" />
+                <ScalarProperty Name="mes" ColumnName="mes" />
+                <ScalarProperty Name="año" ColumnName="año" />
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
                 <ScalarProperty Name="idEmpresa" ColumnName="idEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

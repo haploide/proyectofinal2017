@@ -215,6 +215,12 @@
     <Compile Include="Models\VistaFiltroEmpresa.cs">
       <DependentUpon>GeoTurnosModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\VistaTurnosAgendaVigenteParaClientes.cs">
+      <DependentUpon>GeoTurnosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VistaTurnosAgendaVigenteParaEmpresa.cs">
+      <DependentUpon>GeoTurnosModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
