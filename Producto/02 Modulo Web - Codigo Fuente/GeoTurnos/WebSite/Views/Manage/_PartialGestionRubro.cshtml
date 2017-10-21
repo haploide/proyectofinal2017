@@ -3,7 +3,7 @@
 <div class="container" ng-controller="GestionRubroController">
     <div class="row" style="margin-top: 20px;">
         <div class="col-lg-6">
-            <span class="tituloGestionarRubro">Nuevo Rubro <button type="submit" class="btn btn-primary botonNuevoRubro" ng-click="nuevoRubro()">Nuevo Rubro</button></span> 
+            <span  class="tituloGestionarRubro"><span id="GestionarRubro">Nuevo Rubro  </span><button type="submit" class="btn btn-primary botonNuevoRubro" ng-click="nuevoRubro()">Nuevo Rubro</button></span> 
             <hr style="border-top: 2px solid #1d2980;"/>
             <div class="form-group">
                 <label for="rubro">Rubro:</label>
@@ -22,7 +22,7 @@
                 <tr class="media filaActivarEmpresa" data-ng-repeat="rub in rubro">
                     <th ng-hide="true">{{rub.idRubro }}</th>
                     <th>{{rub.nombre}}</th>
-                    <th><a ng-click="upDateRubro(rub)" class="btn btn-primary">Modificar</a></th>
+                    <th><a ng-click="modificarRubro(rub)" class="btn btn-primary">Modificar</a></th>
                     <th><a ng-click="eliminarRubro(rub)" class="btn btn-danger">Eliminar</a></th>
                 </tr>
             </table>
