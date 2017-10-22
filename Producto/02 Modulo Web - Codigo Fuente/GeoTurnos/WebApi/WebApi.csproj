@@ -142,6 +142,7 @@
     <Compile Include="Controllers\TipoDocumentoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\VistaFiltroEmpresaController.cs" />
+    <Compile Include="Controllers\VistaParametrosAgendaEmpresaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -213,6 +214,9 @@
     </Compile>
     <Compile Include="Models\UsuarioMobile.cs" />
     <Compile Include="Models\VistaFiltroEmpresa.cs">
+      <DependentUpon>GeoTurnosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VistaParametrosAgendaEmpresa.cs">
       <DependentUpon>GeoTurnosModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\VistaTurnosAgendaVigenteParaClientes.cs">

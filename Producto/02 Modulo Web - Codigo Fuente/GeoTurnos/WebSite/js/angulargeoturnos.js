@@ -169,7 +169,7 @@ app.controller("GestionRubroController", function ($scope, $http) {
         if (response.status === 200) {
             angular.copy(response.data, $scope.rubro);
         }
-        
+
     }, function (response) {
 
         httpNegativo(response.status);
@@ -566,7 +566,7 @@ app.controller("registrarUsuario", function ($scope, $http) {
             'Accept': "application/json"
         }
 
-    }).then(function (response) {   
+    }).then(function (response) {
         if (response.status === 200) {
             angular.copy(response.data, $scope.tipoDoc);
         }
@@ -1186,15 +1186,40 @@ app.controller("SchedulerController", function ($scope, $http) {
         TRAER INFORMACION DE LA EMPRESA   
 
     */
+    $scope.parametros = [];
+    $http({
+        method: 'GET',
+        url: 'http://localhost:6901/api/VistaParametrosAgendaEmpresa/' + retornarIdEmpresa(),
+        headers: {
+            'Accept': "application/json",
 
-    //TODO: LLAMADA A LA WEBAPI PARA TRAER PARAMETROS
+        }
+    }).then(function (response) {
+        if (response.status === 200) {
+            angular.copy(response.data, $scope.parametros);
 
+            procesarParametros();
+        }
+
+    }, function (response) {
+
+        httpNegativo(response.status);
+
+    }).then(function () {
+
+    });
+
+    var primerDia=100, ultimoDia=-1, horaDesde=100, horaHasta=-1;
+    var diasLaborables = [];
+    var horarioLaborable = { from: 08, to: 18 };
+    
+    
     /*
     
     CONFIGURACION DEL SCHEDULER
     
     */
-    
+
     var localizacion = {
         days: {
             // full day names
@@ -1230,7 +1255,7 @@ app.controller("SchedulerController", function ($scope, $http) {
     var camposDatos = { description: "description", background: "background", draggable: "draggable", from: "from", id: "id", resizable: "resizable", readOnly: "readOnly", to: "to", tooltip: "tooltip", timeZone: "timeZone", subject: "subject", borderColor: "borderColor", resourceId: "calendar" };
 
     var appointments = [];
-    
+
     var source =
     {
         dataType: "array",
@@ -1280,15 +1305,14 @@ app.controller("SchedulerController", function ($scope, $http) {
         views: vista
 
     });
-    
+
 
     /*
     
     EVENTOS
     
     */
-    var diasLaborables = [2, 3, 4, 5, 6];
-    var horarioLaborable = { from: 08, to: 18 };
+    
 
 
     $('#scheduler').on('cellClick', function (event) {
@@ -1309,7 +1333,7 @@ app.controller("SchedulerController", function ($scope, $http) {
         }
 
         //var args = event.args; var cell = args.cell; var date = args.date;
-        
+
     });
 
     var app1 = { description: "Turno", draggable: false, from: new $.jqx.date(2017, 10, 3, 8, 0, 0, 0), id: "02", resizable: false, calendar: "Ocupado", readOnly: true, to: new $.jqx.date(2017, 10, 3, 8, 30, 0, 0), tooltip: "Ocupado", timeZone: 'Argentina Standard Time', subject: 'Ocupado', background: '#66BCE5', borderColor: '#66BCE5' };
@@ -1323,6 +1347,29 @@ app.controller("SchedulerController", function ($scope, $http) {
     $('#scheduler').jqxScheduler('addAppointment', app3);
     $('#scheduler').jqxScheduler('addAppointment', app4);
 
+
+    function procesarParametros() {
+        for (var i = 0; i < $scope.parametros.length; i++) {
+            if ($scope.parametros[i].id_dia > ultimoDia) {
+                ultimoDia = $scope.parametros[i].id_dia;
+            };
+            if ($scope.parametros[i].id_dia < primerDia) {
+                primerDia = $scope.parametros[i].id_dia;
+
+            };
+            if ($scope.parametros[i].hora_inicio > horaDesde) {
+                horaDesde = $scope.parametros[i].hora_inicio;
+            };
+            if ($scope.parametros[i].hora_fin < horaHasta) {
+                horaHasta = $scope.parametros[i].hora_fin;
+            };
+
+            diasLaborables.push($scope.parametros[i].id_dia);
+           
+        }
+
+        
+    }
 });
 app.controller("ComentariosRatingController", function ($scope, $http) {
 
