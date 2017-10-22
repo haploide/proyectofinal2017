@@ -206,6 +206,22 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaFiltroEmpresa' does not have a 
           <Property Name="longitud" Type="decimal" Precision="38" Scale="25" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'GeoTurnos.dbo.VistaParametrosAgendaEmpresa' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VistaParametrosAgendaEmpresa">
+          <Key>
+            <PropertyRef Name="id_empresa" />
+            <PropertyRef Name="duracion_turno" />
+            <PropertyRef Name="hora_inicio" />
+            <PropertyRef Name="hora_fin" />
+            <PropertyRef Name="id_dia" />
+          </Key>
+          <Property Name="id_empresa" Type="int" Nullable="false" />
+          <Property Name="duracion_turno" Type="int" Nullable="false" />
+          <Property Name="hora_inicio" Type="time" Precision="7" Nullable="false" />
+          <Property Name="hora_fin" Type="time" Precision="7" Nullable="false" />
+          <Property Name="id_dia" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaClientes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VistaTurnosAgendaVigenteParaClientes">
           <Key>
@@ -526,6 +542,15 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
     [VistaFiltroEmpresa].[latitud] AS [latitud], 
     [VistaFiltroEmpresa].[longitud] AS [longitud]
     FROM [dbo].[VistaFiltroEmpresa] AS [VistaFiltroEmpresa]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VistaParametrosAgendaEmpresa" EntityType="Self.VistaParametrosAgendaEmpresa" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VistaParametrosAgendaEmpresa].[id_empresa] AS [id_empresa], 
+    [VistaParametrosAgendaEmpresa].[duracion_turno] AS [duracion_turno], 
+    [VistaParametrosAgendaEmpresa].[hora_inicio] AS [hora_inicio], 
+    [VistaParametrosAgendaEmpresa].[hora_fin] AS [hora_fin], 
+    [VistaParametrosAgendaEmpresa].[id_dia] AS [id_dia]
+    FROM [dbo].[VistaParametrosAgendaEmpresa] AS [VistaParametrosAgendaEmpresa]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VistaTurnosAgendaVigenteParaClientes" EntityType="Self.VistaTurnosAgendaVigenteParaClientes" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -887,6 +912,7 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
           <EntitySet Name="VistaFiltroEmpresa" EntityType="GeoTurnosModel.VistaFiltroEmpresa" />
           <EntitySet Name="VistaTurnosAgendaVigenteParaClientes" EntityType="GeoTurnosModel.VistaTurnosAgendaVigenteParaClientes" />
           <EntitySet Name="VistaTurnosAgendaVigenteParaEmpresa" EntityType="GeoTurnosModel.VistaTurnosAgendaVigenteParaEmpresa" />
+          <EntitySet Name="VistaParametrosAgendaEmpresa" EntityType="GeoTurnosModel.VistaParametrosAgendaEmpresa" />
           </EntityContainer>
         <EntityType Name="Usuario">
           <Key>
@@ -1243,6 +1269,20 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
           <Property Name="apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="idTurno" Type="Int32" />
         </EntityType>
+        <EntityType Name="VistaParametrosAgendaEmpresa">
+          <Key>
+            <PropertyRef Name="id_empresa" />
+            <PropertyRef Name="duracion_turno" />
+            <PropertyRef Name="hora_inicio" />
+            <PropertyRef Name="hora_fin" />
+            <PropertyRef Name="id_dia" />
+          </Key>
+          <Property Name="id_empresa" Type="Int32" Nullable="false" />
+          <Property Name="duracion_turno" Type="Int32" Nullable="false" />
+          <Property Name="hora_inicio" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="hora_fin" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="id_dia" Type="Int32" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1486,6 +1526,17 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
                 <ScalarProperty Name="año" ColumnName="año" />
                 <ScalarProperty Name="idEstado" ColumnName="idEstado" />
                 <ScalarProperty Name="idEmpresa" ColumnName="idEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VistaParametrosAgendaEmpresa">
+            <EntityTypeMapping TypeName="GeoTurnosModel.VistaParametrosAgendaEmpresa">
+              <MappingFragment StoreEntitySet="VistaParametrosAgendaEmpresa">
+                <ScalarProperty Name="id_dia" ColumnName="id_dia" />
+                <ScalarProperty Name="hora_fin" ColumnName="hora_fin" />
+                <ScalarProperty Name="hora_inicio" ColumnName="hora_inicio" />
+                <ScalarProperty Name="duracion_turno" ColumnName="duracion_turno" />
+                <ScalarProperty Name="id_empresa" ColumnName="id_empresa" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

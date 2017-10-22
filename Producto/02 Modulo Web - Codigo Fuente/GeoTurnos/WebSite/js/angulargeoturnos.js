@@ -154,7 +154,9 @@ app.controller("ActivarEmpresasController", function ($scope, $http) {
 
 })
 app.controller("GestionRubroController", function ($scope, $http) {
-
+    var esNuevo = true;
+    var idRubroModificar = 0;
+    var rubroModificar = "";
     $scope.rubro = [];
     $http({
         method: 'GET',
@@ -167,7 +169,7 @@ app.controller("GestionRubroController", function ($scope, $http) {
         if (response.status === 200) {
             angular.copy(response.data, $scope.rubro);
         }
-        
+
     }, function (response) {
 
         httpNegativo(response.status);
@@ -177,61 +179,124 @@ app.controller("GestionRubroController", function ($scope, $http) {
     });
 
     $scope.guardarRubro = function () {
-        alert("Hola Mundo!");
-        var nuevoRubro = {};
-        nuevoRubro.nombre = $scope.nombreRubro;
-        $http({
-            method: 'POST',
-            url: 'http://localhost:6901/api/Rubro',
-            data: nuevoRubro,
-            headers: {
-                'Accept': "application/json",
+    if (esNuevo == true)
+    {
+        if (confirm("Desea crear el Rubro: " + $scope.nombreRubro))
+        {
+            var nuevoRubro = {};
+            nuevoRubro.nombre = $scope.nombreRubro;
+            $http({
+                method: 'POST',
+                url: 'http://localhost:6901/api/Rubro',
+                data: nuevoRubro,
+                headers: {
+                    'Accept': "application/json",
 
-            }
-        }).then(function (response) { }, function (response) {
+                }
+            }).then(function (response) {
+                if (response.status == 201) {
+                    $scope.rubro.push(response.data);
+                    $scope.nuevoRubro
+                }
+            }, function (response) {
 
-            httpNegativo(response.status);
+                httpNegativo(response.status);
 
-        }).then(function () {
+            }).then(function () {
 
-        });
+            });
 
-        alert("Hola Mundo!");
+        }
+        else
+        {
+
+        }
+    }
+    else {
+        if (confirm("Desea Modificar el Rubro: " + rubroModificar + " por "+ $scope.nombreRubro)) {
+            var rubroModificado = {};
+            var rubroAModificar = {};
+            rubroAModificar.nombre = rubroModificar;
+            rubroAModificar.idRubro = idRubroModificar;
+            rubroModificado.nombre = $scope.nombreRubro;
+            rubroModificado.idRubro = idRubroModificar;
+            $http({
+                method: 'PUT',
+                url: 'http://localhost:6901/api/Rubro/' + rubroModificado.idRubro,
+                data: rubroModificado,
+                headers: {
+                    'Accept': "application/json",
+
+                }
+            }).then(function (response) {
+                if (response.status == 200) {
+                    $scope.rubro.splice($scope.rubro.indexOf(rubroAModificar, [0]), 1, response.data);
+                    $scope.nuevoRubro();
+                }
+            }, function (response) {
+
+                httpNegativo(response.status);
+
+            }).then(function () {
+
+            });
+
+        }
+        else {
+
+        }
+    }
+        
+        
+
     }
 
-    $scope.upDateEstadoEmpresa = function (emp) {
-        // aca se cambia el estado de la empresa para activarla
-        emp.idEstado = 1;
-        emp.Estado.idEstado = 1;
-        $http({
+    $scope.eliminarRubro = function (rub) {
+        if (confirm("Esta seguro que desea eliminar el rubro: " + rub.nombre))
+        {
+            var id = rub.idRubro;
+            $http({
+                method: 'DELETE',
+                url: 'http://localhost:6901/api/Rubro/' + id,
+                headers: {
+                    'Accept': "application/json",
 
-            method: 'PUT',
-            url: 'http://localhost:6901/api/Empresa/' + emp.idEmpresa,
-            data: emp,
-            headers: {
-                'Accept': "application/json"
-            }
-
-        }).then(function (response) {
-            if (response.status === 200) {
-
-                for (var i = 0; i < $scope.empresas.length ; i++) {
-                    if ($scope.empresas[i].idEmpresa == emp.idEmpresa) {
-                        $scope.empresas.splice(i, 1);
-                    }
                 }
+            }).then(function (response) {
+                if (response.status == 200) {
+                    $scope.rubro.splice($scope.rubro.indexOf(rub, [0]), 1);
+                    $scope.nuevoRubro();
+                }
+            }, function (response) {
 
-                notificar($("#notificaciones"), $("#mensajeNotificacion"), $("#contenedorNotificaciones"), 'success', 'Empresa activada correctamente');
+                httpNegativo(response.status);
 
-            }
+            }).then(function () {
 
-        }, function (response) {
+            });
+        }
+        else {
 
-            httpNegativo(response.status);
+        }
+        
+    }
 
-        }).then(function () {
+    $scope.modificarRubro = function (rub) {
+        var l1 = document.getElementById("GestionarRubro");
+        l1.innerText = "Modificar Rubro";
+        var l1 = document.getElementById("rubro");
+        l1.value = rub.nombre;
+        rubroModificar = rub.nombre;
+        idRubroModificar = rub.idRubro;
+        esNuevo = false;
 
-        });
+    }
+    $scope.nuevoRubro = function () {
+        var l1 = document.getElementById("GestionarRubro");
+        l1.innerText = "Nuevo Rubro";
+        var l1 = document.getElementById("rubro");
+        l1.value = "";
+        esNuevo = true;
     }
 
 })
@@ -501,7 +566,7 @@ app.controller("registrarUsuario", function ($scope, $http) {
             'Accept': "application/json"
         }
 
-    }).then(function (response) {   
+    }).then(function (response) {
         if (response.status === 200) {
             angular.copy(response.data, $scope.tipoDoc);
         }
@@ -1121,15 +1186,40 @@ app.controller("SchedulerController", function ($scope, $http) {
         TRAER INFORMACION DE LA EMPRESA   
 
     */
+    $scope.parametros = [];
+    $http({
+        method: 'GET',
+        url: 'http://localhost:6901/api/VistaParametrosAgendaEmpresa/' + retornarIdEmpresa(),
+        headers: {
+            'Accept': "application/json",
 
-    //TODO: LLAMADA A LA WEBAPI PARA TRAER PARAMETROS
+        }
+    }).then(function (response) {
+        if (response.status === 200) {
+            angular.copy(response.data, $scope.parametros);
 
+            procesarParametros();
+        }
+
+    }, function (response) {
+
+        httpNegativo(response.status);
+
+    }).then(function () {
+
+    });
+
+    var primerDia=100, ultimoDia=-1, horaDesde=100, horaHasta=-1;
+    var diasLaborables = [];
+    var horarioLaborable = { from: 08, to: 18 };
+    
+    
     /*
     
     CONFIGURACION DEL SCHEDULER
     
     */
-    
+
     var localizacion = {
         days: {
             // full day names
@@ -1165,7 +1255,7 @@ app.controller("SchedulerController", function ($scope, $http) {
     var camposDatos = { description: "description", background: "background", draggable: "draggable", from: "from", id: "id", resizable: "resizable", readOnly: "readOnly", to: "to", tooltip: "tooltip", timeZone: "timeZone", subject: "subject", borderColor: "borderColor", resourceId: "calendar" };
 
     var appointments = [];
-    
+
     var source =
     {
         dataType: "array",
@@ -1215,15 +1305,14 @@ app.controller("SchedulerController", function ($scope, $http) {
         views: vista
 
     });
-    
+
 
     /*
     
     EVENTOS
     
     */
-    var diasLaborables = [2, 3, 4, 5, 6];
-    var horarioLaborable = { from: 08, to: 18 };
+    
 
 
     $('#scheduler').on('cellClick', function (event) {
@@ -1244,7 +1333,7 @@ app.controller("SchedulerController", function ($scope, $http) {
         }
 
         //var args = event.args; var cell = args.cell; var date = args.date;
-        
+
     });
 
     var app1 = { description: "Turno", draggable: false, from: new $.jqx.date(2017, 10, 3, 8, 0, 0, 0), id: "02", resizable: false, calendar: "Ocupado", readOnly: true, to: new $.jqx.date(2017, 10, 3, 8, 30, 0, 0), tooltip: "Ocupado", timeZone: 'Argentina Standard Time', subject: 'Ocupado', background: '#66BCE5', borderColor: '#66BCE5' };
@@ -1258,6 +1347,29 @@ app.controller("SchedulerController", function ($scope, $http) {
     $('#scheduler').jqxScheduler('addAppointment', app3);
     $('#scheduler').jqxScheduler('addAppointment', app4);
 
+
+    function procesarParametros() {
+        for (var i = 0; i < $scope.parametros.length; i++) {
+            if ($scope.parametros[i].id_dia > ultimoDia) {
+                ultimoDia = $scope.parametros[i].id_dia;
+            };
+            if ($scope.parametros[i].id_dia < primerDia) {
+                primerDia = $scope.parametros[i].id_dia;
+
+            };
+            if ($scope.parametros[i].hora_inicio > horaDesde) {
+                horaDesde = $scope.parametros[i].hora_inicio;
+            };
+            if ($scope.parametros[i].hora_fin < horaHasta) {
+                horaHasta = $scope.parametros[i].hora_fin;
+            };
+
+            diasLaborables.push($scope.parametros[i].id_dia);
+           
+        }
+
+        
+    }
 });
 app.controller("ComentariosRatingController", function ($scope, $http) {
 

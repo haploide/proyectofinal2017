@@ -115,6 +115,30 @@ namespace WebApi.Controllers
         }
 
 
+        public IHttpActionResult Delete(int id)
+        {
+            try
+            {
+                var rubr = _db.Rubro.Find(id);
+
+                if (rubr == null)
+                {
+                    return NotFound();
+                }
+                _db.Rubro.Remove(rubr);
+
+                _db.SaveChanges();
+
+                return Ok(rubr);
+
+            }
+            catch (Exception ex)
+            {
+
+                return InternalServerError(ex);
+            }
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
