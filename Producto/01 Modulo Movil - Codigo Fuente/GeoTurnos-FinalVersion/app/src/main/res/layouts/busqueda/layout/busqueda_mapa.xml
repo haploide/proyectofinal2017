@@ -31,7 +31,7 @@
     android:layout_width="327dp"
     android:layout_height="385dp"
     android:id="@+id/map"
-    tools:context="com.example.ld.mapa.MapsActivity"
+    tools:context="com.example.ld.mapa.Login.MapsActivity"
     android:name="com.google.android.gms.maps.SupportMapFragment"
     tools:layout="@android:layout/simple_gallery_item"
     android:layout_alignParentLeft="true"

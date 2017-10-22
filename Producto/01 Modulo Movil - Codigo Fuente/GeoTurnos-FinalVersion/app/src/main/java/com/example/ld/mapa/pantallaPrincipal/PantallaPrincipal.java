@@ -14,7 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.ld.mapa.busqueda.MapaBusqueda;
-import com.example.ld.mapa.MapsActivity;
+import com.example.ld.mapa.Login.MapsActivity;
 import com.example.ld.mapa.R;
 import com.example.ld.mapa.menuLateral.DrawerItem;
 import com.example.ld.mapa.menuLateral.DrawerListAdapter;
