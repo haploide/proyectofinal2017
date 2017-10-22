@@ -13,7 +13,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.example.ld.mapa.busqueda.MapaBusqueda;
+import com.example.ld.mapa.busqueda.BusquedaMapa;
+import com.example.ld.mapa.busqueda.BusquedaEntidades;
 import com.example.ld.mapa.Login.MapsActivity;
 import com.example.ld.mapa.R;
 import com.example.ld.mapa.menuLateral.DrawerItem;
@@ -113,7 +114,7 @@ public class PantallaPrincipal extends ActionBarActivity {
                 Intent PantallaLogin = new Intent(getApplicationContext(), MapsActivity.class);
                 startActivity(PantallaLogin);
             } else if (nombreItem.equals("Buscar")) {
-                Intent Buscar = new Intent(getApplicationContext(), MapaBusqueda.class);
+                Intent Buscar = new Intent(getApplicationContext(), BusquedaEntidades.class);
                 startActivity(Buscar);
             } else if ((nombreItem.equals("Inicio") & !(itemTitle.equals("Pantalla Principal")))) {
                 Intent Inicio = new Intent(getApplicationContext(), PantallaPrincipal.class);

@@ -40,8 +40,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".busqueda.MapaBusqueda"
+            android:name=".busqueda.BusquedaMapa"
             android:label="Búsqueda en Mapa"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".busqueda.BusquedaEntidades"
+            android:label="Búsqueda de Entidades"
             android:screenOrientation="portrait">
         </activity>
         <activity

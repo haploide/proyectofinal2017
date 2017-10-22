@@ -62,7 +62,7 @@ public class MapsActivity extends FragmentActivity {
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //CONEXION A BASE DE DATOS Y CONSULTA
                 try {
                     Class.forName("net.sourceforge.jtds.jdbc.Driver");
                     String cn = "jdbc:jtds:sqlserver://geoturnos.com:49172;databaseName=GeoTurnos;user=geoturnos;password=Al1.B4b4-";
@@ -73,15 +73,19 @@ public class MapsActivity extends FragmentActivity {
 
                     //si hay un registro de vuelta significa que matcheó el usuario y password, y nos lleva a la pantalla principal
                     if (resulset.next()) {
+                        connection.close();
                         Intent PantallaPrincipal = new Intent(getApplicationContext(), com.example.ld.mapa.pantallaPrincipal.PantallaPrincipal.class);
                         startActivity(PantallaPrincipal);
                     } else {
+                        connection.close();
                         Toast.makeText(MapsActivity.this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
                     }
                    } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 } catch (SQLException e) {
                     e.printStackTrace();
+                } finally {
+
                 }
 
             }

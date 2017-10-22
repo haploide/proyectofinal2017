@@ -1,0 +1,38 @@
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<RelativeLayout
+    android:id="@+id/content_frame"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rubro:"
+            android:textSize="18sp"
+            android:textStyle="bold|italic"
+            android:id="@+id/textView2"
+            android:layout_alignBottom="@+id/planets_spinner"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+        <Spinner
+            android:id="@+id/planets_spinner"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignRight="@+id/btnBuscarEnMapa"
+            android:layout_alignEnd="@+id/btnBuscarEnMapa"
+            android:layout_marginTop="20dp"></Spinner>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnBuscarEnMapa"
+            android:text="Buscar en Mapa"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="75dp" />
+</RelativeLayout>
+</android.support.v4.widget.DrawerLayout>
