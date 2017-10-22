@@ -40,22 +40,22 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MapaBusqueda"
+            android:name=".busqueda.MapaBusqueda"
             android:label="Búsqueda en Mapa"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".OlvidoPassword"
+            android:name=".olvidoPassword.OlvidoPassword"
             android:label="Olvido su contraseña"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".Registrarse"
+            android:name=".registrarse.Registrarse"
             android:label="Registrarse"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".PantallaPrincipal"
+            android:name=".pantallaPrincipal.PantallaPrincipal"
             android:label="Pantalla Principal"
             android:screenOrientation="portrait">
         </activity>

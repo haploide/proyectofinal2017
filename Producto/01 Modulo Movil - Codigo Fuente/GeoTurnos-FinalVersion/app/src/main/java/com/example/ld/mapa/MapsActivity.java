@@ -7,9 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.ld.mapa.olvidoPassword.OlvidoPassword;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -42,7 +43,7 @@ public class MapsActivity extends FragmentActivity {
         registrarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent Registrarse = new Intent(getApplicationContext(), Registrarse.class);
+                Intent Registrarse = new Intent(getApplicationContext(), com.example.ld.mapa.registrarse.Registrarse.class);
                 startActivity(Registrarse);
             }
         });
@@ -71,7 +72,7 @@ public class MapsActivity extends FragmentActivity {
 
                     //si hay un registro de vuelta significa que matcheó el usuario y password, y nos lleva a la pantalla principal
                     if (resulset.next()) {
-                        Intent PantallaPrincipal = new Intent(getApplicationContext(), PantallaPrincipal.class);
+                        Intent PantallaPrincipal = new Intent(getApplicationContext(), com.example.ld.mapa.pantallaPrincipal.PantallaPrincipal.class);
                         startActivity(PantallaPrincipal);
                     } else {
                         Toast.makeText(MapsActivity.this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
