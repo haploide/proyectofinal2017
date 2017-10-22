@@ -34,10 +34,6 @@ public class MapsActivity extends FragmentActivity {
         usuario = (EditText) findViewById(R.id.txtUsuario);
         password = (EditText) findViewById(R.id.txtPassword);
 
-        //mustra la imágen de GeoTurnos
-        final ImageView logo_login = (ImageView) findViewById(R.id.logo);
-            logo_login.setImageResource(R.drawable.logo);
-
         Button btnlogin = (Button) findViewById(R.id.btnLogin);
         TextView registrarse = (TextView) findViewById(R.id.lnkRegistrarse);
         TextView olvidoPassword = (TextView) findViewById(R.id.lnkOlvidoPassword);
