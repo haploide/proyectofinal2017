@@ -1,4 +1,11 @@
-﻿<link rel="stylesheet" href="~/Content/Site.css" type="text/css" />
+﻿
+@using WebSite.App_Start
+
+@{
+    var usuarioLogin = Session["usuarioLogin"] as UsuarioLogueado;
+}
+
+<link rel="stylesheet" href="~/Content/Site.css" type="text/css" />
 
 <div class="container" ng-controller="GestionarMisTurnosController">
     <div class="row" style="margin-top: 20px;">
@@ -31,3 +38,10 @@
         <div id="contenedorNotificaciones" class="contenedorNotificaciones"></div>
     </div>
 </div>
+<script>
+
+    var retornarid = function () {
+        return @usuarioLogin.Empresa.idEmpresa;
+    };
+
+</script>
