@@ -142,8 +142,8 @@
     <Compile Include="Controllers\TipoDocumentoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\VistaFiltroEmpresaController.cs" />
-    <Compile Include="Controllers\VistaParametrosAgendaClienteController .cs" />
     <Compile Include="Controllers\VistaParametrosAgendaEmpresaController.cs" />
+    <Compile Include="Controllers\VistaTurnosAgendaCliente.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
