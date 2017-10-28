@@ -120,6 +120,14 @@ namespace WebSite.Controllers
         }
         //
         //GET: GestionarAgendaTurnos
+
+        public PartialViewResult GestionarMisTurnos()
+        {
+            return PartialView("_PartialGestionarMisTurnos");
+        }
+        //
+        //GET: GestionarMisTurnos
+
         public PartialViewResult GestionarAgendaTurnos()
         {
             return PartialView("_PartialGestionarAgendaTurnos");

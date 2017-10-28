@@ -6,7 +6,6 @@
 }
 
 <div class="container" role="main" ng-controller="MiCuentaClientePrestatarioController">
-    
     <div id="head" class="row">
        @Html.Partial("_PartialCabeceraCuenta")
     </div>
@@ -19,7 +18,9 @@
             <li id="gestiondatos" ng-click="clickMenu('gestiondatos')" role="presentation">
                 <a href="">Gestionar Mis Datos</a>
             </li>
-            
+            <li id="gestionarMisTurnos" ng-click="clickMenu('gestionarMisTurnos')" role="presentation">
+                <a href="">Gestionar Mis Turnos</a>
+            </li>
 
         </ul>
     </div>

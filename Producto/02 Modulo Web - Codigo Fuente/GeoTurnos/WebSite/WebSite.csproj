@@ -470,6 +470,7 @@
     <Content Include="Views\Manage\_PartialGestionarPlantillaTurnos.cshtml" />
     <Content Include="Views\Home\_PartialComentariosRating.cshtml" />
     <Content Include="Views\Manage\_PartialGestionRubro.cshtml" />
+    <Content Include="Views\Manage\_PartialGestionarMisTurnos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
