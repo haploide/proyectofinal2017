@@ -10,7 +10,7 @@ using WebApi.Models;
 namespace WebApi.Controllers
 {
     [EnableCors(origins: "http://localhost:6907", headers: "*", methods: "*")]
-    public class VistaTurnosAgendaClienteControlles : ApiController
+    public class VistaTurnosAgendaClienteController : ApiController
     {
         private GeoTurnosEntities _db = new GeoTurnosEntities();
 
@@ -22,14 +22,14 @@ namespace WebApi.Controllers
                 {
                     return NotFound();
                 }
-
+                
                 var resultado = _db.VistaTurnosAgendaVigenteParaClientes.Where(p => p.idCliente == id);
                 if(resultado == null)
                 {
                     return NotFound();
                 }
 
-                return Ok(_db.VistaTurnosAgendaVigenteParaClientes);
+                return Ok(resultado);
             }
             catch (Exception ex)
             {
