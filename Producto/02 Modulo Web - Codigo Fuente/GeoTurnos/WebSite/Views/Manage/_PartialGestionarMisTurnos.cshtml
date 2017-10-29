@@ -9,28 +9,32 @@
 
 <div class="container" ng-controller="GestionarMisTurnosController">
     <div class="row" style="margin-top: 20px;">
-        <div class="col-lg-6">
-            <span class="tituloGestionarRubro"><span id="GestionarRubro">Nuevo Rubro  </span><button type="submit" class="btn btn-primary botonNuevoRubro" ng-click="nuevoRubro()">Nuevo Rubro</button></span>
+        <div class="col-lg-12">
+            <span id="GestionarMisTurnos">Mis Turnos Activos  </span>
             <hr style="border-top: 2px solid #1d2980;" />
-            <div class="form-group">
-                <label for="rubro">Rubro:</label>
-                <input type="text" ng-model="nombreRubro" class="form-control" id="rubro" />
-            </div>
-            <button type="submit" class="btn btn-primary botonGuardarRubro" ng-click="guardarRubro()">Guardar Rubro</button>
+            
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-12">
             <table class="table table-striped">
                 <tr class="info">
-                    <th ng-hide="true">idRubro</th>
+                    <th ng-hide="true">idTurno</th>
                     <th>Rubro</th>
+                    <th>Empresa</th>
+                    <th>Fecha</th>
+                    <th>Desde</th>
+                    <th>Hasta</th>
                     <th></th>
                     <th></th>
                 </tr>
-                <tr class="media filaActivarEmpresa" data-ng-repeat="rub in rubro">
-                    <th ng-hide="true">{{rub.idRubro }}</th>
-                    <th>{{rub.nombre}}</th>
-                    <th><a ng-click="modificarRubro(rub)" class="btn btn-primary">Modificar</a></th>
-                    <th><a ng-click="eliminarRubro(rub)" class="btn btn-danger">Eliminar</a></th>
+                <tr class="media filaActivarEmpresa" data-ng-repeat="vista in VistaTurnosAgendaVigenteParaClientes">
+                    <th ng-hide="true">{{vista.idTurno }}</th>
+                    <th>{{vista.nombre}}</th>
+                    <th>{{vista.razonSocial}}</th>
+                    <th>{{vista.fecha}}</th>
+                    <th>{{vista.horaDesde}}</th>
+                    <th>{{vista.horaHasta}}</th>
+                    <th><a ng-click="verTurno(vista)" class="btn btn-primary">Ver Turno</a></th>
+                    <th><a ng-click="eliminarTurno(vista)" class="btn btn-danger">Eliminar Turno</a></th>
                 </tr>
             </table>
         </div>
@@ -39,9 +43,7 @@
     </div>
 </div>
 <script>
-
     var retornarid = function () {
-        return @usuarioLogin.Empresa.idEmpresa;
+        return @usuarioLogin.Prestatario.idCliente;
     };
-
 </script>

@@ -1178,20 +1178,17 @@ app.controller("GestionarPlantillaAgenda", function ($scope, $http) {
 })
 
 app.controller("GestionarMisTurnosController", function ($scope, $http) {
-    var esNuevo = true;
-    var idRubroModificar = 0;
-    var rubroModificar = "";
-    $scope.rubro = [];
+    $scope.VistaTurnosAgendaVigenteParaClientes = [];
     $http({
         method: 'GET',
-        url: 'http://localhost:6901/api/Rubro',
+        url: 'http://localhost:6901/api/VistaTurnosAgendaCliente/' + retornarid(),
         headers: {
             'Accept': "application/json",
 
         }
     }).then(function (response) {
         if (response.status === 200) {
-            angular.copy(response.data, $scope.rubro);
+            angular.copy(response.data, $scope.VistaTurnosAgendaVigenteParaClientes);
         }
 
     }, function (response) {
