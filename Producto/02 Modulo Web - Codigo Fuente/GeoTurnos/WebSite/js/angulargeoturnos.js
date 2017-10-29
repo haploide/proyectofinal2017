@@ -1327,9 +1327,7 @@ app.controller("PerfilEmpresaController", function ($scope, $http) {
 app.controller("SchedulerController", function ($scope, $http) {
 
     /*
-
         TRAER INFORMACION DE LA EMPRESA   
-
     */
     $scope.parametros = [];
     $http({
@@ -1344,6 +1342,7 @@ app.controller("SchedulerController", function ($scope, $http) {
             angular.copy(response.data, $scope.parametros);
 
             procesarParametros();
+            configurar();
         }
 
     }, function (response) {
@@ -1354,15 +1353,13 @@ app.controller("SchedulerController", function ($scope, $http) {
 
     });
 
-    var primerDia=100, ultimoDia=-1, horaDesde=100, horaHasta=-1;
+    var primerDia = 100, ultimoDia = -1, horaDesde =24, horaHasta = 1;
     var diasLaborables = [];
-    var horarioLaborable = { from: 08, to: 18 };
-    
+    var horarioLaborable = { from: { hora: 08, minutos: 00 }, to: {hora:18, minutos:00} };
+    var duracionTurnos = 0;
     
     /*
-    
     CONFIGURACION DEL SCHEDULER
-    
     */
 
     var localizacion = {
@@ -1390,66 +1387,68 @@ app.controller("SchedulerController", function ($scope, $http) {
         toolBarNextButtonString: "Siguiente",
 
     };
+    function configurar() {
 
-    var vista = [{
-        type: 'weekView', workTime: { fromDayOfWeek: 2, toDayOfWeek: 6, fromHour: 8, toHour: 18 }, timeRuler: {
-            scale: 'tenMinutes', scaleStartHour: 07, scaleEndHour: 18
-        }
-    }];
+        var vista = [{
+            type: 'weekView', workTime: { fromDayOfWeek: primerDia, toDayOfWeek: ultimoDia, fromHour: horaDesde, toHour: horaHasta }, timeRuler: {
+                scale: 'tenMinutes', scaleStartHour: horaDesde - 1, scaleEndHour: horaHasta
+            }
+        }];
 
-    var camposDatos = { description: "description", background: "background", draggable: "draggable", from: "from", id: "id", resizable: "resizable", readOnly: "readOnly", to: "to", tooltip: "tooltip", timeZone: "timeZone", subject: "subject", borderColor: "borderColor", resourceId: "calendar" };
+        var camposDatos = { description: "description", background: "background", draggable: "draggable", from: "from", id: "id", resizable: "resizable", readOnly: "readOnly", to: "to", tooltip: "tooltip", timeZone: "timeZone", subject: "subject", borderColor: "borderColor", resourceId: "calendar" };
 
-    var appointments = [];
+        var appointments = [];
 
-    var source =
-    {
-        dataType: "array",
-        dataFields: [
-            { name: 'id', type: 'string' },
-            { name: 'description', type: 'string' },
-            { name: 'draggable', type: 'boolean' },
-            { name: 'resizable', type: 'boolean' },
-            { name: 'readOnly', type: 'boolean' },
-            { name: 'subject', type: 'string' },
-            { name: 'background', type: 'string' },
-            { name: 'borderColor', type: 'string' },
-            { name: 'tooltip', type: 'string' },
-            { name: 'calendar', type: 'string' },
-            { name: 'timeZone', type: 'string' },
-            { name: 'from', type: 'date' },
-            { name: 'to', type: 'date' }
-        ],
-        id: 'id',
-        localData: appointments
-    };
-    var adapter = new $.jqx.dataAdapter(source);
-    $("#scheduler").jqxScheduler({
-        date: new $.jqx.date('todayDate'),
-        width: 850,
-        height: 700,
-        source: adapter,
-        appointmentDataFields: camposDatos,
-        appointmentTooltips: true,
-        columnsHeight: 25,
-        contextMenu: false,
-        enableHover: false,
-        editDialog: false,
-        //min: new $.jqx.date('todayDate'),
-        localization: localizacion,
-        legendPosition: 'top',
-        theme: 'bootstrap',
-        timeZone: 'Argentina Standard Time',
-        view: 'weekView',
-        showLegend: true,
-        resources:
+        var source =
         {
-            colorScheme: "scheme05",
-            dataField: "calendar",
-            source: new $.jqx.dataAdapter(source)
-        },
-        views: vista
+            dataType: "array",
+            dataFields: [
+                { name: 'id', type: 'string' },
+                { name: 'description', type: 'string' },
+                { name: 'draggable', type: 'boolean' },
+                { name: 'resizable', type: 'boolean' },
+                { name: 'readOnly', type: 'boolean' },
+                { name: 'subject', type: 'string' },
+                { name: 'background', type: 'string' },
+                { name: 'borderColor', type: 'string' },
+                { name: 'tooltip', type: 'string' },
+                { name: 'calendar', type: 'string' },
+                { name: 'timeZone', type: 'string' },
+                { name: 'from', type: 'date' },
+                { name: 'to', type: 'date' }
+            ],
+            id: 'id',
+            localData: appointments
+        };
+        var adapter = new $.jqx.dataAdapter(source);
+        $("#scheduler").jqxScheduler({
+            date: new $.jqx.date('todayDate'),
+            width: 850,
+            height: 700,
+            source: adapter,
+            appointmentDataFields: camposDatos,
+            appointmentTooltips: true,
+            columnsHeight: 25,
+            contextMenu: false,
+            enableHover: false,
+            editDialog: false,
+            //min: new $.jqx.date('todayDate'),
+            localization: localizacion,
+            legendPosition: 'top',
+            theme: 'bootstrap',
+            timeZone: 'Argentina Standard Time',
+            view: 'weekView',
+            showLegend: true,
+            resources:
+            {
+                colorScheme: "scheme05",
+                dataField: "calendar",
+                source: new $.jqx.dataAdapter(source)
+            },
+            views: vista
 
-    });
+        });
+    }
 
 
     /*
@@ -1464,9 +1463,9 @@ app.controller("SchedulerController", function ($scope, $http) {
 
         var fechayhora = event.args.date;
         if ($.inArray(fechayhora.dayOfWeek(), diasLaborables) != -1) {
-            if ((fechayhora.hour() >= horarioLaborable.from) && (fechayhora.hour() < horarioLaborable.to)) {
+            if (esEsDentroDeHorario(fechayhora)) {
 
-                var turno = { description: "Turno", draggable: false, from: fechayhora, id: "01", resizable: false, calendar: "Mi turno", readOnly: true, to: fechayhora.addMinutes(30), tooltip: "Mi turno", timeZone: 'Argentina Standard Time', subject: 'Mi turno', background: '#6EB97D', borderColor: '#6EB97D' };
+                var turno = { description: "Turno", draggable: false, from: fechayhora, id: "01", resizable: false, calendar: "Mi turno", readOnly: true, to: fechayhora.addMinutes(duracionTurnos), tooltip: "Mi turno", timeZone: 'Argentina Standard Time', subject: 'Mi turno', background: '#6EB97D', borderColor: '#6EB97D' };
 
                 $('#scheduler').jqxScheduler('addAppointment', turno);
             }
@@ -1502,18 +1501,37 @@ app.controller("SchedulerController", function ($scope, $http) {
                 primerDia = $scope.parametros[i].id_dia;
 
             };
-            if ($scope.parametros[i].hora_inicio > horaDesde) {
-                horaDesde = $scope.parametros[i].hora_inicio;
+            var resta = moment('1900-01-01 ' + $scope.parametros[i].hora_inicio).hour() - horaDesde;
+            if ( resta < 0) {
+                horaDesde = moment('1900-01-01 ' + $scope.parametros[i].hora_inicio).hour();
+                horarioLaborable.from.hora = moment('1900-01-01 ' + $scope.parametros[i].hora_inicio).hour();
+                horarioLaborable.from.minutos = moment('1900-01-01 ' + $scope.parametros[i].hora_inicio).minute();
             };
-            if ($scope.parametros[i].hora_fin < horaHasta) {
-                horaHasta = $scope.parametros[i].hora_fin;
+            resta = moment('1900-01-01 ' + $scope.parametros[i].hora_fin).hour() - horaHasta;
+            if (resta  > 0) {
+                horaHasta = moment('1900-01-01 ' + $scope.parametros[i].hora_fin).hour();
+                horarioLaborable.to.hora = moment('1900-01-01 ' + $scope.parametros[i].hora_fin).hour();
+                horarioLaborable.to.minutos = moment('1900-01-01 ' + $scope.parametros[i].hora_fin).minute();
             };
 
             diasLaborables.push($scope.parametros[i].id_dia);
-           
         }
+        duracionTurnos = $scope.parametros[0].duracion_turno;
 
         
+    }
+    function esEsDentroDeHorario(fechayhora) {
+        
+
+        if ((fechayhora.hour() >= horarioLaborable.from.hora) && (fechayhora.hour() < horarioLaborable.to.hora)) {
+            var fechayhoraTurno = fechayhora.addMinutes(duracionTurnos);
+            
+            if ((fechayhoraTurno.hour() < horarioLaborable.to.hora) || ((fechayhoraTurno.hour() == horarioLaborable.to.hora) && fechayhoraTurno.minute()==0)) {
+                return true;
+            }
+
+        }
+        return false;
     }
 });
 app.controller("ComentariosRatingController", function ($scope, $http) {
