@@ -43,9 +43,9 @@
         <AssociationConnector Association="GeoTurnosModel.FK_Comentarios_DireccionComentario" />
         <AssociationConnector Association="GeoTurnosModel.FK_Comentarios_Empresa" />
         <EntityTypeShape EntityType="GeoTurnosModel.VistaFiltroEmpresa" Width="1.5" PointX="8.375" PointY="14.75" />
-        <EntityTypeShape EntityType="GeoTurnosModel.VistaTurnosAgendaVigenteParaClientes" Width="1.5" PointX="5.375" PointY="4.75" />
         <EntityTypeShape EntityType="GeoTurnosModel.VistaTurnosAgendaVigenteParaEmpresa" Width="1.5" PointX="13.375" PointY="0.75" />
         <EntityTypeShape EntityType="GeoTurnosModel.VistaParametrosAgendaEmpresa" Width="1.5" PointX="13.375" PointY="5.75" />
+        <EntityTypeShape EntityType="GeoTurnosModel.VistaTurnosAgendaVigenteParaClientes" Width="1.5" PointX="5.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
