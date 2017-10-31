@@ -13,7 +13,7 @@
         <div class="col-md-3" style="background-color:chartreuse;">
             Info empresa y raiting
             <h2>Empresa: @Model.razonSocial</h2>
-
+            <img id="avatar" src="" class="img-responsive img-thumbnail fotoUsuario" />
             datepicker
         </div>
 
@@ -40,3 +40,15 @@
     };
 
 </script>
+@*<script>
+    $(document).ready(function () {
+
+        var base64 = '@Convert.ToBase64String(Model.foto)';
+        if (base64 != '') {
+            var imgtag = document.getElementById("avatar");
+            imgtag.src = 'data:image/png;base64,' + base64;
+          
+        }
+
+    });
+</script>*@
