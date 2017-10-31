@@ -182,81 +182,77 @@ app.controller("GestionRubroController", function ($scope, $http) {
     });
 
     $scope.guardarRubro = function () {
-    if (esNuevo == true)
-    {
-        if (confirm("Desea crear el Rubro: " + $scope.nombreRubro))
-        {
-            var nuevoRubro = {};
-            nuevoRubro.nombre = $scope.nombreRubro;
-            $http({
-                method: 'POST',
-                url: 'http://localhost:6901/api/Rubro',
-                data: nuevoRubro,
-                headers: {
-                    'Accept': "application/json",
+        if (esNuevo == true) {
+            if (confirm("Desea crear el Rubro: " + $scope.nombreRubro)) {
+                var nuevoRubro = {};
+                nuevoRubro.nombre = $scope.nombreRubro;
+                $http({
+                    method: 'POST',
+                    url: 'http://localhost:6901/api/Rubro',
+                    data: nuevoRubro,
+                    headers: {
+                        'Accept': "application/json",
 
-                }
-            }).then(function (response) {
-                if (response.status == 201) {
-                    $scope.rubro.push(response.data);
-                    $scope.nuevoRubro
-                }
-            }, function (response) {
+                    }
+                }).then(function (response) {
+                    if (response.status == 201) {
+                        $scope.rubro.push(response.data);
+                        $scope.nuevoRubro
+                    }
+                }, function (response) {
 
-                httpNegativo(response.status);
+                    httpNegativo(response.status);
 
-            }).then(function () {
+                }).then(function () {
 
-            });
+                });
 
-        }
-        else
-        {
+            }
+            else {
 
-        }
-    }
-    else {
-        if (confirm("Desea Modificar el Rubro: " + rubroModificar + " por "+ $scope.nombreRubro)) {
-            var rubroModificado = {};
-            var rubroAModificar = {};
-            rubroAModificar.nombre = rubroModificar;
-            rubroAModificar.idRubro = idRubroModificar;
-            rubroModificado.nombre = $scope.nombreRubro;
-            rubroModificado.idRubro = idRubroModificar;
-            $http({
-                method: 'PUT',
-                url: 'http://localhost:6901/api/Rubro/' + rubroModificado.idRubro,
-                data: rubroModificado,
-                headers: {
-                    'Accept': "application/json",
-
-                }
-            }).then(function (response) {
-                if (response.status == 200) {
-                    $scope.rubro.splice($scope.rubro.indexOf(rubroAModificar, [0]), 1, response.data);
-                    $scope.nuevoRubro();
-                }
-            }, function (response) {
-
-                httpNegativo(response.status);
-
-            }).then(function () {
-
-            });
-
+            }
         }
         else {
+            if (confirm("Desea Modificar el Rubro: " + rubroModificar + " por " + $scope.nombreRubro)) {
+                var rubroModificado = {};
+                var rubroAModificar = {};
+                rubroAModificar.nombre = rubroModificar;
+                rubroAModificar.idRubro = idRubroModificar;
+                rubroModificado.nombre = $scope.nombreRubro;
+                rubroModificado.idRubro = idRubroModificar;
+                $http({
+                    method: 'PUT',
+                    url: 'http://localhost:6901/api/Rubro/' + rubroModificado.idRubro,
+                    data: rubroModificado,
+                    headers: {
+                        'Accept': "application/json",
 
+                    }
+                }).then(function (response) {
+                    if (response.status == 200) {
+                        $scope.rubro.splice($scope.rubro.indexOf(rubroAModificar, [0]), 1, response.data);
+                        $scope.nuevoRubro();
+                    }
+                }, function (response) {
+
+                    httpNegativo(response.status);
+
+                }).then(function () {
+
+                });
+
+            }
+            else {
+
+            }
         }
-    }
-        
-        
+
+
 
     }
 
     $scope.eliminarRubro = function (rub) {
-        if (confirm("Esta seguro que desea eliminar el rubro: " + rub.nombre))
-        {
+        if (confirm("Esta seguro que desea eliminar el rubro: " + rub.nombre)) {
             var id = rub.idRubro;
             $http({
                 method: 'DELETE',
@@ -281,7 +277,7 @@ app.controller("GestionRubroController", function ($scope, $http) {
         else {
 
         }
-        
+
     }
 
     $scope.modificarRubro = function (rub) {
@@ -1353,11 +1349,17 @@ app.controller("SchedulerController", function ($scope, $http) {
 
     });
 
-    var primerDia = 100, ultimoDia = -1, horaDesde =24, horaHasta = 1;
+    /*
+        Declaracion de variables
+    */
+
+    var primerDia = 100, ultimoDia = -1, horaDesde = 24, horaHasta = 1;
     var diasLaborables = [];
-    var horarioLaborable = { from: { hora: 08, minutos: 00 }, to: {hora:18, minutos:00} };
+    var horarioLaborable = { from: { hora: 08, minutos: 00 }, to: { hora: 18, minutos: 00 } };
     var duracionTurnos = 0;
-    
+
+
+
     /*
     CONFIGURACION DEL SCHEDULER
     */
@@ -1411,11 +1413,12 @@ app.controller("SchedulerController", function ($scope, $http) {
                 { name: 'subject', type: 'string' },
                 { name: 'background', type: 'string' },
                 { name: 'borderColor', type: 'string' },
-                { name: 'tooltip', type: 'string' },
+                { name: 'tooltip', type: 'number' },
                 { name: 'calendar', type: 'string' },
                 { name: 'timeZone', type: 'string' },
                 { name: 'from', type: 'date' },
-                { name: 'to', type: 'date' }
+                { name: 'to', type: 'date' },
+
             ],
             id: 'id',
             localData: appointments
@@ -1432,6 +1435,7 @@ app.controller("SchedulerController", function ($scope, $http) {
             contextMenu: false,
             enableHover: false,
             editDialog: false,
+            appointmentTooltips: false,
             //min: new $.jqx.date('todayDate'),
             localization: localizacion,
             legendPosition: 'top',
@@ -1448,6 +1452,8 @@ app.controller("SchedulerController", function ($scope, $http) {
             views: vista
 
         });
+
+        cargarTurnos();
     }
 
 
@@ -1456,18 +1462,20 @@ app.controller("SchedulerController", function ($scope, $http) {
     EVENTOS
     
     */
-    
 
 
-    $('#scheduler').on('cellClick', function (event) {
+
+    $('#scheduler').on('cellClick', function (event) {//Crear nuevo turno
 
         var fechayhora = event.args.date;
         if ($.inArray(fechayhora.dayOfWeek(), diasLaborables) != -1) {
             if (esEsDentroDeHorario(fechayhora)) {
 
-                var turno = { description: "Turno", draggable: false, from: fechayhora, id: "01", resizable: false, calendar: "Mi turno", readOnly: true, to: fechayhora.addMinutes(duracionTurnos), tooltip: "Mi turno", timeZone: 'Argentina Standard Time', subject: 'Mi turno', background: '#6EB97D', borderColor: '#6EB97D' };
+                if (!esSobreTurno(fechayhora)) {
+                    var turno = { description: "Turno", draggable: false, from: fechayhora, id: retornarIdCliente(), resizable: false, calendar: "Mi turno", readOnly: true, to: fechayhora.addMinutes(duracionTurnos), tooltip: retornarIdCliente(), timeZone: 'Argentina Standard Time', subject: 'Mi turno', background: '#6EB97D', borderColor: '#6EB97D' };
 
-                $('#scheduler').jqxScheduler('addAppointment', turno);
+                    $('#scheduler').jqxScheduler('addAppointment', turno);
+                }
             }
             else {
                 alert('No Trabaja en ese Horario');
@@ -1479,20 +1487,70 @@ app.controller("SchedulerController", function ($scope, $http) {
         //var args = event.args; var cell = args.cell; var date = args.date;
 
     });
+    $("#scheduler").on('appointmentClick', function (event) {//Eliminar Un turno
+        var args = event.args;
+        var appointment = args.appointment;
 
-    var app1 = { description: "Turno", draggable: false, from: new $.jqx.date(2017, 10, 3, 8, 0, 0, 0), id: "02", resizable: false, calendar: "Ocupado", readOnly: true, to: new $.jqx.date(2017, 10, 3, 8, 30, 0, 0), tooltip: "Ocupado", timeZone: 'Argentina Standard Time', subject: 'Ocupado', background: '#66BCE5', borderColor: '#66BCE5' };
-    var app2 = { description: "Turno", draggable: false, from: new $.jqx.date(2017, 10, 4, 9, 30, 0, 0), id: "03", resizable: false, calendar: "Ocupado", readOnly: true, to: new $.jqx.date(2017, 10, 4, 10, 0, 0, 0), tooltip: "Ocupado", timeZone: 'Argentina Standard Time', subject: 'Ocupado', background: '#66BCE5', borderColor: '#66BCE5' };
-    var app3 = { description: "Turno", draggable: false, from: new $.jqx.date(2017, 10, 5, 9, 0, 0, 0), id: "04", resizable: false, calendar: "Ocupado", readOnly: true, to: new $.jqx.date(2017, 10, 5, 9, 30, 0, 0), tooltip: "Ocupado", timeZone: 'Argentina Standard Time', subject: 'Ocupado', background: '#66BCE5', borderColor: '#66BCE5' };
-    var app4 = { description: "Turno", draggable: false, from: new $.jqx.date(2017, 10, 4, 9, 0, 0, 0), id: "05", resizable: false, calendar: "Ocupado", readOnly: true, to: new $.jqx.date(2017, 10, 4, 9, 30, 0, 0), tooltip: "Ocupado", timeZone: 'Argentina Standard Time', subject: 'Ocupado', background: '#66BCE5', borderColor: '#66BCE5' };
+        if (appointment.tooltip == retornarIdCliente()) {//Como no me deja crear nuevos campos de datos utilizo los tooltips para guardar el id cliente
+            $('#scheduler').jqxScheduler('deleteAppointment', appointment.id);
+        }
 
-    $('#scheduler').jqxScheduler('addAppointment', app1);
-    $('#scheduler').jqxScheduler('addAppointment', app2);
+    });
 
-    $('#scheduler').jqxScheduler('addAppointment', app3);
-    $('#scheduler').jqxScheduler('addAppointment', app4);
+    /*
+        Metodos usados
+    */
 
 
-    function procesarParametros() {
+    function cargarTurnos() {//Carga los turnos desde  la base de datos
+
+        $http({
+            method: 'GET',
+            url: 'http://localhost:6901/api/VistaTurnosAgendaVigenteParaClientes/' + retornarIdEmpresa(),
+            headers: {
+                'Accept': "application/json",
+
+            }
+        }).then(function (response) {
+            if (response.status == 200) {
+                for (var i = 0; i < response.data.length; i++) {
+                    var fecha = response.data[i].fecha.split("T")[0].split("-");
+                    var año = parseInt(fecha[0]);
+                    var mes = parseInt(fecha[1]);
+                    var dia = parseInt(fecha[2]);
+
+                    var desde = response.data[i].horaDesde.split(":");
+                    var horaDesde = parseInt(desde[0]);
+                    var minDesde = parseInt(desde[1]);
+                    var hasta = response.data[i].horaHasta.split(":");
+                    var horaHasta = parseInt(hasta[0]);
+                    var minHasta = parseInt(hasta[1]);
+
+                    var turno = {};
+                    if (response.data[i].idCliente != retornarIdCliente()) {
+
+                        turno = { description: "Turno", draggable: false, from: new $.jqx.date(año, mes, dia, horaDesde, minDesde, 0, 0), id: response.data[i].idCliente, resizable: false, calendar: "Ocupado", readOnly: true, to: new $.jqx.date(año, mes, dia, horaHasta, minHasta, 0, 0), tooltip: response.data[i].idCliente, timeZone: 'Argentina Standard Time', subject: 'Ocupado', background: '#66BCE5', borderColor: '#66BCE5' };
+
+                    }
+                    else {
+                        var turno = { description: "Turno", draggable: false, from: new $.jqx.date(año, mes, dia, horaDesde, minDesde, 0, 0), id: response.data[i].idCliente, resizable: false, calendar: "Mi turno", readOnly: true, to: new $.jqx.date(año, mes, dia, horaHasta, minHasta, 0, 0), tooltip: response.data[i].idCliente, timeZone: 'Argentina Standard Time', subject: 'Mi turno', background: '#6EB97D', borderColor: '#6EB97D' };
+                       
+                    }
+
+                    $('#scheduler').jqxScheduler('addAppointment', turno);
+                }
+            }
+        }, function (response) {
+
+            httpNegativo(response.status);
+
+        }).then(function () {
+
+        });
+
+    }
+
+    function procesarParametros() {// Parametros de la agenda
         for (var i = 0; i < $scope.parametros.length; i++) {
             if ($scope.parametros[i].id_dia > ultimoDia) {
                 ultimoDia = $scope.parametros[i].id_dia;
@@ -1502,13 +1560,13 @@ app.controller("SchedulerController", function ($scope, $http) {
 
             };
             var resta = moment('1900-01-01 ' + $scope.parametros[i].hora_inicio).hour() - horaDesde;
-            if ( resta < 0) {
+            if (resta < 0) {
                 horaDesde = moment('1900-01-01 ' + $scope.parametros[i].hora_inicio).hour();
                 horarioLaborable.from.hora = moment('1900-01-01 ' + $scope.parametros[i].hora_inicio).hour();
                 horarioLaborable.from.minutos = moment('1900-01-01 ' + $scope.parametros[i].hora_inicio).minute();
             };
             resta = moment('1900-01-01 ' + $scope.parametros[i].hora_fin).hour() - horaHasta;
-            if (resta  > 0) {
+            if (resta > 0) {
                 horaHasta = moment('1900-01-01 ' + $scope.parametros[i].hora_fin).hour();
                 horarioLaborable.to.hora = moment('1900-01-01 ' + $scope.parametros[i].hora_fin).hour();
                 horarioLaborable.to.minutos = moment('1900-01-01 ' + $scope.parametros[i].hora_fin).minute();
@@ -1518,18 +1576,56 @@ app.controller("SchedulerController", function ($scope, $http) {
         }
         duracionTurnos = $scope.parametros[0].duracion_turno;
 
-        
+
     }
-    function esEsDentroDeHorario(fechayhora) {
-        
+    function esEsDentroDeHorario(fechayhora) {//Para ver si hace click en un horario y dia laborable 
+
 
         if ((fechayhora.hour() >= horarioLaborable.from.hora) && (fechayhora.hour() < horarioLaborable.to.hora)) {
             var fechayhoraTurno = fechayhora.addMinutes(duracionTurnos);
-            
-            if ((fechayhoraTurno.hour() < horarioLaborable.to.hora) || ((fechayhoraTurno.hour() == horarioLaborable.to.hora) && fechayhoraTurno.minute()==0)) {
+
+            if ((fechayhoraTurno.hour() < horarioLaborable.to.hora) || ((fechayhoraTurno.hour() == horarioLaborable.to.hora) && fechayhoraTurno.minute() == 0)) {
                 return true;
             }
 
+        }
+        return false;
+    }
+    function esSobreTurno(fechayhora) {//Para ver si es un sobre turno
+
+        var turnos = $("#scheduler").jqxScheduler('getAppointments');
+
+        var horaInicioNueva = fechayhora.hour();
+        var minInicioNueva = fechayhora.minute();
+
+        fechayhora.addMinutes(duracionTurnos);
+
+        var horaFinNueva = fechayhora.hour();
+        var minFinNueva = fechayhora.minute();
+
+
+        for (var i = 0; i < turnos.length; i++) {
+            if ((fechayhora.month() == turnos[i].from.month()) && (fechayhora.day() == turnos[i].from.day())) {
+
+                var horaInicioEvaluando = turnos[i].from.hour();
+                var minInicioEvaluando = turnos[i].from.minute();
+                var horaFinEvaluando = turnos[i].to.hour();
+                var minFinEvaluando = turnos[i].to.minute();
+
+                if (((horaInicioNueva == horaInicioEvaluando) && (minInicioNueva == minInicioEvaluando))) {
+                    return true;
+                }
+                if (((horaInicioNueva >= horaInicioEvaluando) && (horaInicioNueva <= horaFinEvaluando)) && (minInicioNueva < minInicioEvaluando) && (minInicioNueva > minFinEvaluando)) {
+                    return true;
+                }
+                if (((horaFinNueva <= horaInicioEvaluando) && (horaFinNueva >= horaFinEvaluando)) && (minFinNueva >= minInicioEvaluando) && (minFinNueva < minFinEvaluando)) {
+                    return true;
+                }
+                if (((horaInicioNueva == horaInicioEvaluando) && (minInicioNueva <= minInicioEvaluando) && (minFinNueva < minFinEvaluando))) {
+                    return true;
+                }
+
+            }
         }
         return false;
     }

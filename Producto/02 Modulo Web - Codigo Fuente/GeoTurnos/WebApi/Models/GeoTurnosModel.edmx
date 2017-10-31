@@ -226,10 +226,7 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaClientes
         <EntityType Name="VistaTurnosAgendaVigenteParaClientes">
           <Key>
             <PropertyRef Name="idAgenda" />
-            <PropertyRef Name="mes" />
-            <PropertyRef Name="año" />
-            <PropertyRef Name="idEmpresa" />
-            <PropertyRef Name="idEstado" />
+            <PropertyRef Name="idTurno" />
           </Key>
           <Property Name="idAgenda" Type="int" Nullable="false" />
           <Property Name="mes" Type="int" Nullable="false" />
@@ -238,7 +235,7 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaClientes
           <Property Name="idEstado" Type="int" Nullable="false" />
           <Property Name="razonSocial" Type="nvarchar" MaxLength="50" />
           <Property Name="nombre" Type="nvarchar" MaxLength="50" />
-          <Property Name="idTurno" Type="int" />
+          <Property Name="idTurno" Type="int" Nullable="false" />
           <Property Name="fecha" Type="datetime" />
           <Property Name="horaDesde" Type="time" Precision="7" />
           <Property Name="horaHasta" Type="time" Precision="7" />
@@ -249,10 +246,8 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
         <EntityType Name="VistaTurnosAgendaVigenteParaEmpresa">
           <Key>
             <PropertyRef Name="idEmpresa" />
-            <PropertyRef Name="idEstado" />
-            <PropertyRef Name="año" />
-            <PropertyRef Name="mes" />
             <PropertyRef Name="idAgenda" />
+            <PropertyRef Name="idTurno" />
           </Key>
           <Property Name="idEmpresa" Type="int" Nullable="false" />
           <Property Name="idEstado" Type="int" Nullable="false" />
@@ -265,7 +260,7 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
           <Property Name="idCliente" Type="int" />
           <Property Name="nombre" Type="nvarchar" MaxLength="50" />
           <Property Name="apellido" Type="nvarchar" MaxLength="50" />
-          <Property Name="idTurno" Type="int" />
+          <Property Name="idTurno" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Barrio_Ciudad">
           <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="0..1" />
@@ -914,9 +909,9 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
             <End Role="Comentarios" EntitySet="Comentarios" />
           </AssociationSet>
           <EntitySet Name="VistaFiltroEmpresa" EntityType="GeoTurnosModel.VistaFiltroEmpresa" />
-          <EntitySet Name="VistaTurnosAgendaVigenteParaClientes" EntityType="GeoTurnosModel.VistaTurnosAgendaVigenteParaClientes" />
           <EntitySet Name="VistaTurnosAgendaVigenteParaEmpresa" EntityType="GeoTurnosModel.VistaTurnosAgendaVigenteParaEmpresa" />
           <EntitySet Name="VistaParametrosAgendaEmpresa" EntityType="GeoTurnosModel.VistaParametrosAgendaEmpresa" />
+          <EntitySet Name="VistaTurnosAgendaVigenteParaClientes" EntityType="GeoTurnosModel.VistaTurnosAgendaVigenteParaClientes" />
           </EntityContainer>
         <EntityType Name="Usuario">
           <Key>
@@ -1233,34 +1228,11 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
           <Property Name="latitud" Type="Decimal" Precision="38" Scale="25" />
           <Property Name="longitud" Type="Decimal" Precision="38" Scale="25" />
         </EntityType>
-        <EntityType Name="VistaTurnosAgendaVigenteParaClientes">
-          <Key>
-            <PropertyRef Name="idAgenda" />
-            <PropertyRef Name="mes" />
-            <PropertyRef Name="año" />
-            <PropertyRef Name="idEmpresa" />
-            <PropertyRef Name="idEstado" />
-          </Key>
-          <Property Name="idAgenda" Type="Int32" Nullable="false" />
-          <Property Name="mes" Type="Int32" Nullable="false" />
-          <Property Name="año" Type="Int32" Nullable="false" />
-          <Property Name="idEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="idEstado" Type="Int32" Nullable="false" />
-          <Property Name="idTurno" Type="Int32" />
-          <Property Name="fecha" Type="DateTime" Precision="3" />
-          <Property Name="horaDesde" Type="Time" Precision="7" />
-          <Property Name="horaHasta" Type="Time" Precision="7" />
-          <Property Name="idCliente" Type="Int32" />
-          <Property Name="razonSocial" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="VistaTurnosAgendaVigenteParaEmpresa">
           <Key>
             <PropertyRef Name="idEmpresa" />
-            <PropertyRef Name="idEstado" />
-            <PropertyRef Name="año" />
-            <PropertyRef Name="mes" />
             <PropertyRef Name="idAgenda" />
+            <PropertyRef Name="idTurno" />
           </Key>
           <Property Name="idEmpresa" Type="Int32" Nullable="false" />
           <Property Name="idEstado" Type="Int32" Nullable="false" />
@@ -1273,7 +1245,7 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
           <Property Name="idCliente" Type="Int32" />
           <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="idTurno" Type="Int32" />
+          <Property Name="idTurno" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="VistaParametrosAgendaEmpresa">
           <Key>
@@ -1288,6 +1260,24 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
           <Property Name="hora_inicio" Type="Time" Nullable="false" Precision="7" />
           <Property Name="hora_fin" Type="Time" Nullable="false" Precision="7" />
           <Property Name="id_dia" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VistaTurnosAgendaVigenteParaClientes">
+          <Key>
+            <PropertyRef Name="idAgenda" />
+            <PropertyRef Name="idTurno" />
+          </Key>
+          <Property Name="idAgenda" Type="Int32" Nullable="false" />
+          <Property Name="mes" Type="Int32" Nullable="false" />
+          <Property Name="año" Type="Int32" Nullable="false" />
+          <Property Name="idEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="idEstado" Type="Int32" Nullable="false" />
+          <Property Name="razonSocial" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idTurno" Type="Int32" Nullable="false" />
+          <Property Name="fecha" Type="DateTime" Precision="3" />
+          <Property Name="horaDesde" Type="Time" Precision="7" />
+          <Property Name="horaHasta" Type="Time" Precision="7" />
+          <Property Name="idCliente" Type="Int32" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1501,24 +1491,6 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="VistaTurnosAgendaVigenteParaClientes">
-            <EntityTypeMapping TypeName="GeoTurnosModel.VistaTurnosAgendaVigenteParaClientes">
-              <MappingFragment StoreEntitySet="VistaTurnosAgendaVigenteParaClientes">
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="razonSocial" ColumnName="razonSocial" />
-                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
-                <ScalarProperty Name="horaHasta" ColumnName="horaHasta" />
-                <ScalarProperty Name="horaDesde" ColumnName="horaDesde" />
-                <ScalarProperty Name="fecha" ColumnName="fecha" />
-                <ScalarProperty Name="idTurno" ColumnName="idTurno" />
-                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
-                <ScalarProperty Name="idEmpresa" ColumnName="idEmpresa" />
-                <ScalarProperty Name="año" ColumnName="año" />
-                <ScalarProperty Name="mes" ColumnName="mes" />
-                <ScalarProperty Name="idAgenda" ColumnName="idAgenda" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="VistaTurnosAgendaVigenteParaEmpresa">
             <EntityTypeMapping TypeName="GeoTurnosModel.VistaTurnosAgendaVigenteParaEmpresa">
               <MappingFragment StoreEntitySet="VistaTurnosAgendaVigenteParaEmpresa">
@@ -1545,6 +1517,24 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
                 <ScalarProperty Name="hora_inicio" ColumnName="hora_inicio" />
                 <ScalarProperty Name="duracion_turno" ColumnName="duracion_turno" />
                 <ScalarProperty Name="id_empresa" ColumnName="id_empresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VistaTurnosAgendaVigenteParaClientes">
+            <EntityTypeMapping TypeName="GeoTurnosModel.VistaTurnosAgendaVigenteParaClientes">
+              <MappingFragment StoreEntitySet="VistaTurnosAgendaVigenteParaClientes">
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="horaHasta" ColumnName="horaHasta" />
+                <ScalarProperty Name="horaDesde" ColumnName="horaDesde" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="idTurno" ColumnName="idTurno" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="razonSocial" ColumnName="razonSocial" />
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+                <ScalarProperty Name="idEmpresa" ColumnName="idEmpresa" />
+                <ScalarProperty Name="año" ColumnName="año" />
+                <ScalarProperty Name="mes" ColumnName="mes" />
+                <ScalarProperty Name="idAgenda" ColumnName="idAgenda" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
