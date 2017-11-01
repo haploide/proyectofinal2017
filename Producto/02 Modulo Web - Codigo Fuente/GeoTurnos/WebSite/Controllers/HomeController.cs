@@ -95,7 +95,12 @@ namespace WebSite.Controllers
                         {
                             model.razonSocial = emp.razonSocial;
                             model.foto = emp.logoEmpresa;
-                            model.calificacion = emp.comentario.Value ;
+                            if(emp.comentario == null)
+                            {
+                                model.calificacion = 0;
+                            }
+                            else model.calificacion = emp.comentario.Value;
+
                             model.direccion = emp.calle +" "+ emp.altura;
                             model.telefono = emp.telefono;
                             
