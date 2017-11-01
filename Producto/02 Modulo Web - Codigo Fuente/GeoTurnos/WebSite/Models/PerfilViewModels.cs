@@ -22,7 +22,7 @@ namespace WebSite.Models
         [Display(Name = "Razon Social")]
         public string razonSocial { get; set; }
         public byte[] foto { get; set; }
-        public double calificacion { get; set; }
+        public decimal calificacion { get; set; }
 
     }
 }

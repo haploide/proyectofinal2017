@@ -66,29 +66,7 @@ namespace WebSite.Controllers
         public ActionResult PerfilEmpresa(string nombreEmpresa)
         {
             var model = new PerfilEmpresaViewModels();
-            //using (var client = new HttpClient())
-            //{
-            //    client.BaseAddress = new Uri("http://localhost:6901");
-            //    client.DefaultRequestHeaders.Accept.Clear();
-            //    // Agrega el header Accept: application/json para recibir la data como json  
-            //    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            //    // Hace la llamada a http://url-base-del-api/api/products/<id>
-            //    var  responseTask = client.GetAsync("api/Empresa?nombre="+nombreEmpresa+"&rubro=&prov=&ciudad=");
-            //    responseTask.Wait();
-            //    var response = responseTask.Result;
-            //    // Si el servicio responde correctamente
-            //    if (response.IsSuccessStatusCode)
-            //    {
-            //        // Lee el response y lo deserializa como un Product
-            //        var resultado =  response.Content.ReadAsAsync<IList<VistaFiltroEmpresa>>();
-            //        //var oMycustomclassname = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(resultado);
-            //        //model.razonSocial = resultado.razonSocial;
-
-            //    }
-            //    // Sino devuelve null
-
-            //}
+           
 
             var req = WebRequest.Create(@"http://localhost:6901/api/VistaFiltroEmpresa?nombre=" + nombreEmpresa.Replace(' ', '+'));
 
@@ -116,6 +94,8 @@ namespace WebSite.Controllers
                         foreach (var emp in listResult)
                         {
                             model.razonSocial = emp.razonSocial;
+                            model.foto = emp.logoEmpresa;
+                            model.calificacion = (decimal)emp.comentario;
                         }
                     }
                 }
