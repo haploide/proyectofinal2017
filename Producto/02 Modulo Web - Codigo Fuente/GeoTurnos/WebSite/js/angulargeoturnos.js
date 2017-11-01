@@ -1631,6 +1631,12 @@ app.controller("SchedulerController", function ($scope, $http) {
         }
         return false;
     }
+    function guardarTurno(turno) {
+        var nuevoTruno = {};
+    }
+    function eliminarTurno(turno) {
+
+    }
 });
 app.controller("ComentariosRatingController", function ($scope, $http) {
 
