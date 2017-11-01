@@ -46,6 +46,12 @@
         <EntityTypeShape EntityType="GeoTurnosModel.VistaTurnosAgendaVigenteParaEmpresa" Width="1.5" PointX="13.375" PointY="0.75" />
         <EntityTypeShape EntityType="GeoTurnosModel.VistaParametrosAgendaEmpresa" Width="1.5" PointX="13.375" PointY="5.75" />
         <EntityTypeShape EntityType="GeoTurnosModel.VistaTurnosAgendaVigenteParaClientes" Width="1.5" PointX="5.375" PointY="4.75" />
+        <EntityTypeShape EntityType="GeoTurnosModel.Agenda" Width="1.5" PointX="13.25" PointY="11.875" />
+        <EntityTypeShape EntityType="GeoTurnosModel.Turno" Width="1.5" PointX="6.25" PointY="0.75" />
+        <AssociationConnector Association="GeoTurnosModel.FK_Agenda_Empresa" />
+        <AssociationConnector Association="GeoTurnosModel.FK_Agenda_Estado" />
+        <AssociationConnector Association="GeoTurnosModel.FK_Turno_Agenda" />
+        <AssociationConnector Association="GeoTurnosModel.FK_Turno_Cliente" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -65,7 +65,7 @@ namespace WebApi.Controllers
                 }
 
                 //var emp = _db.Empresa.Where(e => e.Estado.idEstado == 1);
-                Double prom = 0;
+                
                 var emp = (from e in _db.Empresa
                            join r in _db.Rubro on e.Rubro.idRubro equals r.idRubro
                            join d in _db.Domicilio on e.idDomicilio equals d.idDomicilio

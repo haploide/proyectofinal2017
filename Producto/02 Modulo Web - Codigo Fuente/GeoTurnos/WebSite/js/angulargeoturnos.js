@@ -1462,9 +1462,7 @@ app.controller("SchedulerController", function ($scope, $http) {
     EVENTOS
     
     */
-
-
-
+    
     $('#scheduler').on('cellClick', function (event) {//Crear nuevo turno
 
         var fechayhora = event.args.date;
@@ -1478,10 +1476,10 @@ app.controller("SchedulerController", function ($scope, $http) {
                 }
             }
             else {
-                alert('No Trabaja en ese Horario');
+                //alert('No Trabaja en ese Horario');
             }
         } else {
-            alert('No Trabaja Ese dia');
+            //alert('No Trabaja Ese dia');
         }
 
         //var args = event.args; var cell = args.cell; var date = args.date;

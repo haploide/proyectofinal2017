@@ -123,6 +123,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AgendaController.cs" />
     <Compile Include="Controllers\BarrioController.cs" />
     <Compile Include="Controllers\CiudadController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
@@ -140,6 +141,7 @@
     <Compile Include="Controllers\RolPorUsuarioController.cs" />
     <Compile Include="Controllers\RubroController.cs" />
     <Compile Include="Controllers\TipoDocumentoController.cs" />
+    <Compile Include="Controllers\TurnoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\VistaFiltroEmpresaController.cs" />
     <Compile Include="Controllers\VistaParametrosAgendaEmpresaController.cs" />
@@ -147,6 +149,9 @@
     <Compile Include="Controllers\VistaTurnosAgendaVigenteParaClientesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Agenda.cs">
+      <DependentUpon>GeoTurnosModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Barrio.cs">
       <DependentUpon>GeoTurnosModel.tt</DependentUpon>
@@ -209,6 +214,9 @@
       <DependentUpon>GeoTurnosModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TipoDocumento.cs">
+      <DependentUpon>GeoTurnosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Turno.cs">
       <DependentUpon>GeoTurnosModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Usuario.cs">
