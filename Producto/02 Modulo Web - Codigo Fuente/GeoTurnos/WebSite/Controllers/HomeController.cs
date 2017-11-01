@@ -63,7 +63,7 @@ namespace WebSite.Controllers
             return PartialView("_PartialBuscarPorGeoposicion");
         }
         //[Autorizado(Roles =TipoUsuario.Prestatario)]
-        public async System.Threading.Tasks.Task<ActionResult> PerfilEmpresa(string nombreEmpresa)
+        public ActionResult PerfilEmpresa(string nombreEmpresa)
         {
             var model = new PerfilEmpresaViewModels();
             //using (var client = new HttpClient())
@@ -90,7 +90,7 @@ namespace WebSite.Controllers
 
             //}
 
-            var req = WebRequest.Create(@"http://localhost:6901/api/Empresa?nombre=" + nombreEmpresa + "&rubro=&prov=&ciudad=");
+            var req = WebRequest.Create(@"http://localhost:6901/api/VistaFiltroEmpresa?nombre=" + nombreEmpresa.Replace(' ', '+'));
 
             //Indicamos el método a utilizar
             req.Method = "GET";
@@ -122,7 +122,7 @@ namespace WebSite.Controllers
             }
             else
             {
-                Console.WriteLine("Status Code: {0}, Status Description: {1}", resp.StatusCode, resp.StatusDescription);
+                //Console.WriteLine("Status Code: {0}, Status Description: {1}", resp.StatusCode, resp.StatusDescription);
 
             }
 

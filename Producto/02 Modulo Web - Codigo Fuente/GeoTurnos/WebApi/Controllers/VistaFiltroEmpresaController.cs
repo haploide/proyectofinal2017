@@ -51,6 +51,29 @@ namespace WebApi.Controllers
                 return InternalServerError(ex);
             }
         }
+        public IHttpActionResult Get(string nombre)
+        {
+            try
+            {
+                if (_db.VistaFiltroEmpresa == null || !_db.VistaFiltroEmpresa.Any())
+                {
+                    return NotFound();
+                }
+
+                var emp = _db.VistaFiltroEmpresa.Where(n => n.razonSocial.Equals(nombre));
+
+                if (emp == null)
+                {
+                    return NotFound();
+                }
+                return Ok(emp);
+            }
+            catch (Exception ex)
+            {
+
+                return InternalServerError(ex);
+            }
+        }
 
         public IHttpActionResult Get()
         {
