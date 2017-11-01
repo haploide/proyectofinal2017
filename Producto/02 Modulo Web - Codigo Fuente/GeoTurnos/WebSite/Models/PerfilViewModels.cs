@@ -26,6 +26,9 @@ namespace WebSite.Models
         public string direccion { get; set; }
         public string telefono { get; set; }
         public string mail { get; set; }
+        public int idEmpresa { get; set; }
+
+
 
     }
 }

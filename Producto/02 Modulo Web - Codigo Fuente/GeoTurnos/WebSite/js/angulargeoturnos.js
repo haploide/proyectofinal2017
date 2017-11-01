@@ -1417,7 +1417,7 @@ app.controller("SchedulerController", function ($scope, $http) {
                 { name: 'subject', type: 'string' },
                 { name: 'background', type: 'string' },
                 { name: 'borderColor', type: 'string' },
-                { name: 'tooltip', type: 'number' },
+                { name: 'tooltip', type: 'string' },
                 { name: 'calendar', type: 'string' },
                 { name: 'timeZone', type: 'string' },
                 { name: 'from', type: 'date' },
@@ -1473,8 +1473,8 @@ app.controller("SchedulerController", function ($scope, $http) {
         if ($.inArray(fechayhora.dayOfWeek(), diasLaborables) != -1) {
             if (esEsDentroDeHorario(fechayhora)) {
 
-                if (!esSobreTurno(fechayhora)) {
-                    var turno = { description: "Turno", draggable: false, from: fechayhora, id: retornarIdCliente(), resizable: false, calendar: "Mi turno", readOnly: true, to: fechayhora.addMinutes(duracionTurnos), tooltip: retornarIdCliente(), timeZone: 'Argentina Standard Time', subject: 'Mi turno', background: '#6EB97D', borderColor: '#6EB97D' };
+                if (!esSobreTurno(fechayhora)) {//En tooltips guardo el id de cliente y el -1 del id turno porque no esta en base de datos
+                    var turno = { description: "Turno", draggable: false, from: fechayhora, id: retornarIdCliente(), resizable: false, calendar: "Mi turno", readOnly: true, to: fechayhora.addMinutes(duracionTurnos), tooltip: retornarIdCliente()+"+-1", timeZone: 'Argentina Standard Time', subject: 'Mi turno', background: '#6EB97D', borderColor: '#6EB97D' };
 
                     $('#scheduler').jqxScheduler('addAppointment', turno);
                 }
@@ -1491,10 +1491,14 @@ app.controller("SchedulerController", function ($scope, $http) {
     });
     $("#scheduler").on('appointmentClick', function (event) {//Eliminar Un turno
         var args = event.args;
-        var appointment = args.appointment;
+        var turno = args.appointment;
 
-        if (appointment.tooltip == retornarIdCliente()) {//Como no me deja crear nuevos campos de datos utilizo los tooltips para guardar el id cliente
-            $('#scheduler').jqxScheduler('deleteAppointment', appointment.id);
+        if (turno.tooltip.split('+')[0] == retornarIdCliente()) {//Como no me deja crear nuevos campos de datos utilizo los tooltips para guardar el id cliente
+
+
+            $('#scheduler').jqxScheduler('deleteAppointment', turno.id);
+
+            eliminarTurno(turno)
         }
 
     });
@@ -1531,11 +1535,11 @@ app.controller("SchedulerController", function ($scope, $http) {
                     var turno = {};
                     if (response.data[i].idCliente != retornarIdCliente()) {
 
-                        turno = { description: "Turno", draggable: false, from: new $.jqx.date(año, mes, dia, horaDesde, minDesde, 0, 0), id: response.data[i].idCliente, resizable: false, calendar: "Ocupado", readOnly: true, to: new $.jqx.date(año, mes, dia, horaHasta, minHasta, 0, 0), tooltip: response.data[i].idCliente, timeZone: 'Argentina Standard Time', subject: 'Ocupado', background: '#66BCE5', borderColor: '#66BCE5' };
+                        turno = { description: "Turno", draggable: false, from: new $.jqx.date(año, mes, dia, horaDesde, minDesde, 0, 0), id: response.data[i].idCliente, resizable: false, calendar: "Ocupado", readOnly: true, to: new $.jqx.date(año, mes, dia, horaHasta, minHasta, 0, 0), tooltip: response.data[i].idCliente + "+" + response.data[i].idTurno, timeZone: 'Argentina Standard Time', subject: 'Ocupado', background: '#66BCE5', borderColor: '#66BCE5' };
 
                     }
                     else {
-                        var turno = { description: "Turno", draggable: false, from: new $.jqx.date(año, mes, dia, horaDesde, minDesde, 0, 0), id: response.data[i].idCliente, resizable: false, calendar: "Mi turno", readOnly: true, to: new $.jqx.date(año, mes, dia, horaHasta, minHasta, 0, 0), tooltip: response.data[i].idCliente, timeZone: 'Argentina Standard Time', subject: 'Mi turno', background: '#6EB97D', borderColor: '#6EB97D' };
+                        var turno = { description: "Turno", draggable: false, from: new $.jqx.date(año, mes, dia, horaDesde, minDesde, 0, 0), id: response.data[i].idCliente, resizable: false, calendar: "Mi turno", readOnly: true, to: new $.jqx.date(año, mes, dia, horaHasta, minHasta, 0, 0), tooltip: response.data[i].idCliente + "+" + response.data[i].idTurno, timeZone: 'Argentina Standard Time', subject: 'Mi turno', background: '#6EB97D', borderColor: '#6EB97D' };
                        
                     }
 
@@ -1635,6 +1639,27 @@ app.controller("SchedulerController", function ($scope, $http) {
         var nuevoTruno = {};
     }
     function eliminarTurno(turno) {
+        
+        idTurno = turno.tooltip.split('+')[1];
+
+        $http({
+            method: 'DELETE',
+            url: 'http://localhost:6901/api/Turno/' + idTurno,
+            headers: {
+                'Accept': "application/json",
+
+            }
+        }).then(function (response) {
+            if (response.status == 200) {
+               //TODO:Mostrar Mensaje
+            }
+        }, function (response) {
+
+            httpNegativo(response.status);
+
+        }).then(function () {
+
+        });
 
     }
 });

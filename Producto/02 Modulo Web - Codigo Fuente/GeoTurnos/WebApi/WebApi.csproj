@@ -111,12 +111,12 @@
     <Content Include="Global.asax" />
     <Content Include="Models\GeoTurnosModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>GeoTurnosModel.edmx</DependentUpon>
+      <DependentUpon>GeoTurnosModelWeb.edmx</DependentUpon>
       <LastGenOutput>GeoTurnosModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\GeoTurnosModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>GeoTurnosModel.edmx</DependentUpon>
+      <DependentUpon>GeoTurnosModelWeb.edmx</DependentUpon>
       <LastGenOutput>GeoTurnosModel.cs</LastGenOutput>
     </Content>
     <Content Include="Web.config" />
@@ -193,10 +193,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GeoTurnosModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\GeoTurnosModel.Designer.cs">
+    <Compile Include="Models\GeoTurnosModelWeb.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>GeoTurnosModel.edmx</DependentUpon>
+      <DependentUpon>GeoTurnosModelWeb.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ParametroAgenda.cs">
       <DependentUpon>GeoTurnosModel.tt</DependentUpon>
@@ -239,12 +239,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <EntityDeploy Include="Models\GeoTurnosModel.edmx">
+    <EntityDeploy Include="Models\GeoTurnosModelWeb.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>GeoTurnosModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>GeoTurnosModelWeb.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\GeoTurnosModel.edmx.diagram">
-      <DependentUpon>GeoTurnosModel.edmx</DependentUpon>
+    <Content Include="Models\GeoTurnosModelWeb.edmx.diagram">
+      <DependentUpon>GeoTurnosModelWeb.edmx</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -1,8 +1,9 @@
 ﻿@model WebSite.Models.PerfilEmpresaViewModels
-
+@using WebSite.App_Start
 @{
     ViewBag.Title = "PerfilEmpresa";
 
+    var usuarioLogin = Session["usuarioLogin"] as UsuarioLogueado;
 }
 
 <div class="container" ng-controller="PerfilEmpresaController">
@@ -40,10 +41,10 @@
 <script>
     //Cambiar por el id de la empresa que busque
     var retornarIdEmpresa = function () {
-        return 10;
+        return @Model.idEmpresa;
     };
     var retornarIdCliente = function () {
-        return 3;
+        return @usuarioLogin.Prestatario.idCliente;
     };
     var retornarCalificacion = function () {
         var num = Number(("@Model.calificacion").replace(",","."));

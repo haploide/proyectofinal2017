@@ -62,7 +62,7 @@ namespace WebSite.Controllers
         {
             return PartialView("_PartialBuscarPorGeoposicion");
         }
-        //[Autorizado(Roles =TipoUsuario.Prestatario)]
+        [Autorizado(Roles =TipoUsuario.Prestatario)]
         public ActionResult PerfilEmpresa(string nombreEmpresa)
         {
             var model = new PerfilEmpresaViewModels();
@@ -101,6 +101,7 @@ namespace WebSite.Controllers
                             }
                             else model.calificacion = emp.comentario.Value;
 
+                            model.idEmpresa = emp.idEmpresa;
                             model.direccion = emp.calle +" "+ emp.altura;
                             model.telefono = emp.telefono;
                             
