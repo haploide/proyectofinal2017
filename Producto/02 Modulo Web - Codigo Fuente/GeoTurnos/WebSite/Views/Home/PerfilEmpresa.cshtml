@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "PerfilEmpresa";
-    
+
 }
 
 <div class="container" ng-controller="PerfilEmpresaController">
@@ -44,6 +44,10 @@
     };
     var retornarIdCliente = function () {
         return 3;
+    };
+    var retornarCalificacion = function () {
+        var num = Number(("@Model.calificacion").replace(",","."));
+        return num;
     };
 
 </script>

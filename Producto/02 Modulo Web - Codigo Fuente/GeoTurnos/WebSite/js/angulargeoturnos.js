@@ -1319,9 +1319,7 @@ app.controller("PerfilEmpresaController", function ($scope, $http) {
    
     $scope.contenidoATraer = '/Home/ComentariosRating';
     $("#jqxRating").jqxRating({
-        width: 350,
-        height: 35,
-        value: 3
+        width: 100, height: 35, value: retornarCalificacion(), disabled: true, precision: 0.5
     });
 
 
@@ -1361,7 +1359,7 @@ app.controller("SchedulerController", function ($scope, $http) {
 
     var primerDia = 100, ultimoDia = -1, horaDesde = 24, horaHasta = 1;
     var diasLaborables = [];
-    var horarioLaborable = { from: { hora: 08, minutos: 00 }, to: { hora: 18, minutos: 00 } };
+    var horarioLaborable = { from: { hora: 8, minutos: 00 }, to: { hora: 18, minutos: 00 } };
     var duracionTurnos = 0;
 
 
