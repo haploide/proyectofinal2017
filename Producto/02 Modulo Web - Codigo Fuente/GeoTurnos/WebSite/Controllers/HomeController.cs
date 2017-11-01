@@ -96,6 +96,9 @@ namespace WebSite.Controllers
                             model.razonSocial = emp.razonSocial;
                             model.foto = emp.logoEmpresa;
                             model.calificacion = (decimal)emp.comentario;
+                            model.direccion = emp.calle +" "+ emp.altura;
+                            model.telefono = emp.telefono;
+                            
                         }
                     }
                 }

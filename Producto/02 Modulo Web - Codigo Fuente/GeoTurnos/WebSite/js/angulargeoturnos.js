@@ -1316,7 +1316,13 @@ app.controller("GestionarMisTurnosController", function ($scope, $http) {
 
 app.controller("PerfilEmpresaController", function ($scope, $http) {
 
+   
     $scope.contenidoATraer = '/Home/ComentariosRating';
+    $("#jqxRating").jqxRating({
+        width: 350,
+        height: 35,
+        value: 3
+    });
 
 
 });
