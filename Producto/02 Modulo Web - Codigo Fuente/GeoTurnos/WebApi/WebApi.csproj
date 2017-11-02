@@ -143,6 +143,7 @@
     <Compile Include="Controllers\TipoDocumentoController.cs" />
     <Compile Include="Controllers\TurnoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Controllers\VistaComentariosAEmpresaController.cs" />
     <Compile Include="Controllers\VistaFiltroEmpresaController.cs" />
     <Compile Include="Controllers\VistaParametrosAgendaEmpresaController.cs" />
     <Compile Include="Controllers\VistaTurnosAgendaClienteController.cs" />
