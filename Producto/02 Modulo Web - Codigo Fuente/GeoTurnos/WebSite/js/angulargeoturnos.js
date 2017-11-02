@@ -1474,7 +1474,11 @@ app.controller("SchedulerController", function ($scope, $http, $mdDialog) {
             if (esEsDentroDeHorario(fechayhora)) {
 
                 if (!esSobreTurno(fechayhora)) {//En tooltips guardo el id de cliente y el -1 del id turno porque no esta en base de datos
-                    var turno = { description: "Turno", draggable: false, from: fechayhora, id: retornarIdCliente(), resizable: false, calendar: "Mi turno", readOnly: true, to: fechayhora.addMinutes(duracionTurnos), tooltip: retornarIdCliente()+"+-1", timeZone: 'Argentina Standard Time', subject: 'Mi turno', background: '#6EB97D', borderColor: '#6EB97D' };
+
+
+                    var idAgenda=getIdAgenda(fechayhora);
+
+                    var turno = { description: "Turno", draggable: false, from: fechayhora, id: retornarIdCliente(), resizable: false, calendar: "Mi turno", readOnly: true, to: fechayhora.addMinutes(duracionTurnos), tooltip: retornarIdCliente() + "+-1", timeZone: 'Argentina Standard Time', subject: 'Mi turno', background: '#6EB97D', borderColor: '#6EB97D' };
 
                     $('#scheduler').jqxScheduler('addAppointment', turno);
                 }
@@ -1494,8 +1498,8 @@ app.controller("SchedulerController", function ($scope, $http, $mdDialog) {
         var turno = args.appointment;
 
         if (turno.tooltip.split('+')[0] == retornarIdCliente()) {//Como no me deja crear nuevos campos de datos utilizo los tooltips para guardar el id cliente
-            showDialog();
 
+            
             if (confirm("Esta seguro que desea eliminar el turno")) {
                 $('#scheduler').jqxScheduler('deleteAppointment', turno.id);
 
@@ -1664,31 +1668,31 @@ app.controller("SchedulerController", function ($scope, $http, $mdDialog) {
         });
 
     }
-    $scope.items = [1, 2, 3];
-    function showDialog() {
-        var parentEl = angular.element(document.body);
-        $mdDialog.show({
-            parent: parentEl,
-            template:
-              '<md-dialog aria-label="List dialog">' +
-              '  <md-dialog-content>'+
-              '    <md-list>'+
-              '      <md-list-item ng-repeat="item in items">'+
-              '       <p>Number {{item}}</p>' +
-              '      '+
-              '    </md-list-item></md-list>'+
-              '  </md-dialog-content>' +
-              '  <md-dialog-actions>' +
-              '    <md-button ng-click="closeDialog()" class="md-primary">' +
-              '      Close Dialog' +
-              '    </md-button>' +
-              '  </md-dialog-actions>' +
-              '</md-dialog>',
-            locals: {
-                items: $scope.items
-            },
-            controller: DialogController
+
+    function getIdAgenda(fechayhora) {
+
+        $http({
+            method: 'GET',
+            url: 'http://localhost:6901/api/agenda?mes=' + fechayhora.month() + '&anio=' + fechayhora.year(),
+            headers: {
+                'Accept': "application/json",
+
+            }
+        }).then(function (response) {
+            if (response.status === 200) {
+                return response.data.idAgenda;
+            }
+
+        }, function (response) {
+
+            httpNegativo(response.status);
+
+        }).then(function () {
+
         });
+    }
+    
+
 });
 app.controller("ComentariosRatingController", function ($scope, $http) {
 
