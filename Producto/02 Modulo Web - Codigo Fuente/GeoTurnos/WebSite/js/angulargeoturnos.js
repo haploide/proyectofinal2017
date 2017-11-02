@@ -1690,7 +1690,7 @@ app.controller("SchedulerController", function ($scope, $http, $mdDialog) {
         }).then(function () {
 
         });
-    }
+    };
     
 
 });
