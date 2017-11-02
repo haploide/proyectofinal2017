@@ -1324,7 +1324,7 @@ app.controller("PerfilEmpresaController", function ($scope, $http) {
 
 
 });
-app.controller("SchedulerController", function ($scope, $http) {
+app.controller("SchedulerController", function ($scope, $http, $mdDialog) {
 
     /*
         TRAER INFORMACION DE LA EMPRESA   
@@ -1494,11 +1494,13 @@ app.controller("SchedulerController", function ($scope, $http) {
         var turno = args.appointment;
 
         if (turno.tooltip.split('+')[0] == retornarIdCliente()) {//Como no me deja crear nuevos campos de datos utilizo los tooltips para guardar el id cliente
+            showDialog();
 
+            if (confirm("Esta seguro que desea eliminar el turno")) {
+                $('#scheduler').jqxScheduler('deleteAppointment', turno.id);
 
-            $('#scheduler').jqxScheduler('deleteAppointment', turno.id);
-
-            eliminarTurno(turno)
+                eliminarTurno(turno)
+            }
         }
 
     });
@@ -1662,6 +1664,31 @@ app.controller("SchedulerController", function ($scope, $http) {
         });
 
     }
+    $scope.items = [1, 2, 3];
+    function showDialog() {
+        var parentEl = angular.element(document.body);
+        $mdDialog.show({
+            parent: parentEl,
+            template:
+              '<md-dialog aria-label="List dialog">' +
+              '  <md-dialog-content>'+
+              '    <md-list>'+
+              '      <md-list-item ng-repeat="item in items">'+
+              '       <p>Number {{item}}</p>' +
+              '      '+
+              '    </md-list-item></md-list>'+
+              '  </md-dialog-content>' +
+              '  <md-dialog-actions>' +
+              '    <md-button ng-click="closeDialog()" class="md-primary">' +
+              '      Close Dialog' +
+              '    </md-button>' +
+              '  </md-dialog-actions>' +
+              '</md-dialog>',
+            locals: {
+                items: $scope.items
+            },
+            controller: DialogController
+        });
 });
 app.controller("ComentariosRatingController", function ($scope, $http) {
 

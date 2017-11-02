@@ -22,9 +22,9 @@ namespace WebApi.Models
         public string razonSocial { get; set; }
         public string nombre { get; set; }
         public int idTurno { get; set; }
-        public Nullable<System.DateTime> fecha { get; set; }
-        public Nullable<System.TimeSpan> horaDesde { get; set; }
-        public Nullable<System.TimeSpan> horaHasta { get; set; }
-        public Nullable<int> idCliente { get; set; }
+        public System.DateTime fecha { get; set; }
+        public System.TimeSpan horaDesde { get; set; }
+        public System.TimeSpan horaHasta { get; set; }
+        public int idCliente { get; set; }
     }
 }

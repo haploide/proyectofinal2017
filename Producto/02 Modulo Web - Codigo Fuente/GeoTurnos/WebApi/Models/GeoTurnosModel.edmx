@@ -195,11 +195,48 @@
           <Property Name="idEstado" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'GeoTurnos.dbo.VistaComentariosAEmpresa' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VistaComentariosAEmpresa">
+          <Key>
+            <PropertyRef Name="id_empresa" />
+            <PropertyRef Name="Id_comentario" />
+            <PropertyRef Name="nro" />
+            <PropertyRef Name="id_cliente" />
+            <PropertyRef Name="fecha_comentario" />
+            <PropertyRef Name="id_direccion" />
+            <PropertyRef Name="nombre" />
+            <PropertyRef Name="apellido" />
+            <PropertyRef Name="idUsuario" />
+            <PropertyRef Name="usuario" />
+          </Key>
+          <Property Name="id_empresa" Type="int" Nullable="false" />
+          <Property Name="Id_comentario" Type="int" Nullable="false" />
+          <Property Name="nro" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="id_cliente" Type="int" Nullable="false" />
+          <Property Name="comentario" Type="varchar" MaxLength="200" />
+          <Property Name="fecha_comentario" Type="date" Nullable="false" />
+          <Property Name="id_direccion" Type="int" Nullable="false" />
+          <Property Name="titulo" Type="varchar" MaxLength="50" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="apellido" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="foto" Type="image" />
+          <Property Name="idUsuario" Type="int" Nullable="false" />
+          <Property Name="usuario" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'GeoTurnos.dbo.VistaFiltroEmpresa' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VistaFiltroEmpresa">
           <Key>
             <PropertyRef Name="idEmpresa" />
+            
+            
+            
+            
+            
+            
             <PropertyRef Name="idRubro" />
+            
+            
           </Key>
           <Property Name="idEmpresa" Type="int" Nullable="false" />
           <Property Name="cuit" Type="decimal" Precision="18" Scale="0" />
@@ -239,6 +276,10 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaClientes
         <EntityType Name="VistaTurnosAgendaVigenteParaClientes">
           <Key>
             <PropertyRef Name="idAgenda" />
+            
+            
+            
+            
             <PropertyRef Name="idTurno" />
             
             
@@ -253,10 +294,10 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaClientes
           <Property Name="razonSocial" Type="nvarchar" MaxLength="50" />
           <Property Name="nombre" Type="nvarchar" MaxLength="50" />
           <Property Name="idTurno" Type="int" Nullable="false" />
-          <Property Name="fecha" Type="datetime" />
-          <Property Name="horaDesde" Type="time" Precision="7" />
-          <Property Name="horaHasta" Type="time" Precision="7" />
-          <Property Name="idCliente" Type="int" />
+          <Property Name="fecha" Type="datetime" Nullable="false" />
+          <Property Name="horaDesde" Type="time" Precision="7" Nullable="false" />
+          <Property Name="horaHasta" Type="time" Precision="7" Nullable="false" />
+          <Property Name="idCliente" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -590,6 +631,23 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
           <EntitySet Name="TipoDocumento" EntityType="Self.TipoDocumento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Turno" EntityType="Self.Turno" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VistaComentariosAEmpresa" EntityType="Self.VistaComentariosAEmpresa" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VistaComentariosAEmpresa].[id_empresa] AS [id_empresa], 
+    [VistaComentariosAEmpresa].[Id_comentario] AS [Id_comentario], 
+    [VistaComentariosAEmpresa].[nro] AS [nro], 
+    [VistaComentariosAEmpresa].[id_cliente] AS [id_cliente], 
+    [VistaComentariosAEmpresa].[comentario] AS [comentario], 
+    [VistaComentariosAEmpresa].[fecha_comentario] AS [fecha_comentario], 
+    [VistaComentariosAEmpresa].[id_direccion] AS [id_direccion], 
+    [VistaComentariosAEmpresa].[titulo] AS [titulo], 
+    [VistaComentariosAEmpresa].[nombre] AS [nombre], 
+    [VistaComentariosAEmpresa].[apellido] AS [apellido], 
+    [VistaComentariosAEmpresa].[foto] AS [foto], 
+    [VistaComentariosAEmpresa].[idUsuario] AS [idUsuario], 
+    [VistaComentariosAEmpresa].[usuario] AS [usuario]
+    FROM [dbo].[VistaComentariosAEmpresa] AS [VistaComentariosAEmpresa]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="VistaFiltroEmpresa" EntityType="Self.VistaFiltroEmpresa" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [VistaFiltroEmpresa].[idEmpresa] AS [idEmpresa], 
@@ -1016,6 +1074,7 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
             <End Role="Cliente" EntitySet="Cliente" />
             <End Role="Turno" EntitySet="Turno" />
           </AssociationSet>
+          <EntitySet Name="VistaComentariosAEmpresa" EntityType="GeoTurnosModel.VistaComentariosAEmpresa" />
           </EntityContainer>
         <EntityType Name="Usuario">
           <Key>
@@ -1370,10 +1429,10 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
           <Property Name="razonSocial" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="idTurno" Type="Int32" Nullable="false" />
-          <Property Name="fecha" Type="DateTime" Precision="3" />
-          <Property Name="horaDesde" Type="Time" Precision="7" />
-          <Property Name="horaHasta" Type="Time" Precision="7" />
-          <Property Name="idCliente" Type="Int32" />
+          <Property Name="fecha" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="horaDesde" Type="Time" Precision="7" Nullable="false" />
+          <Property Name="horaHasta" Type="Time" Precision="7" Nullable="false" />
+          <Property Name="idCliente" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Agenda">
           <Key>
@@ -1448,6 +1507,33 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="VistaComentariosAEmpresa">
+          <Key>
+            <PropertyRef Name="id_empresa" />
+            <PropertyRef Name="Id_comentario" />
+            <PropertyRef Name="nro" />
+            <PropertyRef Name="id_cliente" />
+            <PropertyRef Name="fecha_comentario" />
+            <PropertyRef Name="id_direccion" />
+            <PropertyRef Name="nombre" />
+            <PropertyRef Name="apellido" />
+            <PropertyRef Name="idUsuario" />
+            <PropertyRef Name="usuario" />
+          </Key>
+          <Property Name="id_empresa" Type="Int32" Nullable="false" />
+          <Property Name="Id_comentario" Type="Int32" Nullable="false" />
+          <Property Name="nro" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="id_cliente" Type="Int32" Nullable="false" />
+          <Property Name="comentario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_comentario" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="id_direccion" Type="Int32" Nullable="false" />
+          <Property Name="titulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="apellido" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="foto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <Property Name="usuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1727,6 +1813,25 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
                 <ScalarProperty Name="fecha" ColumnName="fecha" />
                 <ScalarProperty Name="idAgenda" ColumnName="idAgenda" />
                 <ScalarProperty Name="idTurno" ColumnName="idTurno" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VistaComentariosAEmpresa">
+            <EntityTypeMapping TypeName="GeoTurnosModel.VistaComentariosAEmpresa">
+              <MappingFragment StoreEntitySet="VistaComentariosAEmpresa">
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="foto" ColumnName="foto" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="titulo" ColumnName="titulo" />
+                <ScalarProperty Name="id_direccion" ColumnName="id_direccion" />
+                <ScalarProperty Name="fecha_comentario" ColumnName="fecha_comentario" />
+                <ScalarProperty Name="comentario" ColumnName="comentario" />
+                <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
+                <ScalarProperty Name="nro" ColumnName="nro" />
+                <ScalarProperty Name="Id_comentario" ColumnName="Id_comentario" />
+                <ScalarProperty Name="id_empresa" ColumnName="id_empresa" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

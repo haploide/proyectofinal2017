@@ -261,10 +261,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GeoturnosModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\GeoturnosModel.Designer.cs">
+    <Compile Include="Models\GeoturnosModelWeb.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>GeoturnosModel.edmx</DependentUpon>
+      <DependentUpon>GeoturnosModelWeb.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -319,12 +319,12 @@
     <Content Include="js\angulargeoturnos.js" />
     <Content Include="Models\GeoturnosModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>GeoturnosModel.edmx</DependentUpon>
+      <DependentUpon>GeoturnosModelWeb.edmx</DependentUpon>
       <LastGenOutput>GeoturnosModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\GeoturnosModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>GeoturnosModel.edmx</DependentUpon>
+      <DependentUpon>GeoturnosModelWeb.edmx</DependentUpon>
       <LastGenOutput>GeoturnosModel.cs</LastGenOutput>
     </Content>
     <Content Include="resources\1.png" />
@@ -353,12 +353,12 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\angular-route.min.js.map" />
-    <EntityDeploy Include="Models\GeoturnosModel.edmx">
+    <EntityDeploy Include="Models\GeoturnosModelWeb.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>GeoturnosModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>GeoturnosModelWeb.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\GeoturnosModel.edmx.diagram">
-      <DependentUpon>GeoturnosModel.edmx</DependentUpon>
+    <Content Include="Models\GeoturnosModelWeb.edmx.diagram">
+      <DependentUpon>GeoturnosModelWeb.edmx</DependentUpon>
     </Content>
     <Content Include="resources\GeoTurnos.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

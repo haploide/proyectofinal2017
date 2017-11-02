@@ -48,5 +48,6 @@ namespace WebApi.Models
         public virtual DbSet<VistaTurnosAgendaVigenteParaClientes> VistaTurnosAgendaVigenteParaClientes { get; set; }
         public virtual DbSet<Agenda> Agenda { get; set; }
         public virtual DbSet<Turno> Turno { get; set; }
+        public virtual DbSet<VistaComentariosAEmpresa> VistaComentariosAEmpresa { get; set; }
     }
 }

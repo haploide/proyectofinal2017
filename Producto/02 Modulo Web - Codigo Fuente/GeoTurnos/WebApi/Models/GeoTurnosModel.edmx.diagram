@@ -52,6 +52,7 @@
         <AssociationConnector Association="GeoTurnosModel.FK_Agenda_Estado" />
         <AssociationConnector Association="GeoTurnosModel.FK_Turno_Agenda" />
         <AssociationConnector Association="GeoTurnosModel.FK_Turno_Cliente" />
+        <EntityTypeShape EntityType="GeoTurnosModel.VistaComentariosAEmpresa" Width="1.5" PointX="5.375" PointY="14.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

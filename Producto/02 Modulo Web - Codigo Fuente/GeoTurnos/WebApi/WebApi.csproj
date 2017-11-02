@@ -111,12 +111,12 @@
     <Content Include="Global.asax" />
     <Content Include="Models\GeoTurnosModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>GeoTurnosModelWeb.edmx</DependentUpon>
+      <DependentUpon>GeoTurnosModel.edmx</DependentUpon>
       <LastGenOutput>GeoTurnosModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\GeoTurnosModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>GeoTurnosModelWeb.edmx</DependentUpon>
+      <DependentUpon>GeoTurnosModel.edmx</DependentUpon>
       <LastGenOutput>GeoTurnosModel.cs</LastGenOutput>
     </Content>
     <Content Include="Web.config" />
@@ -193,10 +193,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GeoTurnosModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\GeoTurnosModelWeb.Designer.cs">
+    <Compile Include="Models\GeoTurnosModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>GeoTurnosModelWeb.edmx</DependentUpon>
+      <DependentUpon>GeoTurnosModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ParametroAgenda.cs">
       <DependentUpon>GeoTurnosModel.tt</DependentUpon>
@@ -223,6 +223,9 @@
       <DependentUpon>GeoTurnosModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UsuarioMobile.cs" />
+    <Compile Include="Models\VistaComentariosAEmpresa.cs">
+      <DependentUpon>GeoTurnosModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\VistaFiltroEmpresa.cs">
       <DependentUpon>GeoTurnosModel.tt</DependentUpon>
     </Compile>
@@ -239,12 +242,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <EntityDeploy Include="Models\GeoTurnosModelWeb.edmx">
+    <EntityDeploy Include="Models\GeoTurnosModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>GeoTurnosModelWeb.Designer.cs</LastGenOutput>
+      <LastGenOutput>GeoTurnosModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\GeoTurnosModelWeb.edmx.diagram">
-      <DependentUpon>GeoTurnosModelWeb.edmx</DependentUpon>
+    <Content Include="Models\GeoTurnosModel.edmx.diagram">
+      <DependentUpon>GeoTurnosModel.edmx</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
