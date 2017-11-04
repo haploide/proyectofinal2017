@@ -1343,11 +1343,12 @@ app.controller("SchedulerController", function ($scope, $http, $mdDialog) {
 
             procesarParametros();
             configurar();
+
         }
 
     }, function (response) {
 
-        httpNegativo(response.status);
+        httpNegativoSinContenedor(response.status);
 
     }).then(function () {
 
@@ -1511,10 +1512,12 @@ app.controller("SchedulerController", function ($scope, $http, $mdDialog) {
                                     var turno = { description: "Turno", draggable: false, from: fechayhora, id: retornarIdCliente(), resizable: false, calendar: "Mi turno", readOnly: true, to: fechayhora.addMinutes(duracionTurnos), tooltip: retornarIdCliente() + '+' + response.data.idTurno, timeZone: 'Argentina Standard Time', subject: 'Mi turno', background: '#6EB97D', borderColor: '#6EB97D' };
 
                                     $('#scheduler').jqxScheduler('addAppointment', turno);
+
+
                                 }
                             }, function (response) {
 
-                                httpNegativo(response.status);
+                                httpNegativoSinContenedor(response.status);
 
                             }).then(function () {
 
@@ -1526,7 +1529,7 @@ app.controller("SchedulerController", function ($scope, $http, $mdDialog) {
 
                     }, function (response) {
 
-                        httpNegativo(response.status);
+                        httpNegativoSinContenedor(response.status);
 
                     }).then(function () {
 
@@ -1608,7 +1611,7 @@ app.controller("SchedulerController", function ($scope, $http, $mdDialog) {
             }
         }, function (response) {
 
-            httpNegativo(response.status);
+            httpNegativoSinContenedor(response.status);
 
         }).then(function () {
 
@@ -1713,7 +1716,7 @@ app.controller("SchedulerController", function ($scope, $http, $mdDialog) {
             }
         }, function (response) {
 
-            httpNegativo(response.status);
+            httpNegativoSinContenedor(response.status);
 
         }).then(function () {
 
@@ -1805,7 +1808,7 @@ var httpNegativo = function (status) {
 }
 var notificarSinContenedor = function (notificacion, contenedorMensaje, offset, template, mensaje) {
     notificacion.jqxNotification({
-        width: 300, position: "bottom-left", opacity: 0.9, animationOpenDelay: 800, autoClose: true, autoCloseDelay: 3000,
+        width: 300, position: "top-left", opacity: 0.9, animationOpenDelay: 800, autoClose: true, autoCloseDelay: 3000,
         template: template, showCloseButton: false, browserBoundsOffset: offset
     });
     contenedorMensaje.html(mensaje);
