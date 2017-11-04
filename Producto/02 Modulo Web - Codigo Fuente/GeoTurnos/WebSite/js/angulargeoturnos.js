@@ -1746,6 +1746,11 @@ app.controller("ComentariosRatingController", function ($scope, $http) {
 
     }
 
+    $("#nuevaEstrella").jqxRating({
+    width: 350,
+    height: 35,
+    value:0
+});
 
     $http({
         method: 'GET',
