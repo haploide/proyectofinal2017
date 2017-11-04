@@ -1472,89 +1472,96 @@ app.controller("SchedulerController", function ($scope, $http, $mdDialog) {
     */
 
     $('#scheduler').on('cellClick', function (event) {//Crear nuevo turno
-        $('#loader').jqxLoader('open');
 
 
-        var fechayhora = event.args.date;
-        if ($.inArray(fechayhora.dayOfWeek(), diasLaborables) != -1) {
-            if (esEsDentroDeHorario(fechayhora)) {
+        if (!esFechaVieja(event.args.date)) {
+            $('#loader').jqxLoader('open');
 
-                if (!esSobreTurno(fechayhora)) {//En tooltips guardo el id de cliente y el -1 del id turno porque no esta en base de datos
+            var fechayhora = event.args.date;
+            if ($.inArray(fechayhora.dayOfWeek(), diasLaborables) != -1) {
+                if (esEsDentroDeHorario(fechayhora)) {
 
-
-                    $http({
-                        method: 'GET',
-                        url: 'http://localhost:6901/api/agenda?mes=' + fechayhora.month() + '&anio=' + fechayhora.year(),
-                        headers: {
-                            'Accept': "application/json",
-
-                        }
-                    }).then(function (response) {
-                        if (response.status === 200) {
-
-                            var anio = fechayhora.year();
-                            var mes = fechayhora.month();
-                            var dia = fechayhora.day();
-
-                            var horaDesde = fechayhora.hour() + ':' + fechayhora.minute();
-
-                            var horaHasta = fechayhora.addMinutes(duracionTurnos).hour() + ':' + fechayhora.addMinutes(duracionTurnos).minute();
-
-                            var nuevoTurno = { idAgenda: response.data.idAgenda, fecha: anio + '-' + mes + '-' + dia, horaDesde: horaDesde, horaHasta: horaHasta, idCliente: retornarIdCliente() }
-
-                            $http({
-                                method: 'POST',
-                                url: 'http://localhost:6901/api/Turno',
-                                data: nuevoTurno,
-                                headers: {
-                                    'Accept': "application/json",
-
-                                }
-                            }).then(function (response) {
-                                if (response.status == 201) {
-                                    //TODO: Mensaje OK
-
-                                    var turno = { description: "Turno", draggable: false, from: fechayhora, id: retornarIdCliente(), resizable: false, calendar: "Mi turno", readOnly: true, to: fechayhora.addMinutes(duracionTurnos), tooltip: retornarIdCliente() + '+' + response.data.idTurno, timeZone: 'Argentina Standard Time', subject: 'Mi turno', background: '#6EB97D', borderColor: '#6EB97D' };
-
-                                    $('#scheduler').jqxScheduler('addAppointment', turno);
-
-                                    notificarSinContenedor($("#notificaciones"), $("#mensajeNotificacion"), 200, 'success', 'Turno Creado');
+                    if (!esSobreTurno(fechayhora)) {//En tooltips guardo el id de cliente y el -1 del id turno porque no esta en base de datos
 
 
-                                }
-                            }, function (response) {
+                        $http({
+                            method: 'GET',
+                            url: 'http://localhost:6901/api/agenda?mes=' + fechayhora.month() + '&anio=' + fechayhora.year(),
+                            headers: {
+                                'Accept': "application/json",
 
-                                httpNegativoSinContenedor(response.status);
+                            }
+                        }).then(function (response) {
+                            if (response.status === 200) {
 
-                            }).then(function () {
-                                $('#loader').jqxLoader('close');
-                            });
+                                var anio = fechayhora.year();
+                                var mes = fechayhora.month();
+                                var dia = fechayhora.day();
 
 
+                                var horaDesde = fechayhora.hour() + ':' + fechayhora.minute();
 
-                        }
+                                var horaHasta = fechayhora.addMinutes(duracionTurnos).hour() + ':' + fechayhora.addMinutes(duracionTurnos).minute();
 
-                    }, function (response) {
+                                var nuevoTurno = { idAgenda: response.data.idAgenda, fecha: anio + '-' + mes + '-' + dia, horaDesde: horaDesde, horaHasta: horaHasta, idCliente: retornarIdCliente() }
 
-                        httpNegativoSinContenedor(response.status);
+                                $http({
+                                    method: 'POST',
+                                    url: 'http://localhost:6901/api/Turno',
+                                    data: nuevoTurno,
+                                    headers: {
+                                        'Accept': "application/json",
 
-                    }).then(function () {
+                                    }
+                                }).then(function (response) {
+                                    if (response.status == 201) {
+                                        //TODO: Mensaje OK
+
+                                        var turno = { description: "Turno", draggable: false, from: fechayhora, id: retornarIdCliente(), resizable: false, calendar: "Mi turno", readOnly: true, to: fechayhora.addMinutes(duracionTurnos), tooltip: retornarIdCliente() + '+' + response.data.idTurno, timeZone: 'Argentina Standard Time', subject: 'Mi turno', background: '#6EB97D', borderColor: '#6EB97D' };
+
+                                        $('#scheduler').jqxScheduler('addAppointment', turno);
+
+                                        notificarSinContenedor($("#notificaciones"), $("#mensajeNotificacion"), 200, 'success', 'Turno Creado');
+
+
+                                    }
+                                }, function (response) {
+
+                                    httpNegativoSinContenedor(response.status);
+
+                                }).then(function () {
+                                    $('#loader').jqxLoader('close');
+                                });
 
 
 
-                    });
+                            }
+
+                        }, function (response) {
+
+                            httpNegativoSinContenedor(response.status);
+
+                        }).then(function () {
 
 
+
+                        });
+
+
+                    }
                 }
+                else {
+                    //alert('No Trabaja en ese Horario');
+                }
+            } else {
+                //alert('No Trabaja Ese dia');
             }
-            else {
-                //alert('No Trabaja en ese Horario');
-            }
-        } else {
-            //alert('No Trabaja Ese dia');
-        }
 
-        //var args = event.args; var cell = args.cell; var date = args.date;
+            //var args = event.args; var cell = args.cell; var date = args.date;
+        } else {
+            notificarSinContenedor($("#notificaciones"), $("#mensajeNotificacion"), 200, 'warning', 'Turno Invalido');
+
+        }
 
     });
     $("#scheduler").on('appointmentClick', function (event) {//Eliminar Un turno
@@ -1706,6 +1713,31 @@ app.controller("SchedulerController", function ($scope, $http, $mdDialog) {
         return false;
     }
 
+    function esFechaVieja(fechayhora) {
+
+        var nowAnio = new $.jqx.date().year();
+        var nowMes = new $.jqx.date().month();
+        var nowDia = new $.jqx.date().day();
+
+        var anioTurno = fechayhora.year();
+        var mesTurno = fechayhora.month();
+        var diaTurno = fechayhora.day();
+
+
+        if (anioTurno >= nowAnio) {
+
+            if (mesTurno < nowMes || (mesTurno == nowMes && diaTurno <= nowDia)) {
+                return true;
+            }
+
+        } else {
+            return true;
+        }
+
+        return false;
+
+    }
+
     function eliminarTurno(turno) {
 
         idTurno = turno.tooltip.split('+')[1];
@@ -1816,7 +1848,243 @@ app.controller("ComentariosRatingController", function ($scope, $http) {
 
 
 });
+app.controller("VisualizarAgendaController", function ($scope, $http) {
 
+    $("#loader").jqxLoader({ width: 100, height: 60, imagePosition: 'bottom', theme: 'bootstrap', text: 'Cargando...', textPosition: 'top', isModal: true });
+
+
+    /*
+            TRAER INFORMACION DE LA EMPRESA  
+ 
+    */
+    $scope.parametros = [];
+    $http({
+        method: 'GET',
+        url: 'http://localhost:6901/api/VistaParametrosAgendaEmpresa/' + retornarIdEmpresa(),
+        headers: {
+            'Accept': "application/json",
+
+        }
+    }).then(function (response) {
+        if (response.status === 200) {
+            angular.copy(response.data, $scope.parametros);
+
+            procesarParametros();
+            configurar();
+
+        }
+
+    }, function (response) {
+
+        httpNegativoSinContenedor(response.status);
+
+    }).then(function () {
+
+    });
+
+    /*
+        Declaracion de variables
+    */
+
+    var primerDia = 100, ultimoDia = -1, horaDesde = 24, horaHasta = 1;
+    var diasLaborables = [];
+    var horarioLaborable = { from: { hora: 8, minutos: 00 }, to: { hora: 18, minutos: 00 } };
+    var duracionTurnos = 0;
+    /*
+        CONFIGURACION DEL SCHEDULER
+        */
+
+    var localizacion = {
+        days: {
+            // full day names
+            names: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"],
+            // abbreviated day names
+            namesAbbr: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+            // shortest day names
+            namesShort: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"]
+        },
+        months: {
+            // full month names (13 months for lunar calendards -- 13th month should be "" if not lunar)
+            names: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre", ""],
+            // abbreviated month names
+            namesAbbr: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dec", ""]
+        },
+        agendaViewString: "Agenda",
+        agendaDateColumn: "Fecha",
+        agendaTimeColumn: "Hora",
+        agendaAppointmentColumn: "Turno",
+        emptyDataString: "Sin Turnos",
+        loadString: "Cargando...",
+        clearString: "Limpiar",
+        todayString: "Hoy",
+        dayViewString: "Día",
+        weekViewString: "Semana",
+        monthViewString: "Semana",
+        toolBarPreviousButtonString: "Anterior",
+        toolBarNextButtonString: "Siguiente",
+
+    };
+    function configurar() {
+
+        var vista = [{
+            type: 'agendaView', workTime: { fromDayOfWeek: primerDia, toDayOfWeek: ultimoDia, fromHour: horaDesde, toHour: horaHasta }, timeRuler: {
+                scale: 'tenMinutes', scaleStartHour: horaDesde - 1, scaleEndHour: horaHasta
+            }
+        }];
+
+        var camposDatos = { description: "description", background: "background", draggable: "draggable", from: "from", id: "id", resizable: "resizable", readOnly: "readOnly", to: "to", tooltip: "tooltip", timeZone: "timeZone", subject: "subject", borderColor: "borderColor", resourceId: "calendar" };
+
+        var appointments = [];
+
+        var source =
+        {
+            dataType: "array",
+            dataFields: [
+                { name: 'id', type: 'string' },
+                { name: 'description', type: 'string' },
+                { name: 'draggable', type: 'boolean' },
+                { name: 'resizable', type: 'boolean' },
+                { name: 'readOnly', type: 'boolean' },
+                { name: 'subject', type: 'string' },
+                { name: 'background', type: 'string' },
+                { name: 'borderColor', type: 'string' },
+                { name: 'tooltip', type: 'string' },
+                { name: 'calendar', type: 'string' },
+                { name: 'timeZone', type: 'string' },
+                { name: 'from', type: 'date' },
+                { name: 'to', type: 'date' },
+
+            ],
+            id: 'id',
+            localData: appointments
+        };
+        var adapter = new $.jqx.dataAdapter(source);
+        $("#scheduler").jqxScheduler({
+            date: new $.jqx.date('todayDate'),
+            width: 850,
+            height:500,
+            source: adapter,
+            appointmentDataFields: camposDatos,
+            appointmentTooltips: true,
+            columnsHeight: 25,
+            contextMenu: false,
+            enableHover: false,
+            editDialog: false,
+            appointmentTooltips: false,
+            //min: new $.jqx.date('todayDate'),
+            localization: localizacion,
+            legendPosition: 'top',
+            theme: 'bootstrap',
+            timeZone: 'Argentina Standard Time',
+            view: 'agendaView',
+            showLegend: true,
+            resources:
+            {
+                colorScheme: "scheme05",
+                dataField: "calendar",
+                source: new $.jqx.dataAdapter(source)
+            },
+            views: vista
+
+        });
+
+        cargarTurnos();
+    }
+
+    /*
+    
+    EVENTOS
+    
+    */
+
+
+
+
+    /*
+         Metodos usados
+    */
+
+
+    function cargarTurnos() {//Carga los turnos desde  la base de datos
+
+        $http({
+            method: 'GET',
+            url: 'http://localhost:6901/api/VistaTurnosAgendaVigenteParaClientes/' + retornarIdEmpresa(),
+            headers: {
+                'Accept': "application/json",
+
+            }
+        }).then(function (response) {
+            if (response.status == 200) {
+                for (var i = 0; i < response.data.length; i++) {
+                    var fecha = response.data[i].fecha.split("T")[0].split("-");
+                    var año = parseInt(fecha[0]);
+                    var mes = parseInt(fecha[1]);
+                    var dia = parseInt(fecha[2]);
+
+                    var desde = response.data[i].horaDesde.split(":");
+                    var horaDesde = parseInt(desde[0]);
+                    var minDesde = parseInt(desde[1]);
+                    var hasta = response.data[i].horaHasta.split(":");
+                    var horaHasta = parseInt(hasta[0]);
+                    var minHasta = parseInt(hasta[1]);
+
+                    var turno = {};
+                    if (response.data[i].idCliente != retornarIdCliente()) {
+
+                        turno = { description: "Turno", draggable: false, from: new $.jqx.date(año, mes, dia, horaDesde, minDesde, 0, 0), id: response.data[i].idCliente, resizable: false, calendar: "Ocupado", readOnly: true, to: new $.jqx.date(año, mes, dia, horaHasta, minHasta, 0, 0), tooltip: response.data[i].idCliente + "+" + response.data[i].idTurno, timeZone: 'Argentina Standard Time', subject: 'Ocupado', background: '#66BCE5', borderColor: '#66BCE5' };
+
+                    }
+                    else {
+                        var turno = { description: "Turno", draggable: false, from: new $.jqx.date(año, mes, dia, horaDesde, minDesde, 0, 0), id: response.data[i].idCliente, resizable: false, calendar: "Mi turno", readOnly: true, to: new $.jqx.date(año, mes, dia, horaHasta, minHasta, 0, 0), tooltip: response.data[i].idCliente + "+" + response.data[i].idTurno, timeZone: 'Argentina Standard Time', subject: 'Mi turno', background: '#6EB97D', borderColor: '#6EB97D' };
+
+                    }
+
+                    $('#scheduler').jqxScheduler('addAppointment', turno);
+                }
+            }
+        }, function (response) {
+
+            httpNegativoSinContenedor(response.status);
+
+        }).then(function () {
+
+        });
+
+    }
+
+    function procesarParametros() {// Parametros de la agenda
+        for (var i = 0; i < $scope.parametros.length; i++) {
+            if ($scope.parametros[i].id_dia > ultimoDia) {
+                ultimoDia = $scope.parametros[i].id_dia;
+            };
+            if ($scope.parametros[i].id_dia < primerDia) {
+                primerDia = $scope.parametros[i].id_dia;
+
+            };
+            var resta = moment('1900-01-01 ' + $scope.parametros[i].hora_inicio).hour() - horaDesde;
+            if (resta < 0) {
+                horaDesde = moment('1900-01-01 ' + $scope.parametros[i].hora_inicio).hour();
+                horarioLaborable.from.hora = moment('1900-01-01 ' + $scope.parametros[i].hora_inicio).hour();
+                horarioLaborable.from.minutos = moment('1900-01-01 ' + $scope.parametros[i].hora_inicio).minute();
+            };
+            resta = moment('1900-01-01 ' + $scope.parametros[i].hora_fin).hour() - horaHasta;
+            if (resta > 0) {
+                horaHasta = moment('1900-01-01 ' + $scope.parametros[i].hora_fin).hour();
+                horarioLaborable.to.hora = moment('1900-01-01 ' + $scope.parametros[i].hora_fin).hour();
+                horarioLaborable.to.minutos = moment('1900-01-01 ' + $scope.parametros[i].hora_fin).minute();
+            };
+
+            diasLaborables.push($scope.parametros[i].id_dia);
+        }
+        duracionTurnos = $scope.parametros[0].duracion_turno;
+
+
+    }
+
+
+
+});
 
 
 

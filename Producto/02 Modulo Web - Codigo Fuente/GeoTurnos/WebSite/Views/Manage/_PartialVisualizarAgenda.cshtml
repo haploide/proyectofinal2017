@@ -1,0 +1,21 @@
+﻿@using WebSite.App_Start
+@{
+    var usuarioLogin = Session["usuarioLogin"] as UsuarioLogueado;
+}
+
+<div class="container" ng-controller="VisualizarAgendaController">
+
+    <div class="container"><div id="scheduler"></div></div>
+
+    <div id="notificaciones"><div id="mensajeNotificacion"></div></div>
+    <div id="contenedorNotificaciones" class="contenedorNotificaciones"></div>
+
+    <div id="loader"></div>
+</div>
+<script>
+
+    var retornarIdEmpresa = function () {
+        return @usuarioLogin.Empresa.idEmpresa;
+    };
+
+</script>

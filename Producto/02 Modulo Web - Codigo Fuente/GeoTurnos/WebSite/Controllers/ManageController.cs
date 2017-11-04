@@ -138,5 +138,11 @@ namespace WebSite.Controllers
         {
             return PartialView("_PartialGestionarPlantillaTurnos");
         }
+        //
+        //GET: VisualizarAgenda
+        public PartialViewResult VisualizarAgenda()
+        {
+            return PartialView("_PartialVisualizarAgenda");
+        }
     }
 }
