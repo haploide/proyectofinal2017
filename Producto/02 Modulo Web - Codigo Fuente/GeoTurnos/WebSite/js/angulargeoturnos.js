@@ -1746,13 +1746,13 @@ app.controller("ComentariosRatingController", function ($scope, $http) {
     $scope.objetoComentario = {};
 
     $scope.guardarComentario = function () {
-
-        $scope.objetoComentario = { titulo: $scope.nuevoTitulo, nro: nroNuevoComentario, comentario: nuevoComentario, fecha_comentario: new Date(), id_direccion: 1, id_Empresa: retornarIdEmpresa(), id_cliente: retornarIdCliente() }
+        $scope.nroNuevoComentario = $('#nuevaEstrella').jqxRating('getValue');
+        $scope.objetoComentario = { titulo: $scope.nuevoTitulo, nro: $scope.nroNuevoComentario, comentario: $scope.nuevoComentario, fecha_comentario: new Date(), id_direccion: 1, id_Empresa: retornarIdEmpresa(), id_cliente: retornarIdCliente() }
 
         $http({
             method: 'POST',
             url: 'http://localhost:6901/api/Comentarios',
-            data: objetoComentario,
+            data: $scope.objetoComentario,
             headers: {
                 'Accept': "application/json",
 
