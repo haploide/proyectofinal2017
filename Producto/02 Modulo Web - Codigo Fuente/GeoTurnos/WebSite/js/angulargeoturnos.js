@@ -1724,8 +1724,46 @@ app.controller("SchedulerController", function ($scope, $http, $mdDialog) {
 
 });
 app.controller("ComentariosRatingController", function ($scope, $http) {
+    
+
+    $scope.comentarios = [];
+
+    $scope.verCalificacion = function () {
+        for (var i = 0; i < $scope.comentarios.length; i++) {
+            if ($scope.comentarios[i].nro != null) {
+                var estrella = $('#estrella' + $scope.comentarios[i].Id_comentario);
+                if (estrella.length > 0) {
+                    estrella.jqxRating({
+                        width: 100, height: 35, value: $scope.comentarios[i].nro, disabled: true, precision: 0.5
+                    });
+                }
+            }
+        }
 
 
+
+    }
+
+
+    $http({
+        method: 'GET',
+        url: 'http://localhost:6901/api/VistaComentariosAEmpresa/' + retornarIdEmpresa(),
+        headers: {
+            'Accept': "application/json"
+        }
+
+    }).then(function (response) {
+        if (response.status === 200) {
+            angular.copy(response.data, $scope.comentarios);
+        }
+
+    }, function (response) {
+
+        httpNegativo(response.status);
+
+    }).then(function () {
+
+    });
 
 
 });

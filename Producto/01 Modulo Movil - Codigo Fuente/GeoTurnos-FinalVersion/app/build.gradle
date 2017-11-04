@@ -17,22 +17,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
-    sourceSets {
-        main {
-            res.srcDirs =
-                    [
-                            'src/main/res/layouts/menuLateral',
-                            'src/main/res/layouts/busqueda',
-                            'src/main/res/layouts/olvidoPassword',
-                            'src/main/res/layouts/pantallaPrincipal',
-                            'src/main/res/layouts/registrarse',
-                            'src/main/res/layouts/login',
-                            'src/main/res/layouts',
-                            'src/main/res'
-                    ]
-        }
-    }
 }
 
 dependencies {
@@ -44,5 +28,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.google.android.gms:play-services-maps:11.0.4'
     compile 'com.android.support:support-v4:26.+'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
 }

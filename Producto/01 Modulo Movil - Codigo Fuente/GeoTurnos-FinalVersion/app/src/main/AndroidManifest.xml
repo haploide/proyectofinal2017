@@ -8,7 +8,7 @@
          location permissions for the 'MyLocation' functionality. 
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -31,7 +31,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".Login.MapsActivity"
+            android:name=".MapsActivity"
             android:label="@string/title_activity_maps">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,29 +40,27 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".busqueda.BusquedaMapa"
+            android:name=".MapaBusqueda"
             android:label="Búsqueda en Mapa"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".busqueda.BusquedaEntidades"
-            android:label="Búsqueda de Entidades"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity
-            android:name=".olvidoPassword.OlvidoPassword"
+            android:name=".OlvidoPassword"
             android:label="Olvido su contraseña"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".registrarse.Registrarse"
+            android:name=".Registrarse"
             android:label="Registrarse"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".pantallaPrincipal.PantallaPrincipal"
+            android:name=".PantallaPrincipal"
             android:label="Pantalla Principal"
             android:screenOrientation="portrait">
+
+        </activity>
+        <activity android:name=".MisTurnos"
+         android:label="Mis Turnos"
+         android:screenOrientation="portrait">
+
         </activity>
     </application>
 

@@ -443,3 +443,9 @@ div.tab button.active {
 {
         margin-bottom: 20px;
 }
+
+.review-block-title{
+	font-size:15px;
+	font-weight:700;
+	margin-bottom:10px;
+}
