@@ -10,7 +10,7 @@ using WebApi.Models;
 namespace WebApi.Controllers
 {
     [EnableCors(origins: "http://localhost:6907", headers: "*", methods: "*")]
-    public class VistaComentariosAEmpresaController : ApiController
+    public class VistaComentariosAClienteController : ApiController
     {
         private GeoTurnosEntities _db = new GeoTurnosEntities();
 
@@ -18,11 +18,11 @@ namespace WebApi.Controllers
         {
             try
             {
-                if (_db.VistaComentariosAEmpresa  == null || !_db.VistaComentariosAEmpresa.Any())
+                if (_db.VistaComentariosACliente == null || !_db.VistaComentariosACliente.Any())
                 {
                     return NotFound();
                 }
-                return Ok(_db.VistaComentariosAEmpresa);
+                return Ok(_db.VistaComentariosACliente);
             }
             catch (Exception ex)
             {
@@ -33,20 +33,16 @@ namespace WebApi.Controllers
 
         public IHttpActionResult Get(int id)
         {
-            IQueryable<VistaComentariosAEmpresa> com = null;
+            IQueryable<VistaComentariosACliente> com = null;
             try
             {
-                if (_db.VistaComentariosAEmpresa == null || !_db.VistaComentariosAEmpresa.Any())
+                if (_db.VistaComentariosACliente == null || !_db.VistaComentariosACliente.Any())
                 {
                     return NotFound();
                 }
-
-
                 
-               com = _db.VistaComentariosAEmpresa.Where(p => p.id_empresa == id);
-               
-
-
+                com = _db.VistaComentariosACliente.Where(p => p.id_cliente  == id);
+                
                 if (com == null)
                 {
                     return NotFound();
@@ -69,7 +65,6 @@ namespace WebApi.Controllers
             }
             base.Dispose(disposing);
         }
-
 
     }
 }

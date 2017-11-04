@@ -1324,6 +1324,16 @@ app.controller("PerfilEmpresaController", function ($scope, $http) {
 
 
 });
+app.controller("PerfilClienteController", function ($scope, $http) {
+
+
+    $scope.contenidoATraer = '/Home/ComentariosRating';
+    $("#jqxRating").jqxRating({
+        width: 100, height: 35, value: retornarCalificacion(), disabled: true, precision: 0.5
+    });
+
+
+});
 app.controller("SchedulerController", function ($scope, $http, $mdDialog) {
 
 
