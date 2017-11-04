@@ -1476,11 +1476,63 @@ app.controller("SchedulerController", function ($scope, $http, $mdDialog) {
                 if (!esSobreTurno(fechayhora)) {//En tooltips guardo el id de cliente y el -1 del id turno porque no esta en base de datos
 
 
-                    var idAgenda=getIdAgenda(fechayhora);
+                    $http({
+                        method: 'GET',
+                        url: 'http://localhost:6901/api/agenda?mes=' + fechayhora.month() + '&anio=' + fechayhora.year(),
+                        headers: {
+                            'Accept': "application/json",
 
-                    var turno = { description: "Turno", draggable: false, from: fechayhora, id: retornarIdCliente(), resizable: false, calendar: "Mi turno", readOnly: true, to: fechayhora.addMinutes(duracionTurnos), tooltip: retornarIdCliente() + "+-1", timeZone: 'Argentina Standard Time', subject: 'Mi turno', background: '#6EB97D', borderColor: '#6EB97D' };
+                        }
+                    }).then(function (response) {
+                        if (response.status === 200) {
 
-                    $('#scheduler').jqxScheduler('addAppointment', turno);
+                            var anio=fechayhora.year();
+                            var mes= fechayhora.month();
+                            var dia= fechayhora.day();
+                            
+                            var horaDesde = fechayhora.hour() + ':' + fechayhora.minute();
+                          
+                            var horaHasta = fechayhora.addMinutes(duracionTurnos).hour() + ':' + fechayhora.addMinutes(duracionTurnos).minute();
+
+                            var nuevoTurno = { idAgenda: response.data.idAgenda, fecha: anio+'-'+mes+'-'+dia, horaDesde: horaDesde, horaHasta: horaHasta, idCliente: retornarIdCliente() }
+
+                            $http({
+                                method: 'POST',
+                                url: 'http://localhost:6901/api/Turno',
+                                data: nuevoTurno,
+                                headers: {
+                                    'Accept': "application/json",
+
+                                }
+                            }).then(function (response) {
+                                if (response.status == 201) {
+                                    //TODO: Mensaje OK
+                                }
+                            }, function (response) {
+
+                                httpNegativo(response.status);
+
+                            }).then(function () {
+
+                            });
+
+
+                            
+                        }
+
+                    }, function (response) {
+
+                        httpNegativo(response.status);
+
+                    }).then(function () {
+
+                        var turno = { description: "Turno", draggable: false, from: fechayhora, id: retornarIdCliente(), resizable: false, calendar: "Mi turno", readOnly: true, to: fechayhora.addMinutes(duracionTurnos), tooltip: retornarIdCliente() + "+-1", timeZone: 'Argentina Standard Time', subject: 'Mi turno', background: '#6EB97D', borderColor: '#6EB97D' };
+
+                            $('#scheduler').jqxScheduler('addAppointment', turno);
+
+                    });
+
+                    
                 }
             }
             else {
@@ -1503,7 +1555,7 @@ app.controller("SchedulerController", function ($scope, $http, $mdDialog) {
             if (confirm("Esta seguro que desea eliminar el turno")) {
                 $('#scheduler').jqxScheduler('deleteAppointment', turno.id);
 
-                eliminarTurno(turno)
+                eliminarTurno(turno);
             }
         }
 
@@ -1641,9 +1693,7 @@ app.controller("SchedulerController", function ($scope, $http, $mdDialog) {
         }
         return false;
     }
-    function guardarTurno(turno) {
-        var nuevoTruno = {};
-    }
+    
     function eliminarTurno(turno) {
         
         idTurno = turno.tooltip.split('+')[1];
@@ -1669,28 +1719,7 @@ app.controller("SchedulerController", function ($scope, $http, $mdDialog) {
 
     }
 
-    function getIdAgenda(fechayhora) {
-
-        $http({
-            method: 'GET',
-            url: 'http://localhost:6901/api/agenda?mes=' + fechayhora.month() + '&anio=' + fechayhora.year(),
-            headers: {
-                'Accept': "application/json",
-
-            }
-        }).then(function (response) {
-            if (response.status === 200) {
-                return response.data.idAgenda;
-            }
-
-        }, function (response) {
-
-            httpNegativo(response.status);
-
-        }).then(function () {
-
-        });
-    };
+    
     
 
 });

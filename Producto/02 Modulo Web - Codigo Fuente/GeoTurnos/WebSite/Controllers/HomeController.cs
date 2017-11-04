@@ -66,7 +66,12 @@ namespace WebSite.Controllers
         public ActionResult PerfilEmpresa(string nombreEmpresa)
         {
             var model = new PerfilEmpresaViewModels();
-           
+
+            if (string.IsNullOrEmpty(nombreEmpresa))
+            {
+                return RedirectToAction("BuscarTurnos", "Home");
+            }
+
 
             var req = WebRequest.Create(@"http://localhost:6901/api/VistaFiltroEmpresa?nombre=" + nombreEmpresa.Replace(' ', '+'));
 
