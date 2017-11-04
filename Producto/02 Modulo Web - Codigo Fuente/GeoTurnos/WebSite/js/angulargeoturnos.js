@@ -1507,6 +1507,10 @@ app.controller("SchedulerController", function ($scope, $http, $mdDialog) {
                             }).then(function (response) {
                                 if (response.status == 201) {
                                     //TODO: Mensaje OK
+
+                                    var turno = { description: "Turno", draggable: false, from: fechayhora, id: retornarIdCliente(), resizable: false, calendar: "Mi turno", readOnly: true, to: fechayhora.addMinutes(duracionTurnos), tooltip: retornarIdCliente() + '+' + response.response.idTurno, timeZone: 'Argentina Standard Time', subject: 'Mi turno', background: '#6EB97D', borderColor: '#6EB97D' };
+
+                                    $('#scheduler').jqxScheduler('addAppointment', turno);
                                 }
                             }, function (response) {
 
@@ -1526,9 +1530,7 @@ app.controller("SchedulerController", function ($scope, $http, $mdDialog) {
 
                     }).then(function () {
 
-                        var turno = { description: "Turno", draggable: false, from: fechayhora, id: retornarIdCliente(), resizable: false, calendar: "Mi turno", readOnly: true, to: fechayhora.addMinutes(duracionTurnos), tooltip: retornarIdCliente() + "+-1", timeZone: 'Argentina Standard Time', subject: 'Mi turno', background: '#6EB97D', borderColor: '#6EB97D' };
-
-                            $('#scheduler').jqxScheduler('addAppointment', turno);
+                        
 
                     });
 
