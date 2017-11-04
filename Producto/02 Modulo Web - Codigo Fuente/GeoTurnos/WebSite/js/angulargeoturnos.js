@@ -1326,6 +1326,9 @@ app.controller("PerfilEmpresaController", function ($scope, $http) {
 });
 app.controller("SchedulerController", function ($scope, $http, $mdDialog) {
 
+
+    $("#loader").jqxLoader({ width: 100, height: 60, imagePosition: 'bottom', theme: 'bootstrap', text: 'Cargando...', textPosition: 'top', isModal: true });
+
     /*
         TRAER INFORMACION DE LA EMPRESA   
     */
@@ -1469,6 +1472,8 @@ app.controller("SchedulerController", function ($scope, $http, $mdDialog) {
     */
 
     $('#scheduler').on('cellClick', function (event) {//Crear nuevo turno
+        $('#loader').jqxLoader('open');
+
 
         var fechayhora = event.args.date;
         if ($.inArray(fechayhora.dayOfWeek(), diasLaborables) != -1) {
@@ -1513,6 +1518,8 @@ app.controller("SchedulerController", function ($scope, $http, $mdDialog) {
 
                                     $('#scheduler').jqxScheduler('addAppointment', turno);
 
+                                    notificarSinContenedor($("#notificaciones"), $("#mensajeNotificacion"), 200, 'success', 'Turno Creado');
+
 
                                 }
                             }, function (response) {
@@ -1520,7 +1527,7 @@ app.controller("SchedulerController", function ($scope, $http, $mdDialog) {
                                 httpNegativoSinContenedor(response.status);
 
                             }).then(function () {
-
+                                $('#loader').jqxLoader('close');
                             });
 
 
@@ -1712,7 +1719,7 @@ app.controller("SchedulerController", function ($scope, $http, $mdDialog) {
             }
         }).then(function (response) {
             if (response.status == 200) {
-                //TODO:Mostrar Mensaje
+                notificarSinContenedor($("#notificaciones"), $("#mensajeNotificacion"), 200, 'info', 'Turno Eliminado');
             }
         }, function (response) {
 
