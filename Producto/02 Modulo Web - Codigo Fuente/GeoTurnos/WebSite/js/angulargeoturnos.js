@@ -1316,7 +1316,7 @@ app.controller("GestionarMisTurnosController", function ($scope, $http) {
 
 app.controller("PerfilEmpresaController", function ($scope, $http) {
 
-   
+
     $scope.contenidoATraer = '/Home/ComentariosRating';
     $("#jqxRating").jqxRating({
         width: 100, height: 35, value: retornarCalificacion(), disabled: true, precision: 0.5
@@ -1466,7 +1466,7 @@ app.controller("SchedulerController", function ($scope, $http, $mdDialog) {
     EVENTOS
     
     */
-    
+
     $('#scheduler').on('cellClick', function (event) {//Crear nuevo turno
 
         var fechayhora = event.args.date;
@@ -1486,15 +1486,15 @@ app.controller("SchedulerController", function ($scope, $http, $mdDialog) {
                     }).then(function (response) {
                         if (response.status === 200) {
 
-                            var anio=fechayhora.year();
-                            var mes= fechayhora.month();
-                            var dia= fechayhora.day();
-                            
+                            var anio = fechayhora.year();
+                            var mes = fechayhora.month();
+                            var dia = fechayhora.day();
+
                             var horaDesde = fechayhora.hour() + ':' + fechayhora.minute();
-                          
+
                             var horaHasta = fechayhora.addMinutes(duracionTurnos).hour() + ':' + fechayhora.addMinutes(duracionTurnos).minute();
 
-                            var nuevoTurno = { idAgenda: response.data.idAgenda, fecha: anio+'-'+mes+'-'+dia, horaDesde: horaDesde, horaHasta: horaHasta, idCliente: retornarIdCliente() }
+                            var nuevoTurno = { idAgenda: response.data.idAgenda, fecha: anio + '-' + mes + '-' + dia, horaDesde: horaDesde, horaHasta: horaHasta, idCliente: retornarIdCliente() }
 
                             $http({
                                 method: 'POST',
@@ -1521,7 +1521,7 @@ app.controller("SchedulerController", function ($scope, $http, $mdDialog) {
                             });
 
 
-                            
+
                         }
 
                     }, function (response) {
@@ -1530,11 +1530,11 @@ app.controller("SchedulerController", function ($scope, $http, $mdDialog) {
 
                     }).then(function () {
 
-                        
+
 
                     });
 
-                    
+
                 }
             }
             else {
@@ -1553,7 +1553,7 @@ app.controller("SchedulerController", function ($scope, $http, $mdDialog) {
 
         if (turno.tooltip.split('+')[0] == retornarIdCliente()) {//Como no me deja crear nuevos campos de datos utilizo los tooltips para guardar el id cliente
 
-            
+
             if (confirm("Esta seguro que desea eliminar el turno")) {
                 $('#scheduler').jqxScheduler('deleteAppointment', turno.id);
 
@@ -1600,7 +1600,7 @@ app.controller("SchedulerController", function ($scope, $http, $mdDialog) {
                     }
                     else {
                         var turno = { description: "Turno", draggable: false, from: new $.jqx.date(año, mes, dia, horaDesde, minDesde, 0, 0), id: response.data[i].idCliente, resizable: false, calendar: "Mi turno", readOnly: true, to: new $.jqx.date(año, mes, dia, horaHasta, minHasta, 0, 0), tooltip: response.data[i].idCliente + "+" + response.data[i].idTurno, timeZone: 'Argentina Standard Time', subject: 'Mi turno', background: '#6EB97D', borderColor: '#6EB97D' };
-                       
+
                     }
 
                     $('#scheduler').jqxScheduler('addAppointment', turno);
@@ -1695,9 +1695,9 @@ app.controller("SchedulerController", function ($scope, $http, $mdDialog) {
         }
         return false;
     }
-    
+
     function eliminarTurno(turno) {
-        
+
         idTurno = turno.tooltip.split('+')[1];
 
         $http({
@@ -1709,7 +1709,7 @@ app.controller("SchedulerController", function ($scope, $http, $mdDialog) {
             }
         }).then(function (response) {
             if (response.status == 200) {
-               //TODO:Mostrar Mensaje
+                //TODO:Mostrar Mensaje
             }
         }, function (response) {
 
@@ -1721,14 +1721,45 @@ app.controller("SchedulerController", function ($scope, $http, $mdDialog) {
 
     }
 
-    
-    
+
+
 
 });
 app.controller("ComentariosRatingController", function ($scope, $http) {
-    
+
 
     $scope.comentarios = [];
+    $scope.nuevoTitulo;
+    $scope.nuevoComentario;
+    $scope.fechaNuevoComentario;
+    $scope.nroNuevoComentario;
+    $scope.objetoComentario = {};
+
+    $scope.guardarComentario = function () {
+
+        $scope.objetoComentario = { titulo: $scope.nuevoTitulo, nro: nroNuevoComentario, comentario: nuevoComentario, fecha_comentario: new Date(), id_direccion: 1, id_Empresa: retornarIdEmpresa(), id_cliente: retornarIdCliente() }
+
+        $http({
+            method: 'POST',
+            url: 'http://localhost:6901/api/Comentarios',
+            data: objetoComentario,
+            headers: {
+                'Accept': "application/json",
+
+            }
+        }).then(function (response) {
+            if (response.status == 201) {
+                //TODO: Mensaje OK
+
+            }
+        }, function (response) {
+
+            httpNegativo(response.status);
+
+        }).then(function () {
+
+        });
+    }
 
     $scope.verCalificacion = function () {
         for (var i = 0; i < $scope.comentarios.length; i++) {
@@ -1747,10 +1778,10 @@ app.controller("ComentariosRatingController", function ($scope, $http) {
     }
 
     $("#nuevaEstrella").jqxRating({
-    width: 350,
-    height: 35,
-    value:0
-});
+        width: 350,
+        height: 35,
+        value: 0
+    });
 
     $http({
         method: 'GET',
@@ -1771,6 +1802,7 @@ app.controller("ComentariosRatingController", function ($scope, $http) {
     }).then(function () {
 
     });
+
 
 
 });
