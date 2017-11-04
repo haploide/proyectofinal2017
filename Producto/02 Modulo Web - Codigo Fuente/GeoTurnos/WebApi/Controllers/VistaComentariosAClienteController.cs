@@ -14,6 +14,57 @@ namespace WebApi.Controllers
     {
         private GeoTurnosEntities _db = new GeoTurnosEntities();
 
+        public IHttpActionResult Get()
+        {
+            try
+            {
+                if (_db.VistaComentariosACliente == null || !_db.VistaComentariosACliente.Any())
+                {
+                    return NotFound();
+                }
+                return Ok(_db.VistaComentariosACliente);
+            }
+            catch (Exception ex)
+            {
+
+                return InternalServerError(ex);
+            }
+        }
+
+        public IHttpActionResult Get(int id)
+        {
+            IQueryable<VistaComentariosACliente> com = null;
+            try
+            {
+                if (_db.VistaComentariosACliente == null || !_db.VistaComentariosACliente.Any())
+                {
+                    return NotFound();
+                }
+                
+                com = _db.VistaComentariosACliente.Where(p => p.id_cliente  == id);
+                
+                if (com == null)
+                {
+                    return NotFound();
+                }
+                return Ok(com);
+
+            }
+            catch (Exception ex)
+            {
+
+                return InternalServerError(ex);
+            }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
 
     }
 }
