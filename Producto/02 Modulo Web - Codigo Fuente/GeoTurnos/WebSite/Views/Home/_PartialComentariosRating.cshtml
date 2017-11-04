@@ -1,7 +1,7 @@
 ﻿
 
 
-    <div class="container" ng-controller="ComentariosRatingController">
+<div class="container" ng-controller="ComentariosRatingController">
 
     <div ng-repeat="com in comentarios" class="row">
         <div class="col-sm-7">
@@ -17,13 +17,32 @@
                         <div class="review-block-rate" ng-open="verCalificacion()">
                             <span id="estrella{{com.Id_comentario}}"></span>
                         </div>
-                        <div class="review-block-title" >{{com.titulo}}</div>
+                        <div class="review-block-title">{{com.titulo}}</div>
                         <div class="review-block-description">{{com.comentario}}</div>
                     </div>
                 </div>
             </div>
-       
-
+        </div>
+    </div>
+    DAJÁ TU COMENTARIO
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4 col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <form accept-charset="UTF-8" action="" method="POST">
+                            
+                            <textarea class="form-control counted" name="messageTitulo" placeholder="Titulo" rows="1" style="margin-bottom:10px;"></textarea>
+                            <textarea class="form-control counted" name="messageComentario" placeholder="Ingresa tu comentario" rows="5" style="margin-bottom:10px;"></textarea>
+                            <h6 class="pull-right" id="counter">320 caracteres restantes</h6>
+                            <button class="btn btn-info" type="submit">Enviar comentario</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>  
+</div>
 
 
 
