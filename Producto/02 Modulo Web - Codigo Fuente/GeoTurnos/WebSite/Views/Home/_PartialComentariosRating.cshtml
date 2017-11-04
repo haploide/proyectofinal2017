@@ -11,7 +11,7 @@
                     <div class="col-sm-3">
                         <img ng-src="data:image/png;base64,{{com.foto}}" class="img-rounded" style="height:60px;width:60px">
                         <div class="review-block-name"><a href="#">{{com.usuario}}</a></div>
-                        <div class="review-block-date">{{com.fecha_comentario}}</div>
+                        <div class="review-block-date">{{com.fecha_comentario | date:'dd/MM/yyyy'}}</div>
                     </div>
                     <div class="col-sm-9">
                         <div class="review-block-rate" ng-open="verCalificacion()">

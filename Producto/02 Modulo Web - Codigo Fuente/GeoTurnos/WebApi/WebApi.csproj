@@ -143,6 +143,7 @@
     <Compile Include="Controllers\TipoDocumentoController.cs" />
     <Compile Include="Controllers\TurnoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Controllers\VistaComentariosAClienteController.cs" />
     <Compile Include="Controllers\VistaComentariosAEmpresaController.cs" />
     <Compile Include="Controllers\VistaFiltroEmpresaController.cs" />
     <Compile Include="Controllers\VistaParametrosAgendaEmpresaController.cs" />
@@ -224,6 +225,9 @@
       <DependentUpon>GeoTurnosModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UsuarioMobile.cs" />
+    <Compile Include="Models\VistaComentariosACliente.cs">
+      <DependentUpon>GeoTurnosModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\VistaComentariosAEmpresa.cs">
       <DependentUpon>GeoTurnosModel.tt</DependentUpon>
     </Compile>

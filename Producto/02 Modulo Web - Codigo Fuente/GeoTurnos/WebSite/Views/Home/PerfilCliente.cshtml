@@ -1,7 +1,10 @@
 ﻿@model WebSite.Models.PerfilClienteViewModels
+@using WebSite.App_Start
 @{
     ViewBag.Title = "Perfil Cliente";
+    var usuarioLogin = Session["usuarioLogin"] as UsuarioLogueado;
 }
-
-<h2>Cliente: @Model.nombre</h2>
-
+<div class="container" ng-controller="PerfilClienteController">
+    <h2>Cliente: @Model.nombre</h2>
+    hola mundo
+</div>
