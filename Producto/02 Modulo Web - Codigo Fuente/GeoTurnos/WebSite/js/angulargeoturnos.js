@@ -1858,6 +1858,88 @@ app.controller("ComentariosRatingController", function ($scope, $http) {
 
 
 });
+
+app.controller("ComentariosRatingClienteController", function ($scope, $http) {
+
+
+    $scope.comentarios = [];
+    $scope.nuevoTitulo;
+    $scope.nuevoComentario;
+    $scope.fechaNuevoComentario;
+    $scope.nroNuevoComentario;
+    $scope.objetoComentario = {};
+
+    $scope.guardarComentario = function () {
+        $scope.nroNuevoComentario = $('#nuevaEstrella').jqxRating('getValue');
+        $scope.objetoComentario = { titulo: $scope.nuevoTitulo, nro: $scope.nroNuevoComentario, comentario: $scope.nuevoComentario, fecha_comentario: new Date(), id_direccion: 1, id_Empresa: retornarIdEmpresa(), id_cliente: retornarIdCliente() }
+
+        $http({
+            method: 'POST',
+            url: 'http://localhost:6901/api/ComentariosAClientes',
+            data: $scope.objetoComentario,
+            headers: {
+                'Accept': "application/json",
+
+            }
+        }).then(function (response) {
+            if (response.status == 201) {
+                //TODO: Mensaje OK
+
+            }
+        }, function (response) {
+
+            httpNegativo(response.status);
+
+        }).then(function () {
+
+        });
+    }
+
+    $scope.verCalificacion = function () {
+        for (var i = 0; i < $scope.comentarios.length; i++) {
+            if ($scope.comentarios[i].nro != null) {
+                var estrella = $('#estrellaCliente' + $scope.comentarios[i].Id_comentario);
+                if (estrella.length > 0) {
+                    estrella.jqxRating({
+                        width: 100, height: 35, value: $scope.comentarios[i].nro, disabled: true, precision: 0.5
+                    });
+                }
+            }
+        }
+
+
+
+    }
+
+    $("#nuevaEstrella").jqxRating({
+        width: 350,
+        height: 35,
+        value: 0
+    });
+
+    $http({
+        method: 'GET',
+        url: 'http://localhost:6901/api/VistaComentariosACliente/' + retornarIdCliente(),
+        headers: {
+            'Accept': "application/json"
+        }
+
+    }).then(function (response) {
+        if (response.status === 200) {
+            angular.copy(response.data, $scope.comentarios);
+        }
+
+    }, function (response) {
+
+        httpNegativo(response.status);
+
+    }).then(function () {
+
+    });
+
+
+
+});
 app.controller("VisualizarAgendaController", function ($scope, $http) {
 
     $("#loader").jqxLoader({ width: 100, height: 60, imagePosition: 'bottom', theme: 'bootstrap', text: 'Cargando...', textPosition: 'top', isModal: true });
