@@ -1871,11 +1871,11 @@ app.controller("ComentariosRatingClienteController", function ($scope, $http) {
 
     $scope.guardarComentario = function () {
         $scope.nroNuevoComentario = $('#nuevaEstrella').jqxRating('getValue');
-        $scope.objetoComentario = { titulo: $scope.nuevoTitulo, nro: $scope.nroNuevoComentario, comentario: $scope.nuevoComentario, fecha_comentario: new Date(), id_direccion: 1, id_Empresa: retornarIdEmpresa(), id_cliente: retornarIdCliente() }
+        $scope.objetoComentario = { titulo: $scope.nuevoTitulo, nro: $scope.nroNuevoComentario, comentario: $scope.nuevoComentario, fecha_comentario: new Date(), id_direccion: 2, id_Empresa: retornarIdEmpresa(), id_cliente: retornarIdCliente() }
 
         $http({
             method: 'POST',
-            url: 'http://localhost:6901/api/ComentariosAClientes',
+            url: 'http://localhost:6901/api/ComentariosACliente',
             data: $scope.objetoComentario,
             headers: {
                 'Accept': "application/json",
@@ -1898,7 +1898,7 @@ app.controller("ComentariosRatingClienteController", function ($scope, $http) {
     $scope.verCalificacion = function () {
         for (var i = 0; i < $scope.comentarios.length; i++) {
             if ($scope.comentarios[i].nro != null) {
-                var estrella = $('#estrellaCliente' + $scope.comentarios[i].Id_comentario);
+                var estrella = $('#estrella' + $scope.comentarios[i].Id_comentario);
                 if (estrella.length > 0) {
                     estrella.jqxRating({
                         width: 100, height: 35, value: $scope.comentarios[i].nro, disabled: true, precision: 0.5

@@ -53,12 +53,12 @@
         <AssociationConnector Association="GeoTurnosModel.FK_Turno_Agenda" />
         <AssociationConnector Association="GeoTurnosModel.FK_Turno_Cliente" />
         <EntityTypeShape EntityType="GeoTurnosModel.VistaComentariosAEmpresa" Width="1.5" PointX="5.375" PointY="14.75" />
-        <EntityTypeShape EntityType="GeoTurnosModel.VistaComentariosACliente" Width="1.5" PointX="10.375" PointY="14.75" />
         <EntityTypeShape EntityType="GeoTurnosModel.ComentariosAClientes" Width="1.5" PointX="16.25" PointY="7.75" />
         <AssociationConnector Association="GeoTurnosModel.FK_Comentarios_Acliente" />
         <AssociationConnector Association="GeoTurnosModel.FK_Comentarios_DeEmpresa" />
         <AssociationConnector Association="GeoTurnosModel.FK_Comentarios_DireccionComentario2" />
         <EntityTypeShape EntityType="GeoTurnosModel.VistaFiltroClienteConCalificacion" Width="1.5" PointX="15.375" PointY="0.75" />
+        <EntityTypeShape EntityType="GeoTurnosModel.VistaComentariosACliente" Width="1.5" PointX="10.375" PointY="14.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -22,14 +22,7 @@ namespace WebApi.Models
         public System.DateTime fecha_comentario { get; set; }
         public int id_direccion { get; set; }
         public string titulo { get; set; }
-        public string nombre { get; set; }
-        public string apellido { get; set; }
-        public byte[] foto { get; set; }
-        public int idUsuario { get; set; }
-        public string usuario { get; set; }
-        public Nullable<int> nroDocumento { get; set; }
-        public string telefono { get; set; }
-        public string email { get; set; }
-        public Nullable<System.DateTime> fechaNacimiento { get; set; }
+        public string razonSocial { get; set; }
+        public byte[] logoEmpresa { get; set; }
     }
 }
