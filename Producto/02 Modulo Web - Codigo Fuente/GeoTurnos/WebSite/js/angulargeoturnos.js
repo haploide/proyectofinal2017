@@ -1942,7 +1942,7 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
             }
         }];
 
-        var camposDatos = { description: "description", background: "background", draggable: "draggable", from: "from", id: "id", resizable: "resizable", readOnly: "readOnly", to: "to", tooltip: "tooltip", timeZone: "timeZone", subject: "subject", borderColor: "borderColor", resourceId: "calendar" };
+        var camposDatos = { description: "description", draggable: "draggable", from: "from", id: "id", resizable: "resizable", readOnly: "readOnly", to: "to", tooltip: "tooltip", timeZone: "timeZone", subject: "subject", resourceId: "calendar" };
 
         var appointments = [];
 
@@ -1956,8 +1956,6 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
                 { name: 'resizable', type: 'boolean' },
                 { name: 'readOnly', type: 'boolean' },
                 { name: 'subject', type: 'string' },
-                { name: 'background', type: 'string' },
-                { name: 'borderColor', type: 'string' },
                 { name: 'tooltip', type: 'string' },
                 { name: 'calendar', type: 'string' },
                 { name: 'timeZone', type: 'string' },
@@ -1984,7 +1982,7 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
             //min: new $.jqx.date('todayDate'),
             localization: localizacion,
             legendPosition: 'top',
-            theme: 'bootstrap',
+            
             timeZone: 'Argentina Standard Time',
             view: 'agendaView',
             showLegend: true,
@@ -2039,16 +2037,7 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
                     var horaHasta = parseInt(hasta[0]);
                     var minHasta = parseInt(hasta[1]);
 
-                    var turno = {};
-                    if (response.data[i].idCliente != retornarIdCliente()) {
-
-                        turno = { description: "Turno", draggable: false, from: new $.jqx.date(año, mes, dia, horaDesde, minDesde, 0, 0), id: response.data[i].idCliente, resizable: false, calendar: "Ocupado", readOnly: true, to: new $.jqx.date(año, mes, dia, horaHasta, minHasta, 0, 0), tooltip: response.data[i].idCliente + "+" + response.data[i].idTurno, timeZone: 'Argentina Standard Time', subject: 'Ocupado', background: '#66BCE5', borderColor: '#66BCE5' };
-
-                    }
-                    else {
-                        var turno = { description: "Turno", draggable: false, from: new $.jqx.date(año, mes, dia, horaDesde, minDesde, 0, 0), id: response.data[i].idCliente, resizable: false, calendar: "Mi turno", readOnly: true, to: new $.jqx.date(año, mes, dia, horaHasta, minHasta, 0, 0), tooltip: response.data[i].idCliente + "+" + response.data[i].idTurno, timeZone: 'Argentina Standard Time', subject: 'Mi turno', background: '#6EB97D', borderColor: '#6EB97D' };
-
-                    }
+                    var turno = { description: "Turno", draggable: false, from: new $.jqx.date(año, mes, dia, horaDesde, minDesde, 0, 0), id: response.data[i].idCliente, resizable: false, calendar: 'Room 1', readOnly: true, to: new $.jqx.date(año, mes, dia, horaHasta, minHasta, 0, 0), tooltip: response.data[i].idCliente + "+" + response.data[i].idTurno, timeZone: 'Argentina Standard Time', subject: "<a href=" + "http://localhost:6907/Home/PerfilCliente/haploide1998" + ">" + "Cliente</a>" };
 
                     $('#scheduler').jqxScheduler('addAppointment', turno);
                 }
