@@ -79,51 +79,55 @@ namespace WebSite.Controllers
             req.Method = "GET";
             //Definimos que el contenido del cuerpo del request tiene el formato Json
             req.ContentType = "application/json";
-
-            //Realizamos la llamada a la API de la siguiente forma.
-            var resp = req.GetResponse() as HttpWebResponse;
-
-            if (resp != null && resp.StatusCode == HttpStatusCode.OK)
+            try
             {
-                using (var respStream = resp.GetResponseStream())
+
+                //Realizamos la llamada a la API de la siguiente forma.
+                var resp = req.GetResponse() as HttpWebResponse;
+
+                if (resp != null && resp.StatusCode == HttpStatusCode.OK)
                 {
-                    if (respStream != null)
+                    using (var respStream = resp.GetResponseStream())
                     {
-                        //Obtenemos de la siguiente el cuerpo de la respuesta
-                        var reader = new StreamReader(respStream, Encoding.UTF8);
-                        string result = reader.ReadToEnd();
-
-                        //El cuerpo en formato Json lo deserealizamos en el objeto usuario
-                        var listResult = JsonConvert.DeserializeObject<List<VistaFiltroEmpresa>>(result);
-
-                        foreach (var emp in listResult)
+                        if (respStream != null)
                         {
-                            model.razonSocial = emp.razonSocial;
-                            model.foto = emp.logoEmpresa;
-                            if(emp.comentario == null)
-                            {
-                                model.calificacion = 0;
-                            }
-                            else model.calificacion = emp.comentario.Value;
+                            //Obtenemos de la siguiente el cuerpo de la respuesta
+                            var reader = new StreamReader(respStream, Encoding.UTF8);
+                            string result = reader.ReadToEnd();
 
-                            model.idEmpresa = emp.idEmpresa;
-                            model.direccion = emp.calle +" "+ emp.altura;
-                            model.telefono = emp.telefono;
-                            
+                            //El cuerpo en formato Json lo deserealizamos en el objeto usuario
+                            var listResult = JsonConvert.DeserializeObject<List<VistaFiltroEmpresa>>(result);
+
+                            foreach (var emp in listResult)
+                            {
+                                model.razonSocial = emp.razonSocial;
+                                model.foto = emp.logoEmpresa;
+                                if (emp.comentario == null)
+                                {
+                                    model.calificacion = 0;
+                                }
+                                else model.calificacion = emp.comentario.Value;
+
+                                model.idEmpresa = emp.idEmpresa;
+                                model.direccion = emp.calle + " " + emp.altura;
+                                model.telefono = emp.telefono;
+
+                            }
                         }
                     }
                 }
-            }
-            else
-            {
-                //Console.WriteLine("Status Code: {0}, Status Description: {1}", resp.StatusCode, resp.StatusDescription);
 
+            }
+            catch (Exception)
+            {
+
+                return View();
             }
 
 
             return View(model);
         }
-
+        [Autorizado(Roles = TipoUsuario.Entidad)]
         public ActionResult PerfilCliente(string nombreCliente)
         {
             var model = new PerfilClienteViewModels();
@@ -138,46 +142,50 @@ namespace WebSite.Controllers
             req.Method = "GET";
             //Definimos que el contenido del cuerpo del request tiene el formato Json
             req.ContentType = "application/json";
-
-            //Realizamos la llamada a la API de la siguiente forma.
-            var resp = req.GetResponse() as HttpWebResponse;
-           
-            if (resp != null && resp.StatusCode == HttpStatusCode.OK)
+            try
             {
-                using (var respStream = resp.GetResponseStream())
+
+                //Realizamos la llamada a la API de la siguiente forma.
+                var resp = req.GetResponse() as HttpWebResponse;
+
+                if (resp != null && resp.StatusCode == HttpStatusCode.OK)
                 {
-                    if (respStream != null)
+                    using (var respStream = resp.GetResponseStream())
                     {
-                        //Obtenemos de la siguiente el cuerpo de la respuesta
-                        var reader = new StreamReader(respStream, Encoding.UTF8);
-                        string result = reader.ReadToEnd();
-
-                        //El cuerpo en formato Json lo deserealizamos en el objeto usuario
-                        var listResult = JsonConvert.DeserializeObject<List<VistaFiltroClienteConCalificacion >>(result);
-
-                        foreach (var cli in listResult)
+                        if (respStream != null)
                         {
-                            model.usuario  = cli.usuario ;
-                            model.foto = cli.foto;
-                            if (cli.calificacion  == null)
+                            //Obtenemos de la siguiente el cuerpo de la respuesta
+                            var reader = new StreamReader(respStream, Encoding.UTF8);
+                            string result = reader.ReadToEnd();
+
+                            //El cuerpo en formato Json lo deserealizamos en el objeto usuario
+                            var listResult = JsonConvert.DeserializeObject<List<VistaFiltroClienteConCalificacion>>(result);
+
+                            foreach (var cli in listResult)
                             {
-                                model.calificacion = 0;
+                                model.usuario = cli.usuario;
+                                model.foto = cli.foto;
+                                if (cli.calificacion == null)
+                                {
+                                    model.calificacion = 0;
+                                }
+                                else model.calificacion = cli.calificacion.Value;
+
+                                model.idCliente = cli.idCliente;
+                                model.mail = cli.email;
+                                model.telefono = cli.telefono;
+
                             }
-                            else model.calificacion = cli.calificacion.Value;
-
-                            model.idCliente  = cli.idCliente;
-                            model.mail  = cli.email ;
-                            model.telefono = cli.telefono;
-
                         }
                     }
                 }
             }
-            else
+            catch (Exception)
             {
-                //Console.WriteLine("Status Code: {0}, Status Description: {1}", resp.StatusCode, resp.StatusDescription);
 
+                return View();
             }
+            
 
             return View(model);
         }

@@ -48,7 +48,7 @@
                 <div class="col-sm-4 col-md-4">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <form accept-charset="UTF-8">
+                            <form>
 
                                 <div id='nuevaEstrella'></div>
 
@@ -56,7 +56,7 @@
                                 <textarea class="form-control counted" name="messageTitulo" placeholder="Titulo" rows="1" style="margin-bottom:10px;" ng-model="nuevoTitulo"></textarea>
                                 <textarea class="form-control counted" name="messageComentario" placeholder="Ingresa tu comentario" rows="5" style="margin-bottom:10px;" ng-model="nuevoComentario"></textarea>
                                 <h6 class="pull-right" id="counter">320 caracteres restantes</h6>
-                                <button class="btn btn-info" ng-click="guardarComentario()">Enviar comentario</button>
+                                <button class="btn btn-primary" ng-click="guardarComentario()">Enviar comentario</button>
                             </form>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
     };
     var retornarIdEmpresa = function () {
         return @usuarioLogin.Empresa.idEmpresa;
-        return 10;
+       
     };
     var retornarCalificacion = function () {
         var num = Number(("@Model.calificacion").replace(",", "."));
