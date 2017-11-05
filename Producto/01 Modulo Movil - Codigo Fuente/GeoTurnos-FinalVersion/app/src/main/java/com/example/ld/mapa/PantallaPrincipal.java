@@ -12,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -110,7 +109,7 @@ public class PantallaPrincipal extends ActionBarActivity {
                 Intent PantallaLogin = new Intent(getApplicationContext(), MapsActivity.class);
                 startActivity(PantallaLogin);
             } else if (nombreItem.equals("Buscar")) {
-                Intent Buscar = new Intent(getApplicationContext(), MapaBusqueda.class);
+                Intent Buscar = new Intent(getApplicationContext(), BusquedaEntidades.class);
                 startActivity(Buscar);
             } else if ((nombreItem.equals("Inicio") & !(itemTitle.equals("Pantalla Principal")))) {
                 Intent Inicio = new Intent(getApplicationContext(), PantallaPrincipal.class);

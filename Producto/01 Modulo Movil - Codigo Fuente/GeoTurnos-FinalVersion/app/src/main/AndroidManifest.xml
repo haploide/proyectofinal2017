@@ -62,6 +62,12 @@
          android:screenOrientation="portrait">
 
         </activity>
+        <activity
+            android:name=".BusquedaEntidades"
+            android:label="Búsqueda de Entidades"
+            android:screenOrientation="portrait">
+
+        </activity>
     </application>
 
 </manifest>
