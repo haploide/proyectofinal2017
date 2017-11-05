@@ -41,7 +41,7 @@
           <Property Name="nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="apellido" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="telefono" Type="nchar" MaxLength="20" />
-          <Property Name="foto" Type="image" />
+          <Property Name="foto" Type="varbinary(max)" />
           <Property Name="email" Type="nvarchar" MaxLength="50" />
           <Property Name="fechaNacimiento" Type="date" />
           <Property Name="idDomicilio" Type="int" />
@@ -49,6 +49,19 @@
           <Property Name="idEstado" Type="int" />
         </EntityType>
         <EntityType Name="Comentarios">
+          <Key>
+            <PropertyRef Name="Id_comentario" />
+          </Key>
+          <Property Name="Id_comentario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nro" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="id_cliente" Type="int" Nullable="false" />
+          <Property Name="id_empresa" Type="int" Nullable="false" />
+          <Property Name="comentario" Type="varchar" MaxLength="200" />
+          <Property Name="fecha_comentario" Type="date" Nullable="false" />
+          <Property Name="id_direccion" Type="int" Nullable="false" />
+          <Property Name="titulo" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ComentariosAClientes">
           <Key>
             <PropertyRef Name="Id_comentario" />
           </Key>
@@ -200,6 +213,14 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaComentariosACliente' does not h
           <Key>
             <PropertyRef Name="id_empresa" />
             <PropertyRef Name="Id_comentario" />
+            
+            
+            
+            
+            
+            
+            
+            
           </Key>
           <Property Name="id_empresa" Type="int" Nullable="false" />
           <Property Name="Id_comentario" Type="int" Nullable="false" />
@@ -247,6 +268,26 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaComentariosAEmpresa' does not h
           <Property Name="foto" Type="image" />
           <Property Name="idUsuario" Type="int" Nullable="false" />
           <Property Name="usuario" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GeoTurnos.dbo.VistaFiltroClienteConCalificacion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VistaFiltroClienteConCalificacion">
+          <Key>
+            <PropertyRef Name="usuario" />
+            <PropertyRef Name="idCliente" />
+            <PropertyRef Name="nombre" />
+            <PropertyRef Name="apellido" />
+          </Key>
+          <Property Name="usuario" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="idCliente" Type="int" Nullable="false" />
+          <Property Name="nroDocumento" Type="int" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="apellido" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="telefono" Type="nchar" MaxLength="20" />
+          <Property Name="foto" Type="varbinary(max)" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
+          <Property Name="fechaNacimiento" Type="date" />
+          <Property Name="calificacion" Type="decimal" Precision="38" Scale="6" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'GeoTurnos.dbo.VistaFiltroEmpresa' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -444,6 +485,18 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Comentarios_Acliente">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="ComentariosAClientes" Type="Self.ComentariosAClientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="ComentariosAClientes">
+              <PropertyRef Name="id_cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Comentarios_cliente">
           <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
           <End Role="Comentarios" Type="Self.Comentarios" Multiplicity="*" />
@@ -456,6 +509,18 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Comentarios_DeEmpresa">
+          <End Role="Empresa" Type="Self.Empresa" Multiplicity="1" />
+          <End Role="ComentariosAClientes" Type="Self.ComentariosAClientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresa">
+              <PropertyRef Name="idEmpresa" />
+            </Principal>
+            <Dependent Role="ComentariosAClientes">
+              <PropertyRef Name="id_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Comentarios_DireccionComentario">
           <End Role="DireccionComentario" Type="Self.DireccionComentario" Multiplicity="1" />
           <End Role="Comentarios" Type="Self.Comentarios" Multiplicity="*" />
@@ -464,6 +529,18 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
               <PropertyRef Name="Id_direccion" />
             </Principal>
             <Dependent Role="Comentarios">
+              <PropertyRef Name="id_direccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comentarios_DireccionComentario2">
+          <End Role="DireccionComentario" Type="Self.DireccionComentario" Multiplicity="1" />
+          <End Role="ComentariosAClientes" Type="Self.ComentariosAClientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DireccionComentario">
+              <PropertyRef Name="Id_direccion" />
+            </Principal>
+            <Dependent Role="ComentariosAClientes">
               <PropertyRef Name="id_direccion" />
             </Dependent>
           </ReferentialConstraint>
@@ -642,6 +719,7 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
           <EntitySet Name="Ciudad" EntityType="Self.Ciudad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Comentarios" EntityType="Self.Comentarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ComentariosAClientes" EntityType="Self.ComentariosAClientes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DiaSemana" EntityType="Self.DiaSemana" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DiaXParametroAgenda" EntityType="Self.DiaXParametroAgenda" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DireccionComentario" EntityType="Self.DireccionComentario" Schema="dbo" store:Type="Tables" />
@@ -693,6 +771,20 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
     [VistaComentariosAEmpresa].[idUsuario] AS [idUsuario], 
     [VistaComentariosAEmpresa].[usuario] AS [usuario]
     FROM [dbo].[VistaComentariosAEmpresa] AS [VistaComentariosAEmpresa]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VistaFiltroClienteConCalificacion" EntityType="Self.VistaFiltroClienteConCalificacion" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VistaFiltroClienteConCalificacion].[usuario] AS [usuario], 
+    [VistaFiltroClienteConCalificacion].[idCliente] AS [idCliente], 
+    [VistaFiltroClienteConCalificacion].[nroDocumento] AS [nroDocumento], 
+    [VistaFiltroClienteConCalificacion].[nombre] AS [nombre], 
+    [VistaFiltroClienteConCalificacion].[apellido] AS [apellido], 
+    [VistaFiltroClienteConCalificacion].[telefono] AS [telefono], 
+    [VistaFiltroClienteConCalificacion].[foto] AS [foto], 
+    [VistaFiltroClienteConCalificacion].[email] AS [email], 
+    [VistaFiltroClienteConCalificacion].[fechaNacimiento] AS [fechaNacimiento], 
+    [VistaFiltroClienteConCalificacion].[calificacion] AS [calificacion]
+    FROM [dbo].[VistaFiltroClienteConCalificacion] AS [VistaFiltroClienteConCalificacion]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VistaFiltroEmpresa" EntityType="Self.VistaFiltroEmpresa" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -787,13 +879,25 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Cliente" EntitySet="Cliente" />
           </AssociationSet>
+          <AssociationSet Name="FK_Comentarios_Acliente" Association="Self.FK_Comentarios_Acliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="ComentariosAClientes" EntitySet="ComentariosAClientes" />
+          </AssociationSet>
           <AssociationSet Name="FK_Comentarios_cliente" Association="Self.FK_Comentarios_cliente">
             <End Role="Cliente" EntitySet="Cliente" />
             <End Role="Comentarios" EntitySet="Comentarios" />
           </AssociationSet>
+          <AssociationSet Name="FK_Comentarios_DeEmpresa" Association="Self.FK_Comentarios_DeEmpresa">
+            <End Role="Empresa" EntitySet="Empresa" />
+            <End Role="ComentariosAClientes" EntitySet="ComentariosAClientes" />
+          </AssociationSet>
           <AssociationSet Name="FK_Comentarios_DireccionComentario" Association="Self.FK_Comentarios_DireccionComentario">
             <End Role="DireccionComentario" EntitySet="DireccionComentario" />
             <End Role="Comentarios" EntitySet="Comentarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comentarios_DireccionComentario2" Association="Self.FK_Comentarios_DireccionComentario2">
+            <End Role="DireccionComentario" EntitySet="DireccionComentario" />
+            <End Role="ComentariosAClientes" EntitySet="ComentariosAClientes" />
           </AssociationSet>
           <AssociationSet Name="FK_Comentarios_Empresa" Association="Self.FK_Comentarios_Empresa">
             <End Role="Empresa" EntitySet="Empresa" />
@@ -1122,6 +1226,20 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
           </AssociationSet>
           <EntitySet Name="VistaComentariosAEmpresa" EntityType="GeoTurnosModel.VistaComentariosAEmpresa" />
           <EntitySet Name="VistaComentariosACliente" EntityType="GeoTurnosModel.VistaComentariosACliente" />
+          <EntitySet Name="ComentariosAClientes" EntityType="GeoTurnosModel.ComentariosAClientes" />
+          <AssociationSet Name="FK_Comentarios_Acliente" Association="GeoTurnosModel.FK_Comentarios_Acliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="ComentariosAClientes" EntitySet="ComentariosAClientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comentarios_DeEmpresa" Association="GeoTurnosModel.FK_Comentarios_DeEmpresa">
+            <End Role="Empresa" EntitySet="Empresa" />
+            <End Role="ComentariosAClientes" EntitySet="ComentariosAClientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comentarios_DireccionComentario2" Association="GeoTurnosModel.FK_Comentarios_DireccionComentario2">
+            <End Role="DireccionComentario" EntitySet="DireccionComentario" />
+            <End Role="ComentariosAClientes" EntitySet="ComentariosAClientes" />
+          </AssociationSet>
+          <EntitySet Name="VistaFiltroClienteConCalificacion" EntityType="GeoTurnosModel.VistaFiltroClienteConCalificacion" />
           </EntityContainer>
         <EntityType Name="Usuario">
           <Key>
@@ -1604,6 +1722,76 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="fechaNacimiento" Type="DateTime" Precision="0" />
         </EntityType>
+        <EntityType Name="ComentariosAClientes">
+          <Key>
+            <PropertyRef Name="Id_comentario" />
+          </Key>
+          <Property Name="Id_comentario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nro" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="id_cliente" Type="Int32" Nullable="false" />
+          <Property Name="id_empresa" Type="Int32" Nullable="false" />
+          <Property Name="comentario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_comentario" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="id_direccion" Type="Int32" Nullable="false" />
+          <Property Name="titulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cliente" Relationship="GeoTurnosModel.FK_Comentarios_Acliente" FromRole="ComentariosAClientes" ToRole="Cliente" />
+          <NavigationProperty Name="Empresa" Relationship="GeoTurnosModel.FK_Comentarios_DeEmpresa" FromRole="ComentariosAClientes" ToRole="Empresa" />
+          <NavigationProperty Name="DireccionComentario" Relationship="GeoTurnosModel.FK_Comentarios_DireccionComentario2" FromRole="ComentariosAClientes" ToRole="DireccionComentario" />
+        </EntityType>
+        <Association Name="FK_Comentarios_Acliente">
+          <End Type="GeoTurnosModel.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="GeoTurnosModel.ComentariosAClientes" Role="ComentariosAClientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="ComentariosAClientes">
+              <PropertyRef Name="id_cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comentarios_DeEmpresa">
+          <End Type="GeoTurnosModel.Empresa" Role="Empresa" Multiplicity="1" />
+          <End Type="GeoTurnosModel.ComentariosAClientes" Role="ComentariosAClientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresa">
+              <PropertyRef Name="idEmpresa" />
+            </Principal>
+            <Dependent Role="ComentariosAClientes">
+              <PropertyRef Name="id_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comentarios_DireccionComentario2">
+          <End Type="GeoTurnosModel.DireccionComentario" Role="DireccionComentario" Multiplicity="1" />
+          <End Type="GeoTurnosModel.ComentariosAClientes" Role="ComentariosAClientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DireccionComentario">
+              <PropertyRef Name="Id_direccion" />
+            </Principal>
+            <Dependent Role="ComentariosAClientes">
+              <PropertyRef Name="id_direccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="VistaFiltroClienteConCalificacion">
+          <Key>
+            <PropertyRef Name="usuario" />
+            <PropertyRef Name="idCliente" />
+            <PropertyRef Name="nombre" />
+            <PropertyRef Name="apellido" />
+          </Key>
+          <Property Name="usuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idCliente" Type="Int32" Nullable="false" />
+          <Property Name="nroDocumento" Type="Int32" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="apellido" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="telefono" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="foto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fechaNacimiento" Type="DateTime" Precision="0" />
+          <Property Name="calificacion" Type="Decimal" Precision="38" Scale="6" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1925,6 +2113,36 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
                 <ScalarProperty Name="nro" ColumnName="nro" />
                 <ScalarProperty Name="Id_comentario" ColumnName="Id_comentario" />
                 <ScalarProperty Name="id_empresa" ColumnName="id_empresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ComentariosAClientes">
+            <EntityTypeMapping TypeName="GeoTurnosModel.ComentariosAClientes">
+              <MappingFragment StoreEntitySet="ComentariosAClientes">
+                <ScalarProperty Name="titulo" ColumnName="titulo" />
+                <ScalarProperty Name="id_direccion" ColumnName="id_direccion" />
+                <ScalarProperty Name="fecha_comentario" ColumnName="fecha_comentario" />
+                <ScalarProperty Name="comentario" ColumnName="comentario" />
+                <ScalarProperty Name="id_empresa" ColumnName="id_empresa" />
+                <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
+                <ScalarProperty Name="nro" ColumnName="nro" />
+                <ScalarProperty Name="Id_comentario" ColumnName="Id_comentario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VistaFiltroClienteConCalificacion">
+            <EntityTypeMapping TypeName="GeoTurnosModel.VistaFiltroClienteConCalificacion">
+              <MappingFragment StoreEntitySet="VistaFiltroClienteConCalificacion">
+                <ScalarProperty Name="calificacion" ColumnName="calificacion" />
+                <ScalarProperty Name="fechaNacimiento" ColumnName="fechaNacimiento" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="foto" ColumnName="foto" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="nroDocumento" ColumnName="nroDocumento" />
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

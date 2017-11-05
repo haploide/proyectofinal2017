@@ -126,7 +126,58 @@ namespace WebSite.Controllers
 
         public ActionResult PerfilCliente(string nombreCliente)
         {
-            var model = new PerfilClienteViewModels() { nombre = nombreCliente };
+            var model = new PerfilClienteViewModels();
+
+            if (string.IsNullOrEmpty(nombreCliente))
+            {
+                return RedirectToAction("BuscarTurnos", "Home");
+            }
+            var req = WebRequest.Create(@"http://localhost:6901/api/VistaFiltroClienteConCalificacion?nombre=" + nombreCliente);
+
+            //Indicamos el método a utilizar
+            req.Method = "GET";
+            //Definimos que el contenido del cuerpo del request tiene el formato Json
+            req.ContentType = "application/json";
+
+            //Realizamos la llamada a la API de la siguiente forma.
+            var resp = req.GetResponse() as HttpWebResponse;
+           
+            if (resp != null && resp.StatusCode == HttpStatusCode.OK)
+            {
+                using (var respStream = resp.GetResponseStream())
+                {
+                    if (respStream != null)
+                    {
+                        //Obtenemos de la siguiente el cuerpo de la respuesta
+                        var reader = new StreamReader(respStream, Encoding.UTF8);
+                        string result = reader.ReadToEnd();
+
+                        //El cuerpo en formato Json lo deserealizamos en el objeto usuario
+                        var listResult = JsonConvert.DeserializeObject<List<VistaFiltroClienteConCalificacion >>(result);
+
+                        foreach (var cli in listResult)
+                        {
+                            model.usuario  = cli.usuario ;
+                            model.foto = cli.foto;
+                            if (cli.calificacion  == null)
+                            {
+                                model.calificacion = 0;
+                            }
+                            else model.calificacion = cli.calificacion.Value;
+
+                            model.idCliente  = cli.idCliente;
+                            model.mail  = cli.email ;
+                            model.telefono = cli.telefono;
+
+                        }
+                    }
+                }
+            }
+            else
+            {
+                //Console.WriteLine("Status Code: {0}, Status Description: {1}", resp.StatusCode, resp.StatusDescription);
+
+            }
 
             return View(model);
         }

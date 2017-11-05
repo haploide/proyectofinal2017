@@ -13,6 +13,14 @@ namespace WebSite.Models
         [DataType(DataType.Text)]
         [Display(Name = "Nombre")]
         public string nombre { get; set; }
+        public string apellido { get; set; }
+        public string usuario { get; set; }
+        public byte[] foto { get; set; }
+        public decimal calificacion { get; set; }
+        public string direccion { get; set; }
+        public string telefono { get; set; }
+        public string mail { get; set; }
+        public int idCliente { get; set; }
 
     }
     public class PerfilEmpresaViewModels

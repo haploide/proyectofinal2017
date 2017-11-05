@@ -127,6 +127,7 @@
     <Compile Include="Controllers\BarrioController.cs" />
     <Compile Include="Controllers\CiudadController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
+    <Compile Include="Controllers\ComentariosAClienteController.cs" />
     <Compile Include="Controllers\ComentariosController.cs" />
     <Compile Include="Controllers\DiaSemanaController.cs" />
     <Compile Include="Controllers\DiaXParametroAgendaController.cs" />
@@ -145,6 +146,7 @@
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\VistaComentariosAClienteController.cs" />
     <Compile Include="Controllers\VistaComentariosAEmpresaController.cs" />
+    <Compile Include="Controllers\VistaFiltroClienteConCalificacionController.cs" />
     <Compile Include="Controllers\VistaFiltroEmpresaController.cs" />
     <Compile Include="Controllers\VistaParametrosAgendaEmpresaController.cs" />
     <Compile Include="Controllers\VistaTurnosAgendaClienteController.cs" />
@@ -165,6 +167,9 @@
       <DependentUpon>GeoTurnosModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Comentarios.cs">
+      <DependentUpon>GeoTurnosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ComentariosAClientes.cs">
       <DependentUpon>GeoTurnosModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DiaSemana.cs">
@@ -229,6 +234,9 @@
       <DependentUpon>GeoTurnosModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\VistaComentariosAEmpresa.cs">
+      <DependentUpon>GeoTurnosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VistaFiltroClienteConCalificacion.cs">
       <DependentUpon>GeoTurnosModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\VistaFiltroEmpresa.cs">
