@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2cfd83ece12f4fc5877f2c4d4db473cd" Name="Diagram1" ZoomLevel="70">
+      <Diagram DiagramId="2cfd83ece12f4fc5877f2c4d4db473cd" Name="Diagram1" ZoomLevel="105">
         <EntityTypeShape EntityType="GeoTurnosModel.Barrio" Width="1.5" PointX="1.5" PointY="10.125" IsExpanded="true" />
         <EntityTypeShape EntityType="GeoTurnosModel.Ciudad" Width="1.5" PointX="1.5" PointY="13.125" IsExpanded="true" />
         <EntityTypeShape EntityType="GeoTurnosModel.Cliente" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
@@ -54,6 +54,11 @@
         <AssociationConnector Association="GeoTurnosModel.FK_Turno_Cliente" />
         <EntityTypeShape EntityType="GeoTurnosModel.VistaComentariosAEmpresa" Width="1.5" PointX="5.375" PointY="14.75" />
         <EntityTypeShape EntityType="GeoTurnosModel.VistaComentariosACliente" Width="1.5" PointX="10.375" PointY="14.75" />
+        <EntityTypeShape EntityType="GeoTurnosModel.ComentariosAClientes" Width="1.5" PointX="16.25" PointY="7.75" />
+        <AssociationConnector Association="GeoTurnosModel.FK_Comentarios_Acliente" />
+        <AssociationConnector Association="GeoTurnosModel.FK_Comentarios_DeEmpresa" />
+        <AssociationConnector Association="GeoTurnosModel.FK_Comentarios_DireccionComentario2" />
+        <EntityTypeShape EntityType="GeoTurnosModel.VistaFiltroClienteConCalificacion" Width="1.5" PointX="15.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
