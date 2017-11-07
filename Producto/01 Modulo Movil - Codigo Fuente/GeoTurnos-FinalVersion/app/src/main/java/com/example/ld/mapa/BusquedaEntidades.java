@@ -66,45 +66,7 @@ public class BusquedaEntidades extends ActionBarActivity {
         btnBuscarEntidades.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String consulta = "SELECT e.razonSocial, CONCAT(d.calle, ' ', d.altura , ', ', p.nombre, ', ', c.nombre) as 'direccion' FROM Empresa e INNER JOIN Rubro r ON e.idRubro = r.idRubro INNER JOIN Domicilio d on e.idDomicilio = d.idDomicilio INNER JOIN Barrio b on d.idBarrio = b.idBarrio INNER JOIN Ciudad c on b.idCiudad = c.idCiudad INNER JOIN Provincia p on c.idProvincia = p.idProvincia ";
-                String where1 = "";
-                String where2 = "";
-                String where3 = "";
-                String nroWhere = "0";
-                //nroWhere: a cada Spinner se le asigna un número que me permita armar la consulta final en función a lo que se ha
-                //seleccionado
-                if (!spinnerRubro.getSelectedItem().toString().equals("<Seleccione>")) {
-                    where1 = " r.nombre = '"+spinnerRubro.getSelectedItem().toString()+"'";
-                    nroWhere =  nroWhere + "1";
-                }
-
-                if (!spinnerProvinvcia.getSelectedItem().toString().equals("<Seleccione>")) {
-                    where2 = " p.nombre = '"+spinnerProvinvcia.getSelectedItem().toString()+"'";
-                    nroWhere =  nroWhere + "2";
-                    if (!spinnerCiudad.getSelectedItem().toString().equals("<Seleccione>")) {
-                        where3 = " c.nombre = '"+spinnerCiudad.getSelectedItem().toString()+"'";
-                        nroWhere =  nroWhere + "3";
-                    }
-                }
-
-
-                int nro = 0;
-                try {
-                    nro = Integer.parseInt(nroWhere); //transformo en integer a nroWhere para saber que spinner están seleccionados
-                } catch(NumberFormatException nfe) {}
-
-                //creamos la consulta en funcion a los spinner seleccionados
-                switch (nro){
-                    case 1: consulta = consulta + " WHERE " + where1; break;
-                    case 2: consulta = consulta + " WHERE " + where2; break;
-                    //case 3: consulta = consulta + " WHERE " + where3; break;
-                    case 12: consulta = consulta + " WHERE " + where1 + " AND " + where2; break;
-                    //case 13: consulta = consulta + " WHERE " + where1 + " AND " + where3; break;
-                    case 23: consulta = consulta + " WHERE " + where2 + " AND " + where3; break;
-                    case 123: consulta = consulta + " WHERE " + where1 + " AND " + where2 + " AND " + where3; break;
-
-                }
-
+                String consulta = GenerarConsulta();
                 LlenarListaEntidades(consulta);
             }
         });
@@ -113,7 +75,15 @@ public class BusquedaEntidades extends ActionBarActivity {
         Button btnBuscarEnMapa = (Button) findViewById(R.id.btnBuscarEnMapa);
         btnBuscarEnMapa.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
-                Intent Buscar = new Intent(getApplicationContext(), MapaBusqueda.class);
+                Intent Buscar = new Intent(BusquedaEntidades.this, MapaBusqueda.class);
+                if (!spinnerRubro.getSelectedItem().toString().equals("<Seleccione>")) {
+                    Buscar.putExtra("Rubro", spinnerRubro.getSelectedItem().toString());
+                }
+                if (!spinnerProvinvcia.getSelectedItem().toString().equals("<Seleccione>")) {
+                    Buscar.putExtra("Provincia", spinnerProvinvcia.getSelectedItem().toString());
+                    Buscar.putExtra("Ciudad", spinnerCiudad.getSelectedItem().toString());
+                }
+
                 startActivity(Buscar);
             }
         });
@@ -170,6 +140,49 @@ public class BusquedaEntidades extends ActionBarActivity {
         });
     }
 
+    private String GenerarConsulta(){
+        String consulta = "SELECT CONCAT(e.razonSocial, ' (',r.nombre,')') as razonSocial, CONCAT(d.calle, ' ', d.altura , ', ', c.nombre, ', ', p.nombre, ', Argentina') as 'direccion' FROM Empresa e INNER JOIN Rubro r ON e.idRubro = r.idRubro INNER JOIN Domicilio d on e.idDomicilio = d.idDomicilio INNER JOIN Barrio b on d.idBarrio = b.idBarrio INNER JOIN Ciudad c on b.idCiudad = c.idCiudad INNER JOIN Provincia p on c.idProvincia = p.idProvincia ";
+        String where1 = "";
+        String where2 = "";
+        String where3 = "";
+        String nroWhere = "0";
+        //nroWhere: a cada Spinner se le asigna un número que me permita armar la consulta final en función a lo que se ha
+        //seleccionado
+        if (!spinnerRubro.getSelectedItem().toString().equals("<Seleccione>")) {
+            where1 = " r.nombre = '"+spinnerRubro.getSelectedItem().toString()+"'";
+            nroWhere =  nroWhere + "1";
+        }
+
+        if (!spinnerProvinvcia.getSelectedItem().toString().equals("<Seleccione>")) {
+            where2 = " p.nombre = '"+spinnerProvinvcia.getSelectedItem().toString()+"'";
+            nroWhere =  nroWhere + "2";
+            if (!spinnerCiudad.getSelectedItem().toString().equals("<Seleccione>")) {
+                where3 = " c.nombre = '"+spinnerCiudad.getSelectedItem().toString()+"'";
+                nroWhere =  nroWhere + "3";
+            }
+        }
+
+
+        int nro = 0;
+        try {
+            nro = Integer.parseInt(nroWhere); //transformo en integer a nroWhere para saber que spinner están seleccionados
+        } catch(NumberFormatException nfe) {}
+
+        //creamos la consulta en funcion a los spinner seleccionados
+        switch (nro){
+            case 1: consulta = consulta + " WHERE " + where1; break;
+            case 2: consulta = consulta + " WHERE " + where2; break;
+            //case 3: consulta = consulta + " WHERE " + where3; break;
+            case 12: consulta = consulta + " WHERE " + where1 + " AND " + where2; break;
+            //case 13: consulta = consulta + " WHERE " + where1 + " AND " + where3; break;
+            case 23: consulta = consulta + " WHERE " + where2 + " AND " + where3; break;
+            case 123: consulta = consulta + " WHERE " + where1 + " AND " + where2 + " AND " + where3; break;
+
+        }
+        return consulta;
+    }
+
+
     private void LlenarSpinnerRubro(){
         //definiciones para completar el spinner
         data = new ArrayList<String>();
@@ -200,9 +213,14 @@ public class BusquedaEntidades extends ActionBarActivity {
         String consulta = "SELECT * FROM Ciudad c INNER JOIN Provincia p ON c.idProvincia = p.idProvincia WHERE p.nombre = '"+ provincia + "'";
         data = bd.ConsultaBD(consulta, "nombre");
         String[] array = data.toArray(new String[0]);
-        ArrayAdapter provinciaAdapter = new ArrayAdapter(this,
+        ArrayAdapter ciudadAdapter = new ArrayAdapter(this,
                 android.R.layout.simple_list_item_1, data);
-        spinnerCiudad.setAdapter(provinciaAdapter);
+        spinnerCiudad.setAdapter(ciudadAdapter);
+        //Si la provincia es córdoba, que por defecto seleccione Capital
+        if (provincia.equals("Córdoba")){
+            spinnerCiudad.setSelection((ciudadAdapter.getPosition("Capital")));
+
+        }
 
     }
 
@@ -212,7 +230,7 @@ public class BusquedaEntidades extends ActionBarActivity {
         data2 = new ArrayList<NombreDireccion>();
         data2 = bd.ConsultaBDNombreDireccion(consulta);
 
-        SimpleAdapter adapter = new SimpleAdapter(this, listItems, R.layout.list_item_listview,
+        SimpleAdapter adapter = new SimpleAdapter(this, listItems, R.layout.list_item_subitem,
                 new String[]{"First Line", "Second line"},
                 new int[]{R.id.texto1, R.id.texto2});
 
