@@ -379,6 +379,7 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
           <Property Name="nombre" Type="nvarchar" MaxLength="50" />
           <Property Name="apellido" Type="nvarchar" MaxLength="50" />
           <Property Name="idTurno" Type="int" Nullable="false" />
+          <Property Name="usuario" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <Association Name="FK_Agenda_Empresa">
           <End Role="Empresa" Type="Self.Empresa" Multiplicity="1" />
@@ -828,7 +829,8 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
     [VistaTurnosAgendaVigenteParaEmpresa].[idCliente] AS [idCliente], 
     [VistaTurnosAgendaVigenteParaEmpresa].[nombre] AS [nombre], 
     [VistaTurnosAgendaVigenteParaEmpresa].[apellido] AS [apellido], 
-    [VistaTurnosAgendaVigenteParaEmpresa].[idTurno] AS [idTurno]
+    [VistaTurnosAgendaVigenteParaEmpresa].[idTurno] AS [idTurno], 
+    [VistaTurnosAgendaVigenteParaEmpresa].[usuario] AS [usuario]
     FROM [dbo].[VistaTurnosAgendaVigenteParaEmpresa] AS [VistaTurnosAgendaVigenteParaEmpresa]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Agenda_Empresa" Association="Self.FK_Agenda_Empresa">
@@ -1550,6 +1552,7 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
           <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="idTurno" Type="Int32" Nullable="false" />
+          <Property Name="usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="VistaParametrosAgendaEmpresa">
           <Key>
@@ -1990,6 +1993,7 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
           <EntitySetMapping Name="VistaTurnosAgendaVigenteParaEmpresa">
             <EntityTypeMapping TypeName="GeoTurnosModel.VistaTurnosAgendaVigenteParaEmpresa">
               <MappingFragment StoreEntitySet="VistaTurnosAgendaVigenteParaEmpresa">
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
                 <ScalarProperty Name="idTurno" ColumnName="idTurno" />
                 <ScalarProperty Name="apellido" ColumnName="apellido" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />

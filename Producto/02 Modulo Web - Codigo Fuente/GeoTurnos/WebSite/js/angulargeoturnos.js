@@ -2120,11 +2120,22 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
                     var hasta = response.data[i].horaHasta.split(":");
                     var horaHasta = parseInt(hasta[0]);
                     var minHasta = parseInt(hasta[1]);
+                    var usuario = response.data[i].usuario;
 
+                    var urlBase='localhost:6907/home/perfilcliente/'+usuario
 
-                    var urlBase='localhost:6907/home/perfilcliente/pablo567'
-
-                    var turno = { description: "Turno", draggable: false, from: new $.jqx.date(año, mes, dia, horaDesde, minDesde, 0, 0), id: response.data[i].idCliente, resizable: false, calendar: 'Room 1', readOnly: true, to: new $.jqx.date(año, mes, dia, horaHasta, minHasta, 0, 0), tooltip: response.data[i].idCliente + "+" + response.data[i].idTurno, timeZone: 'Argentina Standard Time', subject: "<a href=\""+urlBase+"\">" + response.data[i].nombre + " " + response.data[i].apellido + "</a>" };
+                    //var turno = { description: "Turno", draggable: false, from: new $.jqx.date(año, mes, dia, horaDesde, minDesde, 0, 0), id: response.data[i].idCliente, resizable: false, calendar: 'Room 1', readOnly: true, to: new $.jqx.date(año, mes, dia, horaHasta, minHasta, 0, 0), tooltip: response.data[i].idCliente + "+" + response.data[i].idTurno, timeZone: 'Argentina Standard Time', subject: "<a href=\"" + urlBase + "\">" + response.data[i].nombre + " " + response.data[i].apellido + "</a>" };
+                    var turno = {
+                        description: "Turno",
+                        draggable: false,
+                        from: new $.jqx.date(año, mes, dia, horaDesde, minDesde, 0, 0),
+                        id: response.data[i].idCliente,
+                        resizable: false, calendar: 'Room 1',
+                        readOnly: true,
+                        to: new $.jqx.date(año, mes, dia, horaHasta, minHasta, 0, 0),
+                        tooltip: response.data[i].idCliente + "+" + response.data[i].idTurno, timeZone: 'Argentina Standard Time', 
+                        subject: "<a href="+urlBase+">" + response.data[i].nombre + " " + response.data[i].apellido + "</a>"
+                    };
 
                     appointments.push(turno);
 
