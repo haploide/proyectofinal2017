@@ -1,0 +1,13 @@
+﻿<link href="~/Content/Site.css" rel="stylesheet" />
+
+<div class="GestionarAgendaTurnos" ng-controller="EstadisticaAdministacionController">
+
+    <div class="tab">
+        <button class="tablinks " ng-click="submenu($event,'estadistcia1')" id="defaultOpen">Estadistica 1</button>
+        <button class="tablinks " ng-click="submenu($event,'estadistcia2')" >Estadistica 2</button>
+    </div>
+   
+    <div id="estadistcia1" class="tabcontent" ng-include="contenidoATraer">
+
+    </div>
+</div>

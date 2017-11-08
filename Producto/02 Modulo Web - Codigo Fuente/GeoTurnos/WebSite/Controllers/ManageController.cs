@@ -89,6 +89,14 @@ namespace WebSite.Controllers
         }
 
         //
+        //GET: Estadisticas
+
+        public PartialViewResult Estadisticas()
+        {
+            return PartialView("_PartialEstadisticas");
+        }
+
+        //
         //GET: PrincipalEntidadPrestadora
         public PartialViewResult PrincipalEntidadPrestadora()
         {
@@ -107,6 +115,11 @@ namespace WebSite.Controllers
             return PartialView("_PartialGestionarDatosEmpresa");
         }
         //
+        // GET: EstadisticaAdminEmpresasRegFiltros
+        public PartialViewResult EstadisticaAdminEmpresasRegFiltros()
+        {
+            return PartialView("_PartialEstadisticaAdminEmpresasRegFiltros");
+        }
         //GET: PrincipalClientePrestatario
         public PartialViewResult PrincipalClientePrestatario()
         {
