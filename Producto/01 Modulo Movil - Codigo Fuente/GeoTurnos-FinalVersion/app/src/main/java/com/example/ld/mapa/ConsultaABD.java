@@ -1,7 +1,11 @@
 package com.example.ld.mapa;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 import com.example.ld.mapa.ClasesSoporte.NombreDireccion;
 
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -72,6 +76,38 @@ public class ConsultaABD {
                 nombreDireccion.setNombre(resultSet.getString("razonSocial"));
                 nombreDireccion.setDireccion(resultSet.getString("Direccion"));
                 data.add(nombreDireccion);
+            }
+            connection.close();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+    public ArrayList ConsultaBDNombreRubroDireccionLogo (String consulta) {
+        ArrayList<NombreDireccion> data = new ArrayList<NombreDireccion>();
+        NombreDireccion nombreDireccion;
+        try {
+            Class.forName("net.sourceforge.jtds.jdbc.Driver");
+            String cn = "jdbc:jtds:sqlserver://geoturnos.com:49172;databaseName=GeoTurnos;user=geoturnos;password=Al1.B4b4-";
+            Connection connection = DriverManager.getConnection(cn);
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(consulta);
+            while (resultSet.next()) {
+                nombreDireccion = new NombreDireccion();
+                nombreDireccion.setNombre(resultSet.getString("razonSocial"));
+                nombreDireccion.setDireccion(resultSet.getString("Direccion"));
+                //convertimos la imagen a bitmap para asignarsela al ImageView
+                Blob b =resultSet.getBlob("logoEmpresa");
+                int blobLength = (int) b.length();
+                byte[] blobAsBytes = b.getBytes(1, blobLength);
+                Bitmap btm =BitmapFactory.decodeByteArray(blobAsBytes,0,blobAsBytes.length);
+                nombreDireccion.setLogo(btm);
+                nombreDireccion.setRubro(resultSet.getString("rubro"));
+                data.add(nombreDireccion);
+
             }
             connection.close();
         } catch (ClassNotFoundException e) {

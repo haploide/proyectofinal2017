@@ -10,6 +10,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebHistoryItem;
 import android.widget.AdapterView;
@@ -60,6 +61,7 @@ public class BusquedaEntidades extends ActionBarActivity {
         spinnerProvinvcia = (Spinner) findViewById(R.id.spinnerProvincia);
         spinnerCiudad = (Spinner) findViewById(R.id.spinnerCiudad);
         lstentidades = (ListView) findViewById(R.id.lstEntidades);
+        lstentidades.setClickable(true);
 
         //accion del boton buscar Entidad
         Button btnBuscarEntidades = (Button) findViewById(R.id.btnBuscarEntidades);
@@ -85,6 +87,29 @@ public class BusquedaEntidades extends ActionBarActivity {
                 }
 
                 startActivity(Buscar);
+            }
+        });
+
+        //accion al seleccionar un item de la lista
+        lstentidades.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                //Object o = listView.getItemAtPosition(position);
+                // Realiza lo que deseas, al recibir clic en el elemento de tu listView determinado por su posicion.
+                //Log.i("Click", "click en el elemento " + position + " de mi ListView");
+               // Toast.makeText(BusquedaEntidades.this, lstentidades.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
+
+                Intent informacionEntidadSeleccionada = new Intent(BusquedaEntidades.this, InformacionEntidadSeleccionada.class);
+
+                //Como lo que le paso al list view para armarlo son cadenas de string, tengo que recortarlo para poder obtener
+                //la razón social y pasárselo al siguiente activity
+                //se debería poder corregir agregando el ID de empresa al listview (espero)
+                String razonSocial = lstentidades.getItemAtPosition(position).toString().substring(lstentidades.getItemAtPosition(position).toString().indexOf("-")+1);
+                razonSocial = razonSocial.substring(0,razonSocial.indexOf("-"));
+
+                informacionEntidadSeleccionada.putExtra("razonSocial",razonSocial);
+                      startActivity(informacionEntidadSeleccionada);
             }
         });
 
@@ -141,7 +166,7 @@ public class BusquedaEntidades extends ActionBarActivity {
     }
 
     private String GenerarConsulta(){
-        String consulta = "SELECT CONCAT(e.razonSocial, ' (',r.nombre,')') as razonSocial, CONCAT(d.calle, ' ', d.altura , ', ', c.nombre, ', ', p.nombre, ', Argentina') as 'direccion' FROM Empresa e INNER JOIN Rubro r ON e.idRubro = r.idRubro INNER JOIN Domicilio d on e.idDomicilio = d.idDomicilio INNER JOIN Barrio b on d.idBarrio = b.idBarrio INNER JOIN Ciudad c on b.idCiudad = c.idCiudad INNER JOIN Provincia p on c.idProvincia = p.idProvincia ";
+        String consulta = "SELECT CONCAT('-',e.razonSocial,'-', ' (',r.nombre,')') as razonSocial, CONCAT(d.calle, ' ', d.altura , ', ', c.nombre, ', ', p.nombre, ', Argentina') as 'direccion' FROM Empresa e INNER JOIN Rubro r ON e.idRubro = r.idRubro INNER JOIN Domicilio d on e.idDomicilio = d.idDomicilio INNER JOIN Barrio b on d.idBarrio = b.idBarrio INNER JOIN Ciudad c on b.idCiudad = c.idCiudad INNER JOIN Provincia p on c.idProvincia = p.idProvincia ";
         String where1 = "";
         String where2 = "";
         String where3 = "";
@@ -231,7 +256,7 @@ public class BusquedaEntidades extends ActionBarActivity {
         data2 = bd.ConsultaBDNombreDireccion(consulta);
 
         SimpleAdapter adapter = new SimpleAdapter(this, listItems, R.layout.list_item_subitem,
-                new String[]{"First Line", "Second line"},
+                new String[]{"First Line", "Second line", "Third line"},
                 new int[]{R.id.texto1, R.id.texto2});
 
         for (int i = 0; i< data2.size(); i++){
