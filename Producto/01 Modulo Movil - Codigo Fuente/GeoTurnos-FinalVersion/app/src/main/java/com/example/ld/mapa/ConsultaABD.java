@@ -86,7 +86,7 @@ public class ConsultaABD {
         return data;
     }
 
-    public ArrayList ConsultaBDNombreRubroDireccionLogo (String consulta) {
+    public ArrayList ConsultaBDNombreRubroDireccionLogoDireccionTelefonoRanking (String consulta) {
         ArrayList<NombreDireccion> data = new ArrayList<NombreDireccion>();
         NombreDireccion nombreDireccion;
         try {
@@ -99,6 +99,9 @@ public class ConsultaABD {
                 nombreDireccion = new NombreDireccion();
                 nombreDireccion.setNombre(resultSet.getString("razonSocial"));
                 nombreDireccion.setDireccion(resultSet.getString("Direccion"));
+                nombreDireccion.setEmail(resultSet.getString("email"));
+                nombreDireccion.setTelefono(resultSet.getString("telefono"));
+                nombreDireccion.setRanking(resultSet.getFloat("ranking"));
                 //convertimos la imagen a bitmap para asignarsela al ImageView
                 Blob b =resultSet.getBlob("logoEmpresa");
                 int blobLength = (int) b.length();

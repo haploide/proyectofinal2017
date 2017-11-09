@@ -12,6 +12,9 @@ public class NombreDireccion {
     private String direccion;
     private Bitmap logo;
     private String rubro;
+    private String telefono;
+    private String email;
+    private float ranking;
 
     public String getNombre() {
         return nombre;
@@ -43,5 +46,29 @@ public class NombreDireccion {
 
     public void setRubro(String rubro) {
         this.rubro = rubro;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public float getRanking() {
+        return ranking;
+    }
+
+    public void setRanking(float ranking) {
+        this.ranking = ranking;
     }
 }
