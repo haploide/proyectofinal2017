@@ -105,10 +105,27 @@ public class BusquedaEntidades extends ActionBarActivity {
                 //Como lo que le paso al list view para armarlo son cadenas de string, tengo que recortarlo para poder obtener
                 //la razón social y pasárselo al siguiente activity
                 //se debería poder corregir agregando el ID de empresa al listview (espero)
-                String razonSocial = lstentidades.getItemAtPosition(position).toString().substring(lstentidades.getItemAtPosition(position).toString().indexOf("-")+1);
-                razonSocial = razonSocial.substring(0,razonSocial.indexOf("-"));
+                String razonSocial = lstentidades.getItemAtPosition(position).toString().substring(lstentidades.getItemAtPosition(position).toString().indexOf("*")+1);
+                razonSocial = razonSocial.substring(0,razonSocial.indexOf("(")-1);
 
+                //busco latitud y longitud de la direccion
+               /** ConsultaABD bd = new ConsultaABD();
+                NombreDireccion nombreDireccion = new NombreDireccion();
+                ArrayList<NombreDireccion> data = new ArrayList<NombreDireccion>();
+                data = bd.ConsultaBDNombreRubroDireccionLogoDireccionTelefonoRanking(consulta);
+                String consulta = "SELECT";
+                double lat = 0;
+                double lon = 0;
+                if (data.size()!=0)
+                {
+                    lat = data.get(0).getLatitud();
+                    lon = data.get(0).getLongitud();
+
+                }
+                */
                 informacionEntidadSeleccionada.putExtra("razonSocial",razonSocial);
+               // informacionEntidadSeleccionada.putExtra("latitud",lat);
+               // informacionEntidadSeleccionada.putExtra("longitud",lon);
                       startActivity(informacionEntidadSeleccionada);
             }
         });
@@ -166,7 +183,7 @@ public class BusquedaEntidades extends ActionBarActivity {
     }
 
     private String GenerarConsulta(){
-        String consulta = "SELECT CONCAT('-',e.razonSocial,'-', ' (',r.nombre,')') as razonSocial, CONCAT(d.calle, ' ', d.altura , ', ', c.nombre, ', ', p.nombre, ', Argentina') as 'direccion' FROM Empresa e INNER JOIN Rubro r ON e.idRubro = r.idRubro INNER JOIN Domicilio d on e.idDomicilio = d.idDomicilio INNER JOIN Barrio b on d.idBarrio = b.idBarrio INNER JOIN Ciudad c on b.idCiudad = c.idCiudad INNER JOIN Provincia p on c.idProvincia = p.idProvincia ";
+        String consulta = "SELECT CONCAT('*',e.razonSocial, ' (',r.nombre,')') as razonSocial, CONCAT(d.calle, ' ', d.altura , ', ', c.nombre, ', ', p.nombre, ', Argentina') as 'direccion' FROM Empresa e INNER JOIN Rubro r ON e.idRubro = r.idRubro INNER JOIN Domicilio d on e.idDomicilio = d.idDomicilio INNER JOIN Barrio b on d.idBarrio = b.idBarrio INNER JOIN Ciudad c on b.idCiudad = c.idCiudad INNER JOIN Provincia p on c.idProvincia = p.idProvincia ";
         String where1 = "";
         String where2 = "";
         String where3 = "";

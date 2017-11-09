@@ -102,6 +102,8 @@ public class ConsultaABD {
                 nombreDireccion.setEmail(resultSet.getString("email"));
                 nombreDireccion.setTelefono(resultSet.getString("telefono"));
                 nombreDireccion.setRanking(resultSet.getFloat("ranking"));
+                nombreDireccion.setLatitud(resultSet.getDouble("latitud"));
+                nombreDireccion.setLongitud(resultSet.getDouble("longitud"));
                 //convertimos la imagen a bitmap para asignarsela al ImageView
                 Blob b =resultSet.getBlob("logoEmpresa");
                 int blobLength = (int) b.length();

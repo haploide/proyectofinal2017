@@ -15,6 +15,8 @@ public class NombreDireccion {
     private String telefono;
     private String email;
     private float ranking;
+    private Double latitud;
+    private  Double longitud;
 
     public String getNombre() {
         return nombre;
@@ -70,5 +72,21 @@ public class NombreDireccion {
 
     public void setRanking(float ranking) {
         this.ranking = ranking;
+    }
+
+    public Double getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(Double latitud) {
+        this.latitud = latitud;
+    }
+
+    public Double getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(Double longitud) {
+        this.longitud = longitud;
     }
 }

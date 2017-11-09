@@ -17,6 +17,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
@@ -41,8 +42,16 @@ public class MapaBusqueda extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        /** mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+             @Override
+             public boolean onMarkerClick(Marker marker) {
+                 int position = (int)(marker.getTag());
+                 Toast.makeText(MapaBusqueda.this, marker.getTitle(),Toast.LENGTH_LONG).show();
+                 return false;
+             }
+         });
+**/
 
-        //asignamos los spinner con el su par en el layout
         spinnerRubro = (Spinner) findViewById(R.id.spinnerRubros);
         spinnerProvinvcia = (Spinner) findViewById(R.id.spinnerProvincia);
         spinnerCiudad = (Spinner) findViewById(R.id.spinnerCiudad);
@@ -260,6 +269,5 @@ public class MapaBusqueda extends FragmentActivity implements OnMapReadyCallback
         }
 
     }
-
 
 }
