@@ -30,13 +30,14 @@
           <Property Name="nroDocumento" Type="int" />
           <Property Name="nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="apellido" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="telefono" Type="nchar" MaxLength="10" />
-          <Property Name="foto" Type="image" />
+          <Property Name="telefono" Type="nchar" MaxLength="20" />
+          <Property Name="foto" Type="varbinary(max)" />
           <Property Name="email" Type="nvarchar" MaxLength="50" />
           <Property Name="fechaNacimiento" Type="date" />
           <Property Name="idDomicilio" Type="int" />
           <Property Name="idUsuario" Type="int" />
           <Property Name="idEstado" Type="int" />
+          <Property Name="fechaRegistroCliente" Type="date" />
         </EntityType>
         <EntityType Name="Domicilio">
           <Key>
@@ -61,8 +62,9 @@
           <Property Name="razonSocial" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="nombreFantasia" Type="nvarchar" MaxLength="50" />
           <Property Name="inicioActividades" Type="date" />
+          <Property Name="fechaRegistroEmpresa" Type="date" />
           <Property Name="telefono" Type="nvarchar" MaxLength="50" />
-          <Property Name="logoEmpresa" Type="image" />
+          <Property Name="logoEmpresa" Type="varbinary(max)" Nullable="false" />
           <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="idDomicilio" Type="int" />
           <Property Name="idRubro" Type="int" />
@@ -396,7 +398,7 @@
           <Property Name="nroDocumento" Type="Int32" />
           <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="telefono" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="telefono" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
           <Property Name="foto" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="fechaNacimiento" Type="DateTime" Precision="0" />
@@ -407,6 +409,7 @@
           <NavigationProperty Name="TipoDocumento" Relationship="Self.FK_Cliente_TipoDocumento" FromRole="Cliente" ToRole="TipoDocumento" />
           <NavigationProperty Name="Usuario" Relationship="Self.FK_Cliente_Usuario" FromRole="Cliente" ToRole="Usuario" />
           <NavigationProperty Name="Domicilio" Relationship="GeoTurnosModel.FK_Cliente_Domicilio" FromRole="Cliente" ToRole="Domicilio" />
+          <Property Name="fechaRegistroCliente" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="Estado">
           <Key>
@@ -653,7 +656,7 @@
           <Property Name="nombreFantasia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="inicioActividades" Type="DateTime" Precision="0" />
           <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="logoEmpresa" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="logoEmpresa" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="idDomicilio" Type="Int32" />
           <Property Name="idRubro" Type="Int32" />
@@ -663,6 +666,7 @@
           <NavigationProperty Name="Rubro" Relationship="GeoTurnosModel.FK_Empresa_Rubro" FromRole="Empresa" ToRole="Rubro" />
           <NavigationProperty Name="Usuario" Relationship="GeoTurnosModel.FK_Empresa_Usuario" FromRole="Empresa" ToRole="Usuario" />
           <NavigationProperty Name="Domicilio" Relationship="GeoTurnosModel.FK_Empresa_Domicilio" FromRole="Empresa" ToRole="Domicilio" />
+          <Property Name="fechaRegistroEmpresa" Type="DateTime" Precision="0" />
         </EntityType>
         <Association Name="FK_Empresa_Estado">
           <End Type="GeoTurnosModel.Estado" Role="Estado" Multiplicity="0..1" />
@@ -780,6 +784,7 @@
           <EntitySetMapping Name="Cliente">
             <EntityTypeMapping TypeName="GeoTurnosModel.Cliente">
               <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="fechaRegistroCliente" ColumnName="fechaRegistroCliente" />
                 <ScalarProperty Name="idCliente" ColumnName="idCliente" />
                 <ScalarProperty Name="idTipoDocumento" ColumnName="idTipoDocumento" />
                 <ScalarProperty Name="nroDocumento" ColumnName="nroDocumento" />
@@ -861,6 +866,7 @@
           <EntitySetMapping Name="Empresa">
             <EntityTypeMapping TypeName="GeoTurnosModel.Empresa">
               <MappingFragment StoreEntitySet="Empresa">
+                <ScalarProperty Name="fechaRegistroEmpresa" ColumnName="fechaRegistroEmpresa" />
                 <ScalarProperty Name="idEstado" ColumnName="idEstado" />
                 <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
                 <ScalarProperty Name="idRubro" ColumnName="idRubro" />
