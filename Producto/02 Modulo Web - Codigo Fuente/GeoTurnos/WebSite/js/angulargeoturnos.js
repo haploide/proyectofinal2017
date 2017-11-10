@@ -1003,28 +1003,27 @@ app.controller("BuscarTurnoFiltradoController", function ($scope, $http) {
 })
 app.controller("GestionarAgendaTurnosController", function ($scope, $http) {
 
-    $scope.submenu = function (evt, nombreMenu) {
-        // Declare all variables
-        var i, tabcontent, tablinks;
+    $scope.contenidoATraer = '';
 
-        // Get all elements with class="tabcontent" and hide them
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
+    $scope.submenu = function (idLista) {
+        $('button').removeClass('active');
 
-        // Get all elements with class="tablinks" and remove the class "active"
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
+        $('#' + idLista).attr("class", "active");
 
-        // Show the current tab, and add an "active" class to the link that opened the tab
-        document.getElementById(nombreMenu).style.display = "block";
-        evt.currentTarget.className += " active";
+        $scope.cargarContenidoHtml(idLista);
+
+        switch (idLista) {
+            case 'plantilla':
+                $scope.contenidoATraer = 'GestionarPlantillaTurnos';
+                break;
+            case 'visualizarAgenda':
+                $scope.contenidoATraer = 'VisualizarAgenda';
+                break;
     }
 
+    
 
+    }
 
 
 
@@ -1372,7 +1371,7 @@ app.controller("PerfilClienteController", function ($scope, $http) {
 
 
 });
-app.controller("SchedulerController", function ($scope, $http, $mdDialog) {
+app.controller("SchedulerController", function ($scope, $http) {
 
 
     $("#loader").jqxLoader({ width: 100, height: 60, imagePosition: 'bottom', theme: 'bootstrap', text: 'Cargando...', textPosition: 'top', isModal: true });
@@ -2172,6 +2171,8 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
         }
     }).then(function (response) {
         if (response.status === 200) {
+
+            $('#loader').jqxLoader('open');
             angular.copy(response.data, $scope.parametros);
 
             procesarParametros();
@@ -2185,6 +2186,7 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
 
     }).then(function () {
 
+        $('#loader').jqxLoader('close');
     });
 
     /*
