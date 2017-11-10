@@ -2160,7 +2160,7 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
                     var minHasta = parseInt(hasta[1]);
                     var usuario = response.data[i].usuario;
 
-                    var urlBase='localhost:6907/home/perfilcliente/'+usuario
+                    var urlBase='/home/perfilcliente/'+usuario
 
                     //var turno = { description: "Turno", draggable: false, from: new $.jqx.date(año, mes, dia, horaDesde, minDesde, 0, 0), id: response.data[i].idCliente, resizable: false, calendar: 'Room 1', readOnly: true, to: new $.jqx.date(año, mes, dia, horaHasta, minHasta, 0, 0), tooltip: response.data[i].idCliente + "+" + response.data[i].idTurno, timeZone: 'Argentina Standard Time', subject: "<a href=\"" + urlBase + "\">" + response.data[i].nombre + " " + response.data[i].apellido + "</a>" };
                     var turno = {
@@ -2171,7 +2171,8 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
                         resizable: false, calendar: 'Room 1',
                         readOnly: true,
                         to: new $.jqx.date(año, mes, dia, horaHasta, minHasta, 0, 0),
-                        tooltip: response.data[i].idCliente + "+" + response.data[i].idTurno, timeZone: 'Argentina Standard Time', 
+                        tooltip: response.data[i].idCliente + "+" + response.data[i].idTurno,
+                        timeZone: 'Argentina Standard Time',
                         subject: "<a href="+urlBase+">" + response.data[i].nombre + " " + response.data[i].apellido + "</a>"
                     };
 
