@@ -1612,16 +1612,18 @@ app.controller("SchedulerController", function ($scope, $http) {
 
     });
     $("#scheduler").on('appointmentClick', function (event) {//Eliminar Un turno
-        var args = event.args;
-        var turno = args.appointment;
+        if (!esFechaVieja(event.args.appointment.from)) {
+            var args = event.args;
+            var turno = args.appointment;
 
-        if (turno.tooltip.split('+')[0] == retornarIdCliente()) {//Como no me deja crear nuevos campos de datos utilizo los tooltips para guardar el id cliente
+            if (turno.tooltip.split('+')[0] == retornarIdCliente()) {//Como no me deja crear nuevos campos de datos utilizo los tooltips para guardar el id cliente
 
 
-            if (confirm("Esta seguro que desea eliminar el turno")) {
-                $('#scheduler').jqxScheduler('deleteAppointment', turno.id);
+                if (confirm("Esta seguro que desea eliminar el turno")) {
+                    $('#scheduler').jqxScheduler('deleteAppointment', turno.id);
 
-                eliminarTurno(turno);
+                    eliminarTurno(turno);
+                }
             }
         }
 
