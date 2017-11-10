@@ -52,5 +52,6 @@ namespace WebApi.Models
         public virtual DbSet<ComentariosAClientes> ComentariosAClientes { get; set; }
         public virtual DbSet<VistaFiltroClienteConCalificacion> VistaFiltroClienteConCalificacion { get; set; }
         public virtual DbSet<VistaComentariosACliente> VistaComentariosACliente { get; set; }
+        public virtual DbSet<VistaInformeEmpresaFiltros> VistaInformeEmpresaFiltros { get; set; }
     }
 }

@@ -26,6 +26,7 @@ namespace WebApi.Models
         public Nullable<int> idRubro { get; set; }
         public Nullable<int> idUsuario { get; set; }
         public Nullable<int> idEstado { get; set; }
+        public Nullable<System.DateTime> fechaRegistroEmpresa { get; set; }
     
         public virtual Domicilio Domicilio { get; set; }
         public virtual Estado Estado { get; set; }
