@@ -30,10 +30,10 @@
                     <th ng-hide="true">{{vista.idTurno }}</th>
                     <th>{{vista.nombre}}</th>
                     <th>{{vista.razonSocial}}</th>
-                    <th>{{vista.fecha}}</th>
+                    <th>{{vista.fecha | date: 'dd/MM/yyyy'}}</th>
                     <th>{{vista.horaDesde}}</th>
                     <th>{{vista.horaHasta}}</th>
-                    <th><a ng-click="verTurno(vista)" class="btn btn-primary">Ver Turno</a></th>
+                    <th><a href="/home/perfilempresa/{{vista.razonSocial}}" class="btn btn-primary">Ver Turno</a></th>
                     <th><a ng-click="eliminarTurno(vista)" class="btn btn-danger">Eliminar Turno</a></th>
                 </tr>
             </table>
