@@ -26,7 +26,8 @@ namespace WebSite.Models
         public Nullable<int> idDomicilio { get; set; }
         public Nullable<int> idUsuario { get; set; }
         public Nullable<int> idEstado { get; set; }
-    
+        public Nullable<System.DateTime> fechaRegistroCliente { get; set; }
+
         public virtual Estado Estado { get; set; }
         public virtual TipoDocumento TipoDocumento { get; set; }
         public virtual Usuario Usuario { get; set; }

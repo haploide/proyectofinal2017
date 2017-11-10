@@ -20,11 +20,8 @@ namespace WebApi.Models
         public byte[] logoEmpresa { get; set; }
         public string telefono { get; set; }
         public string email { get; set; }
-        public string Rubro { get; set; }
         public string calle { get; set; }
         public int altura { get; set; }
-        public string Ciudad { get; set; }
-        public string Provincia { get; set; }
         public int idCiudad { get; set; }
         public int idProvincia { get; set; }
         public Nullable<int> idRubro { get; set; }

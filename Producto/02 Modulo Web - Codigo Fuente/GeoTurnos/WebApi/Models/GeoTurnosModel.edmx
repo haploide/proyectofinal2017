@@ -1833,11 +1833,8 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
           <Property Name="logoEmpresa" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
           <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Rubro" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="calle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="altura" Type="Int32" Nullable="false" />
-          <Property Name="Ciudad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Provincia" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="idCiudad" Type="Int32" Nullable="false" />
           <Property Name="idProvincia" Type="Int32" Nullable="false" />
           <Property Name="idRubro" Type="Int32" />
