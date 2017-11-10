@@ -148,6 +148,7 @@
     <Compile Include="Controllers\VistaComentariosAEmpresaController.cs" />
     <Compile Include="Controllers\VistaFiltroClienteConCalificacionController.cs" />
     <Compile Include="Controllers\VistaFiltroEmpresaController.cs" />
+    <Compile Include="Controllers\VistaInformeEmpresaFiltrosController.cs" />
     <Compile Include="Controllers\VistaParametrosAgendaEmpresaController.cs" />
     <Compile Include="Controllers\VistaTurnosAgendaClienteController.cs" />
     <Compile Include="Controllers\VistaTurnosAgendaVigenteParaClientesController.cs" />
@@ -241,6 +242,9 @@
       <DependentUpon>GeoTurnosModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\VistaFiltroEmpresa.cs">
+      <DependentUpon>GeoTurnosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VistaInformeEmpresaFiltros.cs">
       <DependentUpon>GeoTurnosModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\VistaParametrosAgendaEmpresa.cs">

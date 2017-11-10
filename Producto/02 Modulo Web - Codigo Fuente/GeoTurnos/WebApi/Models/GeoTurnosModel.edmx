@@ -47,6 +47,7 @@
           <Property Name="idDomicilio" Type="int" />
           <Property Name="idUsuario" Type="int" />
           <Property Name="idEstado" Type="int" />
+          <Property Name="fechaRegistroCliente" Type="date" />
         </EntityType>
         <EntityType Name="Comentarios">
           <Key>
@@ -123,6 +124,7 @@
           <Property Name="razonSocial" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="nombreFantasia" Type="nvarchar" MaxLength="50" />
           <Property Name="inicioActividades" Type="date" />
+          <Property Name="fechaRegistroEmpresa" Type="date" />
           <Property Name="telefono" Type="nvarchar" MaxLength="50" />
           <Property Name="logoEmpresa" Type="varbinary(max)" Nullable="false" />
           <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -311,6 +313,31 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaFiltroEmpresa' does not have a 
           <Property Name="comentario" Type="decimal" Precision="38" Scale="6" />
           <Property Name="latitud" Type="decimal" Precision="38" Scale="25" />
           <Property Name="longitud" Type="decimal" Precision="38" Scale="25" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GeoTurnos.dbo.VistaInformeEmpresaFiltros' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VistaInformeEmpresaFiltros">
+          <Key>
+            
+            
+            
+            
+            
+            
+            
+            <PropertyRef Name="cuit" />
+          </Key>
+          <Property Name="cuit" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="razonSocial" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fechaRegistroEmpresa" Type="date" />
+          <Property Name="logoEmpresa" Type="varbinary(max)" Nullable="false" />
+          <Property Name="telefono" Type="nvarchar" MaxLength="50" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="calle" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="altura" Type="int" Nullable="false" />
+          <Property Name="idCiudad" Type="int" Nullable="false" />
+          <Property Name="idProvincia" Type="int" Nullable="false" />
+          <Property Name="idRubro" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'GeoTurnos.dbo.VistaParametrosAgendaEmpresa' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -791,6 +818,21 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
     [VistaFiltroEmpresa].[longitud] AS [longitud]
     FROM [dbo].[VistaFiltroEmpresa] AS [VistaFiltroEmpresa]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="VistaInformeEmpresaFiltros" EntityType="Self.VistaInformeEmpresaFiltros" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VistaInformeEmpresaFiltros].[cuit] AS [cuit], 
+    [VistaInformeEmpresaFiltros].[razonSocial] AS [razonSocial], 
+    [VistaInformeEmpresaFiltros].[fechaRegistroEmpresa] AS [fechaRegistroEmpresa], 
+    [VistaInformeEmpresaFiltros].[logoEmpresa] AS [logoEmpresa], 
+    [VistaInformeEmpresaFiltros].[telefono] AS [telefono], 
+    [VistaInformeEmpresaFiltros].[email] AS [email], 
+    [VistaInformeEmpresaFiltros].[calle] AS [calle], 
+    [VistaInformeEmpresaFiltros].[altura] AS [altura], 
+    [VistaInformeEmpresaFiltros].[idCiudad] AS [idCiudad], 
+    [VistaInformeEmpresaFiltros].[idProvincia] AS [idProvincia], 
+    [VistaInformeEmpresaFiltros].[idRubro] AS [idRubro]
+    FROM [dbo].[VistaInformeEmpresaFiltros] AS [VistaInformeEmpresaFiltros]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="VistaParametrosAgendaEmpresa" EntityType="Self.VistaParametrosAgendaEmpresa" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [VistaParametrosAgendaEmpresa].[id_empresa] AS [id_empresa], 
@@ -984,6 +1026,7 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
           <NavigationProperty Name="TipoDocumento" Relationship="Self.FK_Cliente_TipoDocumento" FromRole="Cliente" ToRole="TipoDocumento" />
           <NavigationProperty Name="Usuario" Relationship="GeoTurnosModel.FK_Cliente_Usuario" FromRole="Cliente" ToRole="Usuario" />
           <NavigationProperty Name="Domicilio" Relationship="GeoTurnosModel.FK_Cliente_Domicilio" FromRole="Cliente" ToRole="Domicilio" />
+          <Property Name="fechaRegistroCliente" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="Estado">
           <Key>
@@ -1226,6 +1269,7 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
           </AssociationSet>
           <EntitySet Name="VistaFiltroClienteConCalificacion" EntityType="GeoTurnosModel.VistaFiltroClienteConCalificacion" />
           <EntitySet Name="VistaComentariosACliente" EntityType="GeoTurnosModel.VistaComentariosACliente" />
+          <EntitySet Name="VistaInformeEmpresaFiltros" EntityType="GeoTurnosModel.VistaInformeEmpresaFiltros" />
           </EntityContainer>
         <EntityType Name="Usuario">
           <Key>
@@ -1337,6 +1381,7 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
           <NavigationProperty Name="Estado" Relationship="GeoTurnosModel.FK_Empresa_Estado" FromRole="Empresa" ToRole="Estado" />
           <NavigationProperty Name="Rubro" Relationship="GeoTurnosModel.FK_Empresa_Rubro" FromRole="Empresa" ToRole="Rubro" />
           <NavigationProperty Name="Usuario" Relationship="GeoTurnosModel.FK_Empresa_Usuario" FromRole="Empresa" ToRole="Usuario" />
+          <Property Name="fechaRegistroEmpresa" Type="DateTime" Precision="0" />
         </EntityType>
         <Association Name="FK_Empresa_Domicilio">
           <End Type="GeoTurnosModel.Domicilio" Role="Domicilio" Multiplicity="0..1" />
@@ -1778,6 +1823,25 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
           <Property Name="razonSocial" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="logoEmpresa" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
         </EntityType>
+        <EntityType Name="VistaInformeEmpresaFiltros">
+          <Key>
+            <PropertyRef Name="cuit" />
+          </Key>
+          <Property Name="cuit" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="razonSocial" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fechaRegistroEmpresa" Type="DateTime" Precision="0" />
+          <Property Name="logoEmpresa" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Rubro" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="calle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="altura" Type="Int32" Nullable="false" />
+          <Property Name="Ciudad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Provincia" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idCiudad" Type="Int32" Nullable="false" />
+          <Property Name="idProvincia" Type="Int32" Nullable="false" />
+          <Property Name="idRubro" Type="Int32" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1805,6 +1869,7 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
           <EntitySetMapping Name="Cliente">
             <EntityTypeMapping TypeName="GeoTurnosModel.Cliente">
               <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="fechaRegistroCliente" ColumnName="fechaRegistroCliente" />
                 <ScalarProperty Name="idCliente" ColumnName="idCliente" />
                 <ScalarProperty Name="idTipoDocumento" ColumnName="idTipoDocumento" />
                 <ScalarProperty Name="nroDocumento" ColumnName="nroDocumento" />
@@ -1901,6 +1966,7 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
           <EntitySetMapping Name="Empresa">
             <EntityTypeMapping TypeName="GeoTurnosModel.Empresa">
               <MappingFragment StoreEntitySet="Empresa">
+                <ScalarProperty Name="fechaRegistroEmpresa" ColumnName="fechaRegistroEmpresa" />
                 <ScalarProperty Name="idEstado" ColumnName="idEstado" />
                 <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
                 <ScalarProperty Name="idRubro" ColumnName="idRubro" />
@@ -2123,6 +2189,23 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
                 <ScalarProperty Name="nro" ColumnName="nro" />
                 <ScalarProperty Name="Id_comentario" ColumnName="Id_comentario" />
                 <ScalarProperty Name="id_empresa" ColumnName="id_empresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VistaInformeEmpresaFiltros">
+            <EntityTypeMapping TypeName="GeoTurnosModel.VistaInformeEmpresaFiltros">
+              <MappingFragment StoreEntitySet="VistaInformeEmpresaFiltros">
+                <ScalarProperty Name="idRubro" ColumnName="idRubro" />
+                <ScalarProperty Name="idProvincia" ColumnName="idProvincia" />
+                <ScalarProperty Name="idCiudad" ColumnName="idCiudad" />
+                <ScalarProperty Name="altura" ColumnName="altura" />
+                <ScalarProperty Name="calle" ColumnName="calle" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="logoEmpresa" ColumnName="logoEmpresa" />
+                <ScalarProperty Name="fechaRegistroEmpresa" ColumnName="fechaRegistroEmpresa" />
+                <ScalarProperty Name="razonSocial" ColumnName="razonSocial" />
+                <ScalarProperty Name="cuit" ColumnName="cuit" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
