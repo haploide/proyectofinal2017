@@ -1630,21 +1630,7 @@ app.controller("SchedulerController", function ($scope, $http) {
                     function (button) {
 
                     });
-                //$.confirm({
-                //    title: "Atención",
-                //    text: "Esta seguro que desea eliminar el turno?",
-                //    confirmButton: "Si",
-                //    cancelButton: "No",
-                //    confirm: function (button) {
-                //        $('#scheduler').jqxScheduler('deleteAppointment', turno.id);
-
-                //        eliminarTurno(turno);
-                //    },
-                //    cancel: function (button) {
-
-                //    }
-                //});
-
+                
             }
         }
 
@@ -2332,13 +2318,33 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
         switch (event.args.cell.cellIndex) {
             case 0:
                 if (!esFechaVieja(event.args.date)) {
+                    var anio = event.args.date.year();
+                    var mes = event.args.date.month();
+                    var dia = event.args.date.day();
+
+
                     mostrarDialogo(
                                     "Atención",
-                                    "Está seguro que desea <b>Cancelar</b> todos los turnos para el dia:",
+                                    "Está seguro que desea <b>Cancelar Todos</b> los turnos del <b>" + dia + '/' + mes + '/' + anio + '</b>?',
                                     "Si",
                                     "No",
                                     function (button) {
+                                        $http({
+                                            method: 'PUT',
+                                            url: 'http://localhost:6901/api/Turno?fecha='+anio+'-'+mes+'-'+dia,
+                                            headers: {
+                                                'Accept': "application/json",
 
+                                            }
+                                        }).then(function (response) {
+                                            
+                                        }, function (response) {
+
+                                            httpNegativo(response.status);
+
+                                        }).then(function () {
+
+                                        });
                                     },
                                     function (button) {
 
@@ -2349,7 +2355,7 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
                 if (!esFechaVieja(event.args.date)) {
                     mostrarDialogo(
                                     "Atención",
-                                    "Está seguro que desea <b>Cancelar</b> el turno:",
+                                    "Está seguro que desea <b>Cancelar el Turno</b> de <b>" +event.args.cell.innerText+'</b>?',
                                     "Si",
                                     "No",
                                     function (button) {
@@ -2423,7 +2429,7 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
                         to: new $.jqx.date(año, mes, dia, horaHasta, minHasta, 0, 0),
                         tooltip: response.data[i].idCliente + "+" + response.data[i].idTurno,
                         timeZone: 'Argentina Standard Time',
-                        subject: "<a href=" + urlBase + ">" + response.data[i].nombre + " " + response.data[i].apellido + "</a>"
+                        subject: "<a class=\"btn-primary\" href=" + urlBase + ">" + response.data[i].nombre + " " + response.data[i].apellido + "</a>"
                     };
 
                     appointments.push(turno);
