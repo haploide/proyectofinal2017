@@ -68,6 +68,126 @@ namespace WebApi.Controllers
             }
         }
 
+        //Cancelar Un Turno
+        public IHttpActionResult Put(int id)
+        {
+            try
+            {
+
+                if (_db.Turno == null || !_db.Turno.Any())
+                {
+                    return NotFound();
+                }
+
+                var turno = _db.Turno.Find(id);
+
+                if (turno == null)
+                {
+                    return NotFound();
+                }
+
+                turno.idEstado = 13;
+
+                _db.Entry(turno).State = System.Data.Entity.EntityState.Modified;
+
+                _db.SaveChanges();
+
+                return Ok(turno);
+
+
+            }
+            catch (Exception ex)
+            {
+
+                return InternalServerError(ex);
+            }
+        }
+
+        //Cancelar  todos los Turno de un Dia
+        public IHttpActionResult Put(DateTime fecha)
+        {
+            try
+            {
+
+                if (_db.Turno == null || !_db.Turno.Any())
+                {
+                    return NotFound();
+                }
+                if (fecha == null)
+                {
+                    return BadRequest();
+                }
+
+                var turnos = _db.Turno.Where(t => t.fecha.Equals(fecha));
+
+                if (turnos == null)
+                {
+                    return NotFound();
+                }
+
+                foreach (var turno in turnos)
+                {
+                    turno.idEstado = 13;
+
+                    _db.Entry(turno).State = System.Data.Entity.EntityState.Modified;
+
+                    _db.SaveChanges(); 
+                }
+
+                return Ok();
+
+
+            }
+            catch (Exception ex)
+            {
+
+                return InternalServerError(ex);
+            }
+        }
+
+        //Registrar Asistencia A Turno
+        public IHttpActionResult Put(int id, bool asistio)
+        {
+            try
+            {
+
+                if (_db.Turno == null || !_db.Turno.Any())
+                {
+                    return NotFound();
+                }
+                
+                var turno = _db.Turno.Find(id);
+
+                if (turno == null)
+                {
+                    return NotFound();
+                }
+
+
+                if (asistio)
+                {
+                    turno.idEstado = 15; 
+                }
+                else
+                {
+                    turno.idEstado = 14;
+                }
+
+               _db.Entry(turno).State = System.Data.Entity.EntityState.Modified;
+
+               _db.SaveChanges();
+                
+
+                return Ok();
+
+
+            }
+            catch (Exception ex)
+            {
+
+                return InternalServerError(ex);
+            }
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

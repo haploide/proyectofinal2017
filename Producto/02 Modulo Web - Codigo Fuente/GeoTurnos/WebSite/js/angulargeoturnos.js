@@ -41,7 +41,7 @@ app.controller("EstadisticaAdministacionController", function ($scope, $http) {
 
     $scope.contenidoATraer = '';
 
-    
+
     $scope.submenu = function (evt, nombreMenu) {
         // Declare all variables
         var i, tabcontent, tablinks;
@@ -69,7 +69,7 @@ app.controller("EstadisticaAdministacionController", function ($scope, $http) {
         }
     }
 
-  
+
 })
 
 app.controller("MiCuentaEmpresaPrestadoraController", function ($scope) {
@@ -1019,9 +1019,9 @@ app.controller("GestionarAgendaTurnosController", function ($scope, $http) {
             case 'visualizarAgenda':
                 $scope.contenidoATraer = 'VisualizarAgenda';
                 break;
-    }
+        }
 
-    
+
 
     }
 
@@ -1550,7 +1550,7 @@ app.controller("SchedulerController", function ($scope, $http) {
 
                                 var horaHasta = fechayhora.addMinutes(duracionTurnos).hour() + ':' + fechayhora.addMinutes(duracionTurnos).minute();
 
-                                var nuevoTurno = { idAgenda: response.data.idAgenda, fecha: anio + '-' + mes + '-' + dia, horaDesde: horaDesde, horaHasta: horaHasta, idCliente: retornarIdCliente(), idEstado:12 }
+                                var nuevoTurno = { idAgenda: response.data.idAgenda, fecha: anio + '-' + mes + '-' + dia, horaDesde: horaDesde, horaHasta: horaHasta, idCliente: retornarIdCliente(), idEstado: 12 }
 
                                 $http({
                                     method: 'POST',
@@ -1617,21 +1617,33 @@ app.controller("SchedulerController", function ($scope, $http) {
             var turno = args.appointment;
 
             if (turno.tooltip.split('+')[0] == retornarIdCliente()) {//Como no me deja crear nuevos campos de datos utilizo los tooltips para guardar el id cliente
-
-                $.confirm({
-                    title: "Atención",
-                    text: "Esta seguro que desea eliminar el turno?",
-                    confirmButton: "Si",
-                    cancelButton: "No",
-                    confirm: function (button) {
+                mostrarDialogo(
+                    "Atención",
+                    "Esta seguro que desea eliminar el turno?",
+                    "Si",
+                    "No",
+                    function (button) {
                         $('#scheduler').jqxScheduler('deleteAppointment', turno.id);
 
                         eliminarTurno(turno);
                     },
-                    cancel: function (button) {
-                        
-                    }
-                });
+                    function (button) {
+
+                    });
+                //$.confirm({
+                //    title: "Atención",
+                //    text: "Esta seguro que desea eliminar el turno?",
+                //    confirmButton: "Si",
+                //    cancelButton: "No",
+                //    confirm: function (button) {
+                //        $('#scheduler').jqxScheduler('deleteAppointment', turno.id);
+
+                //        eliminarTurno(turno);
+                //    },
+                //    cancel: function (button) {
+
+                //    }
+                //});
 
             }
         }
@@ -1997,92 +2009,92 @@ app.controller("ComentariosRatingController", function ($scope, $http) {
 
 app.controller("ComentariosRatingClienteController", function ($scope, $http) {
 
-    (function($) {
-    /**
-	 * attaches a character counter to each textarea element in the jQuery object
-	 * usage: $("#myTextArea").charCounter(max, settings);
-	 */
-	
-	$.fn.charCounter = function (max, settings) {
-		max = max || 100;
-		settings = $.extend({
-			container: "<span></span>",
-			classname: "charcounter",
-			format: "(%1 characters remaining)",
-			pulse: true,
-			delay: 0
-		}, settings);
-		var p, timeout;
-		
-		function count(el, container) {
-			el = $(el);
-			if (el.val().length > max) {
-			    el.val(el.val().substring(0, max));
-			    if (settings.pulse && !p) {
-			    	pulse(container, true);
-			    };
-			};
-			if (settings.delay > 0) {
-				if (timeout) {
-					window.clearTimeout(timeout);
-				}
-				timeout = window.setTimeout(function () {
-					container.html(settings.format.replace(/%1/, (max - el.val().length)));
-				}, settings.delay);
-			} else {
-				container.html(settings.format.replace(/%1/, (max - el.val().length)));
-			}
-		};
-		
-		function pulse(el, again) {
-			if (p) {
-				window.clearTimeout(p);
-				p = null;
-			};
-			el.animate({ opacity: 0.1 }, 100, function () {
-				$(this).animate({ opacity: 1.0 }, 100);
-			});
-			if (again) {
-				p = window.setTimeout(function () { pulse(el) }, 200);
-			};
-		};
-		
-		return this.each(function () {
-			var container;
-			if (!settings.container.match(/^<.+>$/)) {
-				// use existing element to hold counter message
-				container = $(settings.container);
-			} else {
-				// append element to hold counter message (clean up old element first)
-				$(this).next("." + settings.classname).remove();
-				container = $(settings.container)
-								.insertAfter(this)
-								.addClass(settings.classname);
-			}
-			$(this)
-				.unbind(".charCounter")
-				.bind("keydown.charCounter", function () { count(this, container); })
-				.bind("keypress.charCounter", function () { count(this, container); })
-				.bind("keyup.charCounter", function () { count(this, container); })
-				.bind("focus.charCounter", function () { count(this, container); })
-				.bind("mouseover.charCounter", function () { count(this, container); })
-				.bind("mouseout.charCounter", function () { count(this, container); })
-				.bind("paste.charCounter", function () { 
-					var me = this;
-					setTimeout(function () { count(me, container); }, 10);
-				});
-			if (this.addEventListener) {
-				this.addEventListener('input', function () { count(this, container); }, false);
-			};
-			count(this, container);
-		});
-	};
+    (function ($) {
+        /**
+         * attaches a character counter to each textarea element in the jQuery object
+         * usage: $("#myTextArea").charCounter(max, settings);
+         */
 
-})(jQuery);
+        $.fn.charCounter = function (max, settings) {
+            max = max || 100;
+            settings = $.extend({
+                container: "<span></span>",
+                classname: "charcounter",
+                format: "(%1 characters remaining)",
+                pulse: true,
+                delay: 0
+            }, settings);
+            var p, timeout;
 
-$(function() {
-    $(".counted").charCounter(200,{container: "#counter"});
-});
+            function count(el, container) {
+                el = $(el);
+                if (el.val().length > max) {
+                    el.val(el.val().substring(0, max));
+                    if (settings.pulse && !p) {
+                        pulse(container, true);
+                    };
+                };
+                if (settings.delay > 0) {
+                    if (timeout) {
+                        window.clearTimeout(timeout);
+                    }
+                    timeout = window.setTimeout(function () {
+                        container.html(settings.format.replace(/%1/, (max - el.val().length)));
+                    }, settings.delay);
+                } else {
+                    container.html(settings.format.replace(/%1/, (max - el.val().length)));
+                }
+            };
+
+            function pulse(el, again) {
+                if (p) {
+                    window.clearTimeout(p);
+                    p = null;
+                };
+                el.animate({ opacity: 0.1 }, 100, function () {
+                    $(this).animate({ opacity: 1.0 }, 100);
+                });
+                if (again) {
+                    p = window.setTimeout(function () { pulse(el) }, 200);
+                };
+            };
+
+            return this.each(function () {
+                var container;
+                if (!settings.container.match(/^<.+>$/)) {
+                    // use existing element to hold counter message
+                    container = $(settings.container);
+                } else {
+                    // append element to hold counter message (clean up old element first)
+                    $(this).next("." + settings.classname).remove();
+                    container = $(settings.container)
+                                    .insertAfter(this)
+                                    .addClass(settings.classname);
+                }
+                $(this)
+                    .unbind(".charCounter")
+                    .bind("keydown.charCounter", function () { count(this, container); })
+                    .bind("keypress.charCounter", function () { count(this, container); })
+                    .bind("keyup.charCounter", function () { count(this, container); })
+                    .bind("focus.charCounter", function () { count(this, container); })
+                    .bind("mouseover.charCounter", function () { count(this, container); })
+                    .bind("mouseout.charCounter", function () { count(this, container); })
+                    .bind("paste.charCounter", function () {
+                        var me = this;
+                        setTimeout(function () { count(me, container); }, 10);
+                    });
+                if (this.addEventListener) {
+                    this.addEventListener('input', function () { count(this, container); }, false);
+                };
+                count(this, container);
+            });
+        };
+
+    })(jQuery);
+
+    $(function () {
+        $(".counted").charCounter(200, { container: "#counter" });
+    });
 
 
     $scope.comentarios = [];
@@ -2250,7 +2262,7 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
             }
         }];
 
-        var camposDatos = { description: "description", draggable: "draggable", from: "from", id: "id", resizable: "resizable", readOnly: "readOnly", to: "to", tooltip: "tooltip", timeZone: "timeZone", subject: "subject",  resourceId: "calendar" };
+        var camposDatos = { description: "description", draggable: "draggable", from: "from", id: "id", resizable: "resizable", readOnly: "readOnly", to: "to", tooltip: "tooltip", timeZone: "timeZone", subject: "subject", resourceId: "calendar" };
 
         var appointments = [];
 
@@ -2280,7 +2292,7 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
         $("#scheduler").jqxScheduler({
             date: new $.jqx.date('todayDate'),
             width: 850,
-            height:500,
+            height: 500,
             source: adapter,
             appointmentDataFields: camposDatos,
             appointmentTooltips: false,
@@ -2292,7 +2304,7 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
             //min: new $.jqx.date('todayDate'),
             localization: localizacion,
             legendPosition: 'top',
-           
+
             timeZone: 'Argentina Standard Time',
             view: 'agendaView',
             showLegend: true,
@@ -2306,7 +2318,7 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
 
         });
 
-       
+
     }
 
     /*
@@ -2315,8 +2327,59 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
     
     */
 
+    $('#scheduler').on('cellClick', function (event) {//Crear nuevo turno
+
+        switch (event.args.cell.cellIndex) {
+            case 0:
+                if (!esFechaVieja()) {
+                    mostrarDialogo(
+                                    "Atención",
+                                    "Está seguro que desea <b>Cancelar</b> todos los turnos para el dia:",
+                                    "Si",
+                                    "No",
+                                    function (button) {
+
+                                    },
+                                    function (button) {
+
+                                    });
+                }
+                break;
+            case 1:
+                if (!esFechaVieja()) {
+                    mostrarDialogo(
+                                    "Atención",
+                                    "Está seguro que desea <b>Cancelar</b> el turno:",
+                                    "Si",
+                                    "No",
+                                    function (button) {
+
+                                    },
+                                    function (button) {
+
+                                    });
+                }
+                break;
+            case 2:
+                if (esFechaVieja()) {
+                    mostrarDialogo(
+                                   "Registro de asistencia",
+                                   "Confirma que.... <b>Asistió</b> al turno",
+                                   "Asistió",
+                                   "Ausente",
+                                   function (button) {
+
+                                   },
+                                   function (button) {
+
+                                   });
+                }
+                break;
+
+        }
 
 
+    });
 
     /*
          Metodos usados
@@ -2348,8 +2411,8 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
                     var minHasta = parseInt(hasta[1]);
                     var usuario = response.data[i].usuario;
 
-                    var urlBase='/home/perfilcliente/'+usuario
-             
+                    var urlBase = '/home/perfilcliente/' + usuario
+
                     var turno = {
                         description: "Turno",
                         draggable: false,
@@ -2360,7 +2423,7 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
                         to: new $.jqx.date(año, mes, dia, horaHasta, minHasta, 0, 0),
                         tooltip: response.data[i].idCliente + "+" + response.data[i].idTurno,
                         timeZone: 'Argentina Standard Time',
-                        subject: "<a href="+urlBase+">" + response.data[i].nombre + " " + response.data[i].apellido + "</a>"
+                        subject: "<a href=" + urlBase + ">" + response.data[i].nombre + " " + response.data[i].apellido + "</a>"
                     };
 
                     appointments.push(turno);
@@ -2404,6 +2467,30 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
         }
         duracionTurnos = $scope.parametros[0].duracion_turno;
 
+
+    }
+    function esFechaVieja(fechayhora) {
+
+        var nowAnio = new $.jqx.date().year();
+        var nowMes = new $.jqx.date().month();
+        var nowDia = new $.jqx.date().day();
+
+        var anioTurno = fechayhora.year();
+        var mesTurno = fechayhora.month();
+        var diaTurno = fechayhora.day();
+
+
+        if (anioTurno >= nowAnio) {
+
+            if (mesTurno < nowMes || (mesTurno == nowMes && diaTurno <= nowDia)) {
+                return true;
+            }
+
+        } else {
+            return true;
+        }
+
+        return false;
 
     }
 
@@ -2471,4 +2558,14 @@ var httpNegativoSinContenedor = function (status) {
 
     }
 
+}
+var mostrarDialogo = function (titulo, texto, botonAfirmativo, botonNegativo, hacerPorAfirmativo, hacerPorNegativo) {
+    $.confirm({
+        title: titulo,
+        text: texto,
+        confirmButton: botonAfirmativo,
+        cancelButton: botonNegativo,
+        confirm: hacerPorAfirmativo,
+        cancel: hacerPorNegativo
+    });
 }
