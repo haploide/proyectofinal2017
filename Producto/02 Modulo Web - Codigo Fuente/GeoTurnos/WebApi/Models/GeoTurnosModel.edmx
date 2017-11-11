@@ -1025,8 +1025,8 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
           <NavigationProperty Name="Estado" Relationship="Self.FK_Cliente_Estado" FromRole="Cliente" ToRole="Estado" />
           <NavigationProperty Name="TipoDocumento" Relationship="Self.FK_Cliente_TipoDocumento" FromRole="Cliente" ToRole="TipoDocumento" />
           <NavigationProperty Name="Usuario" Relationship="GeoTurnosModel.FK_Cliente_Usuario" FromRole="Cliente" ToRole="Usuario" />
-          <NavigationProperty Name="Domicilio" Relationship="GeoTurnosModel.FK_Cliente_Domicilio" FromRole="Cliente" ToRole="Domicilio" />
           <Property Name="fechaRegistroCliente" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Domicilio" Relationship="GeoTurnosModel.FK_Cliente_Domicilio" FromRole="Cliente" ToRole="Domicilio" />
         </EntityType>
         <EntityType Name="Estado">
           <Key>
@@ -1176,32 +1176,6 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="RolPorUsuario" EntitySet="RolPorUsuario" />
           </AssociationSet>
-          <EntitySet Name="Domicilio" EntityType="GeoTurnosModel.Domicilio" />
-          <AssociationSet Name="FK_Domicilio_Barrio" Association="GeoTurnosModel.FK_Domicilio_Barrio">
-            <End Role="Barrio" EntitySet="Barrio" />
-            <End Role="Domicilio" EntitySet="Domicilio" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Cliente_Domicilio" Association="GeoTurnosModel.FK_Cliente_Domicilio">
-            <End Role="Domicilio" EntitySet="Domicilio" />
-            <End Role="Cliente" EntitySet="Cliente" />
-          </AssociationSet>
-          <EntitySet Name="Empresa" EntityType="GeoTurnosModel.Empresa" />
-          <AssociationSet Name="FK_Empresa_Domicilio" Association="GeoTurnosModel.FK_Empresa_Domicilio">
-            <End Role="Domicilio" EntitySet="Domicilio" />
-            <End Role="Empresa" EntitySet="Empresa" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Empresa_Estado" Association="GeoTurnosModel.FK_Empresa_Estado">
-            <End Role="Estado" EntitySet="Estado" />
-            <End Role="Empresa" EntitySet="Empresa" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Empresa_Rubro" Association="GeoTurnosModel.FK_Empresa_Rubro">
-            <End Role="Rubro" EntitySet="Rubro" />
-            <End Role="Empresa" EntitySet="Empresa" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Empresa_Usuario" Association="GeoTurnosModel.FK_Empresa_Usuario">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="Empresa" EntitySet="Empresa" />
-          </AssociationSet>
           <EntitySet Name="DiaSemana" EntityType="GeoTurnosModel.DiaSemana" />
           <EntitySet Name="DiaXParametroAgenda" EntityType="GeoTurnosModel.DiaXParametroAgenda" />
           <EntitySet Name="ParametroAgenda" EntityType="GeoTurnosModel.ParametroAgenda" />
@@ -1213,10 +1187,6 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
             <End Role="ParametroAgenda" EntitySet="ParametroAgenda" />
             <End Role="DiaXParametroAgenda" EntitySet="DiaXParametroAgenda" />
           </AssociationSet>
-          <AssociationSet Name="FK_ParametroAgenda_Empresa" Association="GeoTurnosModel.FK_ParametroAgenda_Empresa">
-            <End Role="Empresa" EntitySet="Empresa" />
-            <End Role="ParametroAgenda" EntitySet="ParametroAgenda" />
-          </AssociationSet>
           <EntitySet Name="DireccionComentario" EntityType="GeoTurnosModel.DireccionComentario" />
           <EntitySet Name="Comentarios" EntityType="GeoTurnosModel.Comentarios" />
           <AssociationSet Name="FK_Comentarios_cliente" Association="GeoTurnosModel.FK_Comentarios_cliente">
@@ -1227,20 +1197,12 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
             <End Role="DireccionComentario" EntitySet="DireccionComentario" />
             <End Role="Comentarios" EntitySet="Comentarios" />
           </AssociationSet>
-          <AssociationSet Name="FK_Comentarios_Empresa" Association="GeoTurnosModel.FK_Comentarios_Empresa">
-            <End Role="Empresa" EntitySet="Empresa" />
-            <End Role="Comentarios" EntitySet="Comentarios" />
-          </AssociationSet>
           <EntitySet Name="VistaFiltroEmpresa" EntityType="GeoTurnosModel.VistaFiltroEmpresa" />
           <EntitySet Name="VistaTurnosAgendaVigenteParaEmpresa" EntityType="GeoTurnosModel.VistaTurnosAgendaVigenteParaEmpresa" />
           <EntitySet Name="VistaParametrosAgendaEmpresa" EntityType="GeoTurnosModel.VistaParametrosAgendaEmpresa" />
           <EntitySet Name="VistaTurnosAgendaVigenteParaClientes" EntityType="GeoTurnosModel.VistaTurnosAgendaVigenteParaClientes" />
           <EntitySet Name="Agenda" EntityType="GeoTurnosModel.Agenda" />
           <EntitySet Name="Turno" EntityType="GeoTurnosModel.Turno" />
-          <AssociationSet Name="FK_Agenda_Empresa" Association="GeoTurnosModel.FK_Agenda_Empresa">
-            <End Role="Empresa" EntitySet="Empresa" />
-            <End Role="Agenda" EntitySet="Agenda" />
-          </AssociationSet>
           <AssociationSet Name="FK_Agenda_Estado" Association="GeoTurnosModel.FK_Agenda_Estado">
             <End Role="Estado" EntitySet="Estado" />
             <End Role="Agenda" EntitySet="Agenda" />
@@ -1259,10 +1221,6 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
             <End Role="Cliente" EntitySet="Cliente" />
             <End Role="ComentariosAClientes" EntitySet="ComentariosAClientes" />
           </AssociationSet>
-          <AssociationSet Name="FK_Comentarios_DeEmpresa" Association="GeoTurnosModel.FK_Comentarios_DeEmpresa">
-            <End Role="Empresa" EntitySet="Empresa" />
-            <End Role="ComentariosAClientes" EntitySet="ComentariosAClientes" />
-          </AssociationSet>
           <AssociationSet Name="FK_Comentarios_DireccionComentario2" Association="GeoTurnosModel.FK_Comentarios_DireccionComentario2">
             <End Role="DireccionComentario" EntitySet="DireccionComentario" />
             <End Role="ComentariosAClientes" EntitySet="ComentariosAClientes" />
@@ -1270,6 +1228,48 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
           <EntitySet Name="VistaFiltroClienteConCalificacion" EntityType="GeoTurnosModel.VistaFiltroClienteConCalificacion" />
           <EntitySet Name="VistaComentariosACliente" EntityType="GeoTurnosModel.VistaComentariosACliente" />
           <EntitySet Name="VistaInformeEmpresaFiltros" EntityType="GeoTurnosModel.VistaInformeEmpresaFiltros" />
+          <EntitySet Name="Empresa" EntityType="GeoTurnosModel.Empresa" />
+          <AssociationSet Name="FK_Agenda_Empresa" Association="GeoTurnosModel.FK_Agenda_Empresa">
+            <End Role="Empresa" EntitySet="Empresa" />
+            <End Role="Agenda" EntitySet="Agenda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comentarios_Empresa" Association="GeoTurnosModel.FK_Comentarios_Empresa">
+            <End Role="Empresa" EntitySet="Empresa" />
+            <End Role="Comentarios" EntitySet="Comentarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comentarios_DeEmpresa" Association="GeoTurnosModel.FK_Comentarios_DeEmpresa">
+            <End Role="Empresa" EntitySet="Empresa" />
+            <End Role="ComentariosAClientes" EntitySet="ComentariosAClientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empresa_Estado" Association="GeoTurnosModel.FK_Empresa_Estado">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Empresa" EntitySet="Empresa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empresa_Rubro" Association="GeoTurnosModel.FK_Empresa_Rubro">
+            <End Role="Rubro" EntitySet="Rubro" />
+            <End Role="Empresa" EntitySet="Empresa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empresa_Usuario" Association="GeoTurnosModel.FK_Empresa_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Empresa" EntitySet="Empresa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ParametroAgenda_Empresa" Association="GeoTurnosModel.FK_ParametroAgenda_Empresa">
+            <End Role="Empresa" EntitySet="Empresa" />
+            <End Role="ParametroAgenda" EntitySet="ParametroAgenda" />
+          </AssociationSet>
+          <EntitySet Name="Domicilio" EntityType="GeoTurnosModel.Domicilio" />
+          <AssociationSet Name="FK_Domicilio_Barrio" Association="GeoTurnosModel.FK_Domicilio_Barrio">
+            <End Role="Barrio" EntitySet="Barrio" />
+            <End Role="Domicilio" EntitySet="Domicilio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cliente_Domicilio" Association="GeoTurnosModel.FK_Cliente_Domicilio">
+            <End Role="Domicilio" EntitySet="Domicilio" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empresa_Domicilio" Association="GeoTurnosModel.FK_Empresa_Domicilio">
+            <End Role="Domicilio" EntitySet="Domicilio" />
+            <End Role="Empresa" EntitySet="Empresa" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Usuario">
           <Key>
@@ -1284,7 +1284,6 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
           <Property Name="respuestaSeguridad2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="idEstado" Type="Int32" />
           <NavigationProperty Name="Estado" Relationship="GeoTurnosModel.FK_Usuario_Estado" FromRole="Usuario" ToRole="Estado" />
-          <NavigationProperty Name="RolPorUsuario" Relationship="GeoTurnosModel.FK_RolPorUsuario_Usuario" FromRole="Usuario" ToRole="RolPorUsuario" />
         </EntityType>
         <Association Name="FK_Cliente_Usuario">
           <End Type="GeoTurnosModel.Usuario" Role="Usuario" Multiplicity="0..1" />
@@ -1318,115 +1317,6 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
               <PropertyRef Name="idUsuario" />
             </Principal>
             <Dependent Role="RolPorUsuario">
-              <PropertyRef Name="idUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Domicilio">
-          <Key>
-            <PropertyRef Name="idDomicilio" />
-          </Key>
-          <Property Name="idDomicilio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="calle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="altura" Type="Int32" Nullable="false" />
-          <Property Name="piso" Type="Int32" />
-          <Property Name="departamento" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="torre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="latitud" Type="Decimal" Precision="38" Scale="25" />
-          <Property Name="longitud" Type="Decimal" Precision="38" Scale="25" />
-          <Property Name="idBarrio" Type="Int32" />
-          <NavigationProperty Name="Barrio" Relationship="GeoTurnosModel.FK_Domicilio_Barrio" FromRole="Domicilio" ToRole="Barrio" />
-        </EntityType>
-        <Association Name="FK_Domicilio_Barrio">
-          <End Type="GeoTurnosModel.Barrio" Role="Barrio" Multiplicity="0..1" />
-          <End Type="GeoTurnosModel.Domicilio" Role="Domicilio" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Barrio">
-              <PropertyRef Name="idBarrio" />
-            </Principal>
-            <Dependent Role="Domicilio">
-              <PropertyRef Name="idBarrio" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Cliente_Domicilio">
-          <End Type="GeoTurnosModel.Domicilio" Role="Domicilio" Multiplicity="0..1" />
-          <End Type="GeoTurnosModel.Cliente" Role="Cliente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Domicilio">
-              <PropertyRef Name="idDomicilio" />
-            </Principal>
-            <Dependent Role="Cliente">
-              <PropertyRef Name="idDomicilio" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Empresa">
-          <Key>
-            <PropertyRef Name="idEmpresa" />
-          </Key>
-          <Property Name="idEmpresa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="cuit" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="razonSocial" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="nombreFantasia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="inicioActividades" Type="DateTime" Precision="0" />
-          <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="logoEmpresa" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="idDomicilio" Type="Int32" />
-          <Property Name="idRubro" Type="Int32" />
-          <Property Name="idUsuario" Type="Int32" />
-          <Property Name="idEstado" Type="Int32" />
-          <NavigationProperty Name="Domicilio" Relationship="GeoTurnosModel.FK_Empresa_Domicilio" FromRole="Empresa" ToRole="Domicilio" />
-          <NavigationProperty Name="Estado" Relationship="GeoTurnosModel.FK_Empresa_Estado" FromRole="Empresa" ToRole="Estado" />
-          <NavigationProperty Name="Rubro" Relationship="GeoTurnosModel.FK_Empresa_Rubro" FromRole="Empresa" ToRole="Rubro" />
-          <NavigationProperty Name="Usuario" Relationship="GeoTurnosModel.FK_Empresa_Usuario" FromRole="Empresa" ToRole="Usuario" />
-          <Property Name="fechaRegistroEmpresa" Type="DateTime" Precision="0" />
-        </EntityType>
-        <Association Name="FK_Empresa_Domicilio">
-          <End Type="GeoTurnosModel.Domicilio" Role="Domicilio" Multiplicity="0..1" />
-          <End Type="GeoTurnosModel.Empresa" Role="Empresa" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Domicilio">
-              <PropertyRef Name="idDomicilio" />
-            </Principal>
-            <Dependent Role="Empresa">
-              <PropertyRef Name="idDomicilio" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Empresa_Estado">
-          <End Type="GeoTurnosModel.Estado" Role="Estado" Multiplicity="0..1" />
-          <End Type="GeoTurnosModel.Empresa" Role="Empresa" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Estado">
-              <PropertyRef Name="idEstado" />
-            </Principal>
-            <Dependent Role="Empresa">
-              <PropertyRef Name="idEstado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Empresa_Rubro">
-          <End Type="GeoTurnosModel.Rubro" Role="Rubro" Multiplicity="0..1" />
-          <End Type="GeoTurnosModel.Empresa" Role="Empresa" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Rubro">
-              <PropertyRef Name="idRubro" />
-            </Principal>
-            <Dependent Role="Empresa">
-              <PropertyRef Name="idRubro" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Empresa_Usuario">
-          <End Type="GeoTurnosModel.Usuario" Role="Usuario" Multiplicity="0..1" />
-          <End Type="GeoTurnosModel.Empresa" Role="Empresa" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="idUsuario" />
-            </Principal>
-            <Dependent Role="Empresa">
               <PropertyRef Name="idUsuario" />
             </Dependent>
           </ReferentialConstraint>
@@ -1486,18 +1376,6 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ParametroAgenda_Empresa">
-          <End Type="GeoTurnosModel.Empresa" Role="Empresa" Multiplicity="1" />
-          <End Type="GeoTurnosModel.ParametroAgenda" Role="ParametroAgenda" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Empresa">
-              <PropertyRef Name="idEmpresa" />
-            </Principal>
-            <Dependent Role="ParametroAgenda">
-              <PropertyRef Name="id_empresa" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="DireccionComentario">
           <Key>
             <PropertyRef Name="Id_direccion" />
@@ -1518,8 +1396,8 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
           <Property Name="id_direccion" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Cliente" Relationship="GeoTurnosModel.FK_Comentarios_cliente" FromRole="Comentarios" ToRole="Cliente" />
           <NavigationProperty Name="DireccionComentario" Relationship="GeoTurnosModel.FK_Comentarios_DireccionComentario" FromRole="Comentarios" ToRole="DireccionComentario" />
-          <NavigationProperty Name="Empresa" Relationship="GeoTurnosModel.FK_Comentarios_Empresa" FromRole="Comentarios" ToRole="Empresa" />
           <Property Name="titulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Empresa" Relationship="GeoTurnosModel.FK_Comentarios_Empresa" FromRole="Comentarios" ToRole="Empresa" />
         </EntityType>
         <Association Name="FK_Comentarios_cliente">
           <End Type="GeoTurnosModel.Cliente" Role="Cliente" Multiplicity="1" />
@@ -1542,18 +1420,6 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
             </Principal>
             <Dependent Role="Comentarios">
               <PropertyRef Name="id_direccion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Comentarios_Empresa">
-          <End Type="GeoTurnosModel.Empresa" Role="Empresa" Multiplicity="1" />
-          <End Type="GeoTurnosModel.Comentarios" Role="Comentarios" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Empresa">
-              <PropertyRef Name="idEmpresa" />
-            </Principal>
-            <Dependent Role="Comentarios">
-              <PropertyRef Name="id_empresa" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1640,8 +1506,8 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
           <Property Name="año" Type="Int32" Nullable="false" />
           <Property Name="idEmpresa" Type="Int32" Nullable="false" />
           <Property Name="idEstado" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Empresa" Relationship="GeoTurnosModel.FK_Agenda_Empresa" FromRole="Agenda" ToRole="Empresa" />
           <NavigationProperty Name="Estado" Relationship="GeoTurnosModel.FK_Agenda_Estado" FromRole="Agenda" ToRole="Estado" />
+          <NavigationProperty Name="Empresa" Relationship="GeoTurnosModel.FK_Agenda_Empresa" FromRole="Agenda" ToRole="Empresa" />
         </EntityType>
         <EntityType Name="Turno">
           <Key>
@@ -1656,18 +1522,6 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
           <NavigationProperty Name="Agenda" Relationship="GeoTurnosModel.FK_Turno_Agenda" FromRole="Turno" ToRole="Agenda" />
           <NavigationProperty Name="Cliente" Relationship="GeoTurnosModel.FK_Turno_Cliente" FromRole="Turno" ToRole="Cliente" />
         </EntityType>
-        <Association Name="FK_Agenda_Empresa">
-          <End Type="GeoTurnosModel.Empresa" Role="Empresa" Multiplicity="1" />
-          <End Type="GeoTurnosModel.Agenda" Role="Agenda" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Empresa">
-              <PropertyRef Name="idEmpresa" />
-            </Principal>
-            <Dependent Role="Agenda">
-              <PropertyRef Name="idEmpresa" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Agenda_Estado">
           <End Type="GeoTurnosModel.Estado" Role="Estado" Multiplicity="1" />
           <End Type="GeoTurnosModel.Agenda" Role="Agenda" Multiplicity="*" />
@@ -1744,8 +1598,8 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
           <Property Name="id_direccion" Type="Int32" Nullable="false" />
           <Property Name="titulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Cliente" Relationship="GeoTurnosModel.FK_Comentarios_Acliente" FromRole="ComentariosAClientes" ToRole="Cliente" />
-          <NavigationProperty Name="Empresa" Relationship="GeoTurnosModel.FK_Comentarios_DeEmpresa" FromRole="ComentariosAClientes" ToRole="Empresa" />
           <NavigationProperty Name="DireccionComentario" Relationship="GeoTurnosModel.FK_Comentarios_DireccionComentario2" FromRole="ComentariosAClientes" ToRole="DireccionComentario" />
+          <NavigationProperty Name="Empresa" Relationship="GeoTurnosModel.FK_Comentarios_DeEmpresa" FromRole="ComentariosAClientes" ToRole="Empresa" />
         </EntityType>
         <Association Name="FK_Comentarios_Acliente">
           <End Type="GeoTurnosModel.Cliente" Role="Cliente" Multiplicity="1" />
@@ -1756,18 +1610,6 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
             </Principal>
             <Dependent Role="ComentariosAClientes">
               <PropertyRef Name="id_cliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Comentarios_DeEmpresa">
-          <End Type="GeoTurnosModel.Empresa" Role="Empresa" Multiplicity="1" />
-          <End Type="GeoTurnosModel.ComentariosAClientes" Role="ComentariosAClientes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Empresa">
-              <PropertyRef Name="idEmpresa" />
-            </Principal>
-            <Dependent Role="ComentariosAClientes">
-              <PropertyRef Name="id_empresa" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1839,6 +1681,163 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
           <Property Name="idProvincia" Type="Int32" Nullable="false" />
           <Property Name="idRubro" Type="Int32" />
         </EntityType>
+        <EntityType Name="Empresa">
+          <Key>
+            <PropertyRef Name="idEmpresa" />
+          </Key>
+          <Property Name="idEmpresa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cuit" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="razonSocial" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="nombreFantasia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="inicioActividades" Type="DateTime" Precision="0" />
+          <Property Name="fechaRegistroEmpresa" Type="DateTime" Precision="0" />
+          <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="logoEmpresa" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idDomicilio" Type="Int32" />
+          <Property Name="idRubro" Type="Int32" />
+          <Property Name="idUsuario" Type="Int32" />
+          <Property Name="idEstado" Type="Int32" />
+          <NavigationProperty Name="Estado" Relationship="GeoTurnosModel.FK_Empresa_Estado" FromRole="Empresa" ToRole="Estado" />
+          <NavigationProperty Name="Rubro" Relationship="GeoTurnosModel.FK_Empresa_Rubro" FromRole="Empresa" ToRole="Rubro" />
+          <NavigationProperty Name="Usuario" Relationship="GeoTurnosModel.FK_Empresa_Usuario" FromRole="Empresa" ToRole="Usuario" />
+          <NavigationProperty Name="Domicilio" Relationship="GeoTurnosModel.FK_Empresa_Domicilio" FromRole="Empresa" ToRole="Domicilio" />
+        </EntityType>
+        <Association Name="FK_Agenda_Empresa">
+          <End Type="GeoTurnosModel.Empresa" Role="Empresa" Multiplicity="1" />
+          <End Type="GeoTurnosModel.Agenda" Role="Agenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresa">
+              <PropertyRef Name="idEmpresa" />
+            </Principal>
+            <Dependent Role="Agenda">
+              <PropertyRef Name="idEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comentarios_Empresa">
+          <End Type="GeoTurnosModel.Empresa" Role="Empresa" Multiplicity="1" />
+          <End Type="GeoTurnosModel.Comentarios" Role="Comentarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresa">
+              <PropertyRef Name="idEmpresa" />
+            </Principal>
+            <Dependent Role="Comentarios">
+              <PropertyRef Name="id_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comentarios_DeEmpresa">
+          <End Type="GeoTurnosModel.Empresa" Role="Empresa" Multiplicity="1" />
+          <End Type="GeoTurnosModel.ComentariosAClientes" Role="ComentariosAClientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresa">
+              <PropertyRef Name="idEmpresa" />
+            </Principal>
+            <Dependent Role="ComentariosAClientes">
+              <PropertyRef Name="id_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empresa_Estado">
+          <End Type="GeoTurnosModel.Estado" Role="Estado" Multiplicity="0..1" />
+          <End Type="GeoTurnosModel.Empresa" Role="Empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="idEstado" />
+            </Principal>
+            <Dependent Role="Empresa">
+              <PropertyRef Name="idEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empresa_Rubro">
+          <End Type="GeoTurnosModel.Rubro" Role="Rubro" Multiplicity="0..1" />
+          <End Type="GeoTurnosModel.Empresa" Role="Empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rubro">
+              <PropertyRef Name="idRubro" />
+            </Principal>
+            <Dependent Role="Empresa">
+              <PropertyRef Name="idRubro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empresa_Usuario">
+          <End Type="GeoTurnosModel.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="GeoTurnosModel.Empresa" Role="Empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Empresa">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ParametroAgenda_Empresa">
+          <End Type="GeoTurnosModel.Empresa" Role="Empresa" Multiplicity="1" />
+          <End Type="GeoTurnosModel.ParametroAgenda" Role="ParametroAgenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresa">
+              <PropertyRef Name="idEmpresa" />
+            </Principal>
+            <Dependent Role="ParametroAgenda">
+              <PropertyRef Name="id_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Domicilio">
+          <Key>
+            <PropertyRef Name="idDomicilio" />
+          </Key>
+          <Property Name="idDomicilio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="calle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="altura" Type="Int32" Nullable="false" />
+          <Property Name="piso" Type="Int32" />
+          <Property Name="departamento" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="torre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="latitud" Type="Decimal" Precision="38" Scale="25" />
+          <Property Name="longitud" Type="Decimal" Precision="38" Scale="25" />
+          <Property Name="idBarrio" Type="Int32" />
+          <NavigationProperty Name="Barrio" Relationship="GeoTurnosModel.FK_Domicilio_Barrio" FromRole="Domicilio" ToRole="Barrio" />
+        </EntityType>
+        <Association Name="FK_Domicilio_Barrio">
+          <End Type="GeoTurnosModel.Barrio" Role="Barrio" Multiplicity="0..1" />
+          <End Type="GeoTurnosModel.Domicilio" Role="Domicilio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Barrio">
+              <PropertyRef Name="idBarrio" />
+            </Principal>
+            <Dependent Role="Domicilio">
+              <PropertyRef Name="idBarrio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cliente_Domicilio">
+          <End Type="GeoTurnosModel.Domicilio" Role="Domicilio" Multiplicity="0..1" />
+          <End Type="GeoTurnosModel.Cliente" Role="Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Domicilio">
+              <PropertyRef Name="idDomicilio" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="idDomicilio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empresa_Domicilio">
+          <End Type="GeoTurnosModel.Domicilio" Role="Domicilio" Multiplicity="0..1" />
+          <End Type="GeoTurnosModel.Empresa" Role="Empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Domicilio">
+              <PropertyRef Name="idDomicilio" />
+            </Principal>
+            <Dependent Role="Empresa">
+              <PropertyRef Name="idDomicilio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1942,40 +1941,6 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
                 <ScalarProperty Name="contraseña" ColumnName="contraseña" />
                 <ScalarProperty Name="usuario1" ColumnName="usuario" />
                 <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Domicilio">
-            <EntityTypeMapping TypeName="GeoTurnosModel.Domicilio">
-              <MappingFragment StoreEntitySet="Domicilio">
-                <ScalarProperty Name="idBarrio" ColumnName="idBarrio" />
-                <ScalarProperty Name="longitud" ColumnName="longitud" />
-                <ScalarProperty Name="latitud" ColumnName="latitud" />
-                <ScalarProperty Name="torre" ColumnName="torre" />
-                <ScalarProperty Name="departamento" ColumnName="departamento" />
-                <ScalarProperty Name="piso" ColumnName="piso" />
-                <ScalarProperty Name="altura" ColumnName="altura" />
-                <ScalarProperty Name="calle" ColumnName="calle" />
-                <ScalarProperty Name="idDomicilio" ColumnName="idDomicilio" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Empresa">
-            <EntityTypeMapping TypeName="GeoTurnosModel.Empresa">
-              <MappingFragment StoreEntitySet="Empresa">
-                <ScalarProperty Name="fechaRegistroEmpresa" ColumnName="fechaRegistroEmpresa" />
-                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
-                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
-                <ScalarProperty Name="idRubro" ColumnName="idRubro" />
-                <ScalarProperty Name="idDomicilio" ColumnName="idDomicilio" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="logoEmpresa" ColumnName="logoEmpresa" />
-                <ScalarProperty Name="telefono" ColumnName="telefono" />
-                <ScalarProperty Name="inicioActividades" ColumnName="inicioActividades" />
-                <ScalarProperty Name="nombreFantasia" ColumnName="nombreFantasia" />
-                <ScalarProperty Name="razonSocial" ColumnName="razonSocial" />
-                <ScalarProperty Name="cuit" ColumnName="cuit" />
-                <ScalarProperty Name="idEmpresa" ColumnName="idEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2203,6 +2168,40 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
                 <ScalarProperty Name="fechaRegistroEmpresa" ColumnName="fechaRegistroEmpresa" />
                 <ScalarProperty Name="razonSocial" ColumnName="razonSocial" />
                 <ScalarProperty Name="cuit" ColumnName="cuit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empresa">
+            <EntityTypeMapping TypeName="GeoTurnosModel.Empresa">
+              <MappingFragment StoreEntitySet="Empresa">
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="idRubro" ColumnName="idRubro" />
+                <ScalarProperty Name="idDomicilio" ColumnName="idDomicilio" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="logoEmpresa" ColumnName="logoEmpresa" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="fechaRegistroEmpresa" ColumnName="fechaRegistroEmpresa" />
+                <ScalarProperty Name="inicioActividades" ColumnName="inicioActividades" />
+                <ScalarProperty Name="nombreFantasia" ColumnName="nombreFantasia" />
+                <ScalarProperty Name="razonSocial" ColumnName="razonSocial" />
+                <ScalarProperty Name="cuit" ColumnName="cuit" />
+                <ScalarProperty Name="idEmpresa" ColumnName="idEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Domicilio">
+            <EntityTypeMapping TypeName="GeoTurnosModel.Domicilio">
+              <MappingFragment StoreEntitySet="Domicilio">
+                <ScalarProperty Name="idBarrio" ColumnName="idBarrio" />
+                <ScalarProperty Name="longitud" ColumnName="longitud" />
+                <ScalarProperty Name="latitud" ColumnName="latitud" />
+                <ScalarProperty Name="torre" ColumnName="torre" />
+                <ScalarProperty Name="departamento" ColumnName="departamento" />
+                <ScalarProperty Name="piso" ColumnName="piso" />
+                <ScalarProperty Name="altura" ColumnName="altura" />
+                <ScalarProperty Name="calle" ColumnName="calle" />
+                <ScalarProperty Name="idDomicilio" ColumnName="idDomicilio" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

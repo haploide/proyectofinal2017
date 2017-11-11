@@ -19,6 +19,7 @@ namespace WebApi.Models
         public string razonSocial { get; set; }
         public string nombreFantasia { get; set; }
         public Nullable<System.DateTime> inicioActividades { get; set; }
+        public Nullable<System.DateTime> fechaRegistroEmpresa { get; set; }
         public string telefono { get; set; }
         public byte[] logoEmpresa { get; set; }
         public string email { get; set; }
@@ -26,11 +27,10 @@ namespace WebApi.Models
         public Nullable<int> idRubro { get; set; }
         public Nullable<int> idUsuario { get; set; }
         public Nullable<int> idEstado { get; set; }
-        public Nullable<System.DateTime> fechaRegistroEmpresa { get; set; }
     
-        public virtual Domicilio Domicilio { get; set; }
         public virtual Estado Estado { get; set; }
         public virtual Rubro Rubro { get; set; }
         public virtual Usuario Usuario { get; set; }
+        public virtual Domicilio Domicilio { get; set; }
     }
 }

@@ -35,8 +35,6 @@ namespace WebApi.Models
         public virtual DbSet<Rubro> Rubro { get; set; }
         public virtual DbSet<TipoDocumento> TipoDocumento { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
-        public virtual DbSet<Domicilio> Domicilio { get; set; }
-        public virtual DbSet<Empresa> Empresa { get; set; }
         public virtual DbSet<DiaSemana> DiaSemana { get; set; }
         public virtual DbSet<DiaXParametroAgenda> DiaXParametroAgenda { get; set; }
         public virtual DbSet<ParametroAgenda> ParametroAgenda { get; set; }
@@ -53,5 +51,7 @@ namespace WebApi.Models
         public virtual DbSet<VistaFiltroClienteConCalificacion> VistaFiltroClienteConCalificacion { get; set; }
         public virtual DbSet<VistaComentariosACliente> VistaComentariosACliente { get; set; }
         public virtual DbSet<VistaInformeEmpresaFiltros> VistaInformeEmpresaFiltros { get; set; }
+        public virtual DbSet<Empresa> Empresa { get; set; }
+        public virtual DbSet<Domicilio> Domicilio { get; set; }
     }
 }

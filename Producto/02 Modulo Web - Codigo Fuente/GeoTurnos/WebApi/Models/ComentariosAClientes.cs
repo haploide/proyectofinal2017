@@ -24,7 +24,7 @@ namespace WebApi.Models
         public string titulo { get; set; }
     
         public virtual Cliente Cliente { get; set; }
-        public virtual Empresa Empresa { get; set; }
         public virtual DireccionComentario DireccionComentario { get; set; }
+        public virtual Empresa Empresa { get; set; }
     }
 }

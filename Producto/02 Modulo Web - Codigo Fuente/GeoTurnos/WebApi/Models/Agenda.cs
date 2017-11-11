@@ -20,7 +20,7 @@ namespace WebApi.Models
         public int idEmpresa { get; set; }
         public int idEstado { get; set; }
     
-        public virtual Empresa Empresa { get; set; }
         public virtual Estado Estado { get; set; }
+        public virtual Empresa Empresa { get; set; }
     }
 }

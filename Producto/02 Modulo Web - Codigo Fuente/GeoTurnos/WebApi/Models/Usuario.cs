@@ -14,12 +14,6 @@ namespace WebApi.Models
     
     public partial class Usuario
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Usuario()
-        {
-            this.RolPorUsuario = new HashSet<RolPorUsuario>();
-        }
-    
         public int idUsuario { get; set; }
         public string usuario1 { get; set; }
         public string contraseña { get; set; }
@@ -30,7 +24,5 @@ namespace WebApi.Models
         public Nullable<int> idEstado { get; set; }
     
         public virtual Estado Estado { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RolPorUsuario> RolPorUsuario { get; set; }
     }
 }
