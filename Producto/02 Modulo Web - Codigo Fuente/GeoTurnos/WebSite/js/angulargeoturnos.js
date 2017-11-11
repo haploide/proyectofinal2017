@@ -40,7 +40,7 @@ app.controller("AdministacionController", function ($scope, $http) {
 app.controller("EstadisticaAdministacionController", function ($scope, $http) {
 
     $scope.contenidoATraer = '';
-    $('#chartContainer').jqxChart(settings);
+   
 
 
     $scope.submenu = function (evt, nombreMenu) {
@@ -77,7 +77,7 @@ app.controller("EstadisticaAdministacionController", function ($scope, $http) {
                     { name: 'nombre' },
                     { name: 'cantidad' }
                 ],
-                url: 'http://localhost:6901/api/vistacantidadempresasxrubro'
+                url: 'http://localhost:6901/api/VistaCantidadEmpresasXRubro'
             };
             var dataAdapter = new $.jqx.dataAdapter(source, { async: false, autoBind: true, loadError: function (xhr, status, error) { alert('Error loading "' + source.url + '" : ' + error); } });
             // prepare jqxChart settings
@@ -118,7 +118,7 @@ app.controller("EstadisticaAdministacionController", function ($scope, $http) {
                     ]
             };
             // setup the chart
-
+    $('#chartContainer').jqxChart(settings);
 
 })
 
