@@ -118,7 +118,7 @@ namespace WebApi.Controllers
                     return BadRequest();
                 }
 
-                var turnos = _db.Turno.Where(t => t.fecha.Equals(fecha));
+                var turnos = _db.Turno.Where(t => t.fecha.Equals(fecha)).ToList();
 
                 if (turnos == null)
                 {

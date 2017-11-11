@@ -2331,7 +2331,7 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
 
         switch (event.args.cell.cellIndex) {
             case 0:
-                if (!esFechaVieja()) {
+                if (!esFechaVieja(event.args.date)) {
                     mostrarDialogo(
                                     "Atención",
                                     "Está seguro que desea <b>Cancelar</b> todos los turnos para el dia:",
@@ -2346,7 +2346,7 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
                 }
                 break;
             case 1:
-                if (!esFechaVieja()) {
+                if (!esFechaVieja(event.args.date)) {
                     mostrarDialogo(
                                     "Atención",
                                     "Está seguro que desea <b>Cancelar</b> el turno:",
@@ -2361,7 +2361,7 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
                 }
                 break;
             case 2:
-                if (esFechaVieja()) {
+                if (esFechaVieja(event.args.date)) {
                     mostrarDialogo(
                                    "Registro de asistencia",
                                    "Confirma que.... <b>Asistió</b> al turno",
