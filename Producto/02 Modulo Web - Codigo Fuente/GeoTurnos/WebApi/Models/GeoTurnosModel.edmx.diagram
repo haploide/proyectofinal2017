@@ -61,6 +61,7 @@
         <AssociationConnector Association="GeoTurnosModel.FK_Cliente_Domicilio" />
         <AssociationConnector Association="GeoTurnosModel.FK_Empresa_Domicilio" />
         <AssociationConnector Association="GeoTurnosModel.FK_Turno_Estado" />
+        <EntityTypeShape EntityType="GeoTurnosModel.VistaTurnosAgendaCliente" Width="1.5" PointX="15.375" PointY="15.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

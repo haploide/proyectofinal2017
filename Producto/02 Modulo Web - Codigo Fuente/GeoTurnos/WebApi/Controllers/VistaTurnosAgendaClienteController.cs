@@ -18,12 +18,12 @@ namespace WebApi.Controllers
         {
             try
             {
-                if (_db.VistaTurnosAgendaVigenteParaClientes == null || !_db.VistaTurnosAgendaVigenteParaClientes.Any())
+                if (_db.VistaTurnosAgendaCliente == null || !_db.VistaTurnosAgendaCliente.Any())
                 {
                     return NotFound();
                 }
                 
-                var resultado = _db.VistaTurnosAgendaVigenteParaClientes.Where(p => p.idCliente == id);
+                var resultado = _db.VistaTurnosAgendaCliente.Where(p => p.idCliente == id);
                 if(resultado == null)
                 {
                     return NotFound();

@@ -357,6 +357,37 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaParametrosAgendaEmpresa' does n
           <Property Name="id_dia" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaCliente' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VistaTurnosAgendaCliente">
+          <Key>
+            <PropertyRef Name="idAgenda" />
+            <PropertyRef Name="mes" />
+            <PropertyRef Name="año" />
+            <PropertyRef Name="idEmpresa" />
+            <PropertyRef Name="idEstado" />
+            <PropertyRef Name="idTurno" />
+            <PropertyRef Name="fecha" />
+            <PropertyRef Name="horaDesde" />
+            <PropertyRef Name="horaHasta" />
+            <PropertyRef Name="idCliente" />
+            <PropertyRef Name="estado" />
+          </Key>
+          <Property Name="idAgenda" Type="int" Nullable="false" />
+          <Property Name="mes" Type="int" Nullable="false" />
+          <Property Name="año" Type="int" Nullable="false" />
+          <Property Name="idEmpresa" Type="int" Nullable="false" />
+          <Property Name="idEstado" Type="int" Nullable="false" />
+          <Property Name="razonSocial" Type="nvarchar" MaxLength="50" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="50" />
+          <Property Name="idTurno" Type="int" Nullable="false" />
+          <Property Name="fecha" Type="datetime" Nullable="false" />
+          <Property Name="horaDesde" Type="time" Precision="7" Nullable="false" />
+          <Property Name="horaHasta" Type="time" Precision="7" Nullable="false" />
+          <Property Name="idCliente" Type="int" Nullable="false" />
+          <Property Name="idEstadoTurno" Type="int" />
+          <Property Name="estado" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaClientes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VistaTurnosAgendaVigenteParaClientes">
           <Key>
@@ -855,6 +886,24 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
     [VistaParametrosAgendaEmpresa].[id_dia] AS [id_dia]
     FROM [dbo].[VistaParametrosAgendaEmpresa] AS [VistaParametrosAgendaEmpresa]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="VistaTurnosAgendaCliente" EntityType="Self.VistaTurnosAgendaCliente" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VistaTurnosAgendaCliente].[idAgenda] AS [idAgenda], 
+    [VistaTurnosAgendaCliente].[mes] AS [mes], 
+    [VistaTurnosAgendaCliente].[año] AS [año], 
+    [VistaTurnosAgendaCliente].[idEmpresa] AS [idEmpresa], 
+    [VistaTurnosAgendaCliente].[idEstado] AS [idEstado], 
+    [VistaTurnosAgendaCliente].[razonSocial] AS [razonSocial], 
+    [VistaTurnosAgendaCliente].[nombre] AS [nombre], 
+    [VistaTurnosAgendaCliente].[idTurno] AS [idTurno], 
+    [VistaTurnosAgendaCliente].[fecha] AS [fecha], 
+    [VistaTurnosAgendaCliente].[horaDesde] AS [horaDesde], 
+    [VistaTurnosAgendaCliente].[horaHasta] AS [horaHasta], 
+    [VistaTurnosAgendaCliente].[idCliente] AS [idCliente], 
+    [VistaTurnosAgendaCliente].[idEstadoTurno] AS [idEstadoTurno], 
+    [VistaTurnosAgendaCliente].[estado] AS [estado]
+    FROM [dbo].[VistaTurnosAgendaCliente] AS [VistaTurnosAgendaCliente]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="VistaTurnosAgendaVigenteParaClientes" EntityType="Self.VistaTurnosAgendaVigenteParaClientes" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [VistaTurnosAgendaVigenteParaClientes].[idAgenda] AS [idAgenda], 
@@ -1291,6 +1340,7 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
             <End Role="Estado" EntitySet="Estado" />
             <End Role="Turno" EntitySet="Turno" />
           </AssociationSet>
+          <EntitySet Name="VistaTurnosAgendaCliente" EntityType="GeoTurnosModel.VistaTurnosAgendaCliente" />
           </EntityContainer>
         <EntityType Name="Usuario">
           <Key>
@@ -1873,6 +1923,35 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="VistaTurnosAgendaCliente">
+          <Key>
+            <PropertyRef Name="idAgenda" />
+            <PropertyRef Name="mes" />
+            <PropertyRef Name="año" />
+            <PropertyRef Name="idEmpresa" />
+            <PropertyRef Name="idEstado" />
+            <PropertyRef Name="idTurno" />
+            <PropertyRef Name="fecha" />
+            <PropertyRef Name="horaDesde" />
+            <PropertyRef Name="horaHasta" />
+            <PropertyRef Name="idCliente" />
+            <PropertyRef Name="estado" />
+          </Key>
+          <Property Name="idAgenda" Type="Int32" Nullable="false" />
+          <Property Name="mes" Type="Int32" Nullable="false" />
+          <Property Name="año" Type="Int32" Nullable="false" />
+          <Property Name="idEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="idEstado" Type="Int32" Nullable="false" />
+          <Property Name="razonSocial" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idTurno" Type="Int32" Nullable="false" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="horaDesde" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="horaHasta" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="idCliente" Type="Int32" Nullable="false" />
+          <Property Name="idEstadoTurno" Type="Int32" />
+          <Property Name="estado" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2238,6 +2317,26 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
                 <ScalarProperty Name="altura" ColumnName="altura" />
                 <ScalarProperty Name="calle" ColumnName="calle" />
                 <ScalarProperty Name="idDomicilio" ColumnName="idDomicilio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VistaTurnosAgendaCliente">
+            <EntityTypeMapping TypeName="GeoTurnosModel.VistaTurnosAgendaCliente">
+              <MappingFragment StoreEntitySet="VistaTurnosAgendaCliente">
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="idEstadoTurno" ColumnName="idEstadoTurno" />
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="horaHasta" ColumnName="horaHasta" />
+                <ScalarProperty Name="horaDesde" ColumnName="horaDesde" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="idTurno" ColumnName="idTurno" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="razonSocial" ColumnName="razonSocial" />
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+                <ScalarProperty Name="idEmpresa" ColumnName="idEmpresa" />
+                <ScalarProperty Name="año" ColumnName="año" />
+                <ScalarProperty Name="mes" ColumnName="mes" />
+                <ScalarProperty Name="idAgenda" ColumnName="idAgenda" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

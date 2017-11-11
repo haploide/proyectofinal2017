@@ -250,6 +250,9 @@
     <Compile Include="Models\VistaParametrosAgendaEmpresa.cs">
       <DependentUpon>GeoTurnosModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\VistaTurnosAgendaCliente.cs">
+      <DependentUpon>GeoTurnosModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\VistaTurnosAgendaVigenteParaClientes.cs">
       <DependentUpon>GeoTurnosModel.tt</DependentUpon>
     </Compile>
