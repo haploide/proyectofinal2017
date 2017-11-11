@@ -474,7 +474,7 @@
     <Content Include="Views\Manage\_PartialGestionarMisTurnos.cshtml" />
     <Content Include="Views\Manage\_PartialVisualizarAgenda.cshtml" />
     <Content Include="Views\Manage\_PartialEstadisticas.cshtml" />
-    <Content Include="Views\Manage\_PartialEstadisticaAdminEmpresasRegFiltros.cshtml" />
+    <Content Include="Views\Manage\_PartialEstadisticaCantidadEmpresasXRubro.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

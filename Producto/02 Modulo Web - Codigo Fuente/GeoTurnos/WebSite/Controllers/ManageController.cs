@@ -116,9 +116,9 @@ namespace WebSite.Controllers
         }
         //
         // GET: EstadisticaAdminEmpresasRegFiltros
-        public PartialViewResult EstadisticaAdminEmpresasRegFiltros()
+        public PartialViewResult EstadisticaCantidadEmpresasXRubro()
         {
-            return PartialView("_PartialEstadisticaAdminEmpresasRegFiltros");
+            return PartialView("_PartialEstadisticaCantidadEmpresasXRubro");
         }
         //GET: PrincipalClientePrestatario
         public PartialViewResult PrincipalClientePrestatario()

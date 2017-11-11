@@ -211,6 +211,16 @@
           <Property Name="idEstado" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'GeoTurnos.dbo.VistaCantidadEmpresasXRubro' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VistaCantidadEmpresasXRubro">
+          <Key>
+            <PropertyRef Name="nombre" />
+          </Key>
+          <Property Name="nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="idRubro" Type="int" />
+          <Property Name="cantidad" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'GeoTurnos.dbo.VistaComentariosACliente' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VistaComentariosACliente">
           <Key>
@@ -797,6 +807,13 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
           <EntitySet Name="TipoDocumento" EntityType="Self.TipoDocumento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Turno" EntityType="Self.Turno" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VistaCantidadEmpresasXRubro" EntityType="Self.VistaCantidadEmpresasXRubro" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VistaCantidadEmpresasXRubro].[nombre] AS [nombre], 
+    [VistaCantidadEmpresasXRubro].[idRubro] AS [idRubro], 
+    [VistaCantidadEmpresasXRubro].[cantidad] AS [cantidad]
+    FROM [dbo].[VistaCantidadEmpresasXRubro] AS [VistaCantidadEmpresasXRubro]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="VistaComentariosACliente" EntityType="Self.VistaComentariosACliente" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [VistaComentariosACliente].[id_empresa] AS [id_empresa], 
@@ -1341,6 +1358,7 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
             <End Role="Turno" EntitySet="Turno" />
           </AssociationSet>
           <EntitySet Name="VistaTurnosAgendaCliente" EntityType="GeoTurnosModel.VistaTurnosAgendaCliente" />
+          <EntitySet Name="VistaCantidadEmpresasXRubro" EntityType="GeoTurnosModel.VistaCantidadEmpresasXRubro" />
           </EntityContainer>
         <EntityType Name="Usuario">
           <Key>
@@ -1952,6 +1970,14 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
           <Property Name="idEstadoTurno" Type="Int32" />
           <Property Name="estado" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="VistaCantidadEmpresasXRubro">
+          <Key>
+            <PropertyRef Name="nombre" />
+          </Key>
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idRubro" Type="Int32" />
+          <Property Name="cantidad" Type="Int32" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2337,6 +2363,15 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
                 <ScalarProperty Name="año" ColumnName="año" />
                 <ScalarProperty Name="mes" ColumnName="mes" />
                 <ScalarProperty Name="idAgenda" ColumnName="idAgenda" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VistaCantidadEmpresasXRubro">
+            <EntityTypeMapping TypeName="GeoTurnosModel.VistaCantidadEmpresasXRubro">
+              <MappingFragment StoreEntitySet="VistaCantidadEmpresasXRubro">
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="idRubro" ColumnName="idRubro" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

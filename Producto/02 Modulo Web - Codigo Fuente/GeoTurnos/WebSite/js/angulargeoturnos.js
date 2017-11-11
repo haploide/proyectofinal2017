@@ -40,6 +40,7 @@ app.controller("AdministacionController", function ($scope, $http) {
 app.controller("EstadisticaAdministacionController", function ($scope, $http) {
 
     $scope.contenidoATraer = '';
+    $('#chartContainer').jqxChart(settings);
 
 
     $scope.submenu = function (evt, nombreMenu) {
@@ -63,11 +64,60 @@ app.controller("EstadisticaAdministacionController", function ($scope, $http) {
         evt.currentTarget.className += " active";
         switch (nombreMenu) {
             case 'estadistcia1':
-                $scope.contenidoATraer = 'EstadisticaAdminEmpresasRegFiltros';
+                $scope.contenidoATraer = 'EstadisticaCantidadEmpresasXRubro';
                 break;
 
         }
     }
+
+     var source =
+            {
+                datatype: "json",
+                datafields: [
+                    { name: 'nombre' },
+                    { name: 'cantidad' }
+                ],
+                url: 'http://localhost:6901/api/vistacantidadempresasxrubro'
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source, { async: false, autoBind: true, loadError: function (xhr, status, error) { alert('Error loading "' + source.url + '" : ' + error); } });
+            // prepare jqxChart settings
+
+    var settings = {
+                title: "Mobile browsers share",
+                description: "(source: wikipedia.org)",
+                enableAnimations: true,
+                showLegend: true,
+                showBorderLine: true,
+                legendLayout: { left: 700, top: 160, width: 300, height: 200, flow: 'vertical' },
+                padding: { left: 5, top: 5, right: 5, bottom: 5 },
+                titlePadding: { left: 0, top: 0, right: 0, bottom: 10 },
+                source: dataAdapter,
+                colorScheme: 'scheme03',
+                seriesGroups:
+                    [
+                        {
+                            type: 'pie',
+                            showLabels: true,
+                            series:
+                                [
+                                    { 
+                                        dataField: 'Share',
+                                        displayText: 'Browser',
+                                        labelRadius: 170,
+                                        initialAngle: 15,
+                                        radius: 145,
+                                        centerOffset: 0,
+                                        formatFunction: function (value) {
+                                            if (isNaN(value))
+                                                return value;
+                                            return parseFloat(value) + '%';
+                                        },
+                                    }
+                                ]
+                        }
+                    ]
+            };
+            // setup the chart
 
 
 })
