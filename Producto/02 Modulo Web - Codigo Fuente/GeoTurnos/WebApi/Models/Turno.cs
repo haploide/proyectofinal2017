@@ -20,8 +20,10 @@ namespace WebApi.Models
         public System.TimeSpan horaDesde { get; set; }
         public System.TimeSpan horaHasta { get; set; }
         public int idCliente { get; set; }
+        public Nullable<int> idEstado { get; set; }
     
         public virtual Agenda Agenda { get; set; }
         public virtual Cliente Cliente { get; set; }
+        public virtual Estado Estado { get; set; }
     }
 }

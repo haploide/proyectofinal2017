@@ -195,6 +195,7 @@
           <Property Name="horaDesde" Type="time" Precision="7" Nullable="false" />
           <Property Name="horaHasta" Type="time" Precision="7" Nullable="false" />
           <Property Name="idCliente" Type="int" Nullable="false" />
+          <Property Name="idEstado" Type="int" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -720,6 +721,18 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Turno_Estado">
+          <End Role="Estado" Type="Self.Estado" Multiplicity="0..1" />
+          <End Role="Turno" Type="Self.Turno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="idEstado" />
+            </Principal>
+            <Dependent Role="Turno">
+              <PropertyRef Name="idEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Usuario_Estado">
           <End Role="Estado" Type="Self.Estado" Multiplicity="0..1" />
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
@@ -977,6 +990,10 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
           </AssociationSet>
           <AssociationSet Name="FK_Turno_Cliente" Association="Self.FK_Turno_Cliente">
             <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Turno" EntitySet="Turno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Turno_Estado" Association="Self.FK_Turno_Estado">
+            <End Role="Estado" EntitySet="Estado" />
             <End Role="Turno" EntitySet="Turno" />
           </AssociationSet>
           <AssociationSet Name="FK_Usuario_Estado" Association="Self.FK_Usuario_Estado">
@@ -1270,6 +1287,10 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
             <End Role="Domicilio" EntitySet="Domicilio" />
             <End Role="Empresa" EntitySet="Empresa" />
           </AssociationSet>
+          <AssociationSet Name="FK_Turno_Estado" Association="GeoTurnosModel.FK_Turno_Estado">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Turno" EntitySet="Turno" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Usuario">
           <Key>
@@ -1521,6 +1542,8 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
           <Property Name="idCliente" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Agenda" Relationship="GeoTurnosModel.FK_Turno_Agenda" FromRole="Turno" ToRole="Agenda" />
           <NavigationProperty Name="Cliente" Relationship="GeoTurnosModel.FK_Turno_Cliente" FromRole="Turno" ToRole="Cliente" />
+          <Property Name="idEstado" Type="Int32" />
+          <NavigationProperty Name="Estado" Relationship="GeoTurnosModel.FK_Turno_Estado" FromRole="Turno" ToRole="Estado" />
         </EntityType>
         <Association Name="FK_Agenda_Estado">
           <End Type="GeoTurnosModel.Estado" Role="Estado" Multiplicity="1" />
@@ -1838,6 +1861,18 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Turno_Estado">
+          <End Type="GeoTurnosModel.Estado" Role="Estado" Multiplicity="0..1" />
+          <End Type="GeoTurnosModel.Turno" Role="Turno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="idEstado" />
+            </Principal>
+            <Dependent Role="Turno">
+              <PropertyRef Name="idEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2080,6 +2115,7 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
           <EntitySetMapping Name="Turno">
             <EntityTypeMapping TypeName="GeoTurnosModel.Turno">
               <MappingFragment StoreEntitySet="Turno">
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
                 <ScalarProperty Name="idCliente" ColumnName="idCliente" />
                 <ScalarProperty Name="horaHasta" ColumnName="horaHasta" />
                 <ScalarProperty Name="horaDesde" ColumnName="horaDesde" />

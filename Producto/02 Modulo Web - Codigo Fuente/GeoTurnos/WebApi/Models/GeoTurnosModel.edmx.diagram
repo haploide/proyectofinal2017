@@ -60,6 +60,7 @@
         <AssociationConnector Association="GeoTurnosModel.FK_Domicilio_Barrio" />
         <AssociationConnector Association="GeoTurnosModel.FK_Cliente_Domicilio" />
         <AssociationConnector Association="GeoTurnosModel.FK_Empresa_Domicilio" />
+        <AssociationConnector Association="GeoTurnosModel.FK_Turno_Estado" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

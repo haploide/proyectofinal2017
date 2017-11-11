@@ -1550,7 +1550,7 @@ app.controller("SchedulerController", function ($scope, $http) {
 
                                 var horaHasta = fechayhora.addMinutes(duracionTurnos).hour() + ':' + fechayhora.addMinutes(duracionTurnos).minute();
 
-                                var nuevoTurno = { idAgenda: response.data.idAgenda, fecha: anio + '-' + mes + '-' + dia, horaDesde: horaDesde, horaHasta: horaHasta, idCliente: retornarIdCliente() }
+                                var nuevoTurno = { idAgenda: response.data.idAgenda, fecha: anio + '-' + mes + '-' + dia, horaDesde: horaDesde, horaHasta: horaHasta, idCliente: retornarIdCliente(), idEstado:12 }
 
                                 $http({
                                     method: 'POST',
