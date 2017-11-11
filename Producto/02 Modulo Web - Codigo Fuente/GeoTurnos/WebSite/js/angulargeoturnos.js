@@ -1630,7 +1630,7 @@ app.controller("SchedulerController", function ($scope, $http) {
                     function (button) {
 
                     });
-                
+
             }
         }
 
@@ -2315,12 +2315,19 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
 
     $('#scheduler').on('cellClick', function (event) {//Crear nuevo turno
 
-        switch (event.args.cell.cellIndex) {
-            case 0:
+        var anio = event.args.date.year();
+        var mes = event.args.date.month();
+        var dia = event.args.date.day();
+
+        var horaDesde = Number(event.args.cell.innerText.split('-')[0].split(':')[0]);
+        var minDesde = Number(event.args.cell.innerText.split('-')[0].split(':')[1].trim());
+
+        var turnos = event.args.owner.appointments;
+
+        switch (event.args.cell.childNodes["0"].className) {
+            case 'jqx-scheduler-agenda-date':
                 if (!esFechaVieja(event.args.date)) {
-                    var anio = event.args.date.year();
-                    var mes = event.args.date.month();
-                    var dia = event.args.date.day();
+
 
 
                     mostrarDialogo(
@@ -2331,13 +2338,13 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
                                     function (button) {
                                         $http({
                                             method: 'PUT',
-                                            url: 'http://localhost:6901/api/Turno?fecha='+anio+'-'+mes+'-'+dia,
+                                            url: 'http://localhost:6901/api/Turno?fecha=' + anio + '-' + mes + '-' + dia,
                                             headers: {
                                                 'Accept': "application/json",
 
                                             }
                                         }).then(function (response) {
-                                            
+
                                         }, function (response) {
 
                                             httpNegativo(response.status);
@@ -2351,22 +2358,39 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
                                     });
                 }
                 break;
-            case 1:
+            case 'jqx-scheduler-agenda-time':
                 if (!esFechaVieja(event.args.date)) {
+
+                    var obtenerTurno
                     mostrarDialogo(
                                     "Atención",
-                                    "Está seguro que desea <b>Cancelar el Turno</b> de <b>" +event.args.cell.innerText+'</b>?',
+                                    "Está seguro que desea <b>Cancelar el Turno</b> de <b>" + event.args.cell.innerText + '</b>?',
                                     "Si",
                                     "No",
                                     function (button) {
+                                        $http({
+                                            method: 'PUT',
+                                            url: 'http://localhost:6901/api/Turno/',
+                                            headers: {
+                                                'Accept': "application/json",
 
+                                            }
+                                        }).then(function (response) {
+
+                                        }, function (response) {
+
+                                            httpNegativo(response.status);
+
+                                        }).then(function () {
+
+                                        });
                                     },
                                     function (button) {
 
                                     });
                 }
                 break;
-            case 2:
+            case 'jqx-scheduler-agenda-appointment jqx-scheduler-legend-label':
                 if (esFechaVieja(event.args.date)) {
                     mostrarDialogo(
                                    "Registro de asistencia",
@@ -2384,6 +2408,14 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
 
         }
 
+        var obtenerIdTurno = function () {
+            for (var i = 0; i < turnos.length; i++) {
+
+                if (turnos[i]) {
+
+                }
+            }
+        };
 
     });
 

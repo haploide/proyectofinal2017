@@ -397,11 +397,13 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\jqxbuttons.js" />
     <Content Include="Scripts\jqxcalendar.js" />
+    <Content Include="Scripts\jqxchart.core.js" />
     <Content Include="Scripts\jqxcheckbox.js" />
     <Content Include="Scripts\jqxcore.js" />
     <Content Include="Scripts\jqxdata.js" />
     <Content Include="Scripts\jqxdate.js" />
     <Content Include="Scripts\jqxdatetimeinput.js" />
+    <Content Include="Scripts\jqxdraw.js" />
     <Content Include="Scripts\jqxdropdownlist.js" />
     <Content Include="Scripts\jqxinput.js" />
     <Content Include="Scripts\jqxlistbox.js" />
