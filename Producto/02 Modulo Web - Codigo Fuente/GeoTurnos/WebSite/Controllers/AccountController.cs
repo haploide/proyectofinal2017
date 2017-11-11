@@ -170,7 +170,7 @@ namespace WebSite.Controllers
 
                 Domicilio domicilio = new Domicilio() { altura = model.altura, calle = model.calle, piso = (model.piso!=null?int.Parse(model.piso):0), departamento = model.departamento, torre = model.torre, idBarrio = model.idBarrio };
                 Usuario usuario = new Usuario() { usuario1 = model.usuario1, contraseña = System.Web.Helpers.Crypto.SHA256(model.contraseña), preguntaSeguridad1 = model.preguntaSeguridad1, respuestaSeguridad1 = model.respuestaSeguridad1, preguntaSeguridad2 = model.preguntaSeguridad2, respuestaSeguridad2 = model.respuestaSeguridad2, idEstado = (int)EstadoUsuario.Activo };
-                Empresa empresa = new Empresa() { cuit = model.cuit, razonSocial = model.razonSocial, nombreFantasia = model.nombreFantasia, inicioActividades = model.inicioActividades, telefono = model.telefono, email = model.email, idEstado = (int)EstadoEmpresa.PendienteDeActivacion, idRubro = model.idRubro, logoEmpresa = model.logoEmpresa };
+                Empresa empresa = new Empresa() { cuit = model.cuit, razonSocial = model.razonSocial, nombreFantasia = model.nombreFantasia, inicioActividades = model.inicioActividades, telefono = model.telefono, email = model.email, idEstado = (int)EstadoEmpresa.PendienteDeActivacion, idRubro = model.idRubro, logoEmpresa = model.logoEmpresa, fechaRegistroEmpresa=DateTime.Now };
 
                 empresa.Domicilio = domicilio;
                 empresa.Usuario = usuario;
