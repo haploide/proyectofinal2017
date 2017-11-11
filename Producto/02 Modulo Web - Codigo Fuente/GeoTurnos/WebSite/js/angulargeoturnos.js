@@ -1618,12 +1618,21 @@ app.controller("SchedulerController", function ($scope, $http) {
 
             if (turno.tooltip.split('+')[0] == retornarIdCliente()) {//Como no me deja crear nuevos campos de datos utilizo los tooltips para guardar el id cliente
 
+                $.confirm({
+                    title: "Atención",
+                    text: "Esta seguro que desea eliminar el turno?",
+                    confirmButton: "Si",
+                    cancelButton: "No",
+                    confirm: function (button) {
+                        $('#scheduler').jqxScheduler('deleteAppointment', turno.id);
 
-                if (confirm("Esta seguro que desea eliminar el turno")) {
-                    $('#scheduler').jqxScheduler('deleteAppointment', turno.id);
+                        eliminarTurno(turno);
+                    },
+                    cancel: function (button) {
+                        
+                    }
+                });
 
-                    eliminarTurno(turno);
-                }
             }
         }
 
