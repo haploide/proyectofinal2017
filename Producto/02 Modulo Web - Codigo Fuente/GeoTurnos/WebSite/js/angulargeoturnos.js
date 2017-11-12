@@ -2319,15 +2319,12 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
         var mes = event.args.date.month();
         var dia = event.args.date.day();
 
-        var horaDesde = Number(event.args.cell.innerText.split('-')[0].split(':')[0]);
-        var minDesde = Number(event.args.cell.innerText.split('-')[0].split(':')[1].trim());
 
         var turnos = event.args.owner.appointments;
 
         switch (event.args.cell.childNodes["0"].className) {
             case 'jqx-scheduler-agenda-date':
                 if (!esFechaVieja(event.args.date)) {
-
 
 
                     mostrarDialogo(
@@ -2359,9 +2356,28 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
                 }
                 break;
             case 'jqx-scheduler-agenda-time':
+
+                var horaDesde = Number(event.args.cell.innerText.split('-')[0].split(':')[0]);
+                var minDesde = Number(event.args.cell.innerText.split('-')[0].split(':')[1].trim());
+
                 if (!esFechaVieja(event.args.date)) {
 
-                    var obtenerTurno
+                    var obtenerIdTurno = function () {
+                        for (var i = 0; i < turnos.length; i++) {
+
+                            var anioTurnoRevisado = turnos[i].from.year();
+                            var mesTurnoRevisado = turnos[i].from.month();
+                            var diaTurnoRevisado = turnos[i].from.day();
+
+                            var horaDesdeTurnoRevisado = turnos[i].from.hour();
+                            var minDesdeTurnoRevisado = turnos[i].from.minute();
+
+                            if (anioTurnoRevisado == anio && mesTurnoRevisado == mes && diaTurnoRevisado == dia && horaDesdeTurnoRevisado == horaDesde && minDesdeTurnoRevisado == minDesde) {
+                                return turnos[i].tooltip.split('+')[1];
+                            }
+                        }
+
+                    };;
                     mostrarDialogo(
                                     "Atención",
                                     "Está seguro que desea <b>Cancelar el Turno</b> de <b>" + event.args.cell.innerText + '</b>?',
@@ -2370,7 +2386,7 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
                                     function (button) {
                                         $http({
                                             method: 'PUT',
-                                            url: 'http://localhost:6901/api/Turno/',
+                                            url: 'http://localhost:6901/api/Turno/' + obtenerIdTurno(),
                                             headers: {
                                                 'Accept': "application/json",
 
@@ -2391,31 +2407,64 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
                 }
                 break;
             case 'jqx-scheduler-agenda-appointment jqx-scheduler-legend-label':
+
+
+
                 if (esFechaVieja(event.args.date)) {
+
+                    var obtenerIdTurno = function () {
+
+                        return event.args.owner.appointmentsByKey[event.args.cell.childNodes["0"].dataset.key].tooltip.split('+')[1];
+
+
+                    };
                     mostrarDialogo(
                                    "Registro de asistencia",
-                                   "Confirma que.... <b>Asistió</b> al turno",
+                                   "Confirma que <b>" + event.args.cell.innerText + " Asistió</b> al turno?",
                                    "Asistió",
                                    "Ausente",
                                    function (button) {
+                                       $http({
+                                           method: 'PUT',
+                                           url: 'http://localhost:6901/api/Turno/' + obtenerIdTurno() + '?asistio=true',
+                                           headers: {
+                                               'Accept': "application/json",
 
+                                           }
+                                       }).then(function (response) {
+
+                                       }, function (response) {
+
+                                           httpNegativo(response.status);
+
+                                       }).then(function () {
+
+                                       });
                                    },
                                    function (button) {
+                                       $http({
+                                           method: 'PUT',
+                                           url: 'http://localhost:6901/api/Turno/' + obtenerIdTurno() + '?asistio=false',
+                                           headers: {
+                                               'Accept': "application/json",
 
+                                           }
+                                       }).then(function (response) {
+
+                                       }, function (response) {
+
+                                           httpNegativo(response.status);
+
+                                       }).then(function () {
+
+                                       });
                                    });
+
                 }
+
                 break;
 
         }
-
-        var obtenerIdTurno = function () {
-            for (var i = 0; i < turnos.length; i++) {
-
-                if (turnos[i]) {
-
-                }
-            }
-        };
 
     });
 
