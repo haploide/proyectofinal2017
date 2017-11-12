@@ -419,6 +419,7 @@
     <Content Include="Scripts\jqxscrollbar.js" />
     <Content Include="Scripts\jqxtooltip.js" />
     <Content Include="Scripts\jqxwindow.js" />
+    <Content Include="Scripts\loader.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\moment-with-locales.js" />
     <Content Include="Scripts\moment-with-locales.min.js" />

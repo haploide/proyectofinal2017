@@ -71,7 +71,37 @@ app.controller("EstadisticaAdministacionController", function ($scope, $http) {
 
 
 })
+app.controller("CantidadEmpresasPorRubroController", function ($scope, $http) {
 
+    google.charts.load("current", { packages: ["corechart"] });
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Language', 'Speakers (in millions)'],
+          ['Assamese', 13], ['Bengali', 83], ['Bodo', 1.4],
+          ['Dogri', 2.3], ['Gujarati', 46], ['Hindi', 300],
+          ['Kannada', 38], ['Kashmiri', 5.5], ['Konkani', 5],
+          ['Maithili', 20], ['Malayalam', 33], ['Manipuri', 1.5],
+          ['Marathi', 72], ['Nepali', 2.9], ['Oriya', 33],
+          ['Punjabi', 29], ['Sanskrit', 0.01], ['Santhali', 6.5],
+          ['Sindhi', 2.5], ['Tamil', 61], ['Telugu', 74], ['Urdu', 52]
+        ]);
+
+        var options = {
+            title: 'Empresas por Rubro',
+            legend: 'none',
+            pieSliceText: 'label',
+            is3D: true,
+            
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+    }
+
+
+
+})
 app.controller("MiCuentaEmpresaPrestadoraController", function ($scope) {
 
     $scope.contenidoATraer = 'PrincipalEntidadPrestadora';
@@ -1209,7 +1239,6 @@ app.controller("GestionarPlantillaAgenda", function ($scope, $http) {
     }
 
 })
-
 app.controller("GestionarMisTurnosController", function ($scope, $http) {
     $scope.VistaTurnosAgendaVigenteParaClientes = [];
     $http({
@@ -1350,7 +1379,6 @@ app.controller("GestionarMisTurnosController", function ($scope, $http) {
     }
 
 })
-
 app.controller("PerfilEmpresaController", function ($scope, $http) {
 
 
@@ -1992,7 +2020,6 @@ app.controller("ComentariosRatingController", function ($scope, $http) {
 
 
 });
-
 app.controller("ComentariosRatingClienteController", function ($scope, $http) {
 
     (function ($) {
@@ -2252,7 +2279,7 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
 
         var appointments = [];
 
-        cargarTurnos(appointments);
+        cargarTurnos();
 
         var source =
         {
@@ -2341,7 +2368,13 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
 
                                             }
                                         }).then(function (response) {
+                                            if (response.status === 200) {
 
+                                                notificarSinContenedor($("#notificaciones"), $("#mensajeNotificacion"), 200, 'info', 'Se cancelaron todos los turnos');
+                                                vaciarTurnos(event);
+                                                cargarTurnos();
+
+                                            }
                                         }, function (response) {
 
                                             httpNegativo(response.status);
@@ -2392,7 +2425,13 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
 
                                             }
                                         }).then(function (response) {
+                                            if (response.status === 200) {
 
+                                                notificarSinContenedor($("#notificaciones"), $("#mensajeNotificacion"), 200, 'info', 'Se canceló el turno');
+                                                vaciarTurnos(event);
+                                                cargarTurnos();
+
+                                            }
                                         }, function (response) {
 
                                             httpNegativo(response.status);
@@ -2432,7 +2471,13 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
 
                                            }
                                        }).then(function (response) {
+                                           if (response.status === 200) {
 
+                                               notificarSinContenedor($("#notificaciones"), $("#mensajeNotificacion"), 200, 'info', 'Se registró la asistencia');
+                                               vaciarTurnos(event);
+                                               cargarTurnos();
+
+                                           }
                                        }, function (response) {
 
                                            httpNegativo(response.status);
@@ -2450,7 +2495,13 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
 
                                            }
                                        }).then(function (response) {
+                                           if (response.status === 200) {
 
+                                               notificarSinContenedor($("#notificaciones"), $("#mensajeNotificacion"), 200, 'info', 'Se registró la ausencia');
+                                               vaciarTurnos(event);
+                                               cargarTurnos();
+
+                                           }
                                        }, function (response) {
 
                                            httpNegativo(response.status);
@@ -2473,7 +2524,7 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
     */
 
 
-    function cargarTurnos(appointments) {//Carga los turnos desde  la base de datos
+    function cargarTurnos() {//Carga los turnos desde  la base de datos
 
         $http({
             method: 'GET',
@@ -2513,7 +2564,7 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
                         subject: "<a class=\"btn-primary\" href=" + urlBase + ">" + response.data[i].nombre + " " + response.data[i].apellido + "</a>"
                     };
 
-                    appointments.push(turno);
+                    
 
                     $('#scheduler').jqxScheduler('addAppointment', turno);
                 }
@@ -2578,6 +2629,20 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
         }
 
         return false;
+
+    }
+    function vaciarTurnos(event) {
+
+        var ids = [];
+
+        for (var i = 0; i < event.owner.appointments.length; i++) {
+            ids.push(event.owner.appointments[i].id);
+        }
+        for (var i = 0; i < ids.length; i++) {
+            $('#scheduler').jqxScheduler('deleteAppointment', ids[i]);
+        }
+
+
 
     }
 
