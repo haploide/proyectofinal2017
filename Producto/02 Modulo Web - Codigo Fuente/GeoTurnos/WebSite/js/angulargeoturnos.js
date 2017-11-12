@@ -73,29 +73,28 @@ app.controller("EstadisticaAdministacionController", function ($scope, $http) {
 })
 app.controller("CantidadEmpresasPorRubroController", function ($scope, $http) {
 
+    $scope.rubros = [];
+    $scope.datos = [['Rubro', 'Cantidad']]
     $http({
         method: 'GET',
-        url: 'http://localhost:6901/api/Rubro',
+        url: 'http://localhost:6901/api/VistaCantidadEmpresasXRubro',
         headers: {
             'Accept': "application/json",
 
         }
     }).then(function (response) {
         if (response.status === 200) {
-            
+            angular.copy(response.data, $scope.rubros);            
+                
+            for (var i = 0; i < $scope.rubros.length; i++) {
+                $scope.datos.push([$scope.rubros[i].nombre, $scope.rubros[i].cantidad])
+
+            }
+
             google.charts.load("current", { packages: ["corechart"] });
             google.charts.setOnLoadCallback(drawChart);
             function drawChart() {
-                var data = google.visualization.arrayToDataTable([
-                  ['Language', 'Speakers (in millions)'],
-                  ['Assamese', 13], ['Bengali', 83], ['Bodo', 1.4],
-                  ['Dogri', 2.3], ['Gujarati', 46], ['Hindi', 300],
-                  ['Kannada', 38], ['Kashmiri', 5.5], ['Konkani', 5],
-                  ['Maithili', 20], ['Malayalam', 33], ['Manipuri', 1.5],
-                  ['Marathi', 72], ['Nepali', 2.9], ['Oriya', 33],
-                  ['Punjabi', 29], ['Sanskrit', 0.01], ['Santhali', 6.5],
-                  ['Sindhi', 2.5], ['Tamil', 61], ['Telugu', 74], ['Urdu', 52]
-                ]);
+                var data = google.visualization.arrayToDataTable($scope.datos);
 
                 var options = {
                     title: 'Empresas por Rubro',
