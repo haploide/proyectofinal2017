@@ -65,6 +65,9 @@ app.controller("EstadisticaAdministacionController", function ($scope, $http) {
             case 'estadistcia1':
                 $scope.contenidoATraer = 'EstadisticaCantidadEmpresasXRubro';
                 break;
+            case 'estadistcia2':
+                $scope.contenidoATraer = 'InformeEmpresas';
+                break;
 
         }
     }
