@@ -27,13 +27,13 @@
                     <th></th>
                 </tr>
                 <tr class="media filaActivarEmpresa" data-ng-repeat="vista in VistaTurnosAgendaVigenteParaClientes">
-                    <th ng-hide="true">{{vista.idTurno }}</th>
-                    <th>{{vista.nombre}}</th>
-                    <th>{{vista.razonSocial}}</th>
-                    <th>{{vista.fecha | date: 'dd/MM/yyyy'}}</th>
-                    <th>{{vista.horaDesde}}</th>
-                    <th>{{vista.horaHasta}}</th>
-                    <th><a href="/home/perfilempresa/{{vista.razonSocial}}" class="btn btn-primary">Ver Turno</a></th>
+                    <th ng-hide="true">{{vista.e.idTurno }}</th>
+                    <th>{{vista.e.nombre}}</th>
+                    <th>{{vista.e.razonSocial}}</th>
+                    <th>{{vista.e.fecha | date: 'dd/MM/yyyy'}}</th>
+                    <th>{{vista.e.horaDesde}}</th>
+                    <th>{{vista.e.horaHasta}}</th>
+                    <th><a href="/home/perfilempresa/{{vista.e.razonSocial}}" class="btn btn-primary">Ver Turno</a></th>
                     <th><a ng-click="eliminarTurno(vista)" class="btn btn-danger">Eliminar Turno</a></th>
                 </tr>
             </table>

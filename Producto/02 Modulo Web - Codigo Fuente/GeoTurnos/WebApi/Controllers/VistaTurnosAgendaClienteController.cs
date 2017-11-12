@@ -22,9 +22,18 @@ namespace WebApi.Controllers
                 {
                     return NotFound();
                 }
-                
-                var resultado = _db.VistaTurnosAgendaCliente.Where(p => p.idCliente == id);
-                if(resultado == null)
+                //_db.VistaTurnosAgendaCliente.Where(p => p.idCliente == id);
+                var resultado = (from e in _db.VistaTurnosAgendaCliente
+
+                                where 1 == 1
+                                
+                                && (id != null ? e.idCliente == id : true)
+                                orderby e.fecha ascending, e.horaDesde ascending, e.horaHasta ascending
+                                select new
+                                {
+                                    e,
+                                });
+                if (resultado == null)
                 {
                     return NotFound();
                 }

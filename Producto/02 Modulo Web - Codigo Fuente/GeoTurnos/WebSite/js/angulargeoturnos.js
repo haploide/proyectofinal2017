@@ -1271,7 +1271,6 @@ app.controller("GestionarMisTurnosController", function ($scope, $http) {
         url: 'http://localhost:6901/api/VistaTurnosAgendaCliente/' + retornarid(),
         headers: {
             'Accept': "application/json",
-
         }
     }).then(function (response) {
         if (response.status === 200) {
@@ -1295,24 +1294,24 @@ app.controller("GestionarMisTurnosController", function ($scope, $http) {
             "Si",
             "No",
             function (button) {
-                eliminarTurno(vista.idTurno);
+                eliminarTurno(vista);
             },
             function (button) {
 
             });
     }
 
-    function eliminarTurno(id) {
+    function eliminarTurno(vista) {
         $http({
             method: 'DELETE',
-            url: 'http://localhost:6901/api/Turno/' + id,
+            url: 'http://localhost:6901/api/Turno/' + vista.e.idTurno,
             headers: {
                 'Accept': "application/json",
-
             }
         }).then(function (response) {
             if (response.status == 200) {
                 notificarSinContenedor($("#notificaciones"), $("#mensajeNotificacion"), 200, 'info', 'Turno Eliminado');
+                $scope.VistaTurnosAgendaVigenteParaClientes.splice($scope.VistaTurnosAgendaVigenteParaClientes.indexOf(vista, [0]), 1);
             }
         }, function (response) {
 
