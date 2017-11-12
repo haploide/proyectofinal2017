@@ -15,7 +15,7 @@ namespace WebApi.Models
     public partial class VistaCantidadEmpresasXRubro
     {
         public string nombre { get; set; }
-        public Nullable<int> idRubro { get; set; }
+        public int idRubro { get; set; }
         public Nullable<int> cantidad { get; set; }
     }
 }

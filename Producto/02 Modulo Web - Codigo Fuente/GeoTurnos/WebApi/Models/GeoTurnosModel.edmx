@@ -215,10 +215,11 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaCantidadEmpresasXRubro' does no
         <EntityType Name="VistaCantidadEmpresasXRubro">
           <Key>
             <PropertyRef Name="nombre" />
+            
           </Key>
           <Property Name="nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="idRubro" Type="int" />
           <Property Name="cantidad" Type="int" />
+          <Property Name="idRubro" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'GeoTurnos.dbo.VistaComentariosACliente' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -810,8 +811,8 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
           <EntitySet Name="VistaCantidadEmpresasXRubro" EntityType="Self.VistaCantidadEmpresasXRubro" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [VistaCantidadEmpresasXRubro].[nombre] AS [nombre], 
-    [VistaCantidadEmpresasXRubro].[idRubro] AS [idRubro], 
-    [VistaCantidadEmpresasXRubro].[cantidad] AS [cantidad]
+    [VistaCantidadEmpresasXRubro].[cantidad] AS [cantidad], 
+    [VistaCantidadEmpresasXRubro].[idRubro] AS [idRubro]
     FROM [dbo].[VistaCantidadEmpresasXRubro] AS [VistaCantidadEmpresasXRubro]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VistaComentariosACliente" EntityType="Self.VistaComentariosACliente" store:Type="Views" store:Schema="dbo">
@@ -1975,7 +1976,7 @@ warning 6002: The table/view 'GeoTurnos.dbo.VistaTurnosAgendaVigenteParaEmpresa'
             <PropertyRef Name="nombre" />
           </Key>
           <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="idRubro" Type="Int32" />
+          <Property Name="idRubro" Type="Int32" Nullable="false" />
           <Property Name="cantidad" Type="Int32" />
         </EntityType>
         </Schema>
