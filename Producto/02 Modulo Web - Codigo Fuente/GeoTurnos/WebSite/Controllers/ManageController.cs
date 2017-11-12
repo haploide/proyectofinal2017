@@ -120,6 +120,12 @@ namespace WebSite.Controllers
         {
             return PartialView("_PartialEstadisticaCantidadEmpresasXRubro");
         }
+        //
+        // GET: InformeEmpresas
+        public PartialViewResult InformeEmpresas()
+        {
+            return PartialView("_PartialInformeEmpresas");
+        }
         //GET: PrincipalClientePrestatario
         public PartialViewResult PrincipalClientePrestatario()
         {
