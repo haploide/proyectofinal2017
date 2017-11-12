@@ -1283,124 +1283,45 @@ app.controller("GestionarMisTurnosController", function ($scope, $http) {
 
     });
 
-    $scope.guardarRubro = function () {
-        if (esNuevo == true) {
-            if (confirm("Desea crear el Rubro: " + $scope.nombreRubro)) {
-                var nuevoRubro = {};
-                nuevoRubro.nombre = $scope.nombreRubro;
-                $http({
-                    method: 'POST',
-                    url: 'http://localhost:6901/api/Rubro',
-                    data: nuevoRubro,
-                    headers: {
-                        'Accept': "application/json",
+    
 
-                    }
-                }).then(function (response) {
-                    if (response.status == 201) {
-                        $scope.rubro.push(response.data);
-                        $scope.nuevoRubro
-                    }
-                }, function (response) {
-
-                    httpNegativo(response.status);
-
-                }).then(function () {
-
-                });
-
-            }
-            else {
-
-            }
-        }
-        else {
-            if (confirm("Desea Modificar el Rubro: " + rubroModificar + " por " + $scope.nombreRubro)) {
-                var rubroModificado = {};
-                var rubroAModificar = {};
-                rubroAModificar.nombre = rubroModificar;
-                rubroAModificar.idRubro = idRubroModificar;
-                rubroModificado.nombre = $scope.nombreRubro;
-                rubroModificado.idRubro = idRubroModificar;
-                $http({
-                    method: 'PUT',
-                    url: 'http://localhost:6901/api/Rubro/' + rubroModificado.idRubro,
-                    data: rubroModificado,
-                    headers: {
-                        'Accept': "application/json",
-
-                    }
-                }).then(function (response) {
-                    if (response.status == 200) {
-                        $scope.rubro.splice($scope.rubro.indexOf(rubroAModificar, [0]), 1, response.data);
-                        $scope.nuevoRubro();
-                    }
-                }, function (response) {
-
-                    httpNegativo(response.status);
-
-                }).then(function () {
-
-                });
-
-            }
-            else {
-
-            }
-        }
-
-
-
-    }
-
-    $scope.eliminarRubro = function (rub) {
-        if (confirm("Esta seguro que desea eliminar el rubro: " + rub.nombre)) {
-            var id = rub.idRubro;
-            $http({
-                method: 'DELETE',
-                url: 'http://localhost:6901/api/Rubro/' + id,
-                headers: {
-                    'Accept': "application/json",
-
-                }
-            }).then(function (response) {
-                if (response.status == 200) {
-                    $scope.rubro.splice($scope.rubro.indexOf(rub, [0]), 1);
-                    $scope.nuevoRubro();
-                }
-            }, function (response) {
-
-                httpNegativo(response.status);
-
-            }).then(function () {
+    $scope.eliminarTurno = function (vista) {
+        mostrarDialogo(
+            "Atención",
+            "Esta seguro que desea eliminar el turno?",
+            "Si",
+            "No",
+            function (button) {
+                eliminarTurno(vista.idTurno);
+            },
+            function (button) {
 
             });
-        }
-        else {
+    }
 
-        }
+    function eliminarTurno(id) {
+        $http({
+            method: 'DELETE',
+            url: 'http://localhost:6901/api/Turno/' + id,
+            headers: {
+                'Accept': "application/json",
+
+            }
+        }).then(function (response) {
+            if (response.status == 200) {
+                notificarSinContenedor($("#notificaciones"), $("#mensajeNotificacion"), 200, 'info', 'Turno Eliminado');
+            }
+        }, function (response) {
+
+            httpNegativoSinContenedor(response.status);
+
+        }).then(function () {
+
+        });
 
     }
 
-    $scope.modificarRubro = function (rub) {
-        var l1 = document.getElementById("GestionarRubro");
-        l1.innerText = "Modificar Rubro";
-        var l1 = document.getElementById("rubro");
-        l1.value = rub.nombre;
-        rubroModificar = rub.nombre;
-        idRubroModificar = rub.idRubro;
-        esNuevo = false;
-
-    }
-    $scope.nuevoRubro = function () {
-        var l1 = document.getElementById("GestionarRubro");
-        l1.innerText = "Nuevo Rubro";
-        var l1 = document.getElementById("rubro");
-        l1.value = "";
-        esNuevo = true;
-    }
-
-})
+});
 app.controller("PerfilEmpresaController", function ($scope, $http) {
 
 
