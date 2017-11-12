@@ -73,31 +73,54 @@ app.controller("EstadisticaAdministacionController", function ($scope, $http) {
 })
 app.controller("CantidadEmpresasPorRubroController", function ($scope, $http) {
 
-    google.charts.load("current", { packages: ["corechart"] });
-    google.charts.setOnLoadCallback(drawChart);
-    function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Language', 'Speakers (in millions)'],
-          ['Assamese', 13], ['Bengali', 83], ['Bodo', 1.4],
-          ['Dogri', 2.3], ['Gujarati', 46], ['Hindi', 300],
-          ['Kannada', 38], ['Kashmiri', 5.5], ['Konkani', 5],
-          ['Maithili', 20], ['Malayalam', 33], ['Manipuri', 1.5],
-          ['Marathi', 72], ['Nepali', 2.9], ['Oriya', 33],
-          ['Punjabi', 29], ['Sanskrit', 0.01], ['Santhali', 6.5],
-          ['Sindhi', 2.5], ['Tamil', 61], ['Telugu', 74], ['Urdu', 52]
-        ]);
+    $http({
+        method: 'GET',
+        url: 'http://localhost:6901/api/Rubro',
+        headers: {
+            'Accept': "application/json",
 
-        var options = {
-            title: 'Empresas por Rubro',
-            legend: 'none',
-            pieSliceText: 'label',
-            is3D: true,
+        }
+    }).then(function (response) {
+        if (response.status === 200) {
             
-        };
+            google.charts.load("current", { packages: ["corechart"] });
+            google.charts.setOnLoadCallback(drawChart);
+            function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                  ['Language', 'Speakers (in millions)'],
+                  ['Assamese', 13], ['Bengali', 83], ['Bodo', 1.4],
+                  ['Dogri', 2.3], ['Gujarati', 46], ['Hindi', 300],
+                  ['Kannada', 38], ['Kashmiri', 5.5], ['Konkani', 5],
+                  ['Maithili', 20], ['Malayalam', 33], ['Manipuri', 1.5],
+                  ['Marathi', 72], ['Nepali', 2.9], ['Oriya', 33],
+                  ['Punjabi', 29], ['Sanskrit', 0.01], ['Santhali', 6.5],
+                  ['Sindhi', 2.5], ['Tamil', 61], ['Telugu', 74], ['Urdu', 52]
+                ]);
 
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-        chart.draw(data, options);
-    }
+                var options = {
+                    title: 'Empresas por Rubro',
+                    legend: 'none',
+                    pieSliceText: 'label',
+                    is3D: true,
+
+                };
+
+                var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                chart.draw(data, options);
+            }
+
+        }
+
+    }, function (response) {
+
+        httpNegativo(response.status);
+
+    }).then(function () {
+
+    });
+
+
+
 
 
 
@@ -1419,8 +1442,10 @@ app.controller("SchedulerController", function ($scope, $http) {
         if (response.status === 200) {
             angular.copy(response.data, $scope.parametros);
 
-            procesarParametros();
-            configurar();
+            if ($scope.parametros.length > 0) {
+                procesarParametros();
+                configurar();
+            }
 
         }
 
