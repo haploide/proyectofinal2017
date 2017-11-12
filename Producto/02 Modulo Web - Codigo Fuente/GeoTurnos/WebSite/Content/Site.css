@@ -509,3 +509,14 @@ div.tab button.active {
 {
      padding-left: 0px;
 }
+#columnaPerfilCliente
+ {
+    position: fixed;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+}
+.scrollit
+{
+        float: right !important;
+}
