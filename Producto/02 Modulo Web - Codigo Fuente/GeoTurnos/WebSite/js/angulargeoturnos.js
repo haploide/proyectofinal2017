@@ -74,6 +74,123 @@ app.controller("EstadisticaAdministacionController", function ($scope, $http) {
 
 
 })
+app.controller("InformeEmpresasController", function ($scope, $http) {
+
+    $scope.empresas = [];
+    $scope.rubros = [];
+    $scope.provincias = [];
+    $scope.ciudades = [];
+
+    $scope.filtrar = function () {
+
+
+        var fechaDesde = $('#fechaDesde').jqxDateTimeInput('val');;
+        var fechaHasta = $('#fechaHasta').jqxDateTimeInput('val');;
+
+        var rubro = '';
+        if ($scope.rubro != undefined) {
+            rubro = $scope.rubro;
+        }
+        var provincia = '';
+        if ($scope.prov != undefined) {
+            provincia = $scope.prov;
+        }
+        var ciudad = '';
+        if ($scope.ciudad != undefined) {
+            ciudad = $scope.ciudad;
+        }
+
+        $http({
+            method: 'GET',
+            url: 'http://localhost:6901/api/VistaInformeEmpresaFiltros?fechaDesde=' + fechaDesde + '&fechaHasta=' + fechaHasta + '&rubro=' + rubro + '&prov=' + provincia + '&ciudad=' + ciudad,
+            headers: {
+                'Accept': "application/json",
+
+            }
+        }).then(function (response) {
+            if (response.status === 200) {
+                angular.copy(response.data, $scope.empresas);
+
+            }
+
+        }, function (response) {
+
+            httpNegativo(response.status);
+
+        }).then(function () {
+
+        });
+    }
+
+    $http({
+        method: 'GET',
+                url: 'http://localhost:6901/api/rubro',
+            headers: {
+            'Accept': "application/json"
+    }
+
+    }).then(function (response) {
+        if (response.status === 200) {
+            angular.copy(response.data, $scope.rubros);
+        }
+
+        }, function (response) {
+
+        httpNegativo(response.status);
+
+    }).then(function () { 
+
+    });
+        $http({
+        method: 'GET',
+            url: 'http://localhost:6901/api/provincia',
+            headers: {
+            'Accept': "application/json"
+    }
+
+    }).then(function (response) {
+        if (response.status === 200) {
+            angular.copy(response.data, $scope.provincias);
+        }
+        this.isBusy = false;
+
+        }, function (response) {
+
+        httpNegativo(response.status);
+
+    }).then(function () {
+
+    });
+     $scope.clickProvincias = function () {
+        $http({
+             method: 'GET',
+             url: 'http://localhost:6901/api/ciudad?id=' +$scope.prov,
+                 headers: {
+                 'Accept': "application/json"
+            }
+
+            }).then(function (response) {
+            if(response.status === 200) {
+                angular.copy(response.data, $scope.ciudades);
+            }
+            this.isBusy = false;
+
+            }, function (response) {
+
+            httpNegativo(response.status);
+
+        }).then(function () {
+
+            });
+
+        $("#ciudades").removeAttr('disabled');
+
+        }
+
+     $("#fechaDesde").jqxDateTimeInput({ theme: 'bootstrap', template: "primary", width: '275px', height: '25px', formatString: "yyyy-MM-dd" });
+     $("#fechaHasta").jqxDateTimeInput({ theme: 'bootstrap', template: "primary", width: '275px', height: '25px', formatString: "yyyy-MM-dd" });
+
+})
 app.controller("CantidadEmpresasPorRubroController", function ($scope, $http) {
 
     $scope.rubros = [];
@@ -87,8 +204,8 @@ app.controller("CantidadEmpresasPorRubroController", function ($scope, $http) {
         }
     }).then(function (response) {
         if (response.status === 200) {
-            angular.copy(response.data, $scope.rubros);            
-                
+            angular.copy(response.data, $scope.rubros);
+
             for (var i = 0; i < $scope.rubros.length; i++) {
                 $scope.datos.push([$scope.rubros[i].nombre, $scope.rubros[i].cantidad])
 
@@ -2512,7 +2629,7 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
                         subject: "<a class=\"btn-primary\" href=" + urlBase + ">" + response.data[i].nombre + " " + response.data[i].apellido + "</a>"
                     };
 
-                    
+
 
                     $('#scheduler').jqxScheduler('addAppointment', turno);
                 }
