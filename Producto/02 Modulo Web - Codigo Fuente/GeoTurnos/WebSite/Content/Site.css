@@ -449,3 +449,63 @@ div.tab button.active {
 	font-weight:700;
 	margin-bottom:10px;
 }
+
+#textoClasificacion
+{
+    float:left;
+    padding-right: 10px;
+}
+
+#agendaEntidad
+{
+    background-color: white;
+        border-left: 1px solid lightblue;
+    border-bottom: 1px solid lightblue;
+}
+
+#filaPerfil
+{
+    margin-right: -30px;
+    margin-left: -30px;
+    background-color: aliceblue !important;
+        padding-bottom: 20px;
+}
+
+#numeroClasificacion
+{
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+#filaComentarios
+{
+    margin-right: -30px;
+    margin-left: -30px;
+    background-color: aliceblue !important;
+    padding: 20px;
+    padding-top: 0px;
+}
+
+#filaTituloComentarios
+{
+    margin-right: -30px;
+    margin-left: -30px;
+    background-color: lightblue !important;
+    padding: 20px;
+    color: white;
+}
+
+.informacionPerfil
+{
+    padding-left: 30px;
+}
+
+#separadorComentarios
+{
+    color: aliceblue;
+}
+
+.dejarComentario
+{
+     padding-left: 0px;
+}
