@@ -63,7 +63,7 @@ namespace WebApi.Controllers
                 return InternalServerError(ex);
             }
         }
-        public IHttpActionResult Get(int mes, int anio)//para que devuelva el id de agenda para ese mes y año
+        public IHttpActionResult Get(int id,int mes, int anio)//para que devuelva el id de agenda para ese mes y año
         {
             try
             {
@@ -71,7 +71,7 @@ namespace WebApi.Controllers
                 {
                     return NotFound();
                 }
-                Agenda agenda = _db.Agenda.Where(a => a.año == anio && a.mes==mes).FirstOrDefault();
+                Agenda agenda = _db.Agenda.Where(a => a.idEmpresa==id&&a.año == anio && a.mes==mes).FirstOrDefault();
                 if (agenda == null)
                 {
                     return NotFound();

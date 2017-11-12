@@ -33,13 +33,13 @@ app.controller("AdministacionController", function ($scope, $http) {
                 break;
         }
 
-
     };
 
 })
 app.controller("EstadisticaAdministacionController", function ($scope, $http) {
 
     $scope.contenidoATraer = '';
+
 
 
     $scope.submenu = function (evt, nombreMenu) {
@@ -63,7 +63,10 @@ app.controller("EstadisticaAdministacionController", function ($scope, $http) {
         evt.currentTarget.className += " active";
         switch (nombreMenu) {
             case 'estadistcia1':
-                $scope.contenidoATraer = 'EstadisticaAdminEmpresasRegFiltros';
+                $scope.contenidoATraer = 'EstadisticaCantidadEmpresasXRubro';
+                break;
+            case 'estadistcia2':
+                $scope.contenidoATraer = 'InformeEmpresas';
                 break;
 
         }
@@ -71,7 +74,59 @@ app.controller("EstadisticaAdministacionController", function ($scope, $http) {
 
 
 })
+app.controller("CantidadEmpresasPorRubroController", function ($scope, $http) {
 
+    $scope.rubros = [];
+    $scope.datos = [['Rubro', 'Cantidad']]
+    $http({
+        method: 'GET',
+        url: 'http://localhost:6901/api/VistaCantidadEmpresasXRubro',
+        headers: {
+            'Accept': "application/json",
+
+        }
+    }).then(function (response) {
+        if (response.status === 200) {
+            angular.copy(response.data, $scope.rubros);            
+                
+            for (var i = 0; i < $scope.rubros.length; i++) {
+                $scope.datos.push([$scope.rubros[i].nombre, $scope.rubros[i].cantidad])
+
+            }
+
+            google.charts.load("current", { packages: ["corechart"] });
+            google.charts.setOnLoadCallback(drawChart);
+            function drawChart() {
+                var data = google.visualization.arrayToDataTable($scope.datos);
+
+                var options = {
+                    title: 'Empresas por Rubro',
+                    legend: 'none',
+                    pieSliceText: 'label',
+                    is3D: true,
+
+                };
+
+                var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                chart.draw(data, options);
+            }
+
+        }
+
+    }, function (response) {
+
+        httpNegativo(response.status);
+
+    }).then(function () {
+
+    });
+
+
+
+
+
+
+})
 app.controller("MiCuentaEmpresaPrestadoraController", function ($scope) {
 
     $scope.contenidoATraer = 'PrincipalEntidadPrestadora';
@@ -1209,7 +1264,6 @@ app.controller("GestionarPlantillaAgenda", function ($scope, $http) {
     }
 
 })
-
 app.controller("GestionarMisTurnosController", function ($scope, $http) {
     $scope.VistaTurnosAgendaVigenteParaClientes = [];
     $http({
@@ -1232,125 +1286,45 @@ app.controller("GestionarMisTurnosController", function ($scope, $http) {
 
     });
 
-    $scope.guardarRubro = function () {
-        if (esNuevo == true) {
-            if (confirm("Desea crear el Rubro: " + $scope.nombreRubro)) {
-                var nuevoRubro = {};
-                nuevoRubro.nombre = $scope.nombreRubro;
-                $http({
-                    method: 'POST',
-                    url: 'http://localhost:6901/api/Rubro',
-                    data: nuevoRubro,
-                    headers: {
-                        'Accept': "application/json",
+    
 
-                    }
-                }).then(function (response) {
-                    if (response.status == 201) {
-                        $scope.rubro.push(response.data);
-                        $scope.nuevoRubro
-                    }
-                }, function (response) {
-
-                    httpNegativo(response.status);
-
-                }).then(function () {
-
-                });
-
-            }
-            else {
-
-            }
-        }
-        else {
-            if (confirm("Desea Modificar el Rubro: " + rubroModificar + " por " + $scope.nombreRubro)) {
-                var rubroModificado = {};
-                var rubroAModificar = {};
-                rubroAModificar.nombre = rubroModificar;
-                rubroAModificar.idRubro = idRubroModificar;
-                rubroModificado.nombre = $scope.nombreRubro;
-                rubroModificado.idRubro = idRubroModificar;
-                $http({
-                    method: 'PUT',
-                    url: 'http://localhost:6901/api/Rubro/' + rubroModificado.idRubro,
-                    data: rubroModificado,
-                    headers: {
-                        'Accept': "application/json",
-
-                    }
-                }).then(function (response) {
-                    if (response.status == 200) {
-                        $scope.rubro.splice($scope.rubro.indexOf(rubroAModificar, [0]), 1, response.data);
-                        $scope.nuevoRubro();
-                    }
-                }, function (response) {
-
-                    httpNegativo(response.status);
-
-                }).then(function () {
-
-                });
-
-            }
-            else {
-
-            }
-        }
-
-
-
-    }
-
-    $scope.eliminarRubro = function (rub) {
-        if (confirm("Esta seguro que desea eliminar el rubro: " + rub.nombre)) {
-            var id = rub.idRubro;
-            $http({
-                method: 'DELETE',
-                url: 'http://localhost:6901/api/Rubro/' + id,
-                headers: {
-                    'Accept': "application/json",
-
-                }
-            }).then(function (response) {
-                if (response.status == 200) {
-                    $scope.rubro.splice($scope.rubro.indexOf(rub, [0]), 1);
-                    $scope.nuevoRubro();
-                }
-            }, function (response) {
-
-                httpNegativo(response.status);
-
-            }).then(function () {
+    $scope.eliminarTurno = function (vista) {
+        mostrarDialogo(
+            "Atención",
+            "Esta seguro que desea eliminar el turno?",
+            "Si",
+            "No",
+            function (button) {
+                eliminarTurno(vista.idTurno);
+            },
+            function (button) {
 
             });
-        }
-        else {
+    }
 
-        }
+    function eliminarTurno(id) {
+        $http({
+            method: 'DELETE',
+            url: 'http://localhost:6901/api/Turno/' + id,
+            headers: {
+                'Accept': "application/json",
+
+            }
+        }).then(function (response) {
+            if (response.status == 200) {
+                notificarSinContenedor($("#notificaciones"), $("#mensajeNotificacion"), 200, 'info', 'Turno Eliminado');
+            }
+        }, function (response) {
+
+            httpNegativoSinContenedor(response.status);
+
+        }).then(function () {
+
+        });
 
     }
 
-    $scope.modificarRubro = function (rub) {
-        var l1 = document.getElementById("GestionarRubro");
-        l1.innerText = "Modificar Rubro";
-        var l1 = document.getElementById("rubro");
-        l1.value = rub.nombre;
-        rubroModificar = rub.nombre;
-        idRubroModificar = rub.idRubro;
-        esNuevo = false;
-
-    }
-    $scope.nuevoRubro = function () {
-        var l1 = document.getElementById("GestionarRubro");
-        l1.innerText = "Nuevo Rubro";
-        var l1 = document.getElementById("rubro");
-        l1.value = "";
-        esNuevo = true;
-    }
-
-})
-
+});
 app.controller("PerfilEmpresaController", function ($scope, $http) {
 
 
@@ -1391,8 +1365,10 @@ app.controller("SchedulerController", function ($scope, $http) {
         if (response.status === 200) {
             angular.copy(response.data, $scope.parametros);
 
-            procesarParametros();
-            configurar();
+            if ($scope.parametros.length > 0) {
+                procesarParametros();
+                configurar();
+            }
 
         }
 
@@ -1533,7 +1509,7 @@ app.controller("SchedulerController", function ($scope, $http) {
 
                         $http({
                             method: 'GET',
-                            url: 'http://localhost:6901/api/agenda?mes=' + fechayhora.month() + '&anio=' + fechayhora.year(),
+                            url: 'http://localhost:6901/api/agenda/' + retornarIdEmpresa() + '?mes=' + fechayhora.month() + '&anio=' + fechayhora.year(),
                             headers: {
                                 'Accept': "application/json",
 
@@ -1630,20 +1606,6 @@ app.controller("SchedulerController", function ($scope, $http) {
                     function (button) {
 
                     });
-                //$.confirm({
-                //    title: "Atención",
-                //    text: "Esta seguro que desea eliminar el turno?",
-                //    confirmButton: "Si",
-                //    cancelButton: "No",
-                //    confirm: function (button) {
-                //        $('#scheduler').jqxScheduler('deleteAppointment', turno.id);
-
-                //        eliminarTurno(turno);
-                //    },
-                //    cancel: function (button) {
-
-                //    }
-                //});
 
             }
         }
@@ -2006,7 +1968,6 @@ app.controller("ComentariosRatingController", function ($scope, $http) {
 
 
 });
-
 app.controller("ComentariosRatingClienteController", function ($scope, $http) {
 
     (function ($) {
@@ -2266,7 +2227,7 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
 
         var appointments = [];
 
-        cargarTurnos(appointments);
+        cargarTurnos();
 
         var source =
         {
@@ -2329,55 +2290,180 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
 
     $('#scheduler').on('cellClick', function (event) {//Crear nuevo turno
 
-        switch (event.args.cell.cellIndex) {
-            case 0:
+        var anio = event.args.date.year();
+        var mes = event.args.date.month();
+        var dia = event.args.date.day();
+
+
+        var turnos = event.args.owner.appointments;
+
+        switch (event.args.cell.childNodes["0"].className) {
+            case 'jqx-scheduler-agenda-date':
                 if (!esFechaVieja(event.args.date)) {
+
+
                     mostrarDialogo(
                                     "Atención",
-                                    "Está seguro que desea <b>Cancelar</b> todos los turnos para el dia:",
+                                    "Está seguro que desea <b>Cancelar Todos</b> los turnos del <b>" + dia + '/' + mes + '/' + anio + '</b>?',
                                     "Si",
                                     "No",
                                     function (button) {
+                                        $http({
+                                            method: 'PUT',
+                                            url: 'http://localhost:6901/api/Turno?fecha=' + anio + '-' + mes + '-' + dia,
+                                            headers: {
+                                                'Accept': "application/json",
 
+                                            }
+                                        }).then(function (response) {
+                                            if (response.status === 200) {
+
+                                                notificarSinContenedor($("#notificaciones"), $("#mensajeNotificacion"), 200, 'info', 'Se cancelaron todos los turnos');
+                                                vaciarTurnos(event);
+                                                cargarTurnos();
+
+                                            }
+                                        }, function (response) {
+
+                                            httpNegativo(response.status);
+
+                                        }).then(function () {
+
+                                        });
                                     },
                                     function (button) {
 
                                     });
                 }
                 break;
-            case 1:
+            case 'jqx-scheduler-agenda-time':
+
+                var horaDesde = Number(event.args.cell.innerText.split('-')[0].split(':')[0]);
+                var minDesde = Number(event.args.cell.innerText.split('-')[0].split(':')[1].trim());
+
                 if (!esFechaVieja(event.args.date)) {
+
+                    var obtenerIdTurno = function () {
+                        for (var i = 0; i < turnos.length; i++) {
+
+                            var anioTurnoRevisado = turnos[i].from.year();
+                            var mesTurnoRevisado = turnos[i].from.month();
+                            var diaTurnoRevisado = turnos[i].from.day();
+
+                            var horaDesdeTurnoRevisado = turnos[i].from.hour();
+                            var minDesdeTurnoRevisado = turnos[i].from.minute();
+
+                            if (anioTurnoRevisado == anio && mesTurnoRevisado == mes && diaTurnoRevisado == dia && horaDesdeTurnoRevisado == horaDesde && minDesdeTurnoRevisado == minDesde) {
+                                return turnos[i].tooltip.split('+')[1];
+                            }
+                        }
+
+                    };;
                     mostrarDialogo(
                                     "Atención",
-                                    "Está seguro que desea <b>Cancelar</b> el turno:",
+                                    "Está seguro que desea <b>Cancelar el Turno</b> de <b>" + event.args.cell.innerText + '</b>?',
                                     "Si",
                                     "No",
                                     function (button) {
+                                        $http({
+                                            method: 'PUT',
+                                            url: 'http://localhost:6901/api/Turno/' + obtenerIdTurno(),
+                                            headers: {
+                                                'Accept': "application/json",
 
+                                            }
+                                        }).then(function (response) {
+                                            if (response.status === 200) {
+
+                                                notificarSinContenedor($("#notificaciones"), $("#mensajeNotificacion"), 200, 'info', 'Se canceló el turno');
+                                                vaciarTurnos(event);
+                                                cargarTurnos();
+
+                                            }
+                                        }, function (response) {
+
+                                            httpNegativo(response.status);
+
+                                        }).then(function () {
+
+                                        });
                                     },
                                     function (button) {
 
                                     });
                 }
                 break;
-            case 2:
+            case 'jqx-scheduler-agenda-appointment jqx-scheduler-legend-label':
+
+
+
                 if (esFechaVieja(event.args.date)) {
+
+                    var obtenerIdTurno = function () {
+
+                        return event.args.owner.appointmentsByKey[event.args.cell.childNodes["0"].dataset.key].tooltip.split('+')[1];
+
+
+                    };
                     mostrarDialogo(
                                    "Registro de asistencia",
-                                   "Confirma que.... <b>Asistió</b> al turno",
+                                   "Confirma que <b>" + event.args.cell.innerText + " Asistió</b> al turno?",
                                    "Asistió",
                                    "Ausente",
                                    function (button) {
+                                       $http({
+                                           method: 'PUT',
+                                           url: 'http://localhost:6901/api/Turno/' + obtenerIdTurno() + '?asistio=true',
+                                           headers: {
+                                               'Accept': "application/json",
 
+                                           }
+                                       }).then(function (response) {
+                                           if (response.status === 200) {
+
+                                               notificarSinContenedor($("#notificaciones"), $("#mensajeNotificacion"), 200, 'info', 'Se registró la asistencia');
+                                               vaciarTurnos(event);
+                                               cargarTurnos();
+
+                                           }
+                                       }, function (response) {
+
+                                           httpNegativo(response.status);
+
+                                       }).then(function () {
+
+                                       });
                                    },
                                    function (button) {
+                                       $http({
+                                           method: 'PUT',
+                                           url: 'http://localhost:6901/api/Turno/' + obtenerIdTurno() + '?asistio=false',
+                                           headers: {
+                                               'Accept': "application/json",
 
+                                           }
+                                       }).then(function (response) {
+                                           if (response.status === 200) {
+
+                                               notificarSinContenedor($("#notificaciones"), $("#mensajeNotificacion"), 200, 'info', 'Se registró la ausencia');
+                                               vaciarTurnos(event);
+                                               cargarTurnos();
+
+                                           }
+                                       }, function (response) {
+
+                                           httpNegativo(response.status);
+
+                                       }).then(function () {
+
+                                       });
                                    });
+
                 }
+
                 break;
 
         }
-
 
     });
 
@@ -2386,7 +2472,7 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
     */
 
 
-    function cargarTurnos(appointments) {//Carga los turnos desde  la base de datos
+    function cargarTurnos() {//Carga los turnos desde  la base de datos
 
         $http({
             method: 'GET',
@@ -2423,10 +2509,10 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
                         to: new $.jqx.date(año, mes, dia, horaHasta, minHasta, 0, 0),
                         tooltip: response.data[i].idCliente + "+" + response.data[i].idTurno,
                         timeZone: 'Argentina Standard Time',
-                        subject: "<a href=" + urlBase + ">" + response.data[i].nombre + " " + response.data[i].apellido + "</a>"
+                        subject: "<a class=\"btn-primary\" href=" + urlBase + ">" + response.data[i].nombre + " " + response.data[i].apellido + "</a>"
                     };
 
-                    appointments.push(turno);
+                    
 
                     $('#scheduler').jqxScheduler('addAppointment', turno);
                 }
@@ -2491,6 +2577,20 @@ app.controller("VisualizarAgendaController", function ($scope, $http) {
         }
 
         return false;
+
+    }
+    function vaciarTurnos(event) {
+
+        var ids = [];
+
+        for (var i = 0; i < event.owner.appointments.length; i++) {
+            ids.push(event.owner.appointments[i].id);
+        }
+        for (var i = 0; i < ids.length; i++) {
+            $('#scheduler').jqxScheduler('deleteAppointment', ids[i]);
+        }
+
+
 
     }
 

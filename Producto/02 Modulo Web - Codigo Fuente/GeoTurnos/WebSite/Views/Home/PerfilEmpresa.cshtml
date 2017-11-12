@@ -1,4 +1,5 @@
-﻿@model WebSite.Models.PerfilEmpresaViewModels
+﻿<link href="~/Content/Site.css" rel="stylesheet" />
+@model WebSite.Models.PerfilEmpresaViewModels
 @using WebSite.App_Start
 @{
     ViewBag.Title = "PerfilEmpresa";
@@ -9,20 +10,20 @@
 <div class="container" ng-controller="PerfilEmpresaController">
    
     
-    <div class="row" >
-        <div class="col-md-3" style="background-color:white">
+    <div class="row" id="filaPerfil" >
+        <div class="col-md-3 informacionPerfil">
            
             <h1>@Model.razonSocial</h1>
             <img id="avatar" src="" class="img-responsive img-thumbnail fotoUsuario" />
-            <h2>Calificación: @Model.calificacion</h2>
+            <h3 id="textoClasificacion">Calificación: </h3><h2 id="numeroClasificacion">@Model.calificacion</h2>
             <div id='jqxRating'></div>
            
 
-            <h3>Dirección: @Model.direccion</h3>
-            <h3>Teléfono: @Model.telefono</h3>
+            <h4>Dirección: @Model.direccion</h4>
+            <h4>Teléfono: @Model.telefono</h4>
             </div>
 
-        <div class="col-md-9" ng-controller="SchedulerController">
+        <div class="col-md-9" id="agendaEntidad" ng-controller="SchedulerController">
 
 
             <div class="container"><div id="scheduler"></div></div>
@@ -30,10 +31,11 @@
         </div>
     </div>
 
-    <div class="row">
-    
+    <div class="row" id="filaTituloComentarios">
+        <h1>Comentarios</h1>
+    </div>
+    <div class="row" id="filaComentarios">
         <div ng-include="contenidoATraer"></div>
-    
     </div>
 
     <div id="notificaciones"><div id="mensajeNotificacion"></div></div>

@@ -1,69 +1,70 @@
-﻿@model WebSite.Models.PerfilClienteViewModels
+﻿<link href="~/Content/Site.css" rel="stylesheet" />
+@model WebSite.Models.PerfilClienteViewModels
 @using WebSite.App_Start
 @{
     ViewBag.Title = "Perfil Cliente";
     var usuarioLogin = Session["usuarioLogin"] as UsuarioLogueado;
 }
 <div class="container" ng-controller="PerfilClienteController">
-    <div class="row">
-        <div class="col-md-3" style="background-color:white">
+    <div class="row" id="filaPerfil" >
+        <div class="col-md-3" id="columnaPerfilCliente">
 
             <h1>@Model.usuario </h1>
             <img id="avatar" src="" class="img-responsive img-thumbnail fotoUsuario" />
-            <h2>Calificación: @Model.calificacion</h2>
+            <h3 id="textoClasificacion">Calificación: </h3><h2 id="numeroClasificacion">@Model.calificacion</h2>
             <div id='jqxRating'></div>
 
 
             <h4>e-mail: @Model.mail </h4>
             <h3>Teléfono: @Model.telefono</h3>
         </div>
-
-           </div>
-    <div class="container" ng-controller="ComentariosRatingClienteController">
-
-        <div ng-repeat="com in comentarios" class="row">
-            <div class="col-sm-7">
-                <hr />
-                <div class="review-block">
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <img ng-src="data:image/png;base64,{{com.logoEmpresa}}" class="img-rounded" style="height:60px;width:60px">
-                            <div class="review-block-name"><a href="#">{{com.razonSocial}}</a></div>
-                            <div class="review-block-date">{{com.fecha_comentario | date:'dd/MM/yyyy'}}</div>
-                        </div>
-                        <div class="col-sm-9">
-                            <div class="review-block-rate" ng-open="verCalificacion()">
-                                <span id="estrella{{com.Id_comentario}}"></span>
+        <div class="col-md-9 scrollit" style="background-color:white">
+            <h1>Comentarios</h1>
+            <div class="container" ng-controller="ComentariosRatingClienteController">
+                <div ng-repeat="com in comentarios" class="row">
+                    <div class="col-sm-7">
+                        <hr />
+                        <div class="review-block">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <img ng-src="data:image/png;base64,{{com.logoEmpresa}}" class="img-rounded" style="height:60px;width:60px">
+                                    <div class="review-block-name"><a href="#">{{com.razonSocial}}</a></div>
+                                    <div class="review-block-date">{{com.fecha_comentario | date:'dd/MM/yyyy'}}</div>
+                                </div>
+                                <div class="col-sm-9">
+                                    <div class="review-block-rate" ng-open="verCalificacion()">
+                                        <span id="estrella{{com.Id_comentario}}"></span>
+                                    </div>
+                                    <div class="review-block-title">{{com.titulo}}</div>
+                                    <div class="review-block-description">{{com.comentario}}</div>
+                                </div>
                             </div>
-                            <div class="review-block-title">{{com.titulo}}</div>
-                            <div class="review-block-description">{{com.comentario}}</div>
+                        </div>
+                    </div>
+                </div>
+                <hr id="separadorComentarios" />
+                <h3>DEJÁ TU COMENTARIO</h3> 
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-4 col-md-4 dejarComentario">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <form>
+                                        <div id='nuevaEstrella'></div>
+
+                                        <textarea class="form-control counted" name="messageTitulo" placeholder="Titulo" rows="1" style="margin-bottom:10px;" ng-model="nuevoTitulo"></textarea>
+                                        <textarea class="form-control counted" name="messageComentario" placeholder="Ingresa tu comentario" rows="5" style="margin-bottom:10px;" ng-model="nuevoComentario"></textarea>
+                                        <h6>200 caracteres restantes</h6>
+                                        <button class="btn btn-primary" ng-click="guardarComentario()">Enviar comentario</button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        DAJÁ TU COMENTARIO
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-4 col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <form>
-
-                                <div id='nuevaEstrella'></div>
-
-
-                                <textarea class="form-control counted" name="messageTitulo" placeholder="Titulo" rows="1" style="margin-bottom:10px;" ng-model="nuevoTitulo"></textarea>
-                                <textarea class="form-control counted" name="messageComentario" placeholder="Ingresa tu comentario" rows="5" style="margin-bottom:10px;" ng-model="nuevoComentario"></textarea>
-                                <h6 class="pull-right" id="counter">200 caracteres restantes</h6>
-                                <button class="btn btn-primary" ng-click="guardarComentario()">Enviar comentario</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 </div>
 
 <script>

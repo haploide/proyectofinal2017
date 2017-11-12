@@ -1,11 +1,10 @@
-﻿
+﻿<link href="~/Content/Site.css" rel="stylesheet" />
 
 
 <div class="container" ng-controller="ComentariosRatingController">
-
     <div ng-repeat="com in comentarios" class="row">
         <div class="col-sm-7">
-            <hr />
+            <hr id="separadorComentarios"/>
             <div class="review-block">
                 <div class="row">
                     <div class="col-sm-3">
@@ -24,10 +23,11 @@
             </div>
         </div>
     </div>
-    DAJÁ TU COMENTARIO
+    <hr id="separadorComentarios"/>
+    <h3>DEJÁ TU COMENTARIO</h3> 
     <div class="container">
         <div class="row">
-            <div class="col-sm-4 col-md-4">
+            <div class="col-sm-4 col-md-4 dejarComentario">
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <form accept-charset="UTF-8" >
@@ -37,7 +37,7 @@
 
                             <textarea class="form-control counted" name="messageTitulo" placeholder="Titulo" rows="1" style="margin-bottom:10px;" ng-model="nuevoTitulo"></textarea>
                             <textarea class="form-control counted" name="messageComentario" placeholder="Ingresa tu comentario" rows="5" style="margin-bottom:10px;" ng-model="nuevoComentario"></textarea>
-                            <h6 class="pull-right" id="counter">200 caracteres restantes</h6>
+                            <h6>200 caracteres restantes</h6>
                             <button class="btn btn-info" ng-click="guardarComentario()" >Enviar comentario</button>
                         </form>
                     </div>

@@ -397,11 +397,13 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\jqxbuttons.js" />
     <Content Include="Scripts\jqxcalendar.js" />
+    <Content Include="Scripts\jqxchart.core.js" />
     <Content Include="Scripts\jqxcheckbox.js" />
     <Content Include="Scripts\jqxcore.js" />
     <Content Include="Scripts\jqxdata.js" />
     <Content Include="Scripts\jqxdate.js" />
     <Content Include="Scripts\jqxdatetimeinput.js" />
+    <Content Include="Scripts\jqxdraw.js" />
     <Content Include="Scripts\jqxdropdownlist.js" />
     <Content Include="Scripts\jqxinput.js" />
     <Content Include="Scripts\jqxlistbox.js" />
@@ -417,6 +419,7 @@
     <Content Include="Scripts\jqxscrollbar.js" />
     <Content Include="Scripts\jqxtooltip.js" />
     <Content Include="Scripts\jqxwindow.js" />
+    <Content Include="Scripts\loader.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\moment-with-locales.js" />
     <Content Include="Scripts\moment-with-locales.min.js" />
@@ -474,7 +477,8 @@
     <Content Include="Views\Manage\_PartialGestionarMisTurnos.cshtml" />
     <Content Include="Views\Manage\_PartialVisualizarAgenda.cshtml" />
     <Content Include="Views\Manage\_PartialEstadisticas.cshtml" />
-    <Content Include="Views\Manage\_PartialEstadisticaAdminEmpresasRegFiltros.cshtml" />
+    <Content Include="Views\Manage\_PartialEstadisticaCantidadEmpresasXRubro.cshtml" />
+    <Content Include="Views\Manage\_PartialInformeEmpresas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

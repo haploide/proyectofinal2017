@@ -3,30 +3,30 @@
 
     <item
         is-multidex="true"
-        jar="/Users/ld/Documents/GitHub/proyectofinal2017/Producto/01 Modulo Movil - Codigo Fuente/GeoTurnos-FinalVersion/app/libs/jtds-1.3.1.jar"
+        jar="/Users/ld/AndroidStudioProjects/Proyecto/GeoTurnos-FinalVersion/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="26.0.2"
-        sha1="1fc4d17efa80dc375767b0c1006584175212e9dc">
-        <dex dex="/Users/ld/Documents/GitHub/proyectofinal2017/Producto/01 Modulo Movil - Codigo Fuente/GeoTurnos-FinalVersion/app/build/intermediates/transforms/dex/debug/folders/1000/2/jtds-1.3.1_8d95f0cbd4d3e62f7cd3a263ff17e5afee314f1c/classes.dex" />
+        sha1="314aba1c8e12d55a8a30cf221140f1b543bd1b48">
+        <dex dex="/Users/ld/AndroidStudioProjects/Proyecto/GeoTurnos-FinalVersion/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_6df1bd44933e030aa48d0d8f724dc19e43b8674c/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/ld/Documents/GitHub/proyectofinal2017/Producto/01 Modulo Movil - Codigo Fuente/GeoTurnos-FinalVersion/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.2"
-        sha1="46ac522f862bfd1c5be79be59f9414e96c3f0458">
-        <dex dex="/Users/ld/Documents/GitHub/proyectofinal2017/Producto/01 Modulo Movil - Codigo Fuente/GeoTurnos-FinalVersion/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_97fcfb0973916486d359ed6dfcd6f20ca7e589e9/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/ld/Documents/GitHub/proyectofinal2017/Producto/01 Modulo Movil - Codigo Fuente/GeoTurnos-FinalVersion/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jar="/Users/ld/AndroidStudioProjects/Proyecto/GeoTurnos-FinalVersion/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="26.0.2"
         sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
-        <dex dex="/Users/ld/Documents/GitHub/proyectofinal2017/Producto/01 Modulo Movil - Codigo Fuente/GeoTurnos-FinalVersion/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_21053fb79463f087e3284aad3ff87b0f10e3ff44/classes.dex" />
+        <dex dex="/Users/ld/AndroidStudioProjects/Proyecto/GeoTurnos-FinalVersion/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_b82746cdbf5715adc62e484b152d786849821faa/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/ld/AndroidStudioProjects/Proyecto/GeoTurnos-FinalVersion/app/libs/jtds-1.3.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="1fc4d17efa80dc375767b0c1006584175212e9dc">
+        <dex dex="/Users/ld/AndroidStudioProjects/Proyecto/GeoTurnos-FinalVersion/app/build/intermediates/transforms/dex/debug/folders/1000/2/jtds-1.3.1_df65aea42c1bcec51e6b399aee8ff548a7f9cb66/classes.dex" />
     </item>
 
 </items>

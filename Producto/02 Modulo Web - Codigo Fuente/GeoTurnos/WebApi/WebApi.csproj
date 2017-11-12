@@ -146,6 +146,7 @@
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\VistaComentariosAClienteController.cs" />
     <Compile Include="Controllers\VistaComentariosAEmpresaController.cs" />
+    <Compile Include="Controllers\VistaCantidadEmpresasXRubroController.cs" />
     <Compile Include="Controllers\VistaFiltroClienteConCalificacionController.cs" />
     <Compile Include="Controllers\VistaFiltroEmpresaController.cs" />
     <Compile Include="Controllers\VistaInformeEmpresaFiltrosController.cs" />
@@ -232,6 +233,9 @@
       <DependentUpon>GeoTurnosModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UsuarioMobile.cs" />
+    <Compile Include="Models\VistaCantidadEmpresasXRubro.cs">
+      <DependentUpon>GeoTurnosModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\VistaComentariosACliente.cs">
       <DependentUpon>GeoTurnosModel.tt</DependentUpon>
     </Compile>
