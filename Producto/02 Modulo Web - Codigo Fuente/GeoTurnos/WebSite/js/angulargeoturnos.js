@@ -1585,7 +1585,7 @@ app.controller("SchedulerController", function ($scope, $http) {
 
                         $http({
                             method: 'GET',
-                            url: 'http://localhost:6901/api/agenda?mes=' + fechayhora.month() + '&anio=' + fechayhora.year(),
+                            url: 'http://localhost:6901/api/agenda/' + retornarIdEmpresa() + '?mes=' + fechayhora.month() + '&anio=' + fechayhora.year(),
                             headers: {
                                 'Accept': "application/json",
 
