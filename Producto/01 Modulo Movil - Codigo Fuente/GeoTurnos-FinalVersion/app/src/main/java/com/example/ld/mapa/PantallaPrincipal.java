@@ -61,7 +61,9 @@ public class PantallaPrincipal extends ActionBarActivity {
         items.add(new DrawerItem(tagTitles[0], R.drawable.home));
         items.add(new DrawerItem(tagTitles[1], R.drawable.buscar));
         items.add(new DrawerItem(tagTitles[2], R.drawable.turno));
-        items.add(new DrawerItem(tagTitles[3], R.drawable.logouts));
+        items.add(new DrawerItem(tagTitles[3], R.drawable.ayuda));
+        items.add(new DrawerItem(tagTitles[4], R.drawable.logouts));
+
 
 
         // Relacionar el adaptador y la escucha de la lista del drawer
@@ -158,7 +160,10 @@ public class PantallaPrincipal extends ActionBarActivity {
                 String valor = getIntent().getExtras().getString("idUsuario");
                 Turnos.putExtra("idUsuario",valor);
                 startActivity(Turnos);
-            }
+            } else if ((nombreItem.equals("Ayuda"))) {
+            Intent Ayuda = new Intent(getApplicationContext(), Ayuda.class);
+            startActivity(Ayuda);
+        }
 
 
         drawerLayout.closeDrawer(drawerList);

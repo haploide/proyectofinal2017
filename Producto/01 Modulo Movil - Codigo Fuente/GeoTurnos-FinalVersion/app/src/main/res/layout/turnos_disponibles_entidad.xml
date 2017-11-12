@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/linearLayout4">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_below="@+id/txtRubro"
+            android:layout_centerHorizontal="true"
+            android:adjustViewBounds="true" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtnombreEmpresa"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_marginTop="37dp"
+        android:text="NombreEmpresa"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:id="@+id/txtRubro"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="33dp"
+        android:text="Rubro"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:layout_below="@+id/txtnombreEmpresa"
+        android:layout_alignLeft="@+id/txtnombreEmpresa"
+        android:layout_alignStart="@+id/txtnombreEmpresa" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/lblFechaDesde"
+        android:text="Desde:"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/linearLayout4"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="18dp"
+        android:layout_marginStart="18dp" />
+
+    <EditText
+        android:id="@+id/txtFechaDesde"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:focusable="false"
+        android:clickable="true"
+        android:maxLines="1"
+        android:layout_alignBaseline="@+id/lblFechaDesde"
+        android:layout_alignBottom="@+id/lblFechaDesde"
+        android:layout_toRightOf="@+id/lblFechaDesde" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/lblFechaHasta"
+        android:text="Hasta:"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_alignBaseline="@+id/txtFechaDesde"
+        android:layout_alignBottom="@+id/txtFechaDesde"
+        android:layout_toRightOf="@+id/txtFechaDesde"
+        android:layout_toEndOf="@+id/txtFechaDesde"
+        android:layout_marginLeft="32dp"
+        android:layout_marginStart="32dp" />
+
+    <EditText
+        android:id="@+id/txtFechaHasta"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:focusable="false"
+        android:clickable="true"
+        android:maxLines="1"
+        android:layout_alignBaseline="@+id/lblFechaHasta"
+        android:layout_alignBottom="@+id/lblFechaHasta"
+        android:layout_toRightOf="@+id/lblFechaHasta" />
+
+    <Button
+        android:id="@+id/btnBuscarTurnos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Buscar"
+        android:layout_below="@+id/lblFechaDesde"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/lblFechaDesde"
+        android:layout_alignStart="@+id/lblFechaDesde"
+        android:layout_marginTop="10dp"
+        />
+
+   <!-- <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/btnBuscarTurnos"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentBottom="true">
+        <GridView
+            android:id="@+id/gridTurnos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:columnWidth="120dp"
+            android:numColumns="8"
+            >
+        </GridView>
+    </RelativeLayout>-->
+    <TableLayout
+        android:id="@+id/table_header"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:layout_below="@+id/btnBuscarTurnos"
+        android:layout_alignLeft="@+id/btnBuscarTurnos"
+        android:layout_alignStart="@+id/btnBuscarTurnos"
+        android:layout_marginTop="10dp"/>
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/table_header"
+        android:layout_alignLeft="@+id/btnBuscarTurnos"
+        android:layout_alignStart="@+id/btnBuscarTurnos"
+        android:textAlignment="center"
+        >
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/fillable_area">
+            <TableLayout
+                android:id="@+id/fixed_column"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
+                android:textAlignment="center"
+                />
+            <HorizontalScrollView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+                <TableLayout
+                    android:id="@+id/scrollable_part"
+                    android:layout_width="fill_parent"
+                    android:textAlignment="center"
+                    android:layout_height="fill_parent"/>
+            </HorizontalScrollView>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
